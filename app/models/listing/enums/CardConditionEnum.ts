@@ -8,20 +8,20 @@ import { types } from "mobx-state-tree"
  */
 
 export enum CardCondition {
-  OKAY="OKAY",
-GOOD="GOOD",
-GREAT="GREAT",
-NEW="NEW"
+  OKAY = "OKAY",
+  GOOD = "GOOD",
+  GREAT = "GREAT",
+  NEW = "NEW",
 }
 
 /**
-* CardCondition
+ * CardCondition
  *
  * Used to classify photocard conditions
-*/
+ */
 export const CardConditionEnumType = types.enumeration("CardCondition", [
-        "OKAY",
+  "OKAY",
   "GOOD",
   "GREAT",
   "NEW",
-      ])
+])

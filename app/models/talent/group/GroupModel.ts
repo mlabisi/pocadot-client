@@ -12,10 +12,9 @@ export { selectFromGroup, groupModelPrimitives, GroupModelSelector } from "./Gro
  *
  * Represents a group in the system
  */
-export const GroupModel = GroupModelBase
-  .actions(self => ({
-    // This is an auto-generated example action.
-    log() {
-      console.log(JSON.stringify(self))
-    }
-  }))
+export const GroupModel = GroupModelBase.actions((self) => ({
+  // This is an auto-generated example action.
+  log() {
+    console.log(JSON.stringify(self))
+  },
+}))

@@ -5,15 +5,18 @@ import { GroupFeedModelBase } from "./GroupFeedModel.base"
 export interface GroupFeedModelType extends Instance<typeof GroupFeedModel.Type> {}
 
 /* A graphql query fragment builders for GroupFeedModel */
-export { selectFromGroupFeed, groupFeedModelPrimitives, GroupFeedModelSelector } from "./GroupFeedModel.base"
+export {
+  selectFromGroupFeed,
+  groupFeedModelPrimitives,
+  GroupFeedModelSelector,
+} from "./GroupFeedModel.base"
 
 /**
  * GroupFeedModel
  */
-export const GroupFeedModel = GroupFeedModelBase
-  .actions(self => ({
-    // This is an auto-generated example action.
-    log() {
-      console.log(JSON.stringify(self))
-    }
-  }))
+export const GroupFeedModel = GroupFeedModelBase.actions((self) => ({
+  // This is an auto-generated example action.
+  log() {
+    console.log(JSON.stringify(self))
+  },
+}))

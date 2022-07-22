@@ -22,4 +22,3 @@ export interface RootStoreType extends Instance<typeof RootStore> {}
  * The data of a RootStore.
  */
 export interface RootStoreSnapshot extends SnapshotOut<typeof RootStore> {}
-

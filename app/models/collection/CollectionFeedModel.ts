@@ -5,15 +5,18 @@ import { CollectionFeedModelBase } from "./CollectionFeedModel.base"
 export interface CollectionFeedModelType extends Instance<typeof CollectionFeedModel.Type> {}
 
 /* A graphql query fragment builders for CollectionFeedModel */
-export { selectFromCollectionFeed, collectionFeedModelPrimitives, CollectionFeedModelSelector } from "./CollectionFeedModel.base"
+export {
+  selectFromCollectionFeed,
+  collectionFeedModelPrimitives,
+  CollectionFeedModelSelector,
+} from "./CollectionFeedModel.base"
 
 /**
  * CollectionFeedModel
  */
-export const CollectionFeedModel = CollectionFeedModelBase
-  .actions(self => ({
-    // This is an auto-generated example action.
-    log() {
-      console.log(JSON.stringify(self))
-    }
-  }))
+export const CollectionFeedModel = CollectionFeedModelBase.actions((self) => ({
+  // This is an auto-generated example action.
+  log() {
+    console.log(JSON.stringify(self))
+  },
+}))

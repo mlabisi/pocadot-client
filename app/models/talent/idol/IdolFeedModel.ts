@@ -5,15 +5,18 @@ import { IdolFeedModelBase } from "./IdolFeedModel.base"
 export interface IdolFeedModelType extends Instance<typeof IdolFeedModel.Type> {}
 
 /* A graphql query fragment builders for IdolFeedModel */
-export { selectFromIdolFeed, idolFeedModelPrimitives, IdolFeedModelSelector } from "./IdolFeedModel.base"
+export {
+  selectFromIdolFeed,
+  idolFeedModelPrimitives,
+  IdolFeedModelSelector,
+} from "./IdolFeedModel.base"
 
 /**
  * IdolFeedModel
  */
-export const IdolFeedModel = IdolFeedModelBase
-  .actions(self => ({
-    // This is an auto-generated example action.
-    log() {
-      console.log(JSON.stringify(self))
-    }
-  }))
+export const IdolFeedModel = IdolFeedModelBase.actions((self) => ({
+  // This is an auto-generated example action.
+  log() {
+    console.log(JSON.stringify(self))
+  },
+}))

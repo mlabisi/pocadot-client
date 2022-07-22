@@ -12,10 +12,9 @@ export { selectFromUser, userModelPrimitives, UserModelSelector } from "./UserMo
  *
  * Represents a user in the system
  */
-export const UserModel = UserModelBase
-  .actions(self => ({
-    // This is an auto-generated example action.
-    log() {
-      console.log(JSON.stringify(self))
-    }
-  }))
+export const UserModel = UserModelBase.actions((self) => ({
+  // This is an auto-generated example action.
+  log() {
+    console.log(JSON.stringify(self))
+  },
+}))

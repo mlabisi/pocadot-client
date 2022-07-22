@@ -5,17 +5,20 @@ import { ListingModelBase } from "./ListingModel.base"
 export interface ListingModelType extends Instance<typeof ListingModel.Type> {}
 
 /* A graphql query fragment builders for ListingModel */
-export { selectFromListing, listingModelPrimitives, ListingModelSelector } from "./ListingModel.base"
+export {
+  selectFromListing,
+  listingModelPrimitives,
+  ListingModelSelector,
+} from "./ListingModel.base"
 
 /**
  * ListingModel
  *
  * Represents a listing in the system
  */
-export const ListingModel = ListingModelBase
-  .actions(self => ({
-    // This is an auto-generated example action.
-    log() {
-      console.log(JSON.stringify(self))
-    }
-  }))
+export const ListingModel = ListingModelBase.actions((self) => ({
+  // This is an auto-generated example action.
+  log() {
+    console.log(JSON.stringify(self))
+  },
+}))

@@ -12,10 +12,9 @@ export { selectFromIdol, idolModelPrimitives, IdolModelSelector } from "./IdolMo
  *
  * Represents an idol in the system
  */
-export const IdolModel = IdolModelBase
-  .actions(self => ({
-    // This is an auto-generated example action.
-    log() {
-      console.log(JSON.stringify(self))
-    }
-  }))
+export const IdolModel = IdolModelBase.actions((self) => ({
+  // This is an auto-generated example action.
+  log() {
+    console.log(JSON.stringify(self))
+  },
+}))

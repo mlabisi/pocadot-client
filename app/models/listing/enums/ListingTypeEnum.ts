@@ -8,16 +8,13 @@ import { types } from "mobx-state-tree"
  */
 
 export enum ListingType {
-  WTS="WTS",
-WTT="WTT"
+  WTS = "WTS",
+  WTT = "WTT",
 }
 
 /**
-* ListingType
+ * ListingType
  *
  * Used to classify listings
-*/
-export const ListingTypeEnumType = types.enumeration("ListingType", [
-        "WTS",
-  "WTT",
-      ])
+ */
+export const ListingTypeEnumType = types.enumeration("ListingType", ["WTS", "WTT"])

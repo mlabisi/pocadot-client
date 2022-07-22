@@ -2,6 +2,7 @@ import { onSnapshot } from "mobx-state-tree"
 import { RootStore, RootStoreType } from "./RootStore"
 import { Environment } from "./environment"
 import * as storage from "../../utils/storage"
+import { createHttpClient } from "mst-gql"
 
 /**
  * The key we'll be saving our state as within async storage.
@@ -33,11 +34,15 @@ export async function setupRootStore() {
   try {
     // load data from storage
     data = (await storage.load(ROOT_STATE_STORAGE_KEY)) || {}
-    rootStore = RootStore.create(data, env)
+    rootStore = RootStore.create(data, {
+      gqlHttpClient: createHttpClient("http://localhost:4000/")
+    })
   } catch (e) {
     // if there's any problems loading, then let's at least fallback to an empty state
     // instead of crashing.
-    rootStore = RootStore.create({}, env)
+    rootStore = RootStore.create(undefined, {
+      gqlHttpClient: createHttpClient("http://localhost:4000/")
+    })
 
     // but please inform us what happened
     __DEV__ && console.tron.error(e.message, null)

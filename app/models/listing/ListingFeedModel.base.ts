@@ -10,32 +10,45 @@ import { ListingModel, ListingModelType } from "./ListingModel"
 import { ListingModelSelector } from "./ListingModel.base"
 import { RootStoreType } from "../index"
 
-
 /* The TypeScript type that explicits the refs to other models in order to prevent a circular refs issue */
 type Refs = {
-  listings: IObservableArray<ListingModelType>;
+  listings: IObservableArray<ListingModelType>
 }
 
 /**
  * ListingFeedBase
  * auto generated base class for the model ListingFeedModel.
  */
-export const ListingFeedModelBase = withTypedRefs<Refs>()(ModelBase
-  .named('ListingFeed')
-  .props({
-    __typename: types.optional(types.literal("ListingFeed"), "ListingFeed"),
-    page: types.union(types.undefined, types.integer),
-    listings: types.union(types.undefined, types.array(MSTGQLRef(types.late((): any => ListingModel)))),
-  })
-  .views(self => ({
-    get store() {
-      return self.__getStore<RootStoreType>()
-    }
-  })))
+export const ListingFeedModelBase = withTypedRefs<Refs>()(
+  ModelBase.named("ListingFeed")
+    .props({
+      __typename: types.optional(types.literal("ListingFeed"), "ListingFeed"),
+      page: types.union(types.undefined, types.integer),
+      listings: types.union(
+        types.undefined,
+        types.array(MSTGQLRef(types.late((): any => ListingModel))),
+      ),
+    })
+    .views((self) => ({
+      get store() {
+        return self.__getStore<RootStoreType>()
+      },
+    })),
+)
 
 export class ListingFeedModelSelector extends QueryBuilder {
-  get page() { return this.__attr(`page`) }
-  listings(builder: string | ListingModelSelector | ((selector: ListingModelSelector) => ListingModelSelector) | undefined) { return this.__child(`listings`, ListingModelSelector, builder) }
+  get page() {
+    return this.__attr(`page`)
+  }
+  listings(
+    builder:
+      | string
+      | ListingModelSelector
+      | ((selector: ListingModelSelector) => ListingModelSelector)
+      | undefined,
+  ) {
+    return this.__child(`listings`, ListingModelSelector, builder)
+  }
 }
 export function selectFromListingFeed() {
   return new ListingFeedModelSelector()
