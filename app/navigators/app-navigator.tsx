@@ -8,7 +8,7 @@ import React from "react"
 // import { useColorScheme } from "react-native"
 import { NavigationContainer, /* DefaultTheme, */ DarkTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen } from "../screens"
+import { SignInScreen, SignUpScreen, WelcomeScreen } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 
 /**
@@ -26,6 +26,8 @@ import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 export type NavigatorParamList = {
   welcome: undefined
   // 🔥 Your screens go here
+  signIn: undefined
+  signUp: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -41,6 +43,8 @@ const AppStack = () => {
     >
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="signIn" component={SignInScreen} />
+      <Stack.Screen name="signUp" component={SignUpScreen} />
     </Stack.Navigator>
   )
 }
@@ -51,13 +55,13 @@ export const AppNavigator = (props: NavigationProps) => {
   // const colorScheme = useColorScheme()
   useBackButtonHandler(canExit)
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      theme={DarkTheme} // {colorScheme === "dark" ? DarkTheme : DefaultTheme}
-      {...props}
-    >
-      <AppStack />
-    </NavigationContainer>
+      <NavigationContainer
+        ref={navigationRef}
+        theme={DarkTheme} // {colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        {...props}
+      >
+        <AppStack />
+      </NavigationContainer>
   )
 }
 

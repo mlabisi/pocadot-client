@@ -9,9 +9,29 @@
   },
   "welcomeScreen": {
     "appName": "pocadot",
-    "tagline": "Buy, Sell and Trade Kpop Photocards",
+    "tagline": "Buy, Sell, and Trade Kpop Photocards",
     "signIn": "Sign In",
     "signUp": "Sign Up"
+  },
+  "signIn": {
+    "formLabel": "Sign In",
+    "email": "Email",
+    "emailPlaceholder": "------@-----",
+    "password": "Password",
+    "passwordPlaceholder": "----------",
+    "continue": "Continue",
+    "signUpPrompt": "Do you need an account?",
+    "switchToSignUp": "Sign Up"
+  },
+  "signUp": {
+    "formLabel": "Sign Up",
+    "email": "Email",
+    "emailPlaceholder": "------@-----",
+    "password": "Password",
+    "passwordPlaceholder": "----------",
+    "continue": "Continue",
+    "signUpPrompt": "Already have an account?",
+    "switchToSignIn": "Sign In"
   },
   "errorScreen": {
     "title": "Something went wrong!",
