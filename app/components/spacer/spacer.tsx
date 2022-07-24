@@ -1,12 +1,6 @@
 import * as React from "react"
 import { View, ViewStyle } from "react-native"
-
-export interface SpacerProps {
-  /**
-   * The number of flex-spots to take up
-   */
-  n: number
-}
+import { SpacerProps } from "./spacer.props"
 
 /**
  * Takes up n of the parent component's flex-spots
@@ -15,11 +9,10 @@ export interface SpacerProps {
  */
 export function Spacer(props: SpacerProps) {
   const { n } = props
+
   const styles: ViewStyle = {
     flex: n
   }
 
-  return (
-    <View style={styles}/>
-  )
+  return <View style={styles} />
 }

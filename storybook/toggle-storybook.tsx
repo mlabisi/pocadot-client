@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { DevSettings } from "react-native"
 import { loadString, saveString } from "../app/utils/storage"
 import { DEFAULT_REACTOTRON_WS_URI } from "../app/services/reactotron/reactotron-config"
@@ -29,7 +29,7 @@ export function ToggleStorybook(props) {
       setShowStorybook(storedSetting === "on")
 
       if (DevSettings) {
-        saveString("devStorybook", "off")
+        saveString("devStorybook", "on")
 
         // Add our toggle command to the menu
         DevSettings.addMenuItem("Toggle Storybook", () => {
