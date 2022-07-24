@@ -14,6 +14,10 @@ const ROOT: ViewStyle = {
   alignItems: "center",
 }
 
+const SCREEN: ViewStyle = {
+  ...ROOT
+}
+
 const BUTTON_CONTAINER: ViewStyle = {
   flex: 3,
   flexDirection: "row",
@@ -44,7 +48,7 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
 
     return (
       <View style={ROOT} testID="welcomeScreen">
-        <Screen style={ROOT} preset="fixed">
+        <Screen style={SCREEN} preset="fixed">
           <Spacer n={3}/>
           <Text preset="header" tx="welcomeScreen.appName" />
           <Text preset="default" tx="welcomeScreen.tagline" />
