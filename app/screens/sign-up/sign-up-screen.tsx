@@ -74,7 +74,7 @@ export const SignUpScreen: FC<StackScreenProps<NavigatorParamList, "signUp">> = 
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
-    const nextScreen = () => navigation.navigate("welcome")
+    const nextScreen = () => navigation.navigate("setPreferences")
     const signIn = () => navigation.navigate("signIn")
 
     return (

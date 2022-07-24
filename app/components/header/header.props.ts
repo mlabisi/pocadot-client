@@ -1,6 +1,7 @@
 import { StyleProp, TextStyle, ViewStyle } from "react-native"
 import { IconTypes } from "../icon/icons"
 import { TxKeyPath } from "../../i18n"
+import React from "react"
 
 export interface HeaderProps {
   /**
@@ -14,9 +15,31 @@ export interface HeaderProps {
   headerText?: string
 
   /**
+   * overall height of the header
+   */
+  headerHeight?: number
+
+  /**
+   * child items to be shown in sub-header
+   */
+  children?: React.ReactNode
+
+  /**
    * Icon that should appear on the left
    */
   leftIcon?: IconTypes
+  /**
+   * Icon that should appear on the right
+   */
+  rightIcon?: IconTypes
+  /**
+   * Container style overrides.
+   */
+  style?: StyleProp<ViewStyle>
+  /**
+   * Title style overrides.
+   */
+  titleStyle?: StyleProp<TextStyle>
 
   /**
    * What happens when you press the left icon
@@ -24,22 +47,7 @@ export interface HeaderProps {
   onLeftPress?(): void
 
   /**
-   * Icon that should appear on the right
-   */
-  rightIcon?: IconTypes
-
-  /**
    * What happens when you press the right icon
    */
   onRightPress?(): void
-
-  /**
-   * Container style overrides.
-   */
-  style?: StyleProp<ViewStyle>
-
-  /**
-   * Title style overrides.
-   */
-  titleStyle?: StyleProp<TextStyle>
 }
