@@ -25,6 +25,23 @@ export interface HeaderProps {
   children?: React.ReactNode
 
   /**
+   * Key for text that should appear on the left
+   */
+  leftTx?: TxKeyPath
+  /**
+   * Key for text that should appear on the right
+   */
+  rightTx?: TxKeyPath
+  /**
+   * Text that should appear on the left
+   */
+  leftText?: IconTypes
+  /**
+   * Text that should appear on the right
+   */
+  rightText?: IconTypes
+
+  /**
    * Icon that should appear on the left
    */
   leftIcon?: IconTypes
@@ -40,6 +57,10 @@ export interface HeaderProps {
    * Title style overrides.
    */
   titleStyle?: StyleProp<TextStyle>
+  /**
+   * Text style.
+   */
+  textStyle?: StyleProp<TextStyle>
 
   /**
    * What happens when you press the left icon

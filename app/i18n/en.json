@@ -35,7 +35,9 @@
   },
   "setPreferences": {
     "title": "Who are your faves?",
-    "subtitle": "Choose the groups you’re interested in.  You can modify this later."
+    "subtitle": "Choose the groups you’re interested in.  You can modify this later.",
+    "back": "Back",
+    "skip": "Skip"
   },
   "errorScreen": {
     "title": "Something went wrong!",

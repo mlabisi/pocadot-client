@@ -30,10 +30,15 @@ export function Header(props: HeaderProps) {
     onRightPress,
     rightIcon,
     leftIcon,
+    rightTx,
+    leftTx,
+    rightText,
+    leftText,
     headerText,
     headerTx,
     style,
     titleStyle,
+    textStyle,
     headerHeight,
     children,
   } = props
@@ -46,6 +51,14 @@ export function Header(props: HeaderProps) {
           <Button preset="link" onPress={onLeftPress}>
             <Icon icon={leftIcon} />
           </Button>
+        ) : leftTx ? (
+          <Button preset="link" onPress={onLeftPress}>
+            <Text tx={leftTx} style={textStyle} />
+          </Button>
+        ) : leftText ? (
+          <Button preset="link" onPress={onLeftPress}>
+            <Text text={leftText} style={textStyle} />
+          </Button>
         ) : (
           <View style={LEFT} />
         )}
@@ -55,6 +68,14 @@ export function Header(props: HeaderProps) {
         {rightIcon ? (
           <Button preset="link" onPress={onRightPress}>
             <Icon icon={rightIcon} />
+          </Button>
+        ) : rightTx ? (
+          <Button preset="link" onPress={onRightPress}>
+            <Text tx={rightTx} style={textStyle} />
+          </Button>
+        ) : rightText ? (
+          <Button preset="link" onPress={onRightPress}>
+            <Text text={rightText} style={textStyle} />
           </Button>
         ) : (
           <View style={RIGHT} />

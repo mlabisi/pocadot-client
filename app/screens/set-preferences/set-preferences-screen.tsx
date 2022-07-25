@@ -13,7 +13,7 @@ import SearchBar from "react-native-dynamic-search-bar"
 const headerHeight = 75 * 2
 
 const ROOT: ViewStyle = {
-  backgroundColor: color.palette.fill,
+  backgroundColor: color.palette.white,
   flex: 1,
 }
 
@@ -21,12 +21,17 @@ const HEADER: ViewStyle = {
   backgroundColor: color.palette.white,
   zIndex: 1,
 }
+const GRID: ViewStyle = {
+  backgroundColor: color.palette.fill,
+  flex: 1,
+}
 
 const TITLE: TextStyle = {
   color: color.palette.black,
+  textTransform: "uppercase",
 }
 const SUBTITLE: TextStyle = {
-  ...TITLE,
+  color: color.palette.black,
   fontSize: 10,
   textAlign: "center",
 }
@@ -42,6 +47,12 @@ const SEARCH: ViewStyle = {
   flexDirection: "row",
 }
 
+const LINK_TEXT: TextStyle = {
+  fontSize: 15,
+  fontWeight: "300",
+  color: color.palette.lavender,
+}
+
 export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setPreferences">> =
   observer(function SetPreferencesScreen({ navigation }) {
     // Pull in one of our MST stores
@@ -55,10 +66,13 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
           <Header
             headerHeight={headerHeight}
             headerTx="setPreferences.title"
-            leftIcon="back"
+            leftTx={"setPreferences.back"}
+            rightTx={"setPreferences.skip"}
             onLeftPress={() => navigation.goBack()}
+            onRightPress={() => navigation.navigate("welcome")}
             titleStyle={TITLE}
             style={HEADER}
+            textStyle={LINK_TEXT}
           >
             <Text tx="setPreferences.subtitle" style={SUBTITLE} />
             <Spacer n={0.5} />
@@ -71,6 +85,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
           </Header>
         </View>
         <FlatGrid
+          style={GRID}
           maxItemsPerRow={2}
           data={data}
           renderItem={({ item }) => (
