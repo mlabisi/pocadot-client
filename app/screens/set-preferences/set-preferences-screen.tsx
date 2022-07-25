@@ -1,12 +1,14 @@
-import React, { FC, useRef } from "react"
+import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { FlatList, TextStyle, View, ViewStyle } from "react-native"
+import { TextStyle, View, ViewStyle } from "react-native"
+import { FlatGrid } from "react-native-super-grid"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Header, PreferenceCard, Text } from "../../components"
+import { Header, PreferenceCard, Spacer, Text } from "../../components"
 // import { useStores } from "../../models"
 import { color } from "../../theme"
 import { SafeAreaView } from "react-native-safe-area-context"
+import SearchBar from "react-native-dynamic-search-bar"
 
 const headerHeight = 75 * 2
 
@@ -29,13 +31,23 @@ const SUBTITLE: TextStyle = {
   textAlign: "center",
 }
 
+const SEARCH: ViewStyle = {
+  backgroundColor: color.fill,
+  paddingVertical: 8,
+  paddingHorizontal: 10,
+  borderRadius: 10,
+  width: "90%",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "row",
+}
+
 export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setPreferences">> =
   observer(function SetPreferencesScreen({ navigation }) {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
-    const data = [].fill({}, 0, 10)
-    const ref = useRef(null)
+    const data = new Array(100).fill({})
 
     return (
       <SafeAreaView style={ROOT}>
@@ -49,16 +61,23 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
             style={HEADER}
           >
             <Text tx="setPreferences.subtitle" style={SUBTITLE} />
+            <Spacer n={0.5} />
+            <SearchBar
+              style={SEARCH}
+              placeholder="Search"
+              onPress={() => null}
+              onChangeText={(text) => console.log(text)}
+            />
           </Header>
         </View>
-        <FlatList
-          scrollEventThrottle={16}
-          contentContainerStyle={{ paddingTop: headerHeight }}
+        <FlatGrid
+          maxItemsPerRow={2}
           data={data}
-          ref={ref}
-          numColumns={2}
-          renderItem={PreferenceCard}
-          keyExtractor={(item) => item.label}
+          renderItem={({ item }) => (
+            <View>
+              <PreferenceCard item={item} />
+            </View>
+          )}
         />
       </SafeAreaView>
     )

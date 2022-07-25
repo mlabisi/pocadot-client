@@ -11,4 +11,5 @@ export const palette = {
   lavender: "#A3B0EF",
   gray: "#A3A4A4",
   fill: "#F8FAFB",
+  darkGray: "#545656",
 }

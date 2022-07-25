@@ -13,8 +13,6 @@ const CONTAINER: ViewStyle = {
   flexDirection: "column",
   width: dimensions,
   height: dimensions,
-  alignItems: "center",
-  maxWidth: "25%",
 }
 const SELECTED_CONTAINER: ViewStyle = {
   ...CONTAINER,
@@ -45,6 +43,13 @@ const LABEL: TextStyle = {
   color: color.palette.black,
 }
 
+const SHADOW: ViewStyle = {
+  shadowColor: "#171717",
+  shadowOffset: { width: -2, height: 4 },
+  shadowOpacity: 0.2,
+  shadowRadius: 3,
+}
+
 /**
  * Displays an idol/group's default picture, label, and frame depending on whether or not the talent has been selected
  */
@@ -53,7 +58,7 @@ export const PreferenceCard = function PreferenceCard({ item }) {
 
   return (
     <View style={selected ? SELECTED_CONTAINER : null}>
-      <View style={CONTAINER}>
+      <View style={[CONTAINER, SHADOW]}>
         <AutoImage source={featuredImage} style={FEATURED_IMAGE} />
         <View style={LABEL_CONTAINER}>
           <Spacer n={0.4} />
