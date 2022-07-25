@@ -1,14 +1,17 @@
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { TextStyle, View, ViewStyle } from "react-native"
 import { FlatGrid } from "react-native-super-grid"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { Header, PreferenceCard, Spacer, Text } from "../../components"
-// import { useStores } from "../../models"
 import { color } from "../../theme"
 import { SafeAreaView } from "react-native-safe-area-context"
 import SearchBar from "react-native-dynamic-search-bar"
+import { TouchableWithoutFeedback } from "react-native-gesture-handler"
+import { useQuery } from "../../models"
+import SkeletonContent from "react-native-skeleton-content"
+import { load } from "../../utils/storage"
 
 const headerHeight = 75 * 2
 
@@ -55,10 +58,30 @@ const LINK_TEXT: TextStyle = {
 
 export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setPreferences">> =
   observer(function SetPreferencesScreen({ navigation }) {
-    // Pull in one of our MST stores
-    // const { someStore, anotherStore } = useStores()
+    const [selectedItems, setSelectedItems] = useState([])
 
-    const data = new Array(100).fill({})
+    const { loading, data } = useQuery((store) =>
+      store.queryPreferencesFeed(
+        {},
+        `
+        id
+        ... on Idol {
+            stageName
+        }
+        ... on Group {
+            name
+        }`,
+      ),
+    )
+
+    if (loading) {
+      return <SkeletonContent containerStyle={{ flex: 1, width: 300 }} isLoading={loading} />
+    }
+
+    load("selected").then((storedSelections) => {
+      // Set the initial value
+      setSelectedItems(storedSelections)
+    })
 
     return (
       <SafeAreaView style={ROOT}>
@@ -86,12 +109,25 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
         </View>
         <FlatGrid
           style={GRID}
+          keyExtractor={(item) => item.id}
           maxItemsPerRow={2}
-          data={data}
+          data={data.preferencesFeed.map((item) => {
+            return { ...item, selected: false }
+          })}
           renderItem={({ item }) => (
-            <View>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                if (item.selected) {
+                  setSelectedItems(() => selectedItems.filter((found) => found.id !== item.id))
+                  item.selected = !item.selected
+                } else {
+                  setSelectedItems((prev) => [...prev, item])
+                  item.selected = !item.selected
+                }
+              }}
+            >
               <PreferenceCard item={item} />
-            </View>
+            </TouchableWithoutFeedback>
           )}
         />
       </SafeAreaView>

@@ -14,11 +14,17 @@ const CONTAINER: ViewStyle = {
   width: dimensions,
   height: dimensions,
 }
+const SHADOW: ViewStyle = {
+  shadowColor: "#171717",
+  shadowOffset: { width: -2, height: 4 },
+  shadowOpacity: 0.2,
+  shadowRadius: 3,
+}
 const SELECTED_CONTAINER: ViewStyle = {
-  ...CONTAINER,
   borderColor: color.primary,
   borderWidth: 2,
-  borderRadius: 10,
+  borderRadius: 15,
+  width: dimensions + 2,
 }
 
 const FEATURED_IMAGE: ImageStyle = {
@@ -41,20 +47,14 @@ const LABEL_CONTAINER: ViewStyle = {
 const LABEL: TextStyle = {
   fontSize: 14,
   color: color.palette.black,
-}
-
-const SHADOW: ViewStyle = {
-  shadowColor: "#171717",
-  shadowOffset: { width: -2, height: 4 },
-  shadowOpacity: 0.2,
-  shadowRadius: 3,
+  fontWeight: "400",
 }
 
 /**
  * Displays an idol/group's default picture, label, and frame depending on whether or not the talent has been selected
  */
 export const PreferenceCard = function PreferenceCard({ item }) {
-  const { featuredImage = defaultImage, label = "STAYC", selected = false } = item
+  const { featuredImage = defaultImage, name = "STAYC", selected = false } = item
 
   return (
     <View style={selected ? SELECTED_CONTAINER : null}>
@@ -62,7 +62,7 @@ export const PreferenceCard = function PreferenceCard({ item }) {
         <AutoImage source={featuredImage} style={FEATURED_IMAGE} />
         <View style={LABEL_CONTAINER}>
           <Spacer n={0.4} />
-          <Text text={label} style={LABEL} />
+          <Text text={name} style={LABEL} />
           <Spacer n={0.4} />
         </View>
       </View>

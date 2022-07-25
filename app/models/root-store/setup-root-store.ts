@@ -35,13 +35,13 @@ export async function setupRootStore() {
     // load data from storage
     data = (await storage.load(ROOT_STATE_STORAGE_KEY)) || {}
     rootStore = RootStore.create(data, {
-      gqlHttpClient: createHttpClient("http://localhost:4000/"),
+      gqlHttpClient: createHttpClient("http://127.0.0.1:4000/"),
     })
   } catch (e) {
     // if there's any problems loading, then let's at least fallback to an empty state
     // instead of crashing.
     rootStore = RootStore.create(undefined, {
-      gqlHttpClient: createHttpClient("http://localhost:4000/"),
+      gqlHttpClient: createHttpClient("http://127.0.0.1:4000/"),
     })
 
     // but please inform us what happened
