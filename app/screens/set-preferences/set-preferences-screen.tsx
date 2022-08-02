@@ -56,6 +56,11 @@ const LINK_TEXT: TextStyle = {
   color: color.palette.lavender,
 }
 
+const LOADING: ViewStyle = {
+  flex: 1,
+  width: 300,
+}
+
 export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setPreferences">> =
   observer(function SetPreferencesScreen({ navigation }) {
     const [selectedItems, setSelectedItems] = useState([])
@@ -75,7 +80,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
     )
 
     if (loading) {
-      return <SkeletonContent containerStyle={{ flex: 1, width: 300 }} isLoading={loading} />
+      return <SkeletonContent containerStyle={LOADING} isLoading={loading} />
     }
 
     load("selected").then((storedSelections) => {
@@ -112,16 +117,16 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
           keyExtractor={(item) => item.id}
           maxItemsPerRow={2}
           data={data.preferencesFeed.map((item) => {
-            return { ...item, selected: false }
+            return { ...item, selected: selectedItems.includes(item.id) }
           })}
           renderItem={({ item }) => (
             <TouchableWithoutFeedback
               onPress={() => {
                 if (item.selected) {
-                  setSelectedItems(() => selectedItems.filter((found) => found.id !== item.id))
+                  setSelectedItems(() => selectedItems.filter((found) => found !== item.id))
                   item.selected = !item.selected
                 } else {
-                  setSelectedItems((prev) => [...prev, item])
+                  setSelectedItems((prev) => [...prev, item.id])
                   item.selected = !item.selected
                 }
               }}
