@@ -108,16 +108,16 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
           keyExtractor={(item) => item.id}
           maxItemsPerRow={2}
           data={data.preferencesFeed.map((item) => {
-            return { ...item, selected: selectedItems.includes(item.id) }
+            return { ...item, selected: !!selectedItems.find((found) => found.id === item.id) }
           })}
           renderItem={({ item }) => (
             <TouchableWithoutFeedback
               onPress={() => {
                 if (item.selected) {
-                  setSelectedItems(() => selectedItems.filter((found) => found !== item.id))
+                  setSelectedItems(() => selectedItems.filter((found) => found.id !== item.id))
                   item.selected = !item.selected
                 } else {
-                  setSelectedItems((prev) => [...prev, item.id])
+                  setSelectedItems((prev) => [...prev, item])
                   item.selected = !item.selected
                 }
               }}
