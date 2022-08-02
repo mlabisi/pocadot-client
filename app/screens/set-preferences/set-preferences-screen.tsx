@@ -4,14 +4,14 @@ import { TextStyle, View, ViewStyle } from "react-native"
 import { FlatGrid } from "react-native-super-grid"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Header, PreferenceCard, Spacer, Text } from "../../components"
+import { Header, Icon, PreferenceCard, Spacer, Text } from "../../components"
 import { color } from "../../theme"
 import { SafeAreaView } from "react-native-safe-area-context"
 import SearchBar from "react-native-dynamic-search-bar"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import { useQuery } from "../../models"
-import SkeletonContent from "react-native-skeleton-content"
 import { load } from "../../utils/storage"
+import ActionButton from "react-native-action-button-warnings-fixed"
 
 const headerHeight = 75 * 2
 
@@ -56,16 +56,11 @@ const LINK_TEXT: TextStyle = {
   color: color.palette.lavender,
 }
 
-const LOADING: ViewStyle = {
-  flex: 1,
-  width: 300,
-}
-
 export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setPreferences">> =
   observer(function SetPreferencesScreen({ navigation }) {
     const [selectedItems, setSelectedItems] = useState([])
 
-    const { loading, data } = useQuery((store) =>
+    const { data } = useQuery((store) =>
       store.queryPreferencesFeed(
         {},
         `
@@ -78,10 +73,6 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
         }`,
       ),
     )
-
-    if (loading) {
-      return <SkeletonContent containerStyle={LOADING} isLoading={loading} />
-    }
 
     load("selected").then((storedSelections) => {
       // Set the initial value
@@ -134,6 +125,14 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
               <PreferenceCard item={item} />
             </TouchableWithoutFeedback>
           )}
+        />
+        <ActionButton
+          buttonColor={color.primary}
+          renderIcon={() => <Icon icon="checkmark" />}
+          onPress={() => {
+            console.log("Selections saved")
+            navigation.navigate("welcome")
+          }}
         />
       </SafeAreaView>
     )
