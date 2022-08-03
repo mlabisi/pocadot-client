@@ -15,18 +15,23 @@ const ROOT: ViewStyle = {
 }
 
 const SCREEN: ViewStyle = {
-  ...ROOT
+  ...ROOT,
 }
 
 const BUTTON_CONTAINER: ViewStyle = {
   flex: 3,
   flexDirection: "row",
-  alignItems: "center"
+  alignItems: "center",
 }
 
 const BUTTON: ViewStyle = {
   backgroundColor: color.palette.white,
   borderRadius: 100,
+}
+
+const HEADER_TEXT: TextStyle = {
+  fontSize: 70,
+  flex: 1,
 }
 
 const BUTTON_TEXT: TextStyle = {
@@ -35,32 +40,34 @@ const BUTTON_TEXT: TextStyle = {
 
 export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> = observer(
   function WelcomeScreen({ navigation }) {
-    // Pull in one of our MST-GQL stores
-    // const { store, error, loading, data } = useQuery((store) =>
-    //   store.queryMessages()
-    // )
-
-    // Pull in navigation via hook
-    // const navigation = useNavigation()
-
     const signInScreen = () => navigation.navigate("signIn")
     const signUpScreen = () => navigation.navigate("signUp")
 
     return (
       <View style={ROOT} testID="welcomeScreen">
         <Screen style={SCREEN} preset="fixed">
-          <Spacer n={3}/>
-          <Text preset="header" tx="welcomeScreen.appName" />
+          <Spacer n={3} />
+          <Text preset="header" tx="welcomeScreen.appName" style={HEADER_TEXT} />
           <Text preset="default" tx="welcomeScreen.tagline" />
-          <Spacer n={0.5}/>
+          <Spacer n={0.5} />
           <View style={BUTTON_CONTAINER}>
-            <Button tx="welcomeScreen.signIn" testID="signInButton" onPress={signInScreen} style={BUTTON}
-                    textStyle={BUTTON_TEXT}></Button>
-            <Spacer n={0.05}/>
-            <Button tx="welcomeScreen.signUp" testID="signUpButton" onPress={signUpScreen} style={BUTTON}
-                    textStyle={BUTTON_TEXT}></Button>
+            <Button
+              tx="welcomeScreen.signIn"
+              testID="signInButton"
+              onPress={signInScreen}
+              style={BUTTON}
+              textStyle={BUTTON_TEXT}
+            ></Button>
+            <Spacer n={0.05} />
+            <Button
+              tx="welcomeScreen.signUp"
+              testID="signUpButton"
+              onPress={signUpScreen}
+              style={BUTTON}
+              textStyle={BUTTON_TEXT}
+            ></Button>
           </View>
-          <Spacer n={2.5}/>
+          <Spacer n={2.5} />
         </Screen>
       </View>
     )
