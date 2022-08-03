@@ -137,6 +137,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
               onLeftPress={() => navigation.goBack()}
               onRightPress={async () => {
                 navigation.navigate("welcome")
+                alert("Saved selections")
                 await save("selectedItems", selectedItems)
               }}
               titleStyle={TITLE}

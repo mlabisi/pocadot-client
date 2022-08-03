@@ -71,10 +71,7 @@ const POCADOT_CIRCLE: ImageStyle = {
 
 export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = observer(
   function SignInScreen({ navigation }) {
-    // Pull in one of our MST stores
-    // const { someStore, anotherStore } = useStores()
-
-    const nextScreen = () => navigation.navigate("welcome")
+    const nextScreen = () => navigation.navigate("modifyPreferences")
     const signUp = () => navigation.navigate("signUp")
 
     return (

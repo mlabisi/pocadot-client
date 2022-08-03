@@ -8,7 +8,13 @@ import React from "react"
 // import { useColorScheme } from "react-native"
 import { DarkTheme, NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { SetPreferencesScreen, SignInScreen, SignUpScreen, WelcomeScreen } from "../screens"
+import {
+  ModifyPreferencesScreen,
+  SetPreferencesScreen,
+  SignInScreen,
+  SignUpScreen,
+  WelcomeScreen,
+} from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 
 /**
@@ -29,6 +35,7 @@ export type NavigatorParamList = {
   signIn: undefined
   signUp: undefined
   setPreferences: undefined
+  modifyPreferences: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -47,6 +54,7 @@ const AppStack = () => {
       <Stack.Screen name="signIn" component={SignInScreen} />
       <Stack.Screen name="signUp" component={SignUpScreen} />
       <Stack.Screen name="setPreferences" component={SetPreferencesScreen} />
+      <Stack.Screen name="modifyPreferences" component={ModifyPreferencesScreen} />
     </Stack.Navigator>
   )
 }

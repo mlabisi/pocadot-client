@@ -41,6 +41,13 @@
     "skip": "Skip",
     "selected": "%{selectedCt} SELECTED"
   },
+  "modifyPreferences": {
+    "title": "Who are your faves?",
+    "subtitle": "Choose the groups you’re interested in.",
+    "cancel": "Cancel",
+    "save": "Save",
+    "selected": "%{selectedCt} SELECTED"
+  },
   "errorScreen": {
     "title": "Something went wrong!",
     "friendlySubtitle": "This is the screen that your users will see in production when an error is thrown. You'll want to customize this message (located in `app/i18n/en.json`) and probably the layout as well (`app/screens/error`). If you want to remove this entirely, check `app/app.tsx` for the <ErrorBoundary> component.",
