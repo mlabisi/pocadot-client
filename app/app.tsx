@@ -11,20 +11,26 @@
  */
 import "./i18n"
 import "./utils/ignore-warnings"
-import React, { useState, useEffect } from "react"
-import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context"
+import React, { useEffect, useState } from "react"
+import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import { initFonts } from "./theme/fonts" // expo
 import * as storage from "./utils/storage"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
-import { RootStoreType, RootStoreProvider, setupRootStore } from "./models/root-store"
+import { RootStoreProvider, RootStoreType, setupRootStore } from "./models/root-store"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { ErrorBoundary } from "./screens"
+import { GestureHandlerRootView } from "react-native-gesture-handler"
+import { ViewStyle } from "react-native"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
 // https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
+
+const ROOT: ViewStyle = {
+  flex: 1,
+}
 
 /**
  * This is the root component of our app.
@@ -56,16 +62,18 @@ function App() {
   // otherwise, we're ready to render the app
   return (
     <ToggleStorybook>
-      <RootStoreProvider value={rootStore}>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <ErrorBoundary catchErrors={"always"}>
-            <AppNavigator
-              initialState={initialNavigationState}
-              onStateChange={onNavigationStateChange}
-            />
-          </ErrorBoundary>
-        </SafeAreaProvider>
-      </RootStoreProvider>
+      <GestureHandlerRootView style={ROOT}>
+        <RootStoreProvider value={rootStore}>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <ErrorBoundary catchErrors={"always"}>
+              <AppNavigator
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+              />
+            </ErrorBoundary>
+          </SafeAreaProvider>
+        </RootStoreProvider>
+      </GestureHandlerRootView>
     </ToggleStorybook>
   )
 }

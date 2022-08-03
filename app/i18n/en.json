@@ -37,7 +37,9 @@
     "title": "Who are your faves?",
     "subtitle": "Choose the groups you’re interested in.  You can modify this later.",
     "back": "Back",
-    "skip": "Skip"
+    "save": "Save",
+    "skip": "Skip",
+    "selected": "%{selectedCt} SELECTED"
   },
   "errorScreen": {
     "title": "Something went wrong!",

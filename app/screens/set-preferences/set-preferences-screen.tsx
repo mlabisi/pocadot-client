@@ -1,17 +1,21 @@
-import React, { FC, useState } from "react"
+import React, { FC, useCallback, useMemo, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { TextStyle, View, ViewStyle } from "react-native"
+import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { FlatGrid } from "react-native-super-grid"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Header, Icon, PreferenceCard, Spacer, Text } from "../../components"
+import { Button, Header, Icon, ParsedText, PreferenceCard, Spacer, Text } from "../../components"
 import { color } from "../../theme"
 import { SafeAreaView } from "react-native-safe-area-context"
 import SearchBar from "react-native-dynamic-search-bar"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import { useQuery } from "../../models"
-import { load } from "../../utils/storage"
-import ActionButton from "react-native-action-button-warnings-fixed"
+import { load, save } from "../../utils/storage"
+import {
+  BottomSheetFlatList,
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet"
 
 const headerHeight = 75 * 2
 
@@ -56,9 +60,51 @@ const LINK_TEXT: TextStyle = {
   color: color.palette.lavender,
 }
 
+const SELECTED_CT: TextStyle = {
+  ...LINK_TEXT,
+  fontWeight: "bold",
+}
+
+const BUTTON: ViewStyle = {
+  backgroundColor: color.palette.white,
+}
+
+const SELECTED_CONTAINER: ViewStyle = {
+  flex: 1,
+  alignItems: "center",
+}
+
+const ITEM_CONTAINER: ViewStyle = {
+  padding: 6,
+  margin: 6,
+  backgroundColor: "#eee",
+}
+
+const CHEVRON: ImageStyle = {
+  alignItems: "center",
+  width: 10,
+}
+
 export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setPreferences">> =
   observer(function SetPreferencesScreen({ navigation }) {
     const [selectedItems, setSelectedItems] = useState([])
+
+    // ref
+    const bottomSheetModalRef = useRef<BottomSheetModal>(null)
+
+    // variables
+    const snapPoints = useMemo(() => ["75%"], [])
+
+    // callbacks
+    const handlePresentModalPress = useCallback(() => {
+      bottomSheetModalRef.current?.present()
+    }, [])
+    const handleSheetChanges = useCallback((index: number) => {
+      console.log("handleSheetChanges", index)
+    }, [])
+
+    // render
+    const renderItem = useCallback(({ item }) => <Text style={LINK_TEXT}>{item.name}</Text>, [])
 
     const { data } = useQuery((store) =>
       store.queryPreferencesFeed(
@@ -74,66 +120,92 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
       ),
     )
 
-    load("selected").then((storedSelections) => {
+    load("selectedItems").then((storedSelections) => {
       // Set the initial value
-      setSelectedItems(storedSelections)
+      setSelectedItems(storedSelections ?? [])
     })
 
     return (
       <SafeAreaView style={ROOT}>
-        <View style={HEADER}>
-          <Header
-            headerHeight={headerHeight}
-            headerTx="setPreferences.title"
-            leftTx={"setPreferences.back"}
-            rightTx={"setPreferences.skip"}
-            onLeftPress={() => navigation.goBack()}
-            onRightPress={() => navigation.navigate("welcome")}
-            titleStyle={TITLE}
-            style={HEADER}
-            textStyle={LINK_TEXT}
-          >
-            <Text tx="setPreferences.subtitle" style={SUBTITLE} />
-            <Spacer n={0.5} />
-            <SearchBar
-              style={SEARCH}
-              placeholder="Search"
-              onPress={() => null}
-              onChangeText={(text) => console.log(text)}
-            />
-          </Header>
-        </View>
-        <FlatGrid
-          style={GRID}
-          keyExtractor={(item) => item.id}
-          maxItemsPerRow={2}
-          data={data.preferencesFeed.map((item) => {
-            return { ...item, selected: !!selectedItems.find((found) => found.id === item.id) }
-          })}
-          renderItem={({ item }) => (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                if (item.selected) {
-                  setSelectedItems(() => selectedItems.filter((found) => found.id !== item.id))
-                  item.selected = !item.selected
-                } else {
-                  setSelectedItems((prev) => [...prev, item])
-                  item.selected = !item.selected
-                }
+        <BottomSheetModalProvider>
+          <View style={HEADER}>
+            <Header
+              headerHeight={headerHeight}
+              headerTx="setPreferences.title"
+              leftTx={"setPreferences.back"}
+              rightTx={selectedItems.length > 0 ? "setPreferences.save" : "setPreferences.skip"}
+              onLeftPress={() => navigation.goBack()}
+              onRightPress={() => {
+                save("selectedItems", selectedItems).then(() => navigation.navigate("welcome"))
               }}
+              titleStyle={TITLE}
+              style={HEADER}
+              textStyle={LINK_TEXT}
             >
-              <PreferenceCard item={item} />
-            </TouchableWithoutFeedback>
+              <Text tx="setPreferences.subtitle" style={SUBTITLE} />
+              <Spacer n={0.5} />
+              <SearchBar
+                style={SEARCH}
+                placeholder="Search"
+                onPress={() => null}
+                onChangeText={(text) => console.log(text)}
+              />
+            </Header>
+          </View>
+          <FlatGrid
+            style={GRID}
+            keyExtractor={(item) => item.id}
+            maxItemsPerRow={2}
+            data={data.preferencesFeed.map((item) => {
+              return { ...item, selected: !!selectedItems.find((found) => found.id === item.id) }
+            })}
+            renderItem={({ item }) => (
+              <TouchableWithoutFeedback
+                onPress={async () => {
+                  if (item.selected) {
+                    item.selected = !item.selected
+                    setSelectedItems(() => selectedItems.filter((found) => found.id !== item.id))
+                  } else {
+                    item.selected = !item.selected
+                    setSelectedItems((prev) => [...prev, item])
+                  }
+
+                  await save("selectedItems", selectedItems)
+                  if (selectedItems.length > 0) handlePresentModalPress()
+                }}
+              >
+                <PreferenceCard item={item} />
+              </TouchableWithoutFeedback>
+            )}
+          />
+          {selectedItems.length > 0 && (
+            <>
+              <Button onPress={handlePresentModalPress} style={BUTTON}>
+                <Icon icon="chevronUp" style={CHEVRON} />
+                <ParsedText
+                  tx="setPreferences.selected"
+                  txOptions={{ selectedCt: selectedItems.length }}
+                  style={LINK_TEXT}
+                  parse={[{ pattern: /(\d+)/, style: SELECTED_CT }]}
+                />
+              </Button>
+              <BottomSheetModal
+                ref={bottomSheetModalRef}
+                index={0}
+                snapPoints={snapPoints}
+                onChange={handleSheetChanges}
+                style={ITEM_CONTAINER}
+              >
+                <BottomSheetFlatList
+                  data={selectedItems}
+                  keyExtractor={(item) => item.id}
+                  renderItem={renderItem}
+                  contentContainerStyle={SELECTED_CONTAINER}
+                />
+              </BottomSheetModal>
+            </>
           )}
-        />
-        <ActionButton
-          buttonColor={color.primary}
-          renderIcon={() => <Icon icon="checkmark" />}
-          onPress={() => {
-            console.log("Selections saved")
-            navigation.navigate("welcome")
-          }}
-        />
+        </BottomSheetModalProvider>
       </SafeAreaView>
     )
   })
