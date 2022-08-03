@@ -135,8 +135,9 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
               leftTx={"setPreferences.back"}
               rightTx={selectedItems.length > 0 ? "setPreferences.save" : "setPreferences.skip"}
               onLeftPress={() => navigation.goBack()}
-              onRightPress={() => {
-                save("selectedItems", selectedItems).then(() => navigation.navigate("welcome"))
+              onRightPress={async () => {
+                navigation.navigate("welcome")
+                await save("selectedItems", selectedItems)
               }}
               titleStyle={TITLE}
               style={HEADER}
@@ -171,7 +172,6 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
                   }
 
                   await save("selectedItems", selectedItems)
-                  if (selectedItems.length > 0) handlePresentModalPress()
                 }}
               >
                 <PreferenceCard item={item} />
