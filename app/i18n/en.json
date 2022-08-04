@@ -2,7 +2,8 @@
   "common": {
     "ok": "OK!",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "delete": "Delete"
   },
   "errors": {
     "invalidEmail": "Invalid email address."
@@ -38,15 +39,17 @@
     "subtitle": "Choose the groups you’re interested in.  You can modify this later.",
     "back": "Back",
     "save": "Save",
-    "skip": "Skip",
-    "selected": "%{selectedCt} SELECTED"
+    "skip": "Skip"
   },
   "modifyPreferences": {
     "title": "Who are your faves?",
     "subtitle": "Choose the groups you’re interested in.",
     "cancel": "Cancel",
-    "save": "Save",
-    "selected": "%{selectedCt} SELECTED"
+    "save": "Save"
+  },
+  "preferences": {
+    "label": "%{selectedCt} SELECTED",
+    "title": "Your Faves"
   },
   "listings": {
     "title": "Listings",
