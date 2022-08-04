@@ -6,7 +6,7 @@ import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { Spacer, Text } from "../../components"
 import { color } from "../../theme"
-import { load } from "../../utils/storage"
+import { useQuery } from "../../models"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { translate } from "../../i18n"
 
@@ -51,14 +51,43 @@ enum ListingsMode {
 
 export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">> = observer(
   function ListingsScreen({ navigation }) {
-    const [, setSuggestedListings] = useState([])
-
     const [listingsMode, setListingsMode] = useState(ListingsMode.Suggested)
 
-    load("suggestedListings").then((storedSelections) => {
-      // Set the initial value
-      setSuggestedListings(storedSelections ?? [])
-    })
+    const { data, loading } = useQuery((store) =>
+      store.queryListingsFeed(
+        {},
+        `__typename
+        id
+        type
+        isFeatured
+        groups {
+          __typename
+          id
+          name
+        }
+        idols {
+          __typename
+          id
+          stageName
+        }
+        description
+        listedBy {
+          __typename
+          id
+          username
+        }`,
+      ),
+    )
+
+    if (loading) {
+      return (
+        <SafeAreaView style={ROOT}>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={TITLE} tx={"common.ok"} />
+          </View>
+        </SafeAreaView>
+      )
+    }
 
     return (
       <SafeAreaView style={ROOT}>
@@ -78,7 +107,15 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
             />
           </View>
         </View>
-        <View style={CONTENT}></View>
+        <View style={CONTENT}>
+          {listingsMode === ListingsMode.Suggested && <Text style={TITLE}>Suggested</Text>}
+          {listingsMode === ListingsMode.All &&
+            data.listingsFeed.map((item) => (
+              <Text key={item.id} style={TITLE}>
+                All
+              </Text>
+            ))}
+        </View>
       </SafeAreaView>
     )
   },
