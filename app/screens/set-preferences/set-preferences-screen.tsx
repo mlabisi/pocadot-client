@@ -120,6 +120,24 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
       ),
     )
 
+    const [filteredItems, setFilteredItems] = useState(data.preferencesFeed)
+
+    const searchFilterFunction = (text) => {
+      if (text.length === 0) {
+        setFilteredItems(data.preferencesFeed)
+      } else {
+        setFilteredItems(
+          data.preferencesFeed.filter((item) => {
+            // @ts-ignore - Talent is guaranteed to be either a Group (with `name`) or Idol (with `stageName`)
+            const { name, stageName } = item
+            const label = name ?? stageName
+            const textData = text.toUpperCase()
+
+            return label.indexOf(textData) > -1
+          }),
+        )
+      }
+    }
     load("selectedItems").then((storedSelections) => {
       // Set the initial value
       setSelectedItems(storedSelections ?? [])
@@ -150,7 +168,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
                 style={SEARCH}
                 placeholder="Search"
                 onPress={() => null}
-                onChangeText={(text) => console.log(text)}
+                onChangeText={searchFilterFunction}
               />
             </Header>
           </View>
@@ -158,7 +176,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
             style={GRID}
             keyExtractor={(item) => item.id}
             maxItemsPerRow={2}
-            data={data.preferencesFeed.map((item) => {
+            data={filteredItems.map((item) => {
               return { ...item, selected: !!selectedItems.find((found) => found.id === item.id) }
             })}
             renderItem={({ item }) => (
