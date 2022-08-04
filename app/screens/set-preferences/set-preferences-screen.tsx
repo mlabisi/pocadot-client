@@ -154,7 +154,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
               rightTx={selectedItems.length > 0 ? "setPreferences.save" : "setPreferences.skip"}
               onLeftPress={() => navigation.goBack()}
               onRightPress={async () => {
-                navigation.navigate("welcome")
+                navigation.navigate("listings")
                 alert("Saved selections")
                 await save("selectedItems", selectedItems)
               }}
