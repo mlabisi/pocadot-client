@@ -54,7 +54,7 @@ const LABEL: TextStyle = {
  * Displays an idol/group's default picture, label, and frame depending on whether or not the talent has been selected
  */
 export const PreferenceCard = function PreferenceCard({ item }) {
-  const { featuredImage = defaultImage, name = "STAYC", selected = false } = item
+  const { featuredImage = defaultImage, name, stageName, selected = false } = item
 
   return (
     <View style={selected ? SELECTED_CONTAINER : null}>
@@ -62,7 +62,7 @@ export const PreferenceCard = function PreferenceCard({ item }) {
         <AutoImage source={featuredImage} style={FEATURED_IMAGE} />
         <View style={LABEL_CONTAINER}>
           <Spacer n={0.4} />
-          <Text text={name} style={LABEL} />
+          <Text text={name ?? stageName} style={LABEL} />
           <Spacer n={0.4} />
         </View>
       </View>
