@@ -195,6 +195,7 @@ export const ModifyPreferencesScreen: FC<
           rightTx={"modifyPreferences.save"}
           onLeftPress={() => navigation.goBack()}
           onRightPress={async () => {
+            navigation.pop()
             navigation.navigate("listings")
             alert("Saved modifications")
             await save("selectedItems", selectedItems)

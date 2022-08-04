@@ -93,7 +93,15 @@ export const SignUpScreen: FC<StackScreenProps<NavigatorParamList, "signUp">> = 
           <Spacer n={0.1} />
           <View style={BUTTON_CONTAINER}>
             <Spacer n={0.3} />
-            <Button tx="signUp.continue" testID="signUpBtn" onPress={nextScreen} style={BUTTON} />
+            <Button
+              tx="signUp.continue"
+              testID="signUpBtn"
+              onPress={() => {
+                navigation.pop()
+                nextScreen()
+              }}
+              style={BUTTON}
+            />
             <Spacer n={0.3} />
           </View>
           <Spacer n={0.1} />
