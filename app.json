@@ -4,6 +4,7 @@
   "expo": {
     "name": "pocadotClient",
     "slug": "pocadotClient",
+    "jsEngine": "hermes",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-all.png",
@@ -27,7 +28,8 @@
     },
     "ios": {
       "icon": "./assets/images/app-icon-ios.png",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.itsjustmora.pocadotClient"
     },
     "web": {
       "favicon": "./assets/images/app-icon-web-favicon.png"
