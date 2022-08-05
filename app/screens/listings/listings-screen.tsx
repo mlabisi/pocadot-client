@@ -4,9 +4,8 @@ import SegmentedControlTab from "react-native-segmented-control-tab"
 import { TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Spacer, Text } from "../../components"
+import { AllListings, Spacer, SuggestedListings, Text } from "../../components"
 import { color } from "../../theme"
-import { useQuery } from "../../models"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { translate } from "../../i18n"
 
@@ -53,42 +52,6 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
   function ListingsScreen({ navigation }) {
     const [listingsMode, setListingsMode] = useState(ListingsMode.Suggested)
 
-    const { data, loading } = useQuery((store) =>
-      store.queryListingsFeed(
-        {},
-        `__typename
-        id
-        type
-        isFeatured
-        groups {
-          __typename
-          id
-          name
-        }
-        idols {
-          __typename
-          id
-          stageName
-        }
-        description
-        listedBy {
-          __typename
-          id
-          username
-        }`,
-      ),
-    )
-
-    if (loading) {
-      return (
-        <SafeAreaView style={ROOT}>
-          <View style={{ flexDirection: "column" }}>
-            <Text style={TITLE} tx={"common.ok"} />
-          </View>
-        </SafeAreaView>
-      )
-    }
-
     return (
       <SafeAreaView style={ROOT}>
         <View style={{ flexDirection: "column" }}>
@@ -108,13 +71,8 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
           </View>
         </View>
         <View style={CONTENT}>
-          {listingsMode === ListingsMode.Suggested && <Text style={TITLE}>Suggested</Text>}
-          {listingsMode === ListingsMode.All &&
-            data.listingsFeed.map((item) => (
-              <Text key={item.id} style={TITLE}>
-                All
-              </Text>
-            ))}
+          {listingsMode === ListingsMode.Suggested && <SuggestedListings />}
+          {listingsMode === ListingsMode.All && <AllListings />}
         </View>
       </SafeAreaView>
     )
