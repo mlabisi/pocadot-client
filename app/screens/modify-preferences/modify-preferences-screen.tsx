@@ -98,6 +98,7 @@ export const ModifyPreferencesScreen: FC<
   StackScreenProps<NavigatorParamList, "modifyPreferences">
 > = observer(function ModifyPreferencesScreen({ navigation }) {
   const [selectedItems, setSelectedItems] = useState([])
+  const [filteredItems, setFilteredItems] = useState([])
 
   // ref
   const sheetRef = useRef<BottomSheet>(null)
@@ -148,7 +149,7 @@ export const ModifyPreferencesScreen: FC<
     )
   }
 
-  const { data } = useQuery((store) =>
+  const { data, loading } = useQuery((store) =>
     store.queryPreferencesFeed(
       {},
       `
@@ -162,7 +163,18 @@ export const ModifyPreferencesScreen: FC<
     ),
   )
 
-  const [filteredItems, setFilteredItems] = useState(data.preferencesFeed)
+  if (loading) {
+    return (
+      <SafeAreaView style={ROOT}>
+        <View style={{ flexDirection: "column" }}>
+          <Text style={TITLE} tx={"common.ok"} />
+        </View>
+      </SafeAreaView>
+    )
+  }
+
+  // this causes too many re-renders for some reason
+  // setFilteredItems(data.preferencesFeed)
 
   const searchFilterFunction = (text) => {
     if (text.length === 0) {

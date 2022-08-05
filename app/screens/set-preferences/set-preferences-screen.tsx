@@ -97,6 +97,7 @@ const DELETE_BUTTON: ViewStyle = { backgroundColor: color.error, flex: 1 }
 export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setPreferences">> =
   observer(function SetPreferencesScreen({ navigation }) {
     const [selectedItems, setSelectedItems] = useState([])
+    const [filteredItems, setFilteredItems] = useState([])
 
     // ref
     const sheetRef = useRef<BottomSheet>(null)
@@ -147,7 +148,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
       )
     }
 
-    const { data } = useQuery((store) =>
+    const { data, loading } = useQuery((store) =>
       store.queryPreferencesFeed(
         {},
         `
@@ -161,7 +162,18 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
       ),
     )
 
-    const [filteredItems, setFilteredItems] = useState(data.preferencesFeed)
+    if (loading) {
+      return (
+        <SafeAreaView style={ROOT}>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={TITLE} tx={"common.ok"} />
+          </View>
+        </SafeAreaView>
+      )
+    }
+
+    // this causes too many re-renders for some reason
+    // setFilteredItems(data.preferencesFeed)
 
     const searchFilterFunction = (text) => {
       if (text.length === 0) {
