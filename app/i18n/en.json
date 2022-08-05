@@ -53,8 +53,14 @@
   },
   "listings": {
     "title": "Listings",
-    "suggestedLabel": "Suggested",
-    "allLabel": "All"
+    "suggested": {
+      "restart": "Restart",
+      "label": "Suggested",
+      "noMore": "Check back later for more recommendations, or click the restart button to review your already-seen photocard suggestions!"
+    },
+    "all": {
+      "label": "All"
+    }
   },
   "errorScreen": {
     "title": "Something went wrong!",

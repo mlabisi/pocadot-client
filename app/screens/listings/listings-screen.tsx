@@ -14,11 +14,13 @@ const ROOT: ViewStyle = {
   flex: 1,
 }
 
-const HEADER: ViewStyle = {
+const HEADER: ViewStyle = { flexDirection: "column", flex: 0.1, justifyContent: "flex-end" }
+
+const HEADER_CONTENT: ViewStyle = {
   backgroundColor: color.palette.white,
   zIndex: 1,
   flexDirection: "row",
-  height: 75,
+  paddingBottom: 15,
 }
 
 const CONTENT: ViewStyle = {
@@ -54,12 +56,12 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
 
     return (
       <SafeAreaView style={ROOT}>
-        <View style={{ flexDirection: "column" }}>
-          <View style={HEADER}>
+        <View style={HEADER}>
+          <View style={HEADER_CONTENT}>
             <Text tx="listings.title" preset="header" style={TITLE} />
             <Spacer n={0.5} />
             <SegmentedControlTab
-              values={[translate("listings.suggestedLabel"), translate("listings.allLabel")]}
+              values={[translate("listings.suggested.label"), translate("listings.all.label")]}
               tabsContainerStyle={TABS_CONTAINER}
               tabTextStyle={SEGMENT_TITLE}
               activeTabStyle={ACTIVE_TAB}
