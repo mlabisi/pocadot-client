@@ -7,7 +7,7 @@
     <only-packager />
     <build-and-launch value="false" />
     <browser value="2a2a2841-b457-412e-8c8a-ad6c61e31d52" />
-    <debug-host value="192.168.254.53" />
+    <debug-host value="172.20.4.181" />
     <debug-port value="19000" />
     <method v="2">
       <option name="ReactNativePackager" enabled="true" />

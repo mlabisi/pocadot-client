@@ -1,13 +1,13 @@
 import * as React from "react"
-import { StyleSheet, TextStyle, View, ViewStyle } from "react-native"
+import { TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { color } from "../../theme"
 import { Text } from "../text/text"
-import { ListingModelType, useQuery } from "../../models"
+import { useQuery } from "../../models"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { SuggestionCard } from "../suggestion-card/suggestion-card"
 import TinderCard from "react-tinder-card"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import { Button } from "../button/button"
 
 const ROOT: ViewStyle = {
