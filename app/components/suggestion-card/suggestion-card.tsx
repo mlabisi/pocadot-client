@@ -83,6 +83,7 @@ const LISTING_USERNAME: TextStyle = {
 
 const LISTING_IMAGE: ImageStyle = {
   width: 230,
+  alignSelf: "center",
 }
 
 export interface SuggestionCardProps {

@@ -4,6 +4,9 @@ export const icons = {
   bug: require("./ladybug.png"),
   checkmark: require("./ic_checkmark_white.png"),
   chevronUp: require("./chevron-up.png"),
+  star: require("./star.png"),
+  heart: require("./heart.png"),
+  heartFill: require("./heart-fill.png"),
 }
 
 export type IconTypes = keyof typeof icons

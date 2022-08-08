@@ -1,10 +1,12 @@
 import * as React from "react"
-import { ImageStyle, StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import { ImageStyle, Pressable, StyleProp, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { color, typography } from "../../theme"
 import { Text } from "../text/text"
 import { AutoImage } from "../auto-image/auto-image"
 import { Spacer } from "../spacer/spacer"
+import { Icon } from "../icon/icon"
+import { useState } from "react"
 
 const defaultImage = require("./j.png")
 
@@ -23,7 +25,7 @@ const CARD_CONTAINER: ViewStyle = {
     height: 3,
   },
   shadowOpacity: 0.5,
-  shadowRadius: 12.35,
+  shadowRadius: 8,
   elevation: 8,
 }
 
@@ -56,10 +58,10 @@ const TAG_TEXT: TextStyle = {
 }
 
 const LISTING_IDOL: TextStyle = {
-  fontSize: 22,
+  fontSize: 16,
   fontWeight: "600",
   letterSpacing: -0.44,
-  color: "rgba(0,0,0,1)",
+  color: color.palette.black,
   textAlign: "center",
 }
 
@@ -72,25 +74,54 @@ const LISTING_USERNAME: TextStyle = {
   justifyContent: "center",
 }
 
-const FEATURED_IMAGE: ImageStyle = {
+const LISTING_IMAGE: ImageStyle = {
   width: 100,
-  height: 100,
+  height: 150,
+  alignSelf: "center",
+}
+
+const BADGE: ViewStyle = {
+  position: "absolute",
+  backgroundColor: color.palette.white,
+  shadowColor: color.palette.black,
+  shadowOffset: {
+    width: 0,
+    height: 4,
+  },
+  shadowOpacity: 0.5,
+  shadowRadius: 5,
+  elevation: 1,
+  width: 23,
+  height: 23,
+  borderRadius: 100,
+  justifyContent: "center",
+  alignContent: "center",
 }
 const FEATURED_BADGE: ViewStyle = {
-  position: "absolute",
-  top: 11,
-  left: 29,
-  backgroundColor: "rgba(255, 255, 255, 1)",
-  shadowColor: "rgba(0,0,0,0.25)",
-  elevation: 1,
-  shadowOffset: { width: 0, height: 4 },
-  width: 129,
-  height: 209,
-  borderRadius: 10,
+  ...BADGE,
+  top: -10,
+  left: -10,
+}
+const FAVED_BADGE: ViewStyle = {
+  ...BADGE,
+  top: -10,
+  right: -10,
+}
+
+const BADGE_ICON: ImageStyle = {
+  width: 14,
+  height: 14,
+  alignSelf: "center",
+}
+const FEATURED_ICON: ImageStyle = {
+  ...BADGE_ICON,
+}
+const FAVED_ICON: ImageStyle = {
+  ...BADGE_ICON,
 }
 
 /**
- * Describe your component here
+ * Representation of an individual listing on the All Listings page
  */
 export const ListingCard = observer(function ListingCard({ item }) {
   const {
@@ -100,12 +131,27 @@ export const ListingCard = observer(function ListingCard({ item }) {
     type = ["WTS"],
     listedBy = { username: "papagowon" },
     featured = true,
-    isFaved = false,
+    isFaved = true,
   } = item
+
+  const [fillHeart, setFillHeart] = useState(isFaved)
 
   return (
     <View style={CARD_CONTAINER}>
-      <AutoImage source={featuredImage} style={FEATURED_IMAGE} />
+      {featured && (
+        <View style={FEATURED_BADGE}>
+          <Icon icon={"star"} style={FEATURED_ICON} />
+        </View>
+      )}
+      <Pressable
+        style={FAVED_BADGE}
+        onPress={() => {
+          setFillHeart(!fillHeart)
+        }}
+      >
+        <Icon icon={fillHeart ? "heartFill" : "heart"} style={FAVED_ICON} />
+      </Pressable>
+      <AutoImage source={featuredImage} style={LISTING_IMAGE} />
       <View style={TAGS_CONTAINER}>
         {type.map((tag) => (
           <View key={tag} style={TAG}>

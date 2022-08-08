@@ -12,4 +12,5 @@ export const palette = {
   gray: "#A3A4A4",
   fill: "#F8FAFB",
   darkGray: "#545656",
+  black25: "#0000003F",
 }
