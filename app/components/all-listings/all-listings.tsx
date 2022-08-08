@@ -6,6 +6,7 @@ import { Text } from "../text/text"
 import { useQuery } from "../../models"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { ListingCard } from "../listing-card/listing-card"
+import { FlatGrid } from "react-native-super-grid"
 
 const ROOT: ViewStyle = {
   backgroundColor: color.palette.white,
@@ -57,5 +58,10 @@ export const AllListings = observer(function AllListings() {
     )
   }
 
-  return data.listingsFeed.map((item) => <ListingCard key={item.id} item={item} />)
+  return (
+    <FlatGrid
+      data={data.listingsFeed}
+      renderItem={({ item }) => <ListingCard key={item.id} item={item} />}
+    />
+  )
 })
