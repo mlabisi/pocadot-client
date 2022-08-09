@@ -1,5 +1,5 @@
 import * as React from "react"
-import { TextStyle, View, ViewStyle } from "react-native"
+import { Dimensions, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { color } from "../../theme"
 import { Text } from "../text/text"
@@ -10,8 +10,17 @@ import TinderCard from "react-tinder-card"
 import { useState } from "react"
 import { Button } from "../button/button"
 
+const { width } = Dimensions.get("window")
+
 const ROOT: ViewStyle = {
   backgroundColor: color.palette.white,
+  flex: 1,
+}
+
+const CONTENT: ViewStyle = {
+  backgroundColor: color.palette.fill,
+  alignContent: "center",
+  justifyContent: "center",
   flex: 1,
 }
 
@@ -23,23 +32,22 @@ const TITLE: TextStyle = {
 const CONTAINER: ViewStyle = {
   position: "absolute",
   zIndex: 3,
-  bottom: 80,
+  bottom: 100,
   flex: 1,
-  alignItems: "center",
-  justifyContent: "center",
+  paddingLeft: width * 0.09,
 }
 
 const NEXT_ITEM_CONTAINER: ViewStyle = {
   ...CONTAINER,
   zIndex: 2,
-  bottom: 55,
+  bottom: 75,
   transform: [{ scale: 0.95 }],
 }
 
 const NEXT_NEXT_ITEM_CONTAINER: ViewStyle = {
   ...CONTAINER,
   zIndex: 1,
-  bottom: 30,
+  bottom: 50,
   transform: [{ scale: 0.9 }],
 }
 
@@ -90,7 +98,7 @@ export const SuggestedListings = observer(function SuggestedListings() {
   const nextNextItem = data.userSuggestions[nextNextIndex]
 
   return (
-    <>
+    <View style={CONTENT}>
       {item && (
         <View style={CONTAINER}>
           <TinderCard
@@ -161,6 +169,6 @@ export const SuggestedListings = observer(function SuggestedListings() {
           <Button tx={"listings.suggested.restart"} />
         </View>
       )}
-    </>
+    </View>
   )
 })

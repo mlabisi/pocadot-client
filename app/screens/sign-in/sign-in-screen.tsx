@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import { ImageStyle, SafeAreaView, TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { AutoImage, Button, FormRow, Screen, Spacer, Text, TextField } from "../../components"
@@ -19,6 +19,7 @@ const ROOT: ViewStyle = {
 const SCREEN: ViewStyle = {
   flex: 1,
   flexDirection: "column",
+  paddingHorizontal: 15,
 }
 
 const BUTTON_CONTAINER: ViewStyle = {
@@ -75,8 +76,7 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
     const signUp = () => navigation.navigate("signUp")
 
     return (
-      <View style={ROOT} testID="signInScreen">
-        <Spacer n={0.1} />
+      <SafeAreaView style={ROOT} testID="signInScreen">
         <Screen style={SCREEN} preset="fixed">
           <AutoImage source={pocadotCircle} style={POCADOT_CIRCLE} />
           <Text style={FORM_LABEL} preset="header" tx="signIn.formLabel" />
@@ -111,8 +111,7 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
             onPress={signUp}
           />
         </Screen>
-        <Spacer n={0.1} />
-      </View>
+      </SafeAreaView>
     )
   },
 )

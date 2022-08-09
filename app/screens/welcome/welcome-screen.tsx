@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { TextStyle, View, ViewStyle } from "react-native"
+import { SafeAreaView, TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { Button, Screen, Spacer, Text } from "../../components"
@@ -44,7 +44,7 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
     const signUpScreen = () => navigation.navigate("signUp")
 
     return (
-      <View style={ROOT} testID="welcomeScreen">
+      <SafeAreaView style={ROOT} testID="welcomeScreen">
         <Screen style={SCREEN} preset="fixed">
           <Spacer n={3} />
           <Text preset="header" tx="welcomeScreen.appName" style={HEADER_TEXT} />
@@ -69,7 +69,7 @@ export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> 
           </View>
           <Spacer n={2.5} />
         </Screen>
-      </View>
+      </SafeAreaView>
     )
   },
 )

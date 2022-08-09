@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import { ImageStyle, SafeAreaView, TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { AutoImage, Button, FormRow, Screen, Spacer, Text, TextField } from "../../components"
@@ -19,6 +19,7 @@ const ROOT: ViewStyle = {
 const SCREEN: ViewStyle = {
   flex: 1,
   flexDirection: "column",
+  paddingHorizontal: 15,
 }
 
 const BUTTON_CONTAINER: ViewStyle = {
@@ -71,15 +72,11 @@ const POCADOT_CIRCLE: ImageStyle = {
 
 export const SignUpScreen: FC<StackScreenProps<NavigatorParamList, "signUp">> = observer(
   function SignUpScreen({ navigation }) {
-    // Pull in one of our MST stores
-    // const { someStore, anotherStore } = useStores()
-
     const nextScreen = () => navigation.navigate("setPreferences")
     const signIn = () => navigation.navigate("signIn")
 
     return (
-      <View style={ROOT} testID="signUpScreen">
-        <Spacer n={0.1} />
+      <SafeAreaView style={ROOT} testID="signUpScreen">
         <Screen style={SCREEN} preset="fixed">
           <AutoImage source={pocadotCircle} style={POCADOT_CIRCLE} />
           <Text style={FORM_LABEL} preset="header" tx="signUp.formLabel" />
@@ -114,8 +111,7 @@ export const SignUpScreen: FC<StackScreenProps<NavigatorParamList, "signUp">> = 
             onPress={signIn}
           />
         </Screen>
-        <Spacer n={0.1} />
-      </View>
+      </SafeAreaView>
     )
   },
 )

@@ -4,7 +4,7 @@ import SegmentedControlTab from "react-native-segmented-control-tab"
 import { TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { AllListings, Spacer, SuggestedListings, Text } from "../../components"
+import { AllListings, Spacer, SuggestedListings, Text, Screen } from "../../components"
 import { color } from "../../theme"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { translate } from "../../i18n"
@@ -55,28 +55,30 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
     const [listingsMode, setListingsMode] = useState(ListingsMode.Suggested)
 
     return (
-      <SafeAreaView style={ROOT}>
-        <View style={HEADER}>
-          <View style={HEADER_CONTENT}>
-            <Text tx="listings.title" preset="header" style={TITLE} />
-            <Spacer n={0.5} />
-            <SegmentedControlTab
-              values={[translate("listings.suggested.label"), translate("listings.all.label")]}
-              tabsContainerStyle={TABS_CONTAINER}
-              tabTextStyle={SEGMENT_TITLE}
-              activeTabStyle={ACTIVE_TAB}
-              selectedIndex={listingsMode}
-              onTabPress={(index) =>
-                setListingsMode(index === 0 ? ListingsMode.Suggested : ListingsMode.All)
-              }
-            />
+      <Screen preset="fixed">
+        <SafeAreaView style={ROOT}>
+          <View style={HEADER}>
+            <View style={HEADER_CONTENT}>
+              <Text tx="listings.title" preset="header" style={TITLE} />
+              <Spacer n={0.5} />
+              <SegmentedControlTab
+                values={[translate("listings.suggested.label"), translate("listings.all.label")]}
+                tabsContainerStyle={TABS_CONTAINER}
+                tabTextStyle={SEGMENT_TITLE}
+                activeTabStyle={ACTIVE_TAB}
+                selectedIndex={listingsMode}
+                onTabPress={(index) =>
+                  setListingsMode(index === 0 ? ListingsMode.Suggested : ListingsMode.All)
+                }
+              />
+            </View>
           </View>
-        </View>
-        <View style={CONTENT}>
-          {listingsMode === ListingsMode.Suggested && <SuggestedListings />}
-          {listingsMode === ListingsMode.All && <AllListings />}
-        </View>
-      </SafeAreaView>
+          <View style={CONTENT}>
+            {listingsMode === ListingsMode.Suggested && <SuggestedListings />}
+            {listingsMode === ListingsMode.All && <AllListings />}
+          </View>
+        </SafeAreaView>
+      </Screen>
     )
   },
 )
