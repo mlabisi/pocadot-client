@@ -60,6 +60,8 @@
     },
     "all": {
       "label": "All"
+    },
+    "detail": {
     }
   },
   "errorScreen": {

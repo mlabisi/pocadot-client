@@ -12,7 +12,7 @@ import { RootStoreType } from "./RootStore"
  * - Consume stores in our screens (or other components, though it's
  *   preferable to just connect screens)
  */
-const RootStoreContext = createStoreContext<RootStoreType>(React)
+export const RootStoreContext = createStoreContext<RootStoreType>(React)
 
 /**
  * The provider our root component will use to expose the root store

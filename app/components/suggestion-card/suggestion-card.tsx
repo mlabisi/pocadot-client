@@ -1,10 +1,23 @@
 import * as React from "react"
-import { ImageStyle, StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import {
+  ImageStyle,
+  Pressable,
+  StyleProp,
+  TextStyle,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
+} from "react-native"
 import { observer } from "mobx-react-lite"
 import { color, typography } from "../../theme"
 import { Text } from "../text/text"
-import { ListingModelType } from "../../models"
+import { ListingModelType, RootStoreContext } from "../../models"
 import { AutoImage } from "../auto-image/auto-image"
+import { NavigationProp } from "@react-navigation/native"
+import { useContext, useState } from "react"
+import { save } from "../../utils/storage"
+import { _NotCustomized, IModelType, ModelProperties } from "mobx-state-tree"
 
 const yoon = require("./yoon.png")
 
@@ -91,16 +104,26 @@ export interface SuggestionCardProps {
    * The item to represent.
    */
   item: ListingModelType
+
+  navigation?: NavigationProp<any>
+
+  store: IModelType<ModelProperties, any, _NotCustomized, _NotCustomized>
 }
 
 /**
  * Describe your component here
  */
 export const SuggestionCard = observer(function SuggestionCard(props: SuggestionCardProps) {
-  const { item } = props
+  const { item, navigation } = props
+  const rootStore = useContext(RootStoreContext)
+
+  const openDetailsView = async () => {
+    rootStore.setSelectedListingId(item.id)
+    navigation.navigate("listingDetail")
+  }
 
   return (
-    <View style={CARD_CONTAINER}>
+    <Pressable onPress={openDetailsView} style={CARD_CONTAINER}>
       <AutoImage source={yoon} style={LISTING_IMAGE} />
       <View style={TAGS_CONTAINER}>
         {item.type.map((tag) => (
@@ -119,6 +142,6 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
         {item.description && <Text style={LISTING_DESCRIPTION}>{item.description}</Text>}
         {item.listedBy.username && <Text style={LISTING_USERNAME}>@{item.listedBy.username}</Text>}
       </View>
-    </View>
+    </Pressable>
   )
 })

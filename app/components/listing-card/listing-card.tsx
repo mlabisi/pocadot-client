@@ -1,12 +1,23 @@
 import * as React from "react"
-import { ImageStyle, Pressable, StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import {
+  ImageStyle,
+  Pressable,
+  StyleProp,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native"
 import { observer } from "mobx-react-lite"
 import { color, typography } from "../../theme"
 import { Text } from "../text/text"
 import { AutoImage } from "../auto-image/auto-image"
 import { Spacer } from "../spacer/spacer"
 import { Icon } from "../icon/icon"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { useNavigation } from "@react-navigation/native"
+import { save } from "../../utils/storage"
+import { RootStoreContext } from "../../models"
 
 const defaultImage = require("./j.png")
 
@@ -123,7 +134,7 @@ const FAVED_ICON: ImageStyle = {
 /**
  * Representation of an individual listing on the All Listings page
  */
-export const ListingCard = observer(function ListingCard({ item }) {
+export const ListingCard = observer(function ListingCard({ navigation, item }) {
   const {
     featuredImage = defaultImage,
     groups = [{ name: "STAYC" }],
@@ -134,10 +145,17 @@ export const ListingCard = observer(function ListingCard({ item }) {
     isFaved = true,
   } = item
 
+  const rootStore = useContext(RootStoreContext)
+
+  const openDetailsView = async () => {
+    rootStore.setSelectedListingId(item.id)
+    navigation.navigate("listingDetail")
+  }
+
   const [fillHeart, setFillHeart] = useState(isFaved)
 
   return (
-    <View style={CARD_CONTAINER}>
+    <TouchableOpacity onPress={openDetailsView} style={CARD_CONTAINER}>
       {featured && (
         <View style={FEATURED_BADGE}>
           <Icon icon={"star"} style={FEATURED_ICON} />
@@ -168,6 +186,6 @@ export const ListingCard = observer(function ListingCard({ item }) {
         )}
         {listedBy.username && <Text style={LISTING_USERNAME}>@{item.listedBy.username}</Text>}
       </View>
-    </View>
+    </TouchableOpacity>
   )
 })

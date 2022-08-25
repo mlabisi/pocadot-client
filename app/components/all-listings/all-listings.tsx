@@ -7,6 +7,8 @@ import { useQuery } from "../../models"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { ListingCard } from "../listing-card/listing-card"
 import { FlatGrid } from "react-native-super-grid"
+import { useState } from "react"
+import { useNavigation } from "@react-navigation/native"
 
 const ROOT: ViewStyle = {
   backgroundColor: color.palette.white,
@@ -21,7 +23,7 @@ const TITLE: TextStyle = {
 /**
  * Used to display all listings
  */
-export const AllListings = observer(function AllListings() {
+export const AllListings = observer(function AllListings({ navigation }) {
   const { data, loading } = useQuery((store) =>
     store.queryListingsFeed(
       {},
@@ -48,6 +50,8 @@ export const AllListings = observer(function AllListings() {
     ),
   )
 
+  const renderItem = ({ item }) => <ListingCard key={item.id} item={item} navigation={navigation} />
+
   if (loading) {
     return (
       <SafeAreaView style={ROOT}>
@@ -58,10 +62,5 @@ export const AllListings = observer(function AllListings() {
     )
   }
 
-  return (
-    <FlatGrid
-      data={data.listingsFeed}
-      renderItem={({ item }) => <ListingCard key={item.id} item={item} />}
-    />
-  )
+  return <FlatGrid data={data.listingsFeed} renderItem={renderItem} />
 })

@@ -74,8 +74,10 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
             </View>
           </View>
           <View style={CONTENT}>
-            {listingsMode === ListingsMode.Suggested && <SuggestedListings />}
-            {listingsMode === ListingsMode.All && <AllListings />}
+            {listingsMode === ListingsMode.Suggested && (
+              <SuggestedListings navigation={navigation} />
+            )}
+            {listingsMode === ListingsMode.All && <AllListings navigation={navigation} />}
           </View>
         </SafeAreaView>
       </Screen>
