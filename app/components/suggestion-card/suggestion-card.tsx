@@ -50,7 +50,7 @@ const TAG: ViewStyle = {
   paddingHorizontal: 10,
   paddingVertical: 2,
   borderRadius: 100,
-  backgroundColor: "rgba(183,239,163,1)",
+  backgroundColor: color.palette.mint,
 }
 
 const CARD_HEADLINE: ViewStyle = {

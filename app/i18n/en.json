@@ -62,6 +62,7 @@
       "label": "All"
     },
     "detail": {
+      "sellerDescription": "Seller Description"
     }
   },
   "errorScreen": {
