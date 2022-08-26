@@ -3,7 +3,9 @@
     "ok": "OK!",
     "cancel": "Cancel",
     "back": "Back",
-    "delete": "Delete"
+    "delete": "Delete",
+    "details": "Details",
+    "currency": "$"
   },
   "errors": {
     "invalidEmail": "Invalid email address."
@@ -62,7 +64,15 @@
       "label": "All"
     },
     "detail": {
-      "sellerDescription": "Seller Description"
+      "sellerDescription": "Seller Description",
+      "tradeTargets": "Trade Targets",
+      "bid": "Make Offer",
+      "trade": "Offer Trade",
+      "pricePrefix": "Starting at",
+      "conditionSuffix": "Condition",
+      "locationPrefix": "Ships from",
+      "destinationPrefix": "Ships to",
+      "everywhere": "Everywhere"
     }
   },
   "errorScreen": {

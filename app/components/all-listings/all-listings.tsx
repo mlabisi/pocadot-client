@@ -25,28 +25,11 @@ const TITLE: TextStyle = {
  */
 export const AllListings = observer(function AllListings({ navigation }) {
   const { data, loading } = useQuery((store) =>
-    store.queryListingsFeed(
-      {},
-      `__typename
-        id
-        type
-        isFeatured
-        groups {
-          __typename
-          id
-          name
-        }
-        idols {
-          __typename
-          id
-          stageName
-        }
-        description
-        listedBy {
-          __typename
-          id
-          username
-        }`,
+    store.queryListingsFeed({}, (listing) =>
+      listing.id.type.isFeatured
+        .groups((group) => group.name)
+        .idols((idol) => idol.stageName)
+        .listedBy((user) => user.username),
     ),
   )
 
@@ -62,5 +45,18 @@ export const AllListings = observer(function AllListings({ navigation }) {
     )
   }
 
-  return <FlatGrid data={data.listingsFeed} renderItem={renderItem} />
+  return (
+    <FlatGrid
+      data={data.listingsFeed.sort((a, b) => {
+        if (a.isFeatured && !b.isFeatured) {
+          return -1
+        } else if (!a.isFeatured && b.isFeatured) {
+          return 1
+        } else {
+          return -1
+        }
+      })}
+      renderItem={renderItem}
+    />
+  )
 })

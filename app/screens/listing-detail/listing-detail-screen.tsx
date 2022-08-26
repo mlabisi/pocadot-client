@@ -11,12 +11,20 @@ import {
 } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Screen, Header, Text, Icon } from "../../components"
+import { Screen, Header, Text, Icon, Button } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 import { color, spacing } from "../../theme"
 import { load } from "../../utils/storage"
-import { RootStoreContext, useQuery } from "../../models"
+import {
+  listingModelPrimitives,
+  ListingType,
+  RootStoreContext,
+  selectFromListing,
+  useQuery,
+} from "../../models"
+import { translate } from "../../i18n"
+import { titleize } from "../../utils/titelize"
 
 const { height, width } = Dimensions.get("window")
 const headerHeight = height * 0.15
@@ -36,6 +44,11 @@ const HEADER_TEXT: TextStyle = {
 const DESC_TEXT: TextStyle = {
   ...HEADER_TEXT,
   paddingHorizontal: spacing[4],
+}
+const BUTTON_TEXT: TextStyle = {
+  ...DESC_TEXT,
+  fontSize: 16,
+  color: color.palette.white,
 }
 
 const CELL: ViewStyle = {
@@ -79,6 +92,16 @@ const DIVIDER: ViewStyle = {
   width: width - spacing[4] * 2,
   height: 1,
   alignSelf: "center",
+  marginTop: spacing[4],
+}
+
+const BUTTON_STYLE: ViewStyle = {
+  borderRadius: 0,
+  borderStyle: "solid",
+  borderColor: color.primary,
+  width,
+  alignSelf: "center",
+  marginVertical: spacing[4],
 }
 
 const CARD_HEADLINE: ViewStyle = {
@@ -129,6 +152,16 @@ const TEXT: TextStyle = {
   paddingVertical: spacing[3],
 }
 
+const DETAIL_TEXT: TextStyle = {
+  fontSize: 20,
+  fontWeight: "400",
+  letterSpacing: -0.2,
+  color: color.palette.black,
+  textAlign: "center",
+  justifyContent: "center",
+  paddingLeft: spacing[4],
+}
+
 const TAGS_CONTAINER: ViewStyle = {
   justifyContent: "center",
   flexDirection: "row",
@@ -150,6 +183,17 @@ const TAG_TEXT: TextStyle = {
   justifyContent: "center",
 }
 
+const DETAIL_CONTAINER: ViewStyle = {
+  ...ROW,
+  borderRadius: 10,
+  backgroundColor: color.palette.offGray,
+  height: 40,
+  width: width - spacing[4] * 2,
+  alignSelf: "center",
+  alignItems: "center",
+  marginVertical: spacing[1],
+}
+
 const SUBHEADER: ViewStyle = {
   ...HEADER,
   flexDirection: "column-reverse",
@@ -157,10 +201,36 @@ const SUBHEADER: ViewStyle = {
 
 export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listingDetail">> =
   observer(function ListingDetailScreen({ navigation }) {
-    const rootStore = useContext(RootStoreContext)
-    const { selectedListingId, listings } = rootStore
-    const selectedListing = listings.get(selectedListingId)
     const [fillHeart, setFillHeart] = useState(true)
+
+    const { data, loading } = useQuery((store) =>
+      store.queryListings(
+        {
+          input: {
+            ids: [store.selectedListingId],
+          },
+        },
+        (listing) =>
+          listing.id.description.type.startingPrice.condition.country.release.international
+            .groups((group) => group.name)
+            .idols((idol) => idol.stageName)
+            .listedBy((user) => user.username)
+            .targetIdols((idol) => idol.stageName)
+            .targetGroups((group) => group.name),
+      ),
+    )
+
+    if (loading) {
+      return (
+        <SafeAreaView style={ROOT}>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={HEADER_TEXT} tx={"common.ok"} />
+          </View>
+        </SafeAreaView>
+      )
+    }
+
+    const selectedListing = { ...data.listings[0] }
 
     return (
       <Screen preset="scroll">
@@ -189,14 +259,14 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
                       {selectedListing.idols.map((idol) => idol.stageName).join(",")}
                     </Text>
                   )}
-                  <Text style={LISTING_IDOL}>
-                    {selectedListing.release ?? "STEREOTYPE Version 1"}
-                  </Text>
+                  {selectedListing.release && (
+                    <Text style={LISTING_IDOL}>{selectedListing.release}</Text>
+                  )}
                 </View>
               </View>
+              <View style={DIVIDER} />
             </View>
           </Header>
-          <View style={DIVIDER} />
           <View style={CELL}>
             <View style={ROW}>
               <Text tx={"listings.detail.sellerDescription"} style={TEXT} />
@@ -212,6 +282,87 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
               <Text style={DESC_TEXT}>{selectedListing.description}</Text>
             )}
           </View>
+          <Button
+            text={selectedListing.type
+              .map((t) => {
+                switch (t) {
+                  case ListingType.WTT:
+                    return translate("listings.detail.trade")
+                  case ListingType.WTS:
+                  default:
+                    return translate("listings.detail.bid")
+                }
+              })
+              .join("/")}
+            textStyle={BUTTON_TEXT}
+            style={BUTTON_STYLE}
+          ></Button>
+          <View style={CELL}>
+            <Text tx={"common.details"} style={TEXT} />
+            <View style={CELL}>
+              <View style={DETAIL_CONTAINER}>
+                <Icon icon={"money"} style={{ marginLeft: spacing[2], width: 22 }} />
+                <Text
+                  style={DETAIL_TEXT}
+                  text={`${translate("listings.detail.pricePrefix")} ${translate(
+                    "common.currency",
+                  )}${selectedListing.startingPrice ?? 0}`}
+                />
+              </View>
+              <View style={DETAIL_CONTAINER}>
+                <Icon icon={"condition"} style={{ marginLeft: spacing[2], width: 22 }} />
+                <Text
+                  style={DETAIL_TEXT}
+                  text={`${titleize(selectedListing.condition)} ${translate(
+                    "listings.detail.conditionSuffix",
+                  )}`}
+                />
+              </View>
+              <View style={DETAIL_CONTAINER}>
+                <Icon icon={"locationPin"} style={{ marginLeft: spacing[2], width: 22 }} />
+                <Text
+                  style={DETAIL_TEXT}
+                  text={`${translate("listings.detail.locationPrefix")} ${selectedListing.country}`}
+                />
+              </View>
+              <View style={DETAIL_CONTAINER}>
+                <Icon icon={"globe"} style={{ marginLeft: spacing[2], width: 22 }} />
+                <Text
+                  style={DETAIL_TEXT}
+                  text={`${translate("listings.detail.destinationPrefix")} ${
+                    selectedListing.international
+                      ? translate("listings.detail.everywhere")
+                      : selectedListing.country
+                  }`}
+                />
+              </View>
+            </View>
+          </View>
+          {selectedListing.type.includes(ListingType.WTT) && (
+            <View style={CELL}>
+              <Text tx={"listings.detail.tradeTargets"} style={TEXT} />
+              <View style={CELL}>
+                {selectedListing.targetIdols.length > 0 && (
+                  <View style={DETAIL_CONTAINER}>
+                    <Icon icon={"person"} style={{ marginLeft: spacing[2], width: 22 }} />
+                    <Text
+                      style={DETAIL_TEXT}
+                      text={selectedListing.targetIdols.map((i) => i.stageName).join(", ")}
+                    />
+                  </View>
+                )}
+                {selectedListing.targetGroups.length > 0 && (
+                  <View style={DETAIL_CONTAINER}>
+                    <Icon icon={"people"} style={{ marginLeft: spacing[2], width: 22 }} />
+                    <Text
+                      style={DETAIL_TEXT}
+                      text={selectedListing.targetGroups.map((g) => g.name).join(", ")}
+                    />
+                  </View>
+                )}
+              </View>
+            </View>
+          )}
         </SafeAreaView>
       </Screen>
     )

@@ -153,16 +153,8 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
     }
 
     const { data, loading } = useQuery((store) =>
-      store.queryPreferencesFeed(
-        {},
-        `
-        id
-        ... on Idol {
-            stageName
-        }
-        ... on Group {
-            name
-        }`,
+      store.queryPreferencesFeed({}, (feed) =>
+        feed.id.idol((idol) => idol.stageName).group((group) => group.name),
       ),
     )
 

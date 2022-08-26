@@ -121,7 +121,7 @@ export type UpdateListingInput = {
   targetMinStaringPrice?: number | null
 }
 export type ListingFilters = {
-  id?: string[]
+  ids?: string[]
   fields?: ListingFieldFilters | null
 }
 export type ListingFieldFilters = {
@@ -202,6 +202,7 @@ export enum RootStoreBaseQueries {
   queryUsers = "queryUsers",
   queryUsersFeed = "queryUsersFeed",
 }
+
 export enum RootStoreBaseMutations {
   mutateAddCollection = "mutateAddCollection",
   mutateUpdateCollection = "mutateUpdateCollection",

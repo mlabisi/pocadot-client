@@ -7,6 +7,12 @@ export const icons = {
   star: require("./star.png"),
   heart: require("./heart.png"),
   heartFill: require("./heart-fill.png"),
+  money: require("./money.png"),
+  condition: require("./condition.png"),
+  locationPin: require("./locationPin.png"),
+  globe: require("./globe.png"),
+  person: require("./person.png"),
+  people: require("./people.png"),
 }
 
 export type IconTypes = keyof typeof icons

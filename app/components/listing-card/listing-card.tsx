@@ -141,7 +141,7 @@ export const ListingCard = observer(function ListingCard({ navigation, item }) {
     idols = [{ stageName: "J" }],
     type = ["WTS"],
     listedBy = { username: "papagowon" },
-    featured = true,
+    isFeatured,
     isFaved = true,
   } = item
 
@@ -156,7 +156,7 @@ export const ListingCard = observer(function ListingCard({ navigation, item }) {
 
   return (
     <TouchableOpacity onPress={openDetailsView} style={CARD_CONTAINER}>
-      {featured && (
+      {isFeatured && (
         <View style={FEATURED_BADGE}>
           <Icon icon={"star"} style={FEATURED_ICON} />
         </View>
