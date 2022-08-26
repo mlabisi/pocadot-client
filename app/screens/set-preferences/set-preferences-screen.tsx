@@ -154,7 +154,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
 
     const { data, loading } = useQuery((store) =>
       store.queryPreferencesFeed({}, (feed) =>
-        feed.id.idol((idol) => idol.stageName).group((group) => group.name),
+        feed.idol((idol) => idol.stageName).group((group) => group.name),
       ),
     )
 
@@ -202,7 +202,6 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
               onRightPress={async () => {
                 navigation.popToTop()
                 navigation.navigate("listings")
-                alert("Saved selections")
                 await save("selectedItems", selectedItems)
               }}
               titleStyle={TITLE}

@@ -169,7 +169,7 @@ export const ModifyPreferencesScreen: FC<
 
   const { data, loading } = useQuery((store) =>
     store.queryPreferencesFeed({}, (feed) =>
-      feed.id.idol((idol) => idol.stageName).group((group) => group.name),
+      feed.idol((idol) => idol.stageName).group((group) => group.name),
     ),
   )
 
@@ -217,7 +217,6 @@ export const ModifyPreferencesScreen: FC<
             onRightPress={async () => {
               navigation.pop()
               navigation.navigate("listings")
-              alert("Saved modifications")
               await save("selectedItems", selectedItems)
             }}
             titleStyle={TITLE}
