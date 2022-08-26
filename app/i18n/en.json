@@ -1,11 +1,13 @@
 {
   "common": {
     "ok": "OK!",
+    "loading": "Loading...",
     "cancel": "Cancel",
     "back": "Back",
     "delete": "Delete",
     "details": "Details",
-    "currency": "$"
+    "currency": "$",
+    "photos": "Photos"
   },
   "errors": {
     "invalidEmail": "Invalid email address."

@@ -56,7 +56,7 @@ storiesOf("Text", module)
       </UseCase>
       <UseCase text="tx" usage="Used for looking up i18n keys.">
         <View style={VIEWSTYLE}>
-          <Text tx="common.ok" />
+          <Text tx="common.loading" />
           <Text tx="common.cancel" />
         </View>
       </UseCase>

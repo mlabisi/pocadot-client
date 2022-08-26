@@ -11,7 +11,7 @@ import {
 } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Screen, Header, Text, Icon, Button } from "../../components"
+import { Screen, Header, Text, Icon, Button, AutoImage } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 import { color, spacing } from "../../theme"
@@ -25,6 +25,9 @@ import {
 } from "../../models"
 import { translate } from "../../i18n"
 import { titleize } from "../../utils/titelize"
+import { FlatGrid } from "react-native-super-grid"
+
+const defaultImage = require("./yoon.png")
 
 const { height, width } = Dimensions.get("window")
 const headerHeight = height * 0.15
@@ -36,6 +39,13 @@ const ROOT: ViewStyle = {
 const HEADER: ViewStyle = {
   backgroundColor: color.palette.white,
   zIndex: 1,
+}
+
+const IMAGE: ImageStyle = {
+  width: width / 2.5,
+  flex: 0.75,
+  zIndex: -1,
+  alignSelf: "center",
 }
 
 const HEADER_TEXT: TextStyle = {
@@ -145,7 +155,7 @@ const TEXT: TextStyle = {
   fontWeight: "400",
   letterSpacing: -0.2,
   color: color.palette.black,
-  textAlign: "center",
+  textAlign: "left",
   justifyContent: "center",
   paddingLeft: spacing[4],
   paddingRight: spacing[2],
@@ -224,7 +234,7 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
       return (
         <SafeAreaView style={ROOT}>
           <View style={{ flexDirection: "column" }}>
-            <Text style={HEADER_TEXT} tx={"common.ok"} />
+            <Text style={HEADER_TEXT} tx={"common.loading"} />
           </View>
         </SafeAreaView>
       )
@@ -296,7 +306,7 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
               .join("/")}
             textStyle={BUTTON_TEXT}
             style={BUTTON_STYLE}
-          ></Button>
+          />
           <View style={CELL}>
             <Text tx={"common.details"} style={TEXT} />
             <View style={CELL}>
@@ -363,6 +373,23 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
               </View>
             </View>
           )}
+          <Text style={[TEXT, { marginBottom: -spacing[6] }]} tx={"common.photos"} />
+          <FlatGrid
+            data={Array(3).fill(0)}
+            renderItem={(item) => (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignContent: "center",
+                  width: width / 2.5,
+                  height: width / 2.5,
+                }}
+              >
+                <AutoImage source={defaultImage} style={IMAGE} />
+              </View>
+            )}
+          />
         </SafeAreaView>
       </Screen>
     )

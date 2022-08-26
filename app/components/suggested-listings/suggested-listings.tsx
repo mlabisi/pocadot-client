@@ -95,7 +95,7 @@ export const SuggestedListings = observer(function SuggestedListings({ navigatio
     return (
       <SafeAreaView style={ROOT}>
         <View style={{ flexDirection: "column" }}>
-          <Text style={TITLE} tx={"common.ok"} />
+          <Text style={TITLE} tx={"common.loading"} />
         </View>
       </SafeAreaView>
     )
