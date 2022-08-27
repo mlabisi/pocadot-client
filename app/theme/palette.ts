@@ -16,4 +16,5 @@ export const palette = {
   mint: "#B7EFA3FF",
   offGray: "#F8FAFBFF",
   lavenderFill: "#F2F3FB",
+  yellow: "#fdcc00",
 }

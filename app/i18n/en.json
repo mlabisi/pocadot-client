@@ -59,6 +59,7 @@
   },
   "listings": {
     "title": "Listings",
+    "featured": "Featured",
     "suggested": {
       "restart": "Restart",
       "label": "Suggested",

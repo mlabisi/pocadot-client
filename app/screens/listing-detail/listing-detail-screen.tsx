@@ -163,6 +163,7 @@ const TAGS_CONTAINER: ViewStyle = {
 const TAG: ViewStyle = {
   paddingVertical: 2,
   paddingHorizontal: 10,
+  marginLeft: 2,
   justifyContent: "center",
   alignSelf: "center",
   borderRadius: 100,
@@ -269,6 +270,11 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
                     <Text style={LISTING_IDOL}>{selectedListing.release}</Text>
                   )}
                   <View style={TAGS_CONTAINER}>
+                    {selectedListing.isFeatured && (
+                      <View style={[TAG, { backgroundColor: color.palette.yellow }]}>
+                        <Text style={TAG_TEXT} tx={"listings.featured"} />
+                      </View>
+                    )}
                     {selectedListing.type.map((tag) => (
                       <View key={tag} style={TAG}>
                         <Text style={TAG_TEXT}>{tag}</Text>
