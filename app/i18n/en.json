@@ -7,7 +7,8 @@
     "delete": "Delete",
     "details": "Details",
     "currency": "$",
-    "photos": "Photos"
+    "photos": "Photos",
+    "message": "Message"
   },
   "errors": {
     "invalidEmail": "Invalid email address."
@@ -74,7 +75,8 @@
       "conditionSuffix": "Condition",
       "locationPrefix": "Ships from",
       "destinationPrefix": "Ships to",
-      "everywhere": "Everywhere"
+      "everywhere": "Everywhere",
+      "listedBy": "listed by"
     }
   },
   "errorScreen": {

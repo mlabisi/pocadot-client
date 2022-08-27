@@ -175,6 +175,7 @@ const DETAIL_TEXT: TextStyle = {
 const TAGS_CONTAINER: ViewStyle = {
   justifyContent: "center",
   flexDirection: "row",
+  padding: spacing[0],
 }
 const TAG: ViewStyle = {
   paddingVertical: 2,
@@ -193,6 +194,15 @@ const TAG_TEXT: TextStyle = {
   justifyContent: "center",
 }
 
+const LISTED_BY: TextStyle = {
+  fontSize: 14,
+  color: color.palette.gray,
+}
+const NAME: TextStyle = {
+  fontSize: 22,
+  color: color.palette.black,
+}
+
 const DETAIL_CONTAINER: ViewStyle = {
   ...ROW,
   borderRadius: 10,
@@ -204,9 +214,12 @@ const DETAIL_CONTAINER: ViewStyle = {
   marginVertical: spacing[1],
 }
 
-const SUBHEADER: ViewStyle = {
-  ...HEADER,
-  flexDirection: "column-reverse",
+const MESSAGE_CONTAINER: ViewStyle = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "flex-start",
+  paddingTop: spacing[4],
 }
 
 export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listingDetail">> =
@@ -272,22 +285,32 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
                   {selectedListing.release && (
                     <Text style={LISTING_IDOL}>{selectedListing.release}</Text>
                   )}
+                  <View style={TAGS_CONTAINER}>
+                    {selectedListing.type.map((tag) => (
+                      <View key={tag} style={TAG}>
+                        <Text style={TAG_TEXT}>{tag}</Text>
+                      </View>
+                    ))}
+                  </View>
                 </View>
               </View>
-              <View style={DIVIDER} />
             </View>
+            <View style={DIVIDER} />
           </Header>
-          <View style={CELL}>
-            <View style={ROW}>
-              <Text tx={"listings.detail.sellerDescription"} style={TEXT} />
-              <View style={TAGS_CONTAINER}>
-                {selectedListing.type.map((tag) => (
-                  <View key={tag} style={TAG}>
-                    <Text style={TAG_TEXT}>{tag}</Text>
-                  </View>
-                ))}
+          <View style={MESSAGE_CONTAINER}>
+            <View style={[ROW, { justifyContent: "space-between", padding: spacing[4] }]}>
+              <View>
+                <Text tx={"listings.detail.listedBy"} style={LISTED_BY} />
+                <Text text={`@${selectedListing.listedBy.username}`} style={NAME} />
               </View>
+              <Button
+                tx={"common.message"}
+                style={[BUTTON_STYLE, { width: width * 0.25, borderRadius: 100 }]}
+              />
             </View>
+          </View>
+
+          <View style={[CELL]}>
             {selectedListing.description && (
               <Text style={DESC_TEXT}>{selectedListing.description}</Text>
             )}
@@ -373,23 +396,21 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
               </View>
             </View>
           )}
-          <Text style={[TEXT, { marginBottom: -spacing[6] }]} tx={"common.photos"} />
-          <FlatGrid
-            data={Array(3).fill(0)}
-            renderItem={(item) => (
+          <Text style={[TEXT, { marginBottom: spacing[4] }]} tx={"common.photos"} />
+          {Array(3)
+            .fill(0)
+            .map((item, index) => (
               <View
+                key={index}
                 style={{
                   flex: 1,
-                  justifyContent: "center",
-                  alignContent: "center",
                   width: width / 2.5,
                   height: width / 2.5,
                 }}
               >
                 <AutoImage source={defaultImage} style={IMAGE} />
               </View>
-            )}
-          />
+            ))}
         </SafeAreaView>
       </Screen>
     )
