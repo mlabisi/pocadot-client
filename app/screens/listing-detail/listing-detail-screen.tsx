@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react"
+import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import {
   Dimensions,
@@ -12,20 +12,10 @@ import {
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { Screen, Header, Text, Icon, Button, AutoImage } from "../../components"
-// import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "../../models"
 import { color, spacing } from "../../theme"
-import { load } from "../../utils/storage"
-import {
-  listingModelPrimitives,
-  ListingType,
-  RootStoreContext,
-  selectFromListing,
-  useQuery,
-} from "../../models"
+import { ListingType, useQuery } from "../../models"
 import { translate } from "../../i18n"
 import { titleize } from "../../utils/titelize"
-import { FlatGrid } from "react-native-super-grid"
 
 const defaultImage = require("./yoon.png")
 
@@ -113,13 +103,6 @@ const BUTTON_STYLE: ViewStyle = {
   alignSelf: "center",
   marginVertical: spacing[4],
 }
-
-const CARD_HEADLINE: ViewStyle = {
-  alignItems: "center",
-  flex: 0.6,
-  flexDirection: "column",
-}
-
 const FAVED_BADGE: ViewStyle = {
   backgroundColor: color.palette.white,
   shadowColor: color.palette.black,
@@ -329,6 +312,7 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
               .join("/")}
             textStyle={BUTTON_TEXT}
             style={BUTTON_STYLE}
+            onPress={() => navigation.navigate("makeOffer")}
           />
           <View style={CELL}>
             <Text tx={"common.details"} style={TEXT} />
@@ -397,20 +381,22 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
             </View>
           )}
           <Text style={[TEXT, { marginBottom: spacing[4] }]} tx={"common.photos"} />
-          {Array(3)
-            .fill(0)
-            .map((item, index) => (
-              <View
-                key={index}
-                style={{
-                  flex: 1,
-                  width: width / 2.5,
-                  height: width / 2.5,
-                }}
-              >
-                <AutoImage source={defaultImage} style={IMAGE} />
-              </View>
-            ))}
+          <View style={[CELL, { paddingHorizontal: spacing[4], alignItems: "center" }]}>
+            {Array(3)
+              .fill(0)
+              .map((item, index) => (
+                <View
+                  key={index}
+                  style={{
+                    flex: 1,
+                    width: width / 2.5,
+                    height: width / 2.5,
+                  }}
+                >
+                  <AutoImage source={defaultImage} style={IMAGE} />
+                </View>
+              ))}
+          </View>
         </SafeAreaView>
       </Screen>
     )

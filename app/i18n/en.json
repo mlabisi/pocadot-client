@@ -8,7 +8,8 @@
     "details": "Details",
     "currency": "$",
     "photos": "Photos",
-    "message": "Message"
+    "message": "Message",
+    "submit": "Submit"
   },
   "errors": {
     "invalidEmail": "Invalid email address."
@@ -67,7 +68,6 @@
       "label": "All"
     },
     "detail": {
-      "sellerDescription": "Seller Description",
       "tradeTargets": "Trade Targets",
       "bid": "Make Offer",
       "trade": "Offer Trade",
@@ -77,6 +77,13 @@
       "destinationPrefix": "Ships to",
       "everywhere": "Everywhere",
       "listedBy": "listed by"
+    },
+    "offer": {
+      "pricePlaceholder": "Ex: $18",
+      "buyPrice": "Bid Price",
+      "tradePrice": "Offer Price",
+      "tradeItem": "Trade Offering",
+      "messagePrompt": "Say more about your offer!"
     }
   },
   "errorScreen": {

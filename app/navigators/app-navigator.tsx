@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import {
   ListingDetailScreen,
   ListingsScreen,
+  MakeOfferScreen,
   ModifyPreferencesScreen,
   SetPreferencesScreen,
   SignInScreen,
@@ -40,6 +41,7 @@ export type NavigatorParamList = {
   modifyPreferences: undefined
   listings: undefined
   listingDetail: undefined
+  makeOffer: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -61,6 +63,7 @@ const AppStack = () => {
       <Stack.Screen name="modifyPreferences" component={ModifyPreferencesScreen} />
       <Stack.Screen name="listings" component={ListingsScreen} />
       <Stack.Screen name="listingDetail" component={ListingDetailScreen} />
+      <Stack.Screen name="makeOffer" component={MakeOfferScreen} />
     </Stack.Navigator>
   )
 }
