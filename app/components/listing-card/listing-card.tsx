@@ -19,7 +19,8 @@ import { useNavigation } from "@react-navigation/native"
 import { save } from "../../utils/storage"
 import { RootStoreContext } from "../../models"
 
-const defaultImage = require("./j.png")
+const jImage = require("./j.png")
+const gowonImage = require("./gowon.png")
 
 const CARD_CONTAINER: ViewStyle = {
   justifyContent: "center",
@@ -136,7 +137,6 @@ const FAVED_ICON: ImageStyle = {
  */
 export const ListingCard = observer(function ListingCard({ navigation, item }) {
   const {
-    featuredImage = defaultImage,
     groups = [{ name: "STAYC" }],
     idols = [{ stageName: "J" }],
     type = ["WTS"],
@@ -144,6 +144,8 @@ export const ListingCard = observer(function ListingCard({ navigation, item }) {
     isFeatured,
     isFaved = true,
   } = item
+
+  const featuredImage = idols.map((i) => i.stageName).includes("Gowon") ? gowonImage : jImage
 
   const rootStore = useContext(RootStoreContext)
 

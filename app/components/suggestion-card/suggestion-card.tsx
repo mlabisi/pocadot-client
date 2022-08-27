@@ -19,7 +19,8 @@ import { useContext, useState } from "react"
 import { save } from "../../utils/storage"
 import { _NotCustomized, IModelType, ModelProperties } from "mobx-state-tree"
 
-const yoon = require("./yoon.png")
+const jImage = require("./j.png")
+const gowonImage = require("./gowon.png")
 
 const CARD_CONTAINER: ViewStyle = {
   justifyContent: "center",
@@ -96,6 +97,7 @@ const LISTING_USERNAME: TextStyle = {
 
 const LISTING_IMAGE: ImageStyle = {
   width: 230,
+  height: 250,
   alignSelf: "center",
 }
 
@@ -124,7 +126,10 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
 
   return (
     <Pressable onPress={openDetailsView} style={CARD_CONTAINER}>
-      <AutoImage source={yoon} style={LISTING_IMAGE} />
+      <AutoImage
+        source={item.idols.map((i) => i.stageName).includes("Gowon") ? gowonImage : jImage}
+        style={LISTING_IMAGE}
+      />
       <View style={TAGS_CONTAINER}>
         {item.type.map((tag) => (
           <View key={tag} style={TAG}>
