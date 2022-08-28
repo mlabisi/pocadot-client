@@ -53,7 +53,7 @@ const TABS_CONTAINER: ViewStyle = {
 
 const FLOATING_BUTTON_CONTAINER: ViewStyle = {
   position: "absolute",
-  bottom: spacing[8],
+  bottom: spacing[7],
   right: spacing[6],
 }
 
@@ -93,12 +93,14 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
             )}
             {listingsMode === ListingsMode.All && <AllListings navigation={navigation} />}
           </View>
-          <FloatingButton
-            style={FLOATING_BUTTON_CONTAINER}
-            onPress={() => navigation.navigate("addListing")}
-          >
-            <Text text={"+"} style={[SEGMENT_TITLE, { textAlign: "center", fontSize: 30 }]} />
-          </FloatingButton>
+          {listingsMode === ListingsMode.All && (
+            <FloatingButton
+              style={FLOATING_BUTTON_CONTAINER}
+              onPress={() => navigation.navigate("addListing")}
+            >
+              <Text text={"+"} style={[SEGMENT_TITLE, { textAlign: "center", fontSize: 30 }]} />
+            </FloatingButton>
+          )}
         </SafeAreaView>
       </Screen>
     )
