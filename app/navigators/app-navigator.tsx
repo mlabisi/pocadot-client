@@ -9,6 +9,7 @@ import React from "react"
 import { DarkTheme, NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import {
+  AddListingScreen,
   ListingDetailScreen,
   ListingsScreen,
   MakeOfferScreen,
@@ -42,6 +43,7 @@ export type NavigatorParamList = {
   listings: undefined
   listingDetail: undefined
   makeOffer: undefined
+  addListing: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -64,6 +66,7 @@ const AppStack = () => {
       <Stack.Screen name="listings" component={ListingsScreen} />
       <Stack.Screen name="listingDetail" component={ListingDetailScreen} />
       <Stack.Screen name="makeOffer" component={MakeOfferScreen} />
+      <Stack.Screen name="addListing" component={AddListingScreen} />
     </Stack.Navigator>
   )
 }

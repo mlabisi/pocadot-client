@@ -50,6 +50,9 @@ const TAGS_CONTAINER: ViewStyle = {
 const TAG: ViewStyle = {
   paddingHorizontal: 10,
   paddingVertical: 2,
+  marginLeft: 2,
+  justifyContent: "center",
+  alignSelf: "center",
   borderRadius: 100,
   backgroundColor: color.palette.mint,
 }

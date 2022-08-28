@@ -9,7 +9,8 @@
     "currency": "$",
     "photos": "Photos",
     "message": "Message",
-    "submit": "Submit"
+    "submit": "Submit",
+    "image": "Image"
   },
   "errors": {
     "invalidEmail": "Invalid email address."
@@ -85,6 +86,17 @@
       "tradePrice": "Offer Price",
       "tradeItem": "Trade Offering",
       "messagePrompt": "Say more about your offer!"
+    },
+    "add": {
+      "title": "Add a New Listing",
+      "group": "Group",
+      "idol": "Idol",
+      "release": "Release/Era",
+      "description": "Description",
+      "listingType": "Listing Type",
+      "startingPrice": "Starting Price",
+      "condition": "Condition",
+      "international": "International Shipping?"
     }
   },
   "errorScreen": {

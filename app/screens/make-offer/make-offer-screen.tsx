@@ -4,8 +4,6 @@ import { Dimensions, SafeAreaView, TextStyle, View, ViewStyle } from "react-nati
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { Button, Header, Screen, Text, TextField } from "../../components"
-// import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "../../models"
 import { color, spacing } from "../../theme"
 import { ListingType, RootStoreContext } from "../../models"
 import { translate } from "../../i18n"
