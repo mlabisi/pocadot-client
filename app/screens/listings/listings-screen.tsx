@@ -4,8 +4,16 @@ import SegmentedControlTab from "react-native-segmented-control-tab"
 import { TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { AllListings, Spacer, SuggestedListings, Text, Screen } from "../../components"
-import { color } from "../../theme"
+import {
+  AllListings,
+  Spacer,
+  SuggestedListings,
+  Text,
+  Screen,
+  FloatingButton,
+  Icon,
+} from "../../components"
+import { color, spacing } from "../../theme"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { translate } from "../../i18n"
 
@@ -41,6 +49,12 @@ const TABS_CONTAINER: ViewStyle = {
   flex: 1,
   height: 25,
   paddingRight: 15,
+}
+
+const FLOATING_BUTTON_CONTAINER: ViewStyle = {
+  position: "absolute",
+  bottom: spacing[8],
+  right: spacing[6],
 }
 
 const ACTIVE_TAB: ViewStyle = { backgroundColor: color.primary }
@@ -79,6 +93,12 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
             )}
             {listingsMode === ListingsMode.All && <AllListings navigation={navigation} />}
           </View>
+          <FloatingButton
+            style={FLOATING_BUTTON_CONTAINER}
+            onPress={() => navigation.navigate("addListing")}
+          >
+            <Text text={"+"} style={[SEGMENT_TITLE, { textAlign: "center", fontSize: 30 }]} />
+          </FloatingButton>
         </SafeAreaView>
       </Screen>
     )
