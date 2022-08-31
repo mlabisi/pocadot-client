@@ -1,42 +1,10 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { SafeAreaView, TextStyle, View, ViewStyle } from "react-native"
+import { SafeAreaView, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { Button, Screen, Spacer, Text } from "../../components"
-// import { useQuery } from "../../models"
-import { color } from "../../theme"
-
-const ROOT: ViewStyle = {
-  backgroundColor: color.primary,
-  flex: 8,
-  flexDirection: "column",
-  alignItems: "center",
-}
-
-const SCREEN: ViewStyle = {
-  ...ROOT,
-}
-
-const BUTTON_CONTAINER: ViewStyle = {
-  flex: 3,
-  flexDirection: "row",
-  alignItems: "center",
-}
-
-const BUTTON: ViewStyle = {
-  backgroundColor: color.palette.white,
-  borderRadius: 100,
-}
-
-const HEADER_TEXT: TextStyle = {
-  fontSize: 70,
-  flex: 1,
-}
-
-const BUTTON_TEXT: TextStyle = {
-  color: color.palette.lavender,
-}
+import { BUTTON, BUTTON_CONTAINER, BUTTON_TEXT, HEADER_TEXT, ROOT, SCREEN } from "./styles"
 
 export const WelcomeScreen: FC<StackScreenProps<NavigatorParamList, "welcome">> = observer(
   function WelcomeScreen({ navigation }) {

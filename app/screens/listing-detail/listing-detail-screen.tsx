@@ -262,8 +262,8 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
                 <View style={IDOL_CONTAINER}>
                   {selectedListing.groups.length > 0 && (
                     <Text style={LISTING_IDOL}>
-                      {selectedListing.groups.map((group) => group.name).join(",")} ·{" "}
-                      {selectedListing.idols.map((idol) => idol.stageName).join(",")}
+                      {selectedListing.groups.map((group) => group.name).join(", ")} ·{" "}
+                      {selectedListing.idols.map((idol) => idol.stageName).join(", ")}
                     </Text>
                   )}
                   {selectedListing.release && (

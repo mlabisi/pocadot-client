@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import SegmentedControlTab from "react-native-segmented-control-tab"
-import { TextStyle, View, ViewStyle } from "react-native"
+import { View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import {
@@ -11,53 +11,20 @@ import {
   Text,
   Screen,
   FloatingButton,
-  Icon,
 } from "../../components"
-import { color, spacing } from "../../theme"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { translate } from "../../i18n"
-
-const ROOT: ViewStyle = {
-  backgroundColor: color.palette.white,
-  flex: 1,
-}
-
-const HEADER: ViewStyle = { flexDirection: "column", flex: 0.1, justifyContent: "flex-end" }
-
-const HEADER_CONTENT: ViewStyle = {
-  backgroundColor: color.palette.white,
-  zIndex: 1,
-  flexDirection: "row",
-  paddingBottom: 15,
-}
-
-const CONTENT: ViewStyle = {
-  backgroundColor: color.palette.fill,
-  flex: 1,
-}
-
-const TITLE: TextStyle = {
-  color: color.palette.lavender,
-  paddingHorizontal: 15,
-}
-
-const SEGMENT_TITLE: TextStyle = {
-  fontSize: 12,
-}
-
-const TABS_CONTAINER: ViewStyle = {
-  flex: 1,
-  height: 25,
-  paddingRight: 15,
-}
-
-const FLOATING_BUTTON_CONTAINER: ViewStyle = {
-  position: "absolute",
-  bottom: spacing[7],
-  right: spacing[6],
-}
-
-const ACTIVE_TAB: ViewStyle = { backgroundColor: color.primary }
+import {
+  ACTIVE_TAB,
+  CONTENT,
+  FLOATING_BUTTON_CONTAINER,
+  HEADER,
+  HEADER_CONTENT,
+  ROOT,
+  SEGMENT_TITLE,
+  TABS_CONTAINER,
+  TITLE,
+} from "./styles"
 
 enum ListingsMode {
   Suggested,

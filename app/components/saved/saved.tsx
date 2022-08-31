@@ -1,19 +1,31 @@
 import * as React from "react"
-import { View } from "react-native"
+import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
+import { color, typography } from "../../theme"
 import { Text } from "../text/text"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { NavigatorParamList } from "../../navigators"
 import { useQuery } from "../../models"
-import { SafeAreaView } from "react-native-safe-area-context"
 import { ListingCard } from "../listing-card/listing-card"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { ROOT, TITLE } from "../all-listings/styles"
 import { FlatGrid } from "react-native-super-grid"
-import { ROOT, TITLE } from "./styles"
+
+export interface SavedProps {
+  /**
+   * An optional style override useful for padding & margin.
+   */
+  style?: StyleProp<ViewStyle>
+
+  navigation: StackNavigationProp<NavigatorParamList, "faves", undefined>
+}
 
 /**
- * Used to display all listings
+ * Used to display saved listings
  */
-export const AllListings = observer(function AllListings({ navigation }) {
+export const Saved = observer(function Saved({ navigation }) {
   const { data, loading } = useQuery((store) =>
-    store.queryListingsFeed({}, (listing) =>
+    store.queryListings({ input: { fields: { favedBy: ["recJ1tZfGKHtdxeax"] } } }, (listing) =>
       listing.id.type.isFeatured
         .groups((group) => group.name)
         .idols((idol) => idol.stageName)
@@ -35,7 +47,7 @@ export const AllListings = observer(function AllListings({ navigation }) {
 
   return (
     <FlatGrid
-      data={data.listingsFeed.sort((a, b) => {
+      data={data.listings.sort((a, b) => {
         if (a.isFeatured && !b.isFeatured) {
           return -1
         } else if (!a.isFeatured && b.isFeatured) {
