@@ -89,20 +89,6 @@ export const SuggestedListings = observer(function SuggestedListings({ navigatio
         }}
         onSwipedAll={() => {
           setSwipedAll(true)
-          return (
-            <View style={CONTAINER}>
-              <Text style={TITLE} tx={"listings.suggested.noMore"} />
-              <Button
-                tx={"listings.suggested.restart"}
-                onPress={() => {
-                  seen = []
-                  skipped = []
-                  setSwipedAll(false)
-                  setCurrentIndex(0)
-                }}
-              />
-            </View>
-          )
         }}
         containerStyle={CONTAINER}
         backgroundColor={color.fill}
@@ -113,6 +99,20 @@ export const SuggestedListings = observer(function SuggestedListings({ navigatio
         animateCardOpacity
         swipeBackCard
       ></Swiper>
+      {swipedAll && (
+        <View style={CONTAINER}>
+          <Text style={TITLE} tx={"listings.suggested.noMore"} />
+          <Button
+            tx={"listings.suggested.restart"}
+            onPress={() => {
+              seen = []
+              skipped = []
+              setCurrentIndex(0)
+              setSwipedAll(false)
+            }}
+          />
+        </View>
+      )}
     </View>
   )
 })
