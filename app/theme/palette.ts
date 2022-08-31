@@ -17,4 +17,5 @@ export const palette = {
   offGray: "#F8FAFBFF",
   lavenderFill: "#F2F3FB",
   yellow: "#fdcc00",
+  opaque: "rgba(0,0,0,0.1)",
 }

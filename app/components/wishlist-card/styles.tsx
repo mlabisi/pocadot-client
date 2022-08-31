@@ -19,7 +19,7 @@ export const SHADOW: ViewStyle = {
   shadowRadius: 3,
 }
 export const OVERLAY: ViewStyle = {
-  backgroundColor: color.palette.black25,
+  backgroundColor: color.palette.lavenderFill,
   width: dimensions,
   height: dimensions,
   zIndex: 1,

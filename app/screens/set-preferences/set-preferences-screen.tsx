@@ -200,8 +200,7 @@ export const SetPreferencesScreen: FC<StackScreenProps<NavigatorParamList, "setP
               rightTx={selectedItems.length > 0 ? "setPreferences.save" : "setPreferences.skip"}
               onLeftPress={() => navigation.goBack()}
               onRightPress={async () => {
-                navigation.popToTop()
-                navigation.navigate("listings")
+                navigation.navigate("tabs")
                 await save("selectedItems", selectedItems)
               }}
               titleStyle={TITLE}

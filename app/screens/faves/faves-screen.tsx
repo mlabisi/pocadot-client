@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { SafeAreaView, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Saved, Screen, Spacer, Text, Wishlist } from "../../components"
+import { FloatingButton, Saved, Screen, Spacer, Text, Wishlist } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 import {
@@ -51,6 +51,11 @@ export const FavesScreen: FC<StackScreenProps<NavigatorParamList, "faves">> = ob
             {favesMode === FavesMode.Saved && <Saved navigation={navigation} />}
             {favesMode === FavesMode.Wishlist && <Wishlist />}
           </View>
+          {favesMode === FavesMode.Wishlist && (
+            <FloatingButton style={FLOATING_BUTTON_CONTAINER} onPress={() => {}}>
+              <Text text={"+"} style={[SEGMENT_TITLE, { textAlign: "center", fontSize: 30 }]} />
+            </FloatingButton>
+          )}
         </SafeAreaView>
       </Screen>
     )

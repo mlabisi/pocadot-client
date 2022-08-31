@@ -23,7 +23,10 @@ const pocadotCircle = require("../assets/pocadot-circle.png")
 export const SignUpScreen: FC<StackScreenProps<NavigatorParamList, "signUp">> = observer(
   function SignUpScreen({ navigation }) {
     const nextScreen = () => navigation.navigate("setPreferences")
-    const signIn = () => navigation.navigate("signIn")
+    const signIn = () => {
+      navigation.popToTop()
+      navigation.navigate("signIn")
+    }
 
     return (
       <SafeAreaView style={ROOT} testID="signUpScreen">
@@ -44,7 +47,6 @@ export const SignUpScreen: FC<StackScreenProps<NavigatorParamList, "signUp">> = 
               tx="signUp.continue"
               testID="signUpBtn"
               onPress={() => {
-                navigation.pop()
                 nextScreen()
               }}
               style={BUTTON}

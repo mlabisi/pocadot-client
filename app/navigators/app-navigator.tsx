@@ -8,6 +8,8 @@ import React from "react"
 // import { useColorScheme } from "react-native"
 import { DarkTheme, NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+
 import {
   AddListingScreen,
   FavesScreen,
@@ -36,41 +38,98 @@ import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
  */
 export type NavigatorParamList = {
   welcome: undefined
-  // 🔥 Your screens go here
+  welcomeTab: undefined
   signIn: undefined
   signUp: undefined
   setPreferences: undefined
   modifyPreferences: undefined
   listings: undefined
+  listingsTab: undefined
   listingDetail: undefined
   makeOffer: undefined
   addListing: undefined
   faves: undefined
+  favesTab: undefined
+  tabs: undefined
 }
 
-// Documentation: https://reactnavigation.org/docs/stack-navigator/
-const Stack = createNativeStackNavigator<NavigatorParamList>()
-
-const AppStack = () => {
+const WelcomeStack = createNativeStackNavigator<NavigatorParamList>()
+const WelcomeNav = () => {
   return (
-    <Stack.Navigator
+    <WelcomeStack.Navigator
       screenOptions={{
         headerShown: false,
       }}
       initialRouteName="welcome"
     >
-      <Stack.Screen name="welcome" component={WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
-      <Stack.Screen name="signIn" component={SignInScreen} />
-      <Stack.Screen name="signUp" component={SignUpScreen} />
-      <Stack.Screen name="setPreferences" component={SetPreferencesScreen} />
-      <Stack.Screen name="modifyPreferences" component={ModifyPreferencesScreen} />
-      <Stack.Screen name="listings" component={ListingsScreen} />
-      <Stack.Screen name="listingDetail" component={ListingDetailScreen} />
-      <Stack.Screen name="makeOffer" component={MakeOfferScreen} />
-      <Stack.Screen name="addListing" component={AddListingScreen} />
-      <Stack.Screen name="faves" component={FavesScreen} />
-    </Stack.Navigator>
+      <WelcomeStack.Screen name="welcome" component={WelcomeScreen} />
+      <WelcomeStack.Screen name="signIn" component={SignInScreen} />
+      <WelcomeStack.Screen name="signUp" component={SignUpScreen} />
+      <WelcomeStack.Screen name="setPreferences" component={SetPreferencesScreen} />
+      <WelcomeStack.Screen name="tabs" component={AppNav} />
+    </WelcomeStack.Navigator>
+  )
+}
+
+const ListingsStack = createNativeStackNavigator<NavigatorParamList>()
+const ListingsNav = () => {
+  return (
+    <ListingsStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="listings"
+    >
+      <ListingsStack.Screen name="listings" component={ListingsScreen} />
+      <ListingsStack.Screen name="listingDetail" component={ListingDetailScreen} />
+      <ListingsStack.Screen name="makeOffer" component={MakeOfferScreen} />
+      <ListingsStack.Screen name="addListing" component={AddListingScreen} />
+    </ListingsStack.Navigator>
+  )
+}
+
+const FavesStack = createNativeStackNavigator<NavigatorParamList>()
+const FavesNav = () => {
+  return (
+    <FavesStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="faves"
+    >
+      <FavesStack.Screen name="faves" component={FavesScreen} />
+      <FavesStack.Screen name="listingDetail" component={ListingDetailScreen} />
+    </FavesStack.Navigator>
+  )
+}
+
+const AppTab = createBottomTabNavigator<NavigatorParamList>()
+const AppNav = () => {
+  return (
+    <AppTab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="listingsTab"
+    >
+      <AppTab.Screen name="listingsTab" component={ListingsNav} />
+      <AppTab.Screen name="favesTab" component={FavesNav} />
+    </AppTab.Navigator>
+  )
+}
+
+const AppStack = createNativeStackNavigator<NavigatorParamList>()
+const AppStackNav = () => {
+  return (
+    <AppStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="welcomeTab"
+    >
+      <AppStack.Screen name="welcomeTab" component={WelcomeNav} />
+      <AppStack.Screen name="tabs" component={AppNav} />
+    </AppStack.Navigator>
   )
 }
 
@@ -85,7 +144,7 @@ export const AppNavigator = (props: NavigationProps) => {
       theme={DarkTheme} // {colorScheme === "dark" ? DarkTheme : DefaultTheme}
       {...props}
     >
-      <AppStack />
+      <AppStackNav />
     </NavigationContainer>
   )
 }
@@ -101,5 +160,5 @@ AppNavigator.displayName = "AppNavigator"
  *
  * `canExit` is used in ./app/app.tsx in the `useBackButtonHandler` hook.
  */
-const exitRoutes = ["welcome"]
+const exitRoutes = ["welcomeTab", "tabs"]
 export const canExit = (routeName: string) => exitRoutes.includes(routeName)
