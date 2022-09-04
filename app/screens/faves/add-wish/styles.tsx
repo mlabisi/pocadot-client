@@ -28,7 +28,7 @@ export const TITLE: TextStyle = {
 
 export const FORM_CONTAINER: ViewStyle = {
   flex: 1,
-  paddingHorizontal: spacing[4],
+  padding: spacing[4],
 }
 export const BUTTON_STYLE: ViewStyle = {
   borderRadius: 0,

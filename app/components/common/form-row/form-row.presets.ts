@@ -33,6 +33,7 @@ export const PRESETS = {
    */
   middle: {
     ...ROOT,
+    borderTopWidth: 0,
     borderBottomWidth: 0,
   },
   /**

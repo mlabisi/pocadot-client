@@ -5,7 +5,7 @@ export const { height, width } = Dimensions.get("window")
 export const headerHeight = height * 0.15
 
 export const ROOT: ViewStyle = {
-  backgroundColor: color.palette.fill,
+  backgroundColor: color.palette.white,
   flex: 1,
   height,
 }
@@ -28,7 +28,7 @@ export const TITLE: TextStyle = {
 
 export const FORM_CONTAINER: ViewStyle = {
   flex: 1,
-  paddingHorizontal: spacing[4],
+  padding: spacing[4],
 }
 export const BUTTON_STYLE: ViewStyle = {
   borderRadius: 0,
