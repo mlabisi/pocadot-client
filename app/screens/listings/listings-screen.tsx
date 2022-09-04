@@ -1,32 +1,11 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, useContext } from "react"
 import { observer } from "mobx-react-lite"
-import SegmentedControlTab from "react-native-segmented-control-tab"
 import { View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import {
-  AllListings,
-  FloatingButton,
-  Header,
-  Screen,
-  Spacer,
-  SuggestedListings,
-  Text,
-} from "../../components"
+import { AllListings, FloatingButton, SuggestedListings, Text } from "../../components"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { translate } from "../../i18n"
-import {
-  ACTIVE_TAB,
-  CONTENT,
-  FLOATING_BUTTON_CONTAINER,
-  HEADER,
-  HEADER_CONTENT,
-  headerHeight,
-  ROOT,
-  SEGMENT_TITLE,
-  TABS_CONTAINER,
-  TITLE,
-} from "./styles"
+import { CONTENT, FLOATING_BUTTON_CONTAINER, ROOT, SEGMENT_TITLE, TITLE } from "./styles"
 import { ListingsMode } from "./listings-mode"
 import { RootStoreContext, useQuery } from "../../models"
 

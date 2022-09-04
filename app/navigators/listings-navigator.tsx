@@ -18,7 +18,7 @@ export const ListingsNav = () => {
         component={ListingsScreen}
         options={{
           headerShown: true,
-          header: ({ navigation, route, options }) => {
+          header: () => {
             return <ListingsHeader />
           },
         }}

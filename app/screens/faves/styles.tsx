@@ -2,15 +2,18 @@ import { Dimensions, TextStyle, ViewStyle } from "react-native"
 import { color, spacing } from "../../theme"
 
 const { height } = Dimensions.get("window")
-export const headerHeight = height * 0.1
+export const headerHeight = height * 0.2
 
 export const ROOT: ViewStyle = {
   backgroundColor: color.palette.white,
   flex: 1,
 }
 
-export const HEADER: ViewStyle = { flexDirection: "column", justifyContent: "flex-end" }
-
+export const HEADER: ViewStyle = {
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  backgroundColor: color.palette.white,
+}
 export const HEADER_CONTENT: ViewStyle = {
   backgroundColor: color.palette.white,
   zIndex: 1,

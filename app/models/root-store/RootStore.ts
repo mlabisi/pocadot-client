@@ -2,6 +2,7 @@ import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { RootStoreBase } from "./RootStore.base"
 import { ListingsMode } from "../../screens/listings/listings-mode"
 import { isString } from "validate.js"
+import { FavesMode } from "../../screens/faves/faves-mode"
 
 /**
  * A RootStore model.
@@ -9,6 +10,9 @@ import { isString } from "validate.js"
 // prettier-ignore
 export const RootStore = RootStoreBase.props({
   selectedListingId: types.optional(types.string, ""),
+  favesMode: types.optional(
+    types.enumeration<FavesMode>(Object.values(FavesMode)), FavesMode.Saved,
+  ),
   listingsMode: types.optional(
     types.enumeration<ListingsMode>(Object.values(ListingsMode)), ListingsMode.Suggested,
   ),
@@ -40,6 +44,9 @@ export const RootStore = RootStoreBase.props({
     },
     setListingsMode(mode: ListingsMode) {
       self.listingsMode = mode
+    },
+    setFavesMode(mode: FavesMode) {
+      self.favesMode = mode
     },
     log() {
       console.log(JSON.stringify(self))
