@@ -1,10 +1,10 @@
 import React, { FC, useContext } from "react"
 import { observer } from "mobx-react-lite"
-import { SafeAreaView, View } from "react-native"
+import { View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { FloatingButton, Saved, Screen, Text, Wishlist } from "../../components"
-import { CONTENT, FLOATING_BUTTON_CONTAINER, ROOT, SEGMENT_TITLE } from "./styles"
+import { FloatingButton, Saved, Text, Wishlist } from "../../components"
+import { CONTENT, FLOATING_BUTTON_CONTAINER, SEGMENT_TITLE } from "./styles"
 import { RootStoreContext } from "../../models"
 import { FavesMode } from "./faves-mode"
 

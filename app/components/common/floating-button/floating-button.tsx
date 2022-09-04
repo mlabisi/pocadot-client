@@ -1,15 +1,7 @@
 import * as React from "react"
-import {
-  GestureResponderEvent,
-  StyleProp,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from "react-native"
+import { GestureResponderEvent, StyleProp, TouchableOpacity, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { color, typography } from "../../../theme"
-import { Text } from "../text/text"
+import { color } from "../../../theme"
 
 const CONTAINER: ViewStyle = {
   justifyContent: "center",

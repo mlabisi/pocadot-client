@@ -1,50 +1,20 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { Dimensions, SafeAreaView, ScrollView, TextStyle, View, ViewStyle } from "react-native"
+import { SafeAreaView, ScrollView } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../../navigators"
 import { Button, Header, Screen, Text, TextField } from "../../../components"
-import { color, spacing } from "../../../theme"
-import { ListingType } from "../../../models"
-import { translate } from "../../../i18n"
-
-const { height, width } = Dimensions.get("window")
-const headerHeight = height * 0.15
-
-const ROOT: ViewStyle = {
-  backgroundColor: color.palette.fill,
-  flex: 1,
-  height,
-}
-
-const HEADER: ViewStyle = {
-  backgroundColor: color.palette.white,
-  zIndex: 1,
-}
-const HEADER_TEXT: TextStyle = {
-  color: color.palette.lavender,
-}
-const TITLE: TextStyle = {
-  color: color.palette.black,
-  textTransform: "uppercase",
-  textAlign: "center",
-  fontWeight: "500",
-  paddingBottom: spacing[4],
-  backgroundColor: color.palette.white,
-}
-
-const FORM_CONTAINER: ViewStyle = {
-  flex: 1,
-  paddingHorizontal: spacing[4],
-}
-const BUTTON_STYLE: ViewStyle = {
-  borderRadius: 0,
-  borderStyle: "solid",
-  borderColor: color.primary,
+import { color } from "../../../theme"
+import {
+  BUTTON_STYLE,
+  FORM_CONTAINER,
+  HEADER,
+  HEADER_TEXT,
+  headerHeight,
+  ROOT,
+  TITLE,
   width,
-  alignSelf: "center",
-  marginVertical: spacing[4],
-}
+} from "./styles"
 
 export const AddListingScreen: FC<StackScreenProps<NavigatorParamList, "addListing">> = observer(
   function AddListingScreen({ navigation }) {

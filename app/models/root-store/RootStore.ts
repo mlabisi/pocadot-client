@@ -1,7 +1,6 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { RootStoreBase } from "./RootStore.base"
 import { ListingsMode } from "../../screens/listings/listings-mode"
-import { isString } from "validate.js"
 import { FavesMode } from "../../screens/faves/faves-mode"
 
 /**

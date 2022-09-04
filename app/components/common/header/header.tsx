@@ -6,7 +6,6 @@ import { Text } from "../text/text"
 import { Icon } from "../icon/icon"
 import { color, spacing } from "../../../theme"
 import { translate } from "../../../i18n"
-import { Spacer } from "../spacer/spacer"
 
 // static styles
 const BASE: ViewStyle = {
