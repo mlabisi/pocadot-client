@@ -32,14 +32,13 @@ export const AddListingScreen: FC<StackScreenProps<NavigatorParamList, "addListi
           </Header>
           <ScrollView style={FORM_CONTAINER}>
             <TextField
-              labelTx={"common.image"}
+              labelTx={"common.images"}
               inputStyle={{
                 color: color.palette.black,
                 backgroundColor: color.palette.lavenderFill,
                 fontSize: 14,
               }}
               placeholderTextColor={color.palette.black25}
-              placeholderTx={"listings.offer.messagePrompt"}
               style={{ borderRadius: 100 }}
             />
             <TextField
@@ -142,7 +141,7 @@ export const AddListingScreen: FC<StackScreenProps<NavigatorParamList, "addListi
               style={{ borderRadius: 100 }}
             />
             <Button
-              tx={"common.submit"}
+              tx={"common.add"}
               textStyle={{ fontSize: 16 }}
               style={[BUTTON_STYLE, { width: width * 0.75, height: 35, borderRadius: 100 }]}
               onPress={() => navigation.goBack()}

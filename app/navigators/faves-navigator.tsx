@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { FavesScreen, ListingDetailScreen } from "../screens"
+import { AddWishScreen, FavesScreen, ListingDetailScreen } from "../screens"
 import React from "react"
 import { NavigatorParamList } from "./app-navigator"
 import { FavesHeader } from "../components"
@@ -24,6 +24,7 @@ export const FavesNav = () => {
         }}
       />
       <FavesStack.Screen name="listingDetail" component={ListingDetailScreen} />
+      <FavesStack.Screen name="addWish" component={AddWishScreen} />
     </FavesStack.Navigator>
   )
 }

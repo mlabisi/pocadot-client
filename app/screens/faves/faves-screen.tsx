@@ -19,7 +19,12 @@ export const FavesScreen: FC<StackScreenProps<NavigatorParamList, "faves">> = ob
           {favesMode === FavesMode.Wishlist && <Wishlist />}
         </View>
         {favesMode === FavesMode.Wishlist && (
-          <FloatingButton style={FLOATING_BUTTON_CONTAINER} onPress={() => {}}>
+          <FloatingButton
+            style={FLOATING_BUTTON_CONTAINER}
+            onPress={() => {
+              navigation.navigate("addWish")
+            }}
+          >
             <Text text={"+"} style={[SEGMENT_TITLE, { textAlign: "center", fontSize: 30 }]} />
           </FloatingButton>
         )}

@@ -10,7 +10,9 @@
     "photos": "Photos",
     "message": "Message",
     "submit": "Submit",
-    "image": "Image"
+    "image": "Image",
+    "images": "Images",
+    "add": "Add"
   },
   "errors": {
     "invalidEmail": "Invalid email address."
@@ -107,7 +109,14 @@
       "label": "Saved"
     },
     "wishlist": {
-      "label": "Wishlist"
+      "label": "Wishlist",
+      "add": {
+        "title": "Add to Your Wishlist",
+        "group": "Group",
+        "idol": "Idol",
+        "description": "Description",
+        "descriptionPrompt": "Say more about your wish!"
+      }
     }
   },
   "errorScreen": {

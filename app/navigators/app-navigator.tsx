@@ -38,6 +38,7 @@ export type NavigatorParamList = {
   addListing: undefined
   faves: undefined
   favesTab: undefined
+  addWish: undefined
   tabs: undefined
   chats: undefined
   chatDetail: undefined
