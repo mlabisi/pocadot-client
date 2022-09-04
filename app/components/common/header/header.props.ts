@@ -1,9 +1,10 @@
-import { StyleProp, TextStyle, ViewStyle } from "react-native"
+import { ImageStyle, StyleProp, TextStyle, ViewStyle } from "react-native"
 import { IconTypes } from "../icon/icons"
 import { TxKeyPath } from "../../../i18n"
 import React from "react"
 
 export interface HeaderProps {
+  n?: number
   /**
    * Main header, e.g. POWERED BY IGNITE
    */
@@ -49,10 +50,22 @@ export interface HeaderProps {
    * Icon that should appear on the right
    */
   rightIcon?: IconTypes
+
+  /**
+   * Container style overrides.
+   */
+  rightIconStyle?: StyleProp<ImageStyle>
+
+  /**
+   * Container style overrides.
+   */
+  leftIconStyle?: StyleProp<ImageStyle>
+
   /**
    * Container style overrides.
    */
   style?: StyleProp<ViewStyle>
+
   /**
    * Title style overrides.
    */

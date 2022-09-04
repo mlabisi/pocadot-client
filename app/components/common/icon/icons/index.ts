@@ -13,6 +13,7 @@ export const icons = {
   globe: require("./globe.png"),
   person: require("./person.png"),
   people: require("./people.png"),
+  pencil: require("./pencil.png"),
 }
 
 export type IconTypes = keyof typeof icons

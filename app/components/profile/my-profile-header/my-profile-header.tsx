@@ -70,7 +70,13 @@ export const MyProfileHeader = observer(function MyProfileHeader() {
 
   return (
     user && (
-      <Header headerHeight={headerHeight} style={HEADER}>
+      <Header
+        headerHeight={headerHeight}
+        rightIcon={"pencil"}
+        rightIconStyle={{ width: 20 }}
+        style={HEADER}
+        n={0.2}
+      >
         <View style={HEADER_CONTENT}>
           <AutoImage source={myPic} style={PROFILE_PIC} />
           <Text text={`@${user.username}`} preset={"header"} />

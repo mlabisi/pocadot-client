@@ -18,18 +18,13 @@ const BASE: ViewStyle = {
 const ROOT: ViewStyle = {
   ...BASE,
   flexDirection: "row",
-  paddingHorizontal: spacing[4],
-  alignItems: "center",
-  paddingTop: spacing[5],
-  paddingBottom: spacing[5],
   justifyContent: "flex-start",
-  backgroundColor: color.palette.white,
 }
 
 const TITLE: TextStyle = { textAlign: "center" }
 const TITLE_MIDDLE: ViewStyle = { flex: 1, justifyContent: "center" }
-const LEFT: ViewStyle = { width: 32 }
-const RIGHT: ViewStyle = { width: 32 }
+const LEFT: ViewStyle = { padding: spacing[4] }
+const RIGHT: ViewStyle = { padding: spacing[4] }
 
 /**
  * Header that appears on many screens. Will hold navigation buttons and screen title.
@@ -40,6 +35,8 @@ export function Header(props: HeaderProps) {
     onRightPress,
     rightIcon,
     leftIcon,
+    rightIconStyle,
+    leftIconStyle,
     rightTx,
     leftTx,
     rightText,
@@ -51,45 +48,46 @@ export function Header(props: HeaderProps) {
     textStyle,
     headerHeight,
     children,
+    n = 0.5,
   } = props
   const header = headerText || (headerTx && translate(headerTx)) || ""
 
   return (
     <>
-      <View style={[ROOT, { height: headerHeight / 2 }, style]}>
-        {leftIcon ? (
-          <Button preset="link" onPress={onLeftPress}>
-            <Icon icon={leftIcon} />
-          </Button>
-        ) : leftTx ? (
-          <Button preset="link" onPress={onLeftPress}>
-            <Text tx={leftTx} style={textStyle} />
-          </Button>
-        ) : leftText ? (
-          <Button preset="link" onPress={onLeftPress}>
-            <Text text={leftText} style={textStyle} />
-          </Button>
-        ) : (
-          <View style={LEFT} />
-        )}
+      <View style={[ROOT, { height: headerHeight * n }, style]}>
+        <View style={LEFT}>
+          {leftIcon ? (
+            <Button preset="link" onPress={onLeftPress}>
+              <Icon icon={leftIcon} style={leftIconStyle} />
+            </Button>
+          ) : leftTx ? (
+            <Button preset="link" onPress={onLeftPress}>
+              <Text tx={leftTx} style={textStyle} />
+            </Button>
+          ) : leftText ? (
+            <Button preset="link" onPress={onLeftPress}>
+              <Text text={leftText} style={textStyle} />
+            </Button>
+          ) : null}
+        </View>
         <View style={TITLE_MIDDLE}>
           <Text style={[TITLE, titleStyle]} text={header} />
         </View>
-        {rightIcon ? (
-          <Button preset="link" onPress={onRightPress}>
-            <Icon icon={rightIcon} />
-          </Button>
-        ) : rightTx ? (
-          <Button preset="link" onPress={onRightPress}>
-            <Text tx={rightTx} style={textStyle} />
-          </Button>
-        ) : rightText ? (
-          <Button preset="link" onPress={onRightPress}>
-            <Text text={rightText} style={textStyle} />
-          </Button>
-        ) : (
-          <View style={RIGHT} />
-        )}
+        <View style={RIGHT}>
+          {rightIcon ? (
+            <Button preset="link" onPress={onRightPress}>
+              <Icon icon={rightIcon} style={rightIconStyle} />
+            </Button>
+          ) : rightTx ? (
+            <Button preset="link" onPress={onRightPress}>
+              <Text tx={rightTx} style={textStyle} />
+            </Button>
+          ) : rightText ? (
+            <Button preset="link" onPress={onRightPress}>
+              <Text text={rightText} style={textStyle} />
+            </Button>
+          ) : null}
+        </View>
       </View>
       <View style={[{ backgroundColor: color.palette.white }]}>{children}</View>
     </>
