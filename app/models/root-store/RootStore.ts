@@ -8,6 +8,7 @@ import { FavesMode } from "../../screens/faves/faves-mode"
  */
 // prettier-ignore
 export const RootStore = RootStoreBase.props({
+  currentUserId: types.optional(types.string, ""),
   selectedListingId: types.optional(types.string, ""),
   favesMode: types.optional(
     types.enumeration<FavesMode>(Object.values(FavesMode)), FavesMode.Saved,
@@ -40,6 +41,9 @@ export const RootStore = RootStoreBase.props({
     },
     setSelectedListingId(listingId: string) {
       self.selectedListingId = listingId
+    },
+    setCurrentUserId(userId: string) {
+      self.currentUserId = userId
     },
     setListingsMode(mode: ListingsMode) {
       self.listingsMode = mode

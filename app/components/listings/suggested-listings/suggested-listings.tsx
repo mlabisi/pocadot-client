@@ -17,7 +17,7 @@ const saved = []
 
 interface SuggestedListingsProps {
   navigation: StackNavigationProp<NavigatorParamList>
-  suggestions: any[]
+  query: any
 }
 
 /**
@@ -25,8 +25,9 @@ interface SuggestedListingsProps {
  */
 export const SuggestedListings = observer(function SuggestedListings({
   navigation,
-  suggestions,
+  query,
 }: SuggestedListingsProps) {
+  const store = useContext(RootStoreContext)
   const {
     listings,
     remainingSuggestions,
@@ -37,19 +38,24 @@ export const SuggestedListings = observer(function SuggestedListings({
     setSeenSuggestions,
     shouldReloadSuggestions,
     setShouldReloadSuggestions,
-  } = useContext(RootStoreContext)
+  } = store
   const [cards, setCards] = useState([])
 
   useEffect(() => {
-    if (shouldReloadSuggestions || (!cards.length && !!remainingSuggestions.length)) {
-      if (!remainingSuggestions.length) {
-        setShouldReloadSuggestions(false)
-        setCards(suggestions)
-        setRemainingSuggestions(suggestions.map((s) => s.id))
-      } else {
-        setCards(remainingSuggestions.map((id) => listings.get(id)))
+    const refresh = async () => {
+      if (shouldReloadSuggestions || (!cards.length && !!remainingSuggestions.length)) {
+        if (!remainingSuggestions.length) {
+          setShouldReloadSuggestions(false)
+          await query.refetch()
+          setCards(query.suggestions)
+          setRemainingSuggestions(query.suggestions.map((s) => s.id))
+        } else {
+          setCards(remainingSuggestions.map((id) => listings.get(id)))
+        }
       }
     }
+    
+    refresh()
   }, [setCards, shouldReloadSuggestions])
 
   const renderCard = (item) => <SuggestionCard key={item.id} item={item} navigation={navigation} />

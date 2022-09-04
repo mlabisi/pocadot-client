@@ -56,7 +56,7 @@ export function Header(props: HeaderProps) {
 
   return (
     <>
-      <View style={[ROOT, style, { height: headerHeight / 2 }]}>
+      <View style={[ROOT, { height: headerHeight / 2 }, style]}>
         {leftIcon ? (
           <Button preset="link" onPress={onLeftPress}>
             <Icon icon={leftIcon} />

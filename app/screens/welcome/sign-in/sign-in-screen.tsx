@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, useContext } from "react"
 import { observer } from "mobx-react-lite"
 import { SafeAreaView, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
@@ -17,11 +17,14 @@ import {
   ROOT,
   SCREEN,
 } from "./styles"
+import { RootStoreContext } from "../../../models"
 
 const pocadotCircle = require("../../assets/pocadot-circle.png")
 
 export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = observer(
   function SignInScreen({ navigation }) {
+    const { setCurrentUserId } = useContext(RootStoreContext)
+
     const nextScreen = () => {
       navigation.popToTop()
       navigation.navigate("tabs")
@@ -50,6 +53,7 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
               tx="signIn.continue"
               testID="signInBtn"
               onPress={() => {
+                setCurrentUserId("recJ1tZfGKHtdxeax")
                 nextScreen()
               }}
               style={BUTTON}

@@ -43,7 +43,7 @@ export type NavigatorParamList = {
   chats: undefined
   chatDetail: undefined
   chatsTab: undefined
-  profile: undefined
+  myProfile: undefined
   profileTab: undefined
 }
 

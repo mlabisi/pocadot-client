@@ -11,10 +11,10 @@ import { RootStoreContext, useQuery } from "../../models"
 
 export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">> = observer(
   function ListingsScreen({ navigation }) {
-    const { listingsMode } = useContext(RootStoreContext)
+    const { listingsMode, currentUserId } = useContext(RootStoreContext)
 
-    const { data, loading } = useQuery((store) =>
-      store.queryUserSuggestions({ input: "" }, (listing) =>
+    const query = useQuery((store) =>
+      store.queryUserSuggestions({ input: currentUserId }, (listing) =>
         listing.id.type.description
           .groups((group) => group.name)
           .idols((idol) => idol.stageName)
@@ -22,7 +22,7 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
       ),
     )
 
-    if (loading) {
+    if (query.loading) {
       return (
         <SafeAreaView style={ROOT}>
           <View style={{ flexDirection: "column" }}>
@@ -35,7 +35,7 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
     return (
       <View style={CONTENT}>
         {listingsMode === ListingsMode.Suggested && (
-          <SuggestedListings navigation={navigation} suggestions={data.userSuggestions} />
+          <SuggestedListings navigation={navigation} query={query} />
         )}
         {listingsMode === ListingsMode.All && <AllListings navigation={navigation} />}
         {listingsMode === ListingsMode.All && (
