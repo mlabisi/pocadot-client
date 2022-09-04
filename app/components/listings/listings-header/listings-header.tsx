@@ -19,9 +19,6 @@ import { useContext } from "react"
 import { RootStoreContext } from "../../../models"
 import { ListingsMode } from "../../../screens/listings/listings-mode"
 
-/**
- * Describe your component here
- */
 export const ListingsHeader = observer(function ListingsHeader() {
   const rootStore = useContext(RootStoreContext)
 

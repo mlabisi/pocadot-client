@@ -19,9 +19,6 @@ import { useContext } from "react"
 import { RootStoreContext } from "../../../models"
 import { FavesMode } from "../../../screens/faves/faves-mode"
 
-/**
- * Describe your component here
- */
 export const FavesHeader = observer(function FavesHeader() {
   const rootStore = useContext(RootStoreContext)
 

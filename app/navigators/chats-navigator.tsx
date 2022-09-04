@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { ChatsScreen, ListingDetailScreen } from "../screens"
 import React from "react"
 import { NavigatorParamList } from "./app-navigator"
+import { ChatsHeader } from "../components"
 
 const ChatsStack = createNativeStackNavigator<NavigatorParamList>()
 export const ChatsNav = () => {
@@ -12,7 +13,16 @@ export const ChatsNav = () => {
       }}
       initialRouteName="chats"
     >
-      <ChatsStack.Screen name="chats" component={ChatsScreen} />
+      <ChatsStack.Screen
+        name="chats"
+        component={ChatsScreen}
+        options={{
+          headerShown: true,
+          header: () => {
+            return <ChatsHeader />
+          },
+        }}
+      />
       <ChatsStack.Screen name="chatDetail" component={ListingDetailScreen} />
     </ChatsStack.Navigator>
   )
