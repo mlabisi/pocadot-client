@@ -24,6 +24,7 @@ export const BUTTON: ViewStyle = {
 }
 
 export const HEADER_TEXT: TextStyle = {
+  color: color.palette.white,
   fontSize: 70,
   flex: 1,
 }

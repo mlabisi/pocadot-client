@@ -1,31 +1,50 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { RootStoreBase } from "./RootStore.base"
-import { ListingModel, ListingModelType } from "../listing/ListingModel"
-import { MSTGQLRef, withTypedRefs } from "mst-gql"
+import { ListingsMode } from "../../screens/listings/listings-mode"
+import { isString } from "validate.js"
 
 /**
  * A RootStore model.
  */
 // prettier-ignore
-export const RootStore =
-  RootStoreBase
-    .props({
-      selectedListingId: types.optional(types.string, ""),
-    })
-    .views(self => ({
-        get store() {
-          return self
-        },
-      }),
-    )
-    .actions(self => ({
-      setSelectedListingId(listingId) {
-        self.selectedListingId = listingId
-      },
-      log() {
-        console.log(JSON.stringify(self))
-      },
-    }))
+export const RootStore = RootStoreBase.props({
+  selectedListingId: types.optional(types.string, ""),
+  listingsMode: types.optional(
+    types.enumeration<ListingsMode>(Object.values(ListingsMode)), ListingsMode.Suggested,
+  ),
+  skippedSuggestions: types.optional(types.array(types.string), []),
+  seenSuggestions: types.optional(types.array(types.string), []),
+  remainingSuggestions: types.optional(types.array(types.string), []),
+  shouldReloadSuggestions: types.optional(types.boolean, true),
+})
+  .views((self) => ({
+    get store() {
+      return self
+    },
+  }))
+  .actions((self) => ({
+    setShouldReloadSuggestions(flag) {
+      self.shouldReloadSuggestions = flag
+    },
+    setSeenSuggestions(listingIds) {
+      self.seenSuggestions = listingIds
+    },
+    setSkippedSuggestions(listingIds) {
+      self.skippedSuggestions = listingIds
+    },
+    setRemainingSuggestions(listingIds) {
+      self.remainingSuggestions = listingIds
+    },
+    setSelectedListingId(listingId: string) {
+      self.selectedListingId = listingId
+    },
+    setListingsMode(mode: ListingsMode) {
+      self.listingsMode = mode
+    },
+    log() {
+      console.log(JSON.stringify(self))
+    },
+  }))
 
 /**
  * The RootStore instance.

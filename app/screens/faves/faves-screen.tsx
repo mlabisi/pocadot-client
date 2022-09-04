@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { SafeAreaView, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { FloatingButton, Saved, Screen, Spacer, Text, Wishlist } from "../../components"
+import { FloatingButton, Header, Saved, Screen, Spacer, Text, Wishlist } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 import {
@@ -12,6 +12,7 @@ import {
   FLOATING_BUTTON_CONTAINER,
   HEADER,
   HEADER_CONTENT,
+  headerHeight,
   ROOT,
   SEGMENT_TITLE,
   TABS_CONTAINER,
@@ -28,10 +29,11 @@ enum FavesMode {
 export const FavesScreen: FC<StackScreenProps<NavigatorParamList, "faves">> = observer(
   function FavesScreen({ navigation }) {
     const [favesMode, setFavesMode] = useState(FavesMode.Saved)
+
     return (
       <Screen preset="fixed">
         <SafeAreaView style={ROOT}>
-          <View style={HEADER}>
+          <Header headerHeight={headerHeight} style={HEADER}>
             <View style={HEADER_CONTENT}>
               <Text tx={"faves.title"} preset={"header"} style={TITLE} />
               <Spacer n={0.5} />
@@ -46,7 +48,7 @@ export const FavesScreen: FC<StackScreenProps<NavigatorParamList, "faves">> = ob
                 }
               />
             </View>
-          </View>
+          </Header>
           <View style={CONTENT}>
             {favesMode === FavesMode.Saved && <Saved navigation={navigation} />}
             {favesMode === FavesMode.Wishlist && <Wishlist />}

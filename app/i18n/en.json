@@ -62,9 +62,11 @@
     "title": "Listings",
     "featured": "Featured",
     "suggested": {
-      "restart": "Restart",
+      "review": "Review",
+      "refresh": "Refresh",
       "label": "Suggested",
-      "noMore": "Check back later for more recommendations, or click the restart button to review your already-seen photocard suggestions!"
+      "reviewPrompt": "Check back later for more recommendations, or click the button below to review your already-seen photocard suggestions!",
+      "refreshPrompt": "Check back later for more recommendations, or click the button below to see if there are new photocard suggestions available for you!"
     },
     "all": {
       "label": "All"

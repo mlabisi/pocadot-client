@@ -1,12 +1,19 @@
-import { TextStyle, ViewStyle } from "react-native"
+import { Dimensions, TextStyle, ViewStyle } from "react-native"
 import { color, spacing } from "../../theme"
+
+const { height } = Dimensions.get("window")
+export const headerHeight = height * 0.2
 
 export const ROOT: ViewStyle = {
   backgroundColor: color.palette.white,
   flex: 1,
 }
 
-export const HEADER: ViewStyle = { flexDirection: "column", flex: 0.1, justifyContent: "flex-end" }
+export const HEADER: ViewStyle = {
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  backgroundColor: color.palette.white,
+}
 
 export const HEADER_CONTENT: ViewStyle = {
   backgroundColor: color.palette.white,
@@ -37,8 +44,8 @@ export const TABS_CONTAINER: ViewStyle = {
 
 export const FLOATING_BUTTON_CONTAINER: ViewStyle = {
   position: "absolute",
-  bottom: spacing[7],
-  right: spacing[6],
+  bottom: spacing[4],
+  right: spacing[4],
 }
 
 export const ACTIVE_TAB: ViewStyle = { backgroundColor: color.primary }

@@ -15,14 +15,13 @@ import { Text } from "../text/text"
 import { ListingModelType, RootStoreContext } from "../../models"
 import { AutoImage } from "../auto-image/auto-image"
 import { NavigationProp } from "@react-navigation/native"
-import { useContext, useState } from "react"
-import { save } from "../../utils/storage"
-import { _NotCustomized, IModelType, ModelProperties } from "mobx-state-tree"
+import { useContext } from "react"
 
 const jImage = require("./j.png")
 const gowonImage = require("./gowon.png")
 
 const CARD_CONTAINER: ViewStyle = {
+  alignSelf: "center",
   justifyContent: "center",
   display: "flex",
   padding: 10,
@@ -108,8 +107,6 @@ export interface SuggestionCardProps {
   item: ListingModelType
 
   navigation?: NavigationProp<any>
-
-  store: IModelType<ModelProperties, any, _NotCustomized, _NotCustomized>
 }
 
 /**

@@ -29,7 +29,13 @@ export const presets = {
   /**
    * Large headers.
    */
-  header: { ...BASE, fontSize: 24, fontWeight: "bold", fontFamily: "Jua" } as TextStyle,
+  header: {
+    ...BASE,
+    color: color.palette.lavender,
+    fontSize: 24,
+    fontWeight: "bold",
+    fontFamily: "Jua",
+  } as TextStyle,
 
   /**
    * Field labels that appear on forms above the inputs.

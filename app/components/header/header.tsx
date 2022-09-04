@@ -4,18 +4,29 @@ import { HeaderProps } from "./header.props"
 import { Button } from "../button/button"
 import { Text } from "../text/text"
 import { Icon } from "../icon/icon"
-import { spacing } from "../../theme"
+import { color, spacing } from "../../theme"
 import { translate } from "../../i18n/"
+import { Spacer } from "../spacer/spacer"
 
 // static styles
+const BASE: ViewStyle = {
+  paddingHorizontal: spacing[4],
+  alignItems: "center",
+  paddingTop: spacing[5],
+  paddingBottom: spacing[5],
+  backgroundColor: color.palette.white,
+}
 const ROOT: ViewStyle = {
+  ...BASE,
   flexDirection: "row",
   paddingHorizontal: spacing[4],
   alignItems: "center",
   paddingTop: spacing[5],
   paddingBottom: spacing[5],
   justifyContent: "flex-start",
+  backgroundColor: color.palette.white,
 }
+
 const TITLE: TextStyle = { textAlign: "center" }
 const TITLE_MIDDLE: ViewStyle = { flex: 1, justifyContent: "center" }
 const LEFT: ViewStyle = { width: 32 }
@@ -81,7 +92,7 @@ export function Header(props: HeaderProps) {
           <View style={RIGHT} />
         )}
       </View>
-      <View style={{ height: headerHeight / 2 }}>{children}</View>
+      <View style={[{ backgroundColor: color.palette.white }]}>{children}</View>
     </>
   )
 }
