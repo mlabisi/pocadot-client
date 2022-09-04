@@ -11,18 +11,19 @@ import {
   SELECTED_CONTAINER,
   SHADOW,
 } from "./styles"
+import { PreferenceCardProps } from "./preference-card.props"
 
 const defaultImage = require("./stayc.png")
 
 /**
  * Displays an idol/group's default picture, label, and frame depending on whether or not the talent has been selected
  */
-export const PreferenceCard = function PreferenceCard({ item }) {
+export const PreferenceCard = function PreferenceCard({ item, style }: PreferenceCardProps) {
   const { featuredImage = defaultImage, name, stageName, selected = false } = item
 
   return (
     <View style={selected ? SELECTED_CONTAINER : null}>
-      <View style={[CONTAINER, SHADOW]}>
+      <View style={[CONTAINER, SHADOW, style]}>
         <AutoImage source={featuredImage} style={FEATURED_IMAGE} />
         <View style={LABEL_CONTAINER}>
           <Spacer n={0.4} />

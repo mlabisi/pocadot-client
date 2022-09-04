@@ -12,7 +12,9 @@
     "submit": "Submit",
     "image": "Image",
     "images": "Images",
-    "add": "Add"
+    "add": "Add",
+    "addNew": "View All",
+    "modify": "Modify"
   },
   "errors": {
     "invalidEmail": "Invalid email address."
@@ -121,6 +123,10 @@
   },
   "chats": {
     "title": "Chats"
+  },
+  "profile": {
+    "myListingsTitle": "My Listings",
+    "myFavesTitle": "My Faves"
   },
   "errorScreen": {
     "title": "Something went wrong!",

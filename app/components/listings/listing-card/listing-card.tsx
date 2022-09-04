@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Pressable, TouchableOpacity, View } from "react-native"
+import { Pressable, StyleProp, TouchableOpacity, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { Text } from "../../common/text/text"
 import { AutoImage } from "../../common/auto-image/auto-image"
@@ -29,12 +29,19 @@ const gowonImage = require("./gowon.png")
 interface ListingCardProps {
   navigation: StackNavigationProp<NavigatorParamList>
   item: any
+  style?: StyleProp<ViewStyle>
+  saveEnabled?: boolean
 }
 
 /**
  * Representation of an individual listing on the All Listings page
  */
-export const ListingCard = observer(function ListingCard({ navigation, item }: ListingCardProps) {
+export const ListingCard = observer(function ListingCard({
+  navigation,
+  item,
+  style,
+  saveEnabled = true,
+}: ListingCardProps) {
   const {
     groups = [{ name: "STAYC" }],
     idols = [{ stageName: "J" }],
@@ -56,20 +63,22 @@ export const ListingCard = observer(function ListingCard({ navigation, item }: L
   const [fillHeart, setFillHeart] = useState(isFaved)
 
   return (
-    <TouchableOpacity onPress={openDetailsView} style={CARD_CONTAINER}>
+    <TouchableOpacity onPress={openDetailsView} style={[CARD_CONTAINER, style]}>
       {isFeatured && (
         <View style={FEATURED_BADGE}>
           <Icon icon={"star"} style={FEATURED_ICON} />
         </View>
       )}
-      <Pressable
-        style={FAVED_BADGE}
-        onPress={() => {
-          setFillHeart(!fillHeart)
-        }}
-      >
-        <Icon icon={fillHeart ? "heartFill" : "heart"} style={FAVED_ICON} />
-      </Pressable>
+      {saveEnabled && (
+        <Pressable
+          style={FAVED_BADGE}
+          onPress={() => {
+            setFillHeart(!fillHeart)
+          }}
+        >
+          <Icon icon={fillHeart ? "heartFill" : "heart"} style={FAVED_ICON} />
+        </Pressable>
+      )}
       <AutoImage source={featuredImage} style={LISTING_IMAGE} />
       <View style={TAGS_CONTAINER}>
         {type.map((tag) => (
@@ -79,13 +88,13 @@ export const ListingCard = observer(function ListingCard({ navigation, item }: L
         ))}
       </View>
       <View style={CARD_HEADLINE}>
-        {item.groups.length > 0 && (
+        {groups.length > 0 && (
           <Text style={LISTING_IDOL}>
             {groups.map((group) => group.name).join(",")} -{" "}
             {idols.map((idol) => idol.stageName).join(",")}
           </Text>
         )}
-        {listedBy.username && <Text style={LISTING_USERNAME}>@{item.listedBy.username}</Text>}
+        {listedBy.username && <Text style={LISTING_USERNAME}>@{listedBy.username}</Text>}
       </View>
     </TouchableOpacity>
   )

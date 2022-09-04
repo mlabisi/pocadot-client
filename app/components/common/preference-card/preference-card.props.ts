@@ -1,16 +1,10 @@
+import { StyleProp, ViewStyle } from "react-native"
+
 export interface PreferenceCardProps {
   /**
    * The featured image to override the default image.
    */
-  featuredImage?: string
+  item: any
 
-  /**
-   * The label to override the default label.
-   */
-  label?: string
-
-  /**
-   * Indicates whether or not to include the "selected" frame
-   */
-  selected?: boolean
+  style?: StyleProp<ViewStyle>
 }
