@@ -1,37 +1,21 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from "react"
+import React, { FC, useCallback, useContext, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { Dimensions, FlatList, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../../navigators"
-import {
-  Screen,
-  Button,
-  Header,
-  Icon,
-  ParsedText,
-  Spacer,
-  Text,
-  PreferencesGrid,
-} from "../../../components"
+import { Button, Icon, ParsedText, Text, PreferencesGrid } from "../../../components"
 import { color } from "../../../theme"
 import { SafeAreaView } from "react-native-safe-area-context"
-import SearchBar from "react-native-dynamic-search-bar"
-import { useQuery } from "../../../models"
-import { load, save } from "../../../utils/storage"
+import { RootStoreContext, useQuery } from "../../../models"
 import BottomSheet from "react-native-gesture-bottom-sheet"
 import { Divider } from "@rneui/base"
 import Swipeable from "react-native-gesture-handler/Swipeable"
 
 const { height } = Dimensions.get("window")
-const headerHeight = height * 0.2
 
 const ROOT: ViewStyle = {
   backgroundColor: color.palette.white,
   flex: 1,
-}
-const HEADER: ViewStyle = {
-  backgroundColor: color.palette.white,
-  zIndex: 1,
 }
 
 const TITLE: TextStyle = {
@@ -39,23 +23,6 @@ const TITLE: TextStyle = {
   textTransform: "uppercase",
   textAlign: "center",
   padding: 5,
-}
-
-const SUBTITLE: TextStyle = {
-  color: color.palette.black,
-  fontSize: 10,
-  textAlign: "center",
-}
-
-const SEARCH: ViewStyle = {
-  backgroundColor: color.fill,
-  paddingVertical: 8,
-  paddingHorizontal: 10,
-  borderRadius: 10,
-  width: "90%",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "row",
 }
 
 const LINK_TEXT: TextStyle = {
@@ -100,24 +67,9 @@ const DELETE_BUTTON: ViewStyle = { backgroundColor: color.error, flex: 1 }
 export const ModifyPreferencesScreen: FC<
   StackScreenProps<NavigatorParamList, "modifyPreferences">
 > = observer(function ModifyPreferencesScreen({ navigation }) {
-  const [selectedItems, setSelectedItems] = useState([])
+  const { preferencesQuery, selectedPreferences, setSelectedPreferences, currentUserId } =
+    useContext(RootStoreContext)
   const [filteredItems, setFilteredItems] = useState([])
-  const [query, setQuery] = useState("")
-  const [isRestored, setIsRestored] = useState(false)
-
-  const restoreSelected = async () => {
-    try {
-      const selected = await load("selectedItems")
-      if (selected) setSelectedItems(selected)
-    } finally {
-      setIsRestored(true)
-    }
-  }
-
-  useEffect(() => {
-    if (!isRestored) restoreSelected()
-  }, [isRestored])
-
   // ref
   const sheetRef = useRef<BottomSheet>(null)
 
@@ -132,8 +84,7 @@ export const ModifyPreferencesScreen: FC<
 
   const handleDelete = async (item) => {
     item.selected = !item.selected
-    setSelectedItems(() => selectedItems.filter((found) => found.id !== item.id))
-    await save("selectedItems", selectedItems)
+    setSelectedPreferences((old) => old.filter((found) => found.id !== item.id))
   }
 
   const renderItem = ({ item, index }, onClick) => {
@@ -167,13 +118,19 @@ export const ModifyPreferencesScreen: FC<
     )
   }
 
-  const { data, loading } = useQuery((store) =>
+  const preferencesFeedQuery = useQuery((store) =>
     store.queryPreferencesFeed({}, (feed) =>
       feed.idol((idol) => idol.stageName).group((group) => group.name),
     ),
   )
 
-  if (loading) {
+  const myPreferencesQuery = useQuery((store) =>
+    store.queryUsers({ input: { ids: [currentUserId] } }, (user) =>
+      user.id.faveGroups((group) => group.name).faveIdols((idol) => idol.stageName),
+    ),
+  )
+
+  if (preferencesFeedQuery.loading) {
     return (
       <SafeAreaView style={ROOT}>
         <View style={{ flexDirection: "column" }}>
@@ -183,84 +140,41 @@ export const ModifyPreferencesScreen: FC<
     )
   }
 
-  if (!query.length && !filteredItems.length) setFilteredItems(data.preferencesFeed)
-
-  const searchFilterFunction = (text) => {
-    setQuery(text)
-
-    if (text.length === 0) {
-      setFilteredItems(data.preferencesFeed)
-    } else {
-      setFilteredItems(
-        data.preferencesFeed.filter((item) => {
-          // @ts-ignore - Talent is guaranteed to be either a Group (with `name`) or Idol (with `stageName`)
-          const { name, stageName } = item
-          const label = (name ?? stageName).toUpperCase()
-          const textData = text.toUpperCase()
-
-          return label.indexOf(textData) > -1
-        }),
-      )
-    }
-  }
+  if (!preferencesQuery.length && !filteredItems.length)
+    setFilteredItems(preferencesFeedQuery.data.preferencesFeed)
 
   return (
-    <SafeAreaView style={ROOT}>
-      <Screen preset={"fixed"}>
-        <View style={HEADER}>
-          <Header
-            headerHeight={headerHeight}
-            headerTx="modifyPreferences.title"
-            leftTx={"modifyPreferences.cancel"}
-            rightTx={"modifyPreferences.save"}
-            onLeftPress={() => navigation.goBack()}
-            onRightPress={async () => {
-              navigation.navigate("listings")
-              await save("selectedItems", selectedItems)
-            }}
-            titleStyle={TITLE}
-            style={HEADER}
-            textStyle={LINK_TEXT}
-          >
-            <Text tx="modifyPreferences.subtitle" style={SUBTITLE} />
-            <Spacer n={0.5} />
-            <SearchBar
-              style={SEARCH}
-              placeholder="Search"
-              onPress={() => null}
-              onClearPress={() => searchFilterFunction("")}
-              onChangeText={searchFilterFunction}
-            />
-          </Header>
-        </View>
-        <PreferencesGrid
-          selectedItems={selectedItems}
-          setSelectedItems={setSelectedItems}
-          filteredItems={filteredItems}
-        />
+    <>
+      <PreferencesGrid
+        selectedItems={selectedPreferences}
+        setSelectedItems={setSelectedPreferences}
+        filteredItems={filteredItems}
+      />
 
-        <Button onPress={handlePresentModalPress} style={BUTTON}>
-          <Icon icon="chevronUp" style={CHEVRON} />
-          <ParsedText
-            tx="preferences.label"
-            txOptions={{ selectedCt: selectedItems.length }}
-            style={LINK_TEXT}
-            parse={[{ pattern: /(\d+)/, style: SELECTED_CT }]}
-          />
-        </Button>
-        <BottomSheet ref={sheetRef} draggable={true} hasDraggableIcon={true} height={height * 0.8}>
-          <Text tx="preferences.title" style={TITLE} />
-          <FlatList
-            data={selectedItems}
-            keyExtractor={(item) => item.id}
-            renderItem={(v) =>
-              renderItem(v, async () => {
-                await handleDelete(v.item)
-              })
-            }
-          />
-        </BottomSheet>
-      </Screen>
-    </SafeAreaView>
+      <Button onPress={handlePresentModalPress} style={BUTTON}>
+        <Icon icon="chevronUp" style={CHEVRON} />
+        <ParsedText
+          tx="preferences.label"
+          txOptions={{ selectedCt: selectedPreferences.length }}
+          style={LINK_TEXT}
+          parse={[{ pattern: /(\d+)/, style: SELECTED_CT }]}
+        />
+      </Button>
+      <BottomSheet ref={sheetRef} draggable={true} hasDraggableIcon={true} height={height * 0.8}>
+        <Text tx="preferences.title" style={TITLE} />
+        <FlatList
+          data={[
+            ...myPreferencesQuery.data.users[0].faveIdols,
+            ...myPreferencesQuery.data.users[0].faveGroups,
+          ]}
+          keyExtractor={(item) => item.id}
+          renderItem={(v) =>
+            renderItem(v, async () => {
+              await handleDelete(v.item)
+            })
+          }
+        />
+      </BottomSheet>
+    </>
   )
 })

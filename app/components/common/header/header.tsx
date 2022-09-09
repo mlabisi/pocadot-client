@@ -11,20 +11,30 @@ import { translate } from "../../../i18n"
 const BASE: ViewStyle = {
   paddingHorizontal: spacing[4],
   alignItems: "center",
-  paddingTop: spacing[5],
-  paddingBottom: spacing[5],
+  paddingTop: spacing[6],
   backgroundColor: color.palette.white,
 }
 const ROOT: ViewStyle = {
   ...BASE,
   flexDirection: "row",
-  justifyContent: "flex-start",
 }
 
 const TITLE: TextStyle = { textAlign: "center" }
-const TITLE_MIDDLE: ViewStyle = { flex: 1, justifyContent: "center" }
-const LEFT: ViewStyle = { padding: spacing[4] }
-const RIGHT: ViewStyle = { padding: spacing[4] }
+const TITLE_MIDDLE: ViewStyle = {
+  flex: 1 / 3,
+  flexDirection: "row",
+  justifyContent: "center",
+}
+const LEFT: ViewStyle = {
+  flex: 1 / 3,
+  flexDirection: "row",
+  justifyContent: "flex-start",
+}
+const RIGHT: ViewStyle = {
+  flex: 1 / 3,
+  flexDirection: "row",
+  justifyContent: "flex-end",
+}
 
 /**
  * Header that appears on many screens. Will hold navigation buttons and screen title.

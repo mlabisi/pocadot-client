@@ -20,6 +20,9 @@ export const RootStore = RootStoreBase.props({
   seenSuggestions: types.optional(types.array(types.string), []),
   remainingSuggestions: types.optional(types.array(types.string), []),
   shouldReloadSuggestions: types.optional(types.boolean, true),
+  preferencesQuery: types.optional(types.string, ""),
+  selectedPreferences: types.optional(types.array(types.string), []),
+  filteredPreferences: types.optional(types.array(types.string), []),
 })
   .views((self) => ({
     get store() {
@@ -27,6 +30,12 @@ export const RootStore = RootStoreBase.props({
     },
   }))
   .actions((self) => ({
+    setSelectedPreferences(selected) {
+      self.selectedPreferences = selected
+    },
+    setPreferencesQuery(query) {
+      self.preferencesQuery = query
+    },
     setShouldReloadSuggestions(flag) {
       self.shouldReloadSuggestions = flag
     },

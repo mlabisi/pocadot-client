@@ -14,7 +14,9 @@
     "images": "Images",
     "add": "Add",
     "addNew": "View All",
-    "modify": "Modify"
+    "modify": "Modify",
+    "edit": "Edit",
+    "save": "Save"
   },
   "errors": {
     "invalidEmail": "Invalid email address."
@@ -61,6 +63,9 @@
   "preferences": {
     "label": "%{selectedCt} SELECTED",
     "title": "Your Faves"
+  },
+  "myListings": {
+    "title": "My Listings"
   },
   "listings": {
     "title": "Listings",

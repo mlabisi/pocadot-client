@@ -78,10 +78,10 @@ export const MakeOfferScreen: FC<StackScreenProps<NavigatorParamList, "makeOffer
           </Header>
           <View style={FORM_CONTAINER}>
             <TextField
-              label={
+              labelTx={
                 selectedListing.type.includes(ListingType.WTT)
-                  ? translate("listings.offer.tradePrice")
-                  : translate("listings.offer.buyPrice")
+                  ? "listings.offer.tradePrice"
+                  : "listings.offer.buyPrice"
               }
               inputStyle={{
                 color: color.palette.black,

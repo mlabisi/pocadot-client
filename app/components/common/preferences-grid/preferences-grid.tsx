@@ -31,7 +31,7 @@ export const PreferencesGrid = observer(function PreferencesGrid(props: Preferen
       onPress={() => {
         if (item.selected) {
           item.selected = !item.selected
-          setSelectedItems(() => selectedItems.filter((found) => found.id !== item.id))
+          setSelectedItems((old) => old.filter((found) => found.id !== item.id))
         } else {
           item.selected = !item.selected
           setSelectedItems((prev) => [...prev, item])

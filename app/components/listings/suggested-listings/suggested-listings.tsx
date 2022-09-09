@@ -9,7 +9,6 @@ import Swiper from "react-native-deck-swiper"
 import { useContext, useEffect, useState } from "react"
 import { Button } from "../../common/button/button"
 import { CONTAINER, TITLE } from "./styles"
-import { translate } from "../../../i18n"
 import { NavigatorParamList } from "../../../navigators"
 import { StackNavigationProp } from "@react-navigation/stack"
 
@@ -42,20 +41,17 @@ export const SuggestedListings = observer(function SuggestedListings({
   const [cards, setCards] = useState([])
 
   useEffect(() => {
-    const refresh = async () => {
-      if (shouldReloadSuggestions || (!cards.length && !!remainingSuggestions.length)) {
-        if (!remainingSuggestions.length) {
-          setShouldReloadSuggestions(false)
-          await query.refetch()
-          setCards(query.suggestions)
-          setRemainingSuggestions(query.suggestions.map((s) => s.id))
-        } else {
-          setCards(remainingSuggestions.map((id) => listings.get(id)))
-        }
+    if (shouldReloadSuggestions || (!cards.length && !!remainingSuggestions.length)) {
+      if (!remainingSuggestions.length) {
+        setShouldReloadSuggestions(false)
+        // query.refetch().then(() => {
+        setCards(query.data.userSuggestions)
+        setRemainingSuggestions(query.data.userSuggestions.map((s) => s.id))
+        // })
+      } else {
+        setCards(remainingSuggestions.map((id) => listings.get(id)))
       }
     }
-    
-    refresh()
   }, [setCards, shouldReloadSuggestions])
 
   const renderCard = (item) => <SuggestionCard key={item.id} item={item} navigation={navigation} />
@@ -93,10 +89,10 @@ export const SuggestedListings = observer(function SuggestedListings({
         <View style={CONTAINER}>
           <Text
             style={TITLE}
-            text={
+            tx={
               skippedSuggestions.length > 0
-                ? translate("listings.suggested.reviewPrompt")
-                : translate("listings.suggested.refreshPrompt")
+                ? "listings.suggested.reviewPrompt"
+                : "listings.suggested.refreshPrompt"
             }
           />
           {skippedSuggestions.length > 0 ? (

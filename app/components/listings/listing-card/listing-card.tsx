@@ -46,7 +46,7 @@ export const ListingCard = observer(function ListingCard({
     groups = [{ name: "STAYC" }],
     idols = [{ stageName: "J" }],
     type = ["WTS"],
-    listedBy = { username: "papagowon" },
+    listedBy,
     isFeatured,
     isFaved = true,
   } = item
@@ -81,20 +81,22 @@ export const ListingCard = observer(function ListingCard({
       )}
       <AutoImage source={featuredImage} style={LISTING_IMAGE} />
       <View style={TAGS_CONTAINER}>
-        {type.map((tag) => (
+        {type?.map((tag) => (
           <View key={tag} style={TAG}>
             <Text style={TAG_TEXT}>{tag}</Text>
           </View>
         ))}
       </View>
       <View style={CARD_HEADLINE}>
-        {groups.length > 0 && (
+        {groups?.length > 0 && (
           <Text style={LISTING_IDOL}>
             {groups.map((group) => group.name).join(",")} -{" "}
             {idols.map((idol) => idol.stageName).join(",")}
           </Text>
         )}
-        {listedBy.username && <Text style={LISTING_USERNAME}>@{listedBy.username}</Text>}
+        {saveEnabled && listedBy?.username && (
+          <Text style={LISTING_USERNAME}>@{listedBy.username}</Text>
+        )}
       </View>
     </TouchableOpacity>
   )

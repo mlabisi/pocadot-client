@@ -34,6 +34,7 @@ export type NavigatorParamList = {
   listings: undefined
   listingsTab: undefined
   listingDetail: undefined
+  myListings: undefined
   makeOffer: undefined
   addListing: undefined
   faves: undefined

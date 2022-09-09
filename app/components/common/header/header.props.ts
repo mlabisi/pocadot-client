@@ -36,11 +36,11 @@ export interface HeaderProps {
   /**
    * Text that should appear on the left
    */
-  leftText?: IconTypes
+  leftText?: string
   /**
    * Text that should appear on the right
    */
-  rightText?: IconTypes
+  rightText?: string
 
   /**
    * Icon that should appear on the left

@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite"
 import { Text } from "../../common/text/text"
 import {
   ACTIVE_TAB,
-  HEADER,
   HEADER_CONTENT,
   headerHeight,
   SEGMENT_TITLE,
@@ -23,7 +22,7 @@ export const ListingsHeader = observer(function ListingsHeader() {
   const rootStore = useContext(RootStoreContext)
 
   return (
-    <Header headerHeight={headerHeight} style={HEADER}>
+    <Header headerHeight={headerHeight}>
       <View style={HEADER_CONTENT}>
         <Text tx="listings.title" preset="header" style={TITLE} />
         <Spacer n={0.5} />

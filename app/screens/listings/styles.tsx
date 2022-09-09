@@ -9,17 +9,16 @@ export const ROOT: ViewStyle = {
   flex: 1,
 }
 
-export const HEADER: ViewStyle = {
-  flexDirection: "column",
-  justifyContent: "flex-end",
-  backgroundColor: color.palette.white,
-}
-
 export const HEADER_CONTENT: ViewStyle = {
   backgroundColor: color.palette.white,
   zIndex: 1,
   flexDirection: "row",
   paddingBottom: 15,
+}
+
+export const HEADER_TEXT: TextStyle = {
+  color: color.palette.lavender,
+  fontSize: 15,
 }
 
 export const CONTENT: ViewStyle = {
