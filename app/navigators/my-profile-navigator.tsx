@@ -4,6 +4,7 @@ import {
   PreferencesScreen,
   MyListingsScreen,
   MyProfileScreen,
+  AddListingScreen,
 } from "../screens"
 import React from "react"
 import { NavigatorParamList } from "./app-navigator"
@@ -30,6 +31,11 @@ export const MyProfileNav = () => {
         }}
       />
       <MyProfileStack.Screen name="listingDetail" component={ListingDetailScreen} />
+      <MyProfileStack.Screen
+        name="addListing"
+        component={AddListingScreen}
+        options={{ headerShown: false }}
+      />
       <MyProfileStack.Screen
         name={"preferences"}
         component={PreferencesScreen}

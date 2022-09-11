@@ -89,7 +89,8 @@
       "locationPrefix": "Ships from",
       "destinationPrefix": "Ships to",
       "everywhere": "Everywhere",
-      "listedBy": "listed by"
+      "listedBy": "listed by",
+      "viewOffers": "View Offers"
     },
     "offer": {
       "pricePlaceholder": "Ex: $18",

@@ -41,7 +41,6 @@ const defaultImage = require("./yoon.png")
 export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listingDetail">> =
   observer(function ListingDetailScreen({ navigation }) {
     const [fillHeart, setFillHeart] = useState(true)
-    const [editMode, setEditMode] = useState(false)
     const { currentUserId, selectedListingId } = useContext(RootStoreContext)
 
     const { data, loading } = useQuery((store) =>
@@ -81,11 +80,11 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
             headerHeight={headerHeight}
             leftTx={"common.back"}
             onLeftPress={() => navigation.goBack()}
-            rightText={
-              isMyListing ? (editMode ? translate("common.save") : translate("common.edit")) : null
-            }
+            rightText={isMyListing ? translate("common.save") : null}
             onRightPress={() => {
-              if (currentUserId === selectedListing.listedBy.id) setEditMode((oldMode) => !oldMode)
+              if (currentUserId === selectedListing.listedBy.id) {
+                navigation.navigate("addListing")
+              }
             }}
             style={HEADER}
             textStyle={HEADER_TEXT}
@@ -149,24 +148,26 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
             )}
           </View>
 
-          {!isMyListing && (
-            <Button
-              text={selectedListing.type
-                .map((t) => {
-                  switch (t) {
-                    case ListingType.WTT:
-                      return translate("listings.detail.trade")
-                    case ListingType.WTS:
-                    default:
-                      return translate("listings.detail.bid")
-                  }
-                })
-                .join("/")}
-              textStyle={BUTTON_TEXT}
-              style={BUTTON_STYLE}
-              onPress={() => navigation.navigate("makeOffer")}
-            />
-          )}
+          <Button
+            text={
+              isMyListing
+                ? translate("listings.detail.viewOffers")
+                : selectedListing.type
+                    .map((t) => {
+                      switch (t) {
+                        case ListingType.WTT:
+                          return translate("listings.detail.trade")
+                        case ListingType.WTS:
+                        default:
+                          return translate("listings.detail.bid")
+                      }
+                    })
+                    .join("/")
+            }
+            textStyle={BUTTON_TEXT}
+            style={BUTTON_STYLE}
+            onPress={() => (isMyListing ? {} : navigation.navigate("makeOffer"))}
+          />
           <View style={CELL}>
             <Text tx={"common.details"} style={TEXT} />
             <View style={CELL}>
