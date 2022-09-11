@@ -25,7 +25,7 @@ export const SignUpScreen: FC<StackScreenProps<NavigatorParamList, "signUp">> = 
   function SignUpScreen({ navigation }) {
     const { setCurrentUserId } = useContext(RootStoreContext)
 
-    const nextScreen = () => navigation.navigate("setPreferences")
+    const nextScreen = () => navigation.navigate("preferences")
     const signIn = () => {
       navigation.popToTop()
       navigation.navigate("signIn")

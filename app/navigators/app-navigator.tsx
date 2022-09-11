@@ -29,8 +29,7 @@ export type NavigatorParamList = {
   welcomeTab: undefined
   signIn: undefined
   signUp: undefined
-  setPreferences: undefined
-  modifyPreferences: undefined
+  preferences: undefined
   listings: undefined
   listingsTab: undefined
   listingDetail: undefined

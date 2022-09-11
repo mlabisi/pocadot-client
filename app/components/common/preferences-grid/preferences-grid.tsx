@@ -13,33 +13,25 @@ const GRID: ViewStyle = {
   flex: 1,
 }
 
-export interface PreferencesGridProps {
-  filteredItems: any[]
-
-  selectedItems: any[]
-
-  setSelectedItems: Function
-}
-
 /**
  * Used to display all available preferences
  */
-export const PreferencesGrid = observer(function PreferencesGrid(props: PreferencesGridProps) {
-  const { selectedItems, setSelectedItems, filteredItems } = props
-  const { groups, idols } = useContext(RootStoreContext)
+export const PreferencesGrid = observer(function PreferencesGrid() {
+  const { selectedPreferences, setSelectedPreferences, filteredPreferences } =
+    useContext(RootStoreContext)
 
   const renderItem = ({ item }) => (
     <TouchableWithoutFeedback
       key={item.id}
       onPress={() => {
-        if (selectedItems.includes(item.id)) {
-          setSelectedItems(selectedItems.filter((found) => found !== item.id))
+        if (selectedPreferences.includes(item.id)) {
+          setSelectedPreferences(selectedPreferences.filter((found) => found !== item.id))
         } else {
-          setSelectedItems([...selectedItems, item.id])
+          setSelectedPreferences([...selectedPreferences, item.id])
         }
       }}
     >
-      <PreferenceCard item={item} selected={selectedItems.includes(item.id)} />
+      <PreferenceCard item={item} />
     </TouchableWithoutFeedback>
   )
 
@@ -48,7 +40,7 @@ export const PreferencesGrid = observer(function PreferencesGrid(props: Preferen
       style={GRID}
       keyExtractor={(item) => item.id}
       maxItemsPerRow={2}
-      data={filteredItems.map((id) => groups.get(id) ?? idols.get(id))}
+      data={filteredPreferences}
       renderItem={renderItem}
     />
   )

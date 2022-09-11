@@ -2,6 +2,7 @@ import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { RootStoreBase } from "./RootStore.base"
 import { ListingsMode } from "../../screens/listings/listings-mode"
 import { FavesMode } from "../../screens/faves/faves-mode"
+import { TalentUnionModel } from "../talent/TalentUnionModel"
 
 /**
  * A RootStore model.
@@ -22,7 +23,7 @@ export const RootStore = RootStoreBase.props({
   shouldReloadSuggestions: types.optional(types.boolean, true),
   preferencesQuery: types.optional(types.string, ""),
   selectedPreferences: types.optional(types.array(types.string), []),
-  filteredPreferences: types.optional(types.array(types.string), []),
+  filteredPreferences: types.optional(types.array(types.safeReference(TalentUnionModel)), []),
 })
   .views((self) => ({
     get store() {

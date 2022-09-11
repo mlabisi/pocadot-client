@@ -1,13 +1,13 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import {
   ListingDetailScreen,
-  ModifyPreferencesScreen,
+  PreferencesScreen,
   MyListingsScreen,
   MyProfileScreen,
 } from "../screens"
 import React from "react"
 import { NavigatorParamList } from "./app-navigator"
-import { MyListingsHeader, ModifyPreferencesHeader } from "../components"
+import { MyListingsHeader, PreferencesHeader } from "../components"
 
 const MyProfileStack = createNativeStackNavigator<NavigatorParamList>()
 export const MyProfileNav = () => {
@@ -31,12 +31,12 @@ export const MyProfileNav = () => {
       />
       <MyProfileStack.Screen name="listingDetail" component={ListingDetailScreen} />
       <MyProfileStack.Screen
-        name={"modifyPreferences"}
-        component={ModifyPreferencesScreen}
+        name={"preferences"}
+        component={PreferencesScreen}
         options={{
           headerShown: true,
           header: () => {
-            return <ModifyPreferencesHeader />
+            return <PreferencesHeader modifyPreferences={true} />
           },
         }}
       />
