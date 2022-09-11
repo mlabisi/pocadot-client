@@ -46,8 +46,10 @@ export const AllListings = observer(function AllListings({
       )
 
   useEffect(() => {
-    // @ts-ignore the key for the data changes depending on whether we're viewing current user's listings
-    setListings(myListings ? listingsFeed.data.users[0].listings : listingsFeed.data.listingsFeed)
+    if (!!listingsFeed.data && !listings.length) {
+      // @ts-ignore the key for the data changes depending on whether we're viewing current user's listings
+      setListings(myListings ? listingsFeed.data.users[0].listings : listingsFeed.data.listingsFeed)
+    }
   }, [setListings, listingsFeed.data])
 
   const renderItem = ({ item }) =>
