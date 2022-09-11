@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext, useRef, useState } from "react"
+import React, { FC, useCallback, useContext, useRef } from "react"
 import { observer } from "mobx-react-lite"
 import { Dimensions, FlatList, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
@@ -67,9 +67,9 @@ const DELETE_BUTTON: ViewStyle = { backgroundColor: color.error, flex: 1 }
 export const ModifyPreferencesScreen: FC<
   StackScreenProps<NavigatorParamList, "modifyPreferences">
 > = observer(function ModifyPreferencesScreen({ navigation }) {
-  const { preferencesQuery, selectedPreferences, setSelectedPreferences, currentUserId } =
+  const { selectedPreferences, setSelectedPreferences, filteredPreferences, currentUserId } =
     useContext(RootStoreContext)
-  const [filteredItems, setFilteredItems] = useState([])
+
   // ref
   const sheetRef = useRef<BottomSheet>(null)
 
@@ -140,15 +140,12 @@ export const ModifyPreferencesScreen: FC<
     )
   }
 
-  if (!preferencesQuery.length && !filteredItems.length)
-    setFilteredItems(preferencesFeedQuery.data.preferencesFeed)
-
   return (
     <>
       <PreferencesGrid
         selectedItems={selectedPreferences}
         setSelectedItems={setSelectedPreferences}
-        filteredItems={filteredItems}
+        filteredItems={filteredPreferences}
       />
 
       <Button onPress={handlePresentModalPress} style={BUTTON}>

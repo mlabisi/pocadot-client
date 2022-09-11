@@ -7,4 +7,6 @@ export interface PreferenceCardProps {
   item: any
 
   style?: StyleProp<ViewStyle>
+
+  selected?: boolean
 }

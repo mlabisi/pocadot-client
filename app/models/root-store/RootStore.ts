@@ -30,6 +30,9 @@ export const RootStore = RootStoreBase.props({
     },
   }))
   .actions((self) => ({
+    setFilteredPreferences(filtered) {
+      self.filteredPreferences = filtered
+    },
     setSelectedPreferences(selected) {
       self.selectedPreferences = selected
     },

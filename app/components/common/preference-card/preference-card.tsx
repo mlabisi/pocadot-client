@@ -18,8 +18,12 @@ const defaultImage = require("./stayc.png")
 /**
  * Displays an idol/group's default picture, label, and frame depending on whether or not the talent has been selected
  */
-export const PreferenceCard = function PreferenceCard({ item, style }: PreferenceCardProps) {
-  const { featuredImage = defaultImage, name, stageName, selected = false } = item
+export const PreferenceCard = function PreferenceCard({
+  item,
+  style,
+  selected = false,
+}: PreferenceCardProps) {
+  const { featuredImage = defaultImage, name, stageName } = item
 
   return (
     <View style={selected ? SELECTED_CONTAINER : null}>

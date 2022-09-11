@@ -5,6 +5,8 @@ import { color } from "../../../theme"
 import { FlatGrid } from "react-native-super-grid"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import { PreferenceCard } from "../preference-card/preference-card"
+import { useContext } from "react"
+import { RootStoreContext } from "../../../models"
 
 const GRID: ViewStyle = {
   backgroundColor: color.palette.fill,
@@ -24,21 +26,20 @@ export interface PreferencesGridProps {
  */
 export const PreferencesGrid = observer(function PreferencesGrid(props: PreferencesGridProps) {
   const { selectedItems, setSelectedItems, filteredItems } = props
+  const { groups, idols } = useContext(RootStoreContext)
 
   const renderItem = ({ item }) => (
     <TouchableWithoutFeedback
       key={item.id}
       onPress={() => {
-        if (item.selected) {
-          item.selected = !item.selected
-          setSelectedItems((old) => old.filter((found) => found.id !== item.id))
+        if (selectedItems.includes(item.id)) {
+          setSelectedItems(selectedItems.filter((found) => found !== item.id))
         } else {
-          item.selected = !item.selected
-          setSelectedItems((prev) => [...prev, item])
+          setSelectedItems([...selectedItems, item.id])
         }
       }}
     >
-      <PreferenceCard item={item} />
+      <PreferenceCard item={item} selected={selectedItems.includes(item.id)} />
     </TouchableWithoutFeedback>
   )
 
@@ -47,9 +48,7 @@ export const PreferencesGrid = observer(function PreferencesGrid(props: Preferen
       style={GRID}
       keyExtractor={(item) => item.id}
       maxItemsPerRow={2}
-      data={filteredItems.map((item) => {
-        return { ...item, selected: !!selectedItems.find((found) => found.id === item.id) }
-      })}
+      data={filteredItems.map((id) => groups.get(id) ?? idols.get(id))}
       renderItem={renderItem}
     />
   )
