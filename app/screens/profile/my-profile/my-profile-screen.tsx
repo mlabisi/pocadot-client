@@ -53,25 +53,24 @@ export const MyProfileScreen: FC<StackScreenProps<NavigatorParamList, "myProfile
     )
 
     useEffect(() => {
-      if (myProfileQuery.data && !myListings.length) {
-        setMyListings(myProfileQuery.data.users[0].listings)
+      const data = myProfileQuery.data
+
+      if (data && !myListings.length) {
+        setMyListings(data.users[0].listings)
       }
 
-      if (myProfileQuery.data && !myPreferences.length) {
-        setMyPreferences([
-          ...myProfileQuery.data.users[0].faveGroups,
-          ...myProfileQuery.data.users[0].faveIdols,
-        ])
+      if (data && !myPreferences.length) {
+        setMyPreferences([...data.users[0].faveGroups, ...data.users[0].faveIdols])
       }
 
-      if (myProfileQuery.data && !user) {
-        setUser(myProfileQuery.data.users[0])
+      if (data && !user) {
+        setUser(data.users[0])
       }
     }, [myProfileQuery.data, setMyListings, setMyPreferences, setUser])
 
     const renderListingCard = ({ item }) => (
       <ListingCard
-        key={"oop"}
+        key={item.id}
         item={item}
         navigation={navigation}
         style={{ marginBottom: spacing[5] }}
@@ -80,7 +79,12 @@ export const MyProfileScreen: FC<StackScreenProps<NavigatorParamList, "myProfile
     )
 
     const renderPreferenceCard = ({ item }) => (
-      <PreferenceCard item={item} style={{ marginLeft: spacing[4], marginBottom: spacing[5] }} />
+      <PreferenceCard
+        key={item.id}
+        item={item}
+        style={{ marginLeft: spacing[4], marginBottom: spacing[5] }}
+        myProfileView={true}
+      />
     )
 
     return (
@@ -121,7 +125,7 @@ export const MyProfileScreen: FC<StackScreenProps<NavigatorParamList, "myProfile
               text={`${translate("common.modify")} →`}
               textStyle={LINK}
               preset={"link"}
-              onPress={() => navigation.navigate("modifyPreferences")}
+              onPress={() => navigation.navigate("preferences")}
             />
           </View>
           <View style={CELL}>

@@ -24,12 +24,15 @@ const defaultImage = require("./stayc.png")
 export const PreferenceCard = observer(function PreferenceCard({
   item,
   style,
+  myProfileView = false,
 }: PreferenceCardProps) {
   const { selectedPreferences } = useContext(RootStoreContext)
   const { featuredImage = defaultImage, name, stageName } = item
 
   return (
-    <View style={selectedPreferences.includes(item.id) ? SELECTED_CONTAINER : null}>
+    <View
+      style={!myProfileView && selectedPreferences.includes(item.id) ? SELECTED_CONTAINER : null}
+    >
       <View style={[CONTAINER, SHADOW, style]}>
         <AutoImage source={featuredImage} style={FEATURED_IMAGE} />
         <View style={LABEL_CONTAINER}>
