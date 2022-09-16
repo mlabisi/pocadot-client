@@ -2,7 +2,8 @@ import { Instance } from "mobx-state-tree"
 import { ListingFeedModelBase } from "./ListingFeedModel.base"
 
 /* The TypeScript type of an instance of ListingFeedModel */
-export interface ListingFeedModelType extends Instance<typeof ListingFeedModel.Type> {}
+export interface ListingFeedModelType extends Instance<typeof ListingFeedModel> {
+}
 
 /* A graphql query fragment builders for ListingFeedModel */
 export {

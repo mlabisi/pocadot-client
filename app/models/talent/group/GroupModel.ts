@@ -2,7 +2,8 @@ import { Instance } from "mobx-state-tree"
 import { GroupModelBase } from "./GroupModel.base"
 
 /* The TypeScript type of an instance of GroupModel */
-export interface GroupModelType extends Instance<typeof GroupModel.Type> {}
+export interface GroupModelType extends Instance<typeof GroupModel> {
+}
 
 /* A graphql query fragment builders for GroupModel */
 export { selectFromGroup, groupModelPrimitives, GroupModelSelector } from "./GroupModel.base"

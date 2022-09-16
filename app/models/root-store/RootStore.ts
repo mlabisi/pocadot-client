@@ -24,6 +24,7 @@ export const RootStore = RootStoreBase.props({
   preferencesQuery: types.optional(types.string, ""),
   selectedPreferences: types.optional(types.array(types.string), []),
   filteredPreferences: types.optional(types.array(types.safeReference(TalentUnionModel)), []),
+  activeConversation: types.optional(types.array(types.string), []),
 })
   .views((self) => ({
     get store() {
@@ -31,6 +32,9 @@ export const RootStore = RootStoreBase.props({
     },
   }))
   .actions((self) => ({
+    setActiveConversation(convo) {
+      self.activeConversation = convo
+    },
     setFilteredPreferences(filtered) {
       self.filteredPreferences = filtered
     },

@@ -2,7 +2,8 @@ import { Instance } from "mobx-state-tree"
 import { CollectionModelBase } from "./CollectionModel.base"
 
 /* The TypeScript type of an instance of CollectionModel */
-export interface CollectionModelType extends Instance<typeof CollectionModel.Type> {}
+export interface CollectionModelType extends Instance<typeof CollectionModel> {
+}
 
 /* A graphql query fragment builders for CollectionModel */
 export {

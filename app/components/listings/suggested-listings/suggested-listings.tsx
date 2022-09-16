@@ -83,6 +83,7 @@ export const SuggestedListings = observer(function SuggestedListings({
           animateOverlayLabelsOpacity
           animateCardOpacity
           swipeBackCard
+          useViewOverflow={true}
         />
       )}
       {!remainingSuggestions.length && (

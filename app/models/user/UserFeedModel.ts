@@ -2,7 +2,8 @@ import { Instance } from "mobx-state-tree"
 import { UserFeedModelBase } from "./UserFeedModel.base"
 
 /* The TypeScript type of an instance of UserFeedModel */
-export interface UserFeedModelType extends Instance<typeof UserFeedModel.Type> {}
+export interface UserFeedModelType extends Instance<typeof UserFeedModel> {
+}
 
 /* A graphql query fragment builders for UserFeedModel */
 export {

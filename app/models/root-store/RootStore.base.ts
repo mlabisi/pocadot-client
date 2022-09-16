@@ -5,6 +5,8 @@ import { ObservableMap } from "mobx"
 import { types } from "mobx-state-tree"
 import { MSTGQLStore, configureStoreMixin, QueryOptions, withTypedRefs } from "mst-gql"
 
+import { ChatModel, ChatModelType } from "../chat/ChatModel"
+import { chatModelPrimitives, ChatModelSelector } from "../chat/ChatModel.base"
 import { CollectionModel, CollectionModelType } from "../collection/CollectionModel"
 import {
   collectionModelPrimitives,
@@ -29,6 +31,8 @@ import { idolFeedModelPrimitives, IdolFeedModelSelector } from "../talent/idol/I
 import { ListingModel, ListingModelType } from "../listing/ListingModel"
 import { listingModelPrimitives, ListingModelSelector } from "../listing/ListingModel.base"
 import { ListingFeedModel } from "../listing/ListingFeedModel"
+import { MessageModel, MessageModelType } from "../chat/MessageModel"
+// import { messageModelPrimitives, MessageModelSelector } from "../chat/MessageModel.base"
 import { UserModel, UserModelType } from "../user/UserModel"
 import { userModelPrimitives, UserModelSelector } from "../user/UserModel.base"
 import { UserFeedModel, UserFeedModelType } from "../user/UserFeedModel"
@@ -124,6 +128,19 @@ export type ListingFilters = {
   ids?: string[]
   fields?: ListingFieldFilters | null
 }
+export type SendMessageInput = {
+  authorId: string
+  conversationId: string
+  message: string
+}
+export type StartChatInput = {
+  fromId: string
+  listingId: string
+  toId: string
+}
+export type UniqueChatInput = {
+  id: string
+}
 export type ListingFieldFilters = {
   release?: string[]
   description?: string[]
@@ -177,10 +194,12 @@ export type UserFilterFields = {
 }
 /* The TypeScript type that explicits the refs to other models in order to prevent a circular refs issue */
 type Refs = {
+  chats: ObservableMap<string, ChatModelType>
   collections: ObservableMap<string, CollectionModelType>
   groups: ObservableMap<string, GroupModelType>
   idols: ObservableMap<string, IdolModelType>
   listings: ObservableMap<string, ListingModelType>
+  messages: ObservableMap<string, MessageModelType>
   users: ObservableMap<string, UserModelType>
 }
 
@@ -190,6 +209,7 @@ type Refs = {
 export enum RootStoreBaseQueries {
   queryCollections = "queryCollections",
   queryCollectionsFeed = "queryCollectionsFeed",
+  queryFetchChat = "queryFetchChat",
   queryGroups = "queryGroups",
   queryGroupsFeed = "queryGroupsFeed",
   queryIdols = "queryIdols",
@@ -212,6 +232,9 @@ export enum RootStoreBaseMutations {
   mutateDeleteListings = "mutateDeleteListings",
   mutateUserPreferences = "mutateUserPreferences",
   mutateAddUser = "mutateAddUser",
+  mutateDeleteChat = "mutateDeleteChat",
+  mutateSendMessage = "mutateSendMessage",
+  mutateStartChat = "mutateStartChat",
   mutateUpdateUser = "mutateUpdateUser",
   mutateDeleteUser = "mutateDeleteUser",
 }
@@ -224,6 +247,7 @@ export const RootStoreBase = withTypedRefs<Refs>()(
     .extend(
       configureStoreMixin(
         [
+          ["Chat", () => ChatModel],
           ["Collection", () => CollectionModel],
           ["CollectionFeed", () => CollectionFeedModel],
           ["Group", () => GroupModel],
@@ -232,18 +256,21 @@ export const RootStoreBase = withTypedRefs<Refs>()(
           ["IdolFeed", () => IdolFeedModel],
           ["Listing", () => ListingModel],
           ["ListingFeed", () => ListingFeedModel],
+          ["Message", () => MessageModel],
           ["User", () => UserModel],
           ["UserFeed", () => UserFeedModel],
         ],
-        ["Collection", "Group", "Idol", "Listing", "User"],
+        ["Chat", "Collection", "Group", "Idol", "Listing", "Message", "User"],
         "js",
       ),
     )
     .props({
+      chats: types.optional(types.map(types.late((): any => ChatModel)), {}),
       collections: types.optional(types.map(types.late((): any => CollectionModel)), {}),
       groups: types.optional(types.map(types.late((): any => GroupModel)), {}),
       idols: types.optional(types.map(types.late((): any => IdolModel)), {}),
       listings: types.optional(types.map(types.late((): any => ListingModel)), {}),
+      messages: types.optional(types.map(types.late((): any => MessageModel)), {}),
       users: types.optional(types.map(types.late((): any => UserModel)), {}),
     })
     .actions((self) => ({
@@ -282,6 +309,25 @@ export const RootStoreBase = withTypedRefs<Refs>()(
         ${
           typeof resultSelector === "function"
             ? resultSelector(new CollectionFeedModelSelector()).toString()
+            : resultSelector
+        }
+      } }`,
+          variables,
+          options,
+        )
+      },
+      queryFetchChat(
+        variables: { input: UniqueChatInput },
+        resultSelector:
+          | string
+          | ((qb: ChatModelSelector) => ChatModelSelector) = chatModelPrimitives.toString(),
+        options: QueryOptions = {},
+      ) {
+        return self.query<{ fetchChat: ChatModelType }>(
+          `query fetchChat($input: UniqueChatInput!) { fetchChat(input: $input) {
+        ${
+          typeof resultSelector === "function"
+            ? resultSelector(new ChatModelSelector()).toString()
             : resultSelector
         }
       } }`,
@@ -705,6 +751,44 @@ export const RootStoreBase = withTypedRefs<Refs>()(
         ${
           typeof resultSelector === "function"
             ? resultSelector(new UserModelSelector()).toString()
+            : resultSelector
+        }
+      } }`,
+          variables,
+          optimisticUpdate,
+        )
+      },
+      mutateSendMessage(
+        variables: { input: SendMessageInput },
+        resultSelector:
+          | string
+          | ((qb: ChatModelSelector) => ChatModelSelector) = chatModelPrimitives.toString(),
+        optimisticUpdate?: () => void,
+      ) {
+        return self.mutate<{ sendMessage: ChatModelType }>(
+          `mutation sendMessage($input: SendMessageInput!) { sendMessage(input: $input) {
+        ${
+          typeof resultSelector === "function"
+            ? resultSelector(new ChatModelSelector()).toString()
+            : resultSelector
+        }
+      } }`,
+          variables,
+          optimisticUpdate,
+        )
+      },
+      mutateStartChat(
+        variables: { input: StartChatInput },
+        resultSelector:
+          | string
+          | ((qb: ChatModelSelector) => ChatModelSelector) = chatModelPrimitives.toString(),
+        optimisticUpdate?: () => void,
+      ) {
+        return self.mutate<{ startChat: ChatModelType }>(
+          `mutation startChat($input: StartChatInput!) { startChat(input: $input) {
+        ${
+          typeof resultSelector === "function"
+            ? resultSelector(new ChatModelSelector()).toString()
             : resultSelector
         }
       } }`,

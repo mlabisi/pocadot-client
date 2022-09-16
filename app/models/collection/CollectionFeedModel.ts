@@ -2,7 +2,7 @@ import { Instance } from "mobx-state-tree"
 import { CollectionFeedModelBase } from "./CollectionFeedModel.base"
 
 /* The TypeScript type of an instance of CollectionFeedModel */
-export interface CollectionFeedModelType extends Instance<typeof CollectionFeedModel.Type> {}
+export interface CollectionFeedModelType extends Instance<typeof CollectionFeedModel> {}
 
 /* A graphql query fragment builders for CollectionFeedModel */
 export {

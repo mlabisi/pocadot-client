@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { ChatsScreen, ListingDetailScreen } from "../screens"
+import { ChatsScreen, ChatDetailScreen } from "../screens"
 import React from "react"
 import { NavigatorParamList } from "./app-navigator"
 import { ChatsHeader } from "../components"
@@ -23,7 +23,7 @@ export const ChatsNav = () => {
           },
         }}
       />
-      <ChatsStack.Screen name="chatDetail" component={ListingDetailScreen} />
+      <ChatsStack.Screen name="chatDetail" component={ChatDetailScreen} />
     </ChatsStack.Navigator>
   )
 }

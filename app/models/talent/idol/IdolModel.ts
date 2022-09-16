@@ -2,7 +2,7 @@ import { Instance } from "mobx-state-tree"
 import { IdolModelBase } from "./IdolModel.base"
 
 /* The TypeScript type of an instance of IdolModel */
-export interface IdolModelType extends Instance<typeof IdolModel.Type> {}
+export interface IdolModelType extends Instance<typeof IdolModel> {}
 
 /* A graphql query fragment builders for IdolModel */
 export { selectFromIdol, idolModelPrimitives, IdolModelSelector } from "./IdolModel.base"
