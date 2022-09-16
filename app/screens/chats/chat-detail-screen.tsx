@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Screen, Text } from "../../components"
+import { Header, Screen, Text } from "../../components"
 import { GiftedChat } from "react-native-gifted-chat"
 import {
   listingModelPrimitives,
@@ -14,6 +14,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context"
 import { ROOT, TITLE } from "../../components/listings/all-listings/styles"
 import { KeyboardAvoidingView, Platform, View } from "react-native"
+import { HEADER, headerHeight } from "../listings/listing-detail/styles"
+import { HEADER_TEXT } from "../listings/styles"
 
 export const ChatDetailScreen: FC<StackScreenProps<NavigatorParamList, "chatDetail">> = observer(
   function ChatDetailScreen({ navigation }) {
@@ -25,27 +27,30 @@ export const ChatDetailScreen: FC<StackScreenProps<NavigatorParamList, "chatDeta
       store.queryFetchChat({ input: { id: "CH3640382b12bd4387802c17ea357f3f8b" } }, (chat) =>
         chat.id.timestamp
           .messages(messageModelPrimitives.author(userModelPrimitives))
-          .participants((p) => p.id)
+          .participants((p) => p.id.username)
           .listings(listingModelPrimitives),
       ),
     )
 
     useEffect(() => {
-      if (!messages.length) {
-        setMessages(chatQuery.data.fetchChat.messages.map(buildMessage))
-      }
+      if (chatQuery.data) {
+        if (!messages.length) {
+          setMessages(chatQuery.data.fetchChat.messages.map(buildMessage))
+        }
 
-      if (!otherUserId) {
-        setOtherUserId(
-          chatQuery.data.fetchChat.participants.find((p) => p.id !== chatQuery.store.currentUserId)
-            .id,
-        )
-      }
+        if (!otherUserId) {
+          setOtherUserId(
+            chatQuery.data.fetchChat.participants.find(
+              (p) => p.id !== chatQuery.store.currentUserId,
+            ).id,
+          )
+        }
 
-      if (!chatListings.length) {
-        setChatListings(chatQuery.data.fetchChat.listings.map((l) => l.id))
+        if (!chatListings.length) {
+          setChatListings(chatQuery.data.fetchChat.listings.map((l) => l.id))
+        }
       }
-    }, [chatQuery.data, setMessages, setOtherUserId])
+    })
 
     const onSend = useCallback((messages = []) => {
       setMessages((previousMessages) => GiftedChat.append(previousMessages, messages))
@@ -60,7 +65,7 @@ export const ChatDetailScreen: FC<StackScreenProps<NavigatorParamList, "chatDeta
           _id: message.author.id,
           name: message.author.username,
           avatar:
-            "https://64.media.tumblr.com/2b13ab3dc76b79508e9f75ad56eb284d/7a0d5d8a0e6f2bb4-aa/s1280x1920/58fe5ab39773453ff399d6058183e65307a2a4c2.jpg",
+            "https://t1.daumcdn.net/cafeattach/1Yss9/7fa37ac8fca35a755b3aa513090d2d02e2e4f9bb",
         },
       }
     }
@@ -77,6 +82,21 @@ export const ChatDetailScreen: FC<StackScreenProps<NavigatorParamList, "chatDeta
 
     return (
       <Screen preset="fixed">
+        <Header
+          headerHeight={headerHeight}
+          leftTx={"common.back"}
+          onLeftPress={() => navigation.goBack()}
+          rightTx={"listings.title"}
+          onRightPress={() => navigation.goBack()}
+          // headerText={
+          //   chatQuery.data.fetchChat.participants.find(
+          //     (p) => p.id !== chatQuery.store.currentUserId,
+          //   ).username
+          // }
+          headerText={chatQuery.store.users.get(chatQuery.store.currentUserId).username}
+          style={HEADER}
+          textStyle={HEADER_TEXT}
+        />
         <GiftedChat
           alwaysShowSend={true}
           alignTop={true}
