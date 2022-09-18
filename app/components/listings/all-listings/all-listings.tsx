@@ -1,7 +1,7 @@
 import * as React from "react"
 import { View } from "react-native"
 import { observer } from "mobx-react-lite"
-import { Text } from "../../common/text/text"
+import { Text } from "../../../components"
 import { RootStoreContext, useQuery } from "../../../models"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { ListingCard } from "../listing-card/listing-card"

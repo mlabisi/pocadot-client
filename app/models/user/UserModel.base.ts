@@ -15,7 +15,7 @@ import { IdolModelSelector } from "../talent/idol/IdolModel.base"
 import { ListingModel, ListingModelType } from "../listing/ListingModel"
 import { ListingModelSelector } from "../listing/ListingModel.base"
 import { UserModel, UserModelType } from "./UserModel"
-import { RootStoreType } from "../index"
+import { ChatModel, ChatModelSelector, RootStoreType } from "../index"
 
 /* The TypeScript type that explicits the refs to other models in order to prevent a circular refs issue */
 type Refs = {
@@ -73,6 +73,11 @@ export const UserModelBase = withTypedRefs<Refs>()(
         types.null,
         types.array(MSTGQLRef(types.late((): any => CollectionModel))),
       ),
+      chats: types.union(
+        types.undefined,
+        types.null,
+        types.array(MSTGQLRef(types.late((): any => ChatModel))),
+      ),
     })
     .views((self) => ({
       get store() {
@@ -85,21 +90,27 @@ export class UserModelSelector extends QueryBuilder {
   get id() {
     return this.__attr(`id`)
   }
+
   get username() {
     return this.__attr(`username`)
   }
+
   get country() {
     return this.__attr(`country`)
   }
+
   get isFeatured() {
     return this.__attr(`isFeatured`)
   }
+
   get description() {
     return this.__attr(`description`)
   }
+
   get profilePicture() {
     return this.__attr(`profilePicture`)
   }
+
   listings(
     builder:
       | string
@@ -109,6 +120,7 @@ export class UserModelSelector extends QueryBuilder {
   ) {
     return this.__child(`listings`, ListingModelSelector, builder)
   }
+
   faveGroups(
     builder:
       | string
@@ -118,6 +130,7 @@ export class UserModelSelector extends QueryBuilder {
   ) {
     return this.__child(`faveGroups`, GroupModelSelector, builder)
   }
+
   faveIdols(
     builder:
       | string
@@ -127,6 +140,7 @@ export class UserModelSelector extends QueryBuilder {
   ) {
     return this.__child(`faveIdols`, IdolModelSelector, builder)
   }
+
   faveListings(
     builder:
       | string
@@ -136,6 +150,7 @@ export class UserModelSelector extends QueryBuilder {
   ) {
     return this.__child(`faveListings`, ListingModelSelector, builder)
   }
+
   faveUsers(
     builder:
       | string
@@ -145,6 +160,7 @@ export class UserModelSelector extends QueryBuilder {
   ) {
     return this.__child(`faveUsers`, UserModelSelector, builder)
   }
+
   collections(
     builder:
       | string
@@ -154,7 +170,18 @@ export class UserModelSelector extends QueryBuilder {
   ) {
     return this.__child(`collections`, CollectionModelSelector, builder)
   }
+
+  chats(
+    builder:
+      | string
+      | ChatModelSelector
+      | ((selector: ChatModelSelector) => ChatModelSelector)
+      | undefined,
+  ) {
+    return this.__child(`chats`, ChatModelSelector, builder)
+  }
 }
+
 export function selectFromUser() {
   return new UserModelSelector()
 }

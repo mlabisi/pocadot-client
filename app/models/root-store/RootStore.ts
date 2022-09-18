@@ -11,6 +11,7 @@ import { TalentUnionModel } from "../talent/TalentUnionModel"
 export const RootStore = RootStoreBase.props({
   currentUserId: types.optional(types.string, ""),
   selectedListingId: types.optional(types.string, ""),
+  selectedChatId: types.optional(types.string, ""),
   favesMode: types.optional(
     types.enumeration<FavesMode>(Object.values(FavesMode)), FavesMode.Saved,
   ),
@@ -55,6 +56,9 @@ export const RootStore = RootStoreBase.props({
     },
     setRemainingSuggestions(listingIds) {
       self.remainingSuggestions = listingIds
+    },
+    setSelectedChatId(chatId: string) {
+      self.selectedChatId = chatId
     },
     setSelectedListingId(listingId: string) {
       self.selectedListingId = listingId
