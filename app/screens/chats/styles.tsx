@@ -14,12 +14,12 @@ export const CONTENT: ViewStyle = {
 }
 
 export const ROW: ViewStyle = {
-  backgroundColor: color.palette.black,
+  backgroundColor: color.palette.lavenderFill,
   flexDirection: "row",
   width,
 }
 
 export const TITLE: TextStyle = {
-  color: color.palette.white,
-  fontSize: 30,
+  color: color.palette.lavender,
+  fontSize: 16,
 }

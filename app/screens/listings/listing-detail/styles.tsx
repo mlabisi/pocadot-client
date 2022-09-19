@@ -141,11 +141,12 @@ export const TAGS_CONTAINER: ViewStyle = {
   justifyContent: "center",
   flexDirection: "row",
   padding: spacing[0],
+  paddingTop: spacing[1],
 }
 export const TAG: ViewStyle = {
-  paddingVertical: 2,
-  paddingHorizontal: 10,
-  marginLeft: 2,
+  paddingVertical: 4,
+  paddingHorizontal: 12,
+  marginLeft: 4,
   justifyContent: "center",
   alignSelf: "center",
   borderRadius: 100,

@@ -45,6 +45,7 @@ export type NavigatorParamList = {
   chatsTab: undefined
   myProfile: undefined
   profileTab: undefined
+  notifications: undefined
 }
 
 const AppStack = createNativeStackNavigator<NavigatorParamList>()

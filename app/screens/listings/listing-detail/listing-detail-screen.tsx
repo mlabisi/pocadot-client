@@ -80,7 +80,7 @@ export const ListingDetailScreen: FC<StackScreenProps<NavigatorParamList, "listi
             headerHeight={headerHeight}
             leftTx={"common.back"}
             onLeftPress={() => navigation.goBack()}
-            rightText={isMyListing ? translate("common.save") : null}
+            rightText={isMyListing ? translate("common.edit") : null}
             onRightPress={() => {
               if (currentUserId === selectedListing.listedBy.id) {
                 navigation.navigate("addListing")

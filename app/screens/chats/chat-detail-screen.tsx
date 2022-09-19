@@ -88,11 +88,6 @@ export const ChatDetailScreen: FC<StackScreenProps<NavigatorParamList, "chatDeta
           onLeftPress={() => navigation.goBack()}
           rightTx={"listings.title"}
           onRightPress={() => navigation.goBack()}
-          // headerText={
-          //   chatQuery.data.fetchChat.participants.find(
-          //     (p) => p.id !== chatQuery.store.currentUserId,
-          //   ).username
-          // }
           headerText={chatQuery.store.users.get(chatQuery.store.currentUserId).username}
           style={HEADER}
           textStyle={HEADER_TEXT}
