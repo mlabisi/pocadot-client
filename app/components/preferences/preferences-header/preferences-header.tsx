@@ -57,7 +57,7 @@ export const PreferencesHeader = observer(function PreferencesHeader({
           // @ts-ignore - Talent is guaranteed to be either a Group (with `name`) or Idol (with `stageName`)
           const { name, stageName } = item
           const label = (name ?? stageName).toUpperCase()
-          const textData = text.toUpperCase()
+          const textData = text.trim().toUpperCase()
 
           return label.indexOf(textData) > -1
         }),
