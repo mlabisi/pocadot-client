@@ -1,7 +1,6 @@
 import * as React from "react"
 import { View } from "react-native"
 import { observer } from "mobx-react-lite"
-import { AutoImage, Text } from "../../"
 import {
   BODY,
   CONTAINER,
@@ -13,6 +12,8 @@ import {
 } from "./styles"
 import { NavigatorParamList } from "../../../navigators"
 import { StackNavigationProp } from "@react-navigation/stack"
+import { AutoImage } from "../../common/auto-image/auto-image"
+import { Text } from "../../common/text/text"
 
 const stars = require("./img.png")
 

@@ -2,10 +2,11 @@ import * as React from "react"
 import { observer } from "mobx-react-lite"
 import { useContext, useEffect, useState } from "react"
 import SearchBar from "react-native-dynamic-search-bar"
-import { Header, Text } from "../../index"
 import { headerHeight, LINK_TEXT, SEARCH, SUBTITLE, TITLE, HEADER } from "./styles"
 import { useNavigation } from "@react-navigation/native"
 import { RootStoreContext, useQuery } from "../../../models"
+import { Header } from "../../common/header/header"
+import { Text } from "../../common/text/text"
 
 export interface PreferencesHeaderProps {
   modifyPreferences: boolean

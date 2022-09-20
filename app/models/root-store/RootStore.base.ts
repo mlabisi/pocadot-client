@@ -38,7 +38,11 @@ import { userModelPrimitives, UserModelSelector } from "../user/UserModel.base"
 import { UserFeedModel, UserFeedModelType } from "../user/UserFeedModel"
 import { userFeedModelPrimitives, UserFeedModelSelector } from "../user/UserFeedModel.base"
 
-import { talentModelPrimitives, TalentModelSelector, TalentUnion } from "../index"
+import {
+  talentModelPrimitives,
+  TalentModelSelector,
+  TalentUnion,
+} from "../talent/TalentModelSelector"
 
 import { CardCondition } from "../listing/enums/CardConditionEnum"
 import { ListingType } from "../listing/enums/ListingTypeEnum"

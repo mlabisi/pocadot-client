@@ -10,7 +10,8 @@ import { DarkTheme, NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
-import { TabNav, WelcomeNav } from "./"
+import { WelcomeNav } from "./welcome-navigator"
+import { TabNav } from "./tab-navigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator

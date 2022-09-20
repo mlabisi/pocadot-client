@@ -1,8 +1,8 @@
 import * as React from "react"
 import { View } from "react-native"
 import { observer } from "mobx-react-lite"
-import { Text } from "../../../components"
 import { Header } from "../../common/header/header"
+import { Text } from "../../common/text/text"
 import {
   ACTIVE_TAB,
   HEADER,

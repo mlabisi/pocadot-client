@@ -1,7 +1,8 @@
 import * as React from "react"
 import { View } from "react-native"
 import { observer } from "mobx-react-lite"
-import { Header, Text } from "../../index"
+import { Header } from "../../common/header/header"
+import { Text } from "../../common/text/text"
 import { HEADER, HEADER_CONTENT, headerHeight, TITLE, SEARCH } from "./styles"
 import SearchBar from "react-native-dynamic-search-bar"
 
