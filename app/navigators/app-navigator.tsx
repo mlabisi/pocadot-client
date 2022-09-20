@@ -5,8 +5,7 @@
  * and a "main" flow which the user will use once logged in.
  */
 import React from "react"
-// import { useColorScheme } from "react-native"
-import { DarkTheme, NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
@@ -70,11 +69,7 @@ export const AppNavigator = (props: NavigationProps) => {
   // const colorScheme = useColorScheme()
   useBackButtonHandler(canExit)
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      theme={DarkTheme} // {colorScheme === "dark" ? DarkTheme : DefaultTheme}
-      {...props}
-    >
+    <NavigationContainer ref={navigationRef} {...props}>
       <AppStackNav />
     </NavigationContainer>
   )

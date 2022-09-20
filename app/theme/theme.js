@@ -44,6 +44,20 @@ export const theme = {
   "color-danger-700": "#B72E2A",
   "color-danger-800": "#931A20",
   "color-danger-900": "#7A101D",
+
+  "background-basic-color-1": "$color-basic-100",
+  "background-basic-color-2": "$color-basic-200",
+  "background-basic-color-3": "$color-basic-300",
+  "background-basic-color-4": "$color-basic-400",
+
+  "border-basic-color-1": "$color-basic-100",
+  "border-basic-color-2": "$color-basic-200",
+  "border-basic-color-3": "$color-basic-300",
+  "border-basic-color-4": "$color-basic-400",
+  "border-basic-color-5": "$color-basic-500",
+
+  /* Basic colors - for backgrounds and borders and texts */
+
   "color-basic-100": "#F8FAFB",
   "color-basic-200": "#D4D4D4",
   "color-basic-300": "#D4D4D4",
@@ -61,4 +75,12 @@ export const theme = {
   "color-basic-transparent-400": "rgba(128, 128, 128, 0.32)",
   "color-basic-transparent-500": "rgba(128, 128, 128, 0.4)",
   "color-basic-transparent-600": "rgba(128, 128, 128, 0.48)",
+
+  /* Status colors states - focus, hover, default, active, disabled  */
+
+  "color-primary-focus": "$color-primary-700",
+  "color-primary-hover": "$color-primary-400",
+  "color-primary-default": "$color-primary-500",
+  "color-primary-active": "$color-primary-600",
+  "color-primary-disabled": "$color-primary-300",
 }

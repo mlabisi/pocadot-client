@@ -12,7 +12,6 @@
 import "./i18n"
 import "./utils/ignore-warnings"
 import React, { useEffect, useState } from "react"
-import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import { initFonts } from "./theme/fonts" // expo
 import * as storage from "./utils/storage"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
@@ -21,8 +20,9 @@ import { ErrorBoundary } from "./screens"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { ViewStyle } from "react-native"
 import * as eva from "@eva-design/eva"
-import { ApplicationProvider } from "@ui-kitten/components"
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components"
 import theme from "./theme/theme"
+import { EvaIconsPack } from "@ui-kitten/eva-icons"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -65,16 +65,15 @@ function App() {
   return (
     <GestureHandlerRootView style={ROOT}>
       <RootStoreProvider value={rootStore}>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-            <ErrorBoundary catchErrors={"always"}>
-              <AppNavigator
-                initialState={initialNavigationState}
-                onStateChange={onNavigationStateChange}
-              />
-            </ErrorBoundary>
-          </ApplicationProvider>
-        </SafeAreaProvider>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+          <ErrorBoundary catchErrors={"always"}>
+            <AppNavigator
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
+          </ErrorBoundary>
+        </ApplicationProvider>
       </RootStoreProvider>
     </GestureHandlerRootView>
   )
