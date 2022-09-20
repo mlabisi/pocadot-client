@@ -1,14 +1,12 @@
-import { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { Dimensions, ImageStyle, TextStyle, ViewStyle } from "react-native"
 import { color } from "../../../theme"
+
+const { width, height } = Dimensions.get("window")
 
 export const CARD_CONTAINER: ViewStyle = {
   alignSelf: "center",
   justifyContent: "center",
   display: "flex",
-  padding: 10,
-  margin: 15,
-  width: 300,
-  height: 500,
   borderRadius: 15,
   backgroundColor: color.palette.white,
   shadowColor: color.palette.black,
@@ -19,6 +17,8 @@ export const CARD_CONTAINER: ViewStyle = {
   shadowOpacity: 0.5,
   shadowRadius: 12.35,
   elevation: 8,
+  width: width * 0.75,
+  height: height * 0.6,
 }
 
 export const TAGS_CONTAINER: ViewStyle = {

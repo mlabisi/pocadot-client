@@ -7,7 +7,7 @@ export interface TextProps extends TextProperties {
   /**
    * Children components.
    */
-  children?: React.ReactNode
+  children?: any
 
   /**
    * Text which is looked up via i18n.

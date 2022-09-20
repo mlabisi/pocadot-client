@@ -21,10 +21,7 @@ export const HEADER_TEXT: TextStyle = {
   fontSize: 15,
 }
 
-export const CONTENT: ViewStyle = {
-  backgroundColor: color.palette.fill,
-  flex: 1,
-}
+export const CONTENT: ViewStyle = { flex: 1, alignItems: "center" }
 
 export const TITLE: TextStyle = {
   color: color.palette.lavender,

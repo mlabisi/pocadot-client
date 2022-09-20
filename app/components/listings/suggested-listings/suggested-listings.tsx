@@ -80,6 +80,8 @@ export const SuggestedListings = observer(function SuggestedListings({
           backgroundColor={color.fill}
           stackSize={3}
           keyExtractor={(item) => item.id}
+          stackScale={0.85}
+          stackSeparation={5}
           animateOverlayLabelsOpacity
           animateCardOpacity
           swipeBackCard

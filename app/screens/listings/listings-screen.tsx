@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { CONTENT, FLOATING_BUTTON_CONTAINER, ROOT, SEGMENT_TITLE, TITLE } from "./styles"
 import { ListingsMode } from "./listings-mode"
 import { RootStoreContext, useQuery } from "../../models"
+import { Layout } from "@ui-kitten/components"
 
 export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">> = observer(
   function ListingsScreen({ navigation }) {
@@ -33,7 +34,7 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
     }
 
     return (
-      <View style={CONTENT}>
+      <Layout style={CONTENT} level={"2"}>
         {listingsMode === ListingsMode.Suggested && (
           <SuggestedListings navigation={navigation} query={query} />
         )}
@@ -46,7 +47,7 @@ export const ListingsScreen: FC<StackScreenProps<NavigatorParamList, "listings">
             <Text text={"+"} style={[SEGMENT_TITLE, { textAlign: "center", fontSize: 30 }]} />
           </FloatingButton>
         )}
-      </View>
+      </Layout>
     )
   },
 )
