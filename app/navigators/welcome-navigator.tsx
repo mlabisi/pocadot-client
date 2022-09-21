@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { PreferencesScreen, SignInScreen, SignUpScreen, WelcomeScreen } from "../screens"
 import React from "react"
 import { NavigatorParamList } from "./app-navigator"
-import { TabNav } from "./tab-navigator"
+import { MainNav } from "./tab-navigator"
 import { PreferencesHeader } from "../components"
 
 const WelcomeStack = createNativeStackNavigator<NavigatorParamList>()
@@ -27,7 +27,7 @@ export const WelcomeNav = () => {
           },
         }}
       />
-      <WelcomeStack.Screen name="tabs" component={TabNav} />
+      <WelcomeStack.Screen name="tabs" component={MainNav} />
     </WelcomeStack.Navigator>
   )
 }
