@@ -5,7 +5,7 @@ import { Layout, Text } from "@ui-kitten/components"
 import { AutoImage } from "../old/common/auto-image/auto-image"
 
 const styles = StyleSheet.create({
-  Column: {
+  Container: {
     paddingTop: 50,
     display: "flex",
     flexDirection: "column",
@@ -45,7 +45,7 @@ export const OnboardingPanel = observer(function OnboardingPanel(props: Onboardi
   const { image, label, desc } = props.data
 
   return (
-    <Layout style={styles.Column}>
+    <Layout style={styles.Container}>
       <AutoImage style={styles.Illustration} source={image} />
       <Text style={styles.Label}>{label}</Text>
       <Text style={styles.Description}>{desc}</Text>

@@ -10,18 +10,18 @@ import { translate } from "../../i18n"
 const data = [
   {
     image: require("../../../assets/images/kpop.png"),
-    label: "Tell Us Who You Stan",
-    desc: "Let us know who your favorite Kpop groups and idols are",
+    label: translate("onboarding.panels.a.label"),
+    desc: translate("onboarding.panels.a.desc"),
   },
   {
     image: require("../../../assets/images/photocard.png"),
-    label: "Sell & Trade Your Photocards",
-    desc: "List the photocards you Want To Trade and/or Buy",
+    label: translate("onboarding.panels.b.label"),
+    desc: translate("onboarding.panels.b.desc"),
   },
   {
     image: require("../../../assets/images/wishlist.png"),
-    label: "Fulfill Your Wishlist",
-    desc: "We'll recommend photocard listings that match your preferences",
+    label: translate("onboarding.panels.c.label"),
+    desc: translate("onboarding.panels.c.desc"),
   },
 ]
 

@@ -19,6 +19,20 @@
     "save": "Save"
   },
   "onboarding": {
+    "panels": {
+      "a": {
+        "label": "Tell Us Who You Stan",
+        "desc": "Let us know who your favorite Kpop groups and idols are"
+      },
+      "b": {
+        "label": "Sell & Trade Your Photocards",
+        "desc": "List the photocards you Want To Trade and/or Buy"
+      },
+      "c": {
+        "label": "Fulfill Your Wishlist",
+        "desc": "We'll recommend photocard listings that match your preferences"
+      }
+    },
     "start": "Let's Go!"
   },
   "errors": {
