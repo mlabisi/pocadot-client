@@ -1,6 +1,6 @@
 import * as React from "react"
 import { observer } from "mobx-react-lite"
-import { HEADER_TEXT, headerHeight } from "../../../screens/listings/styles"
+import { HEADER_TEXT, headerHeight } from "../../../screens/old/listings/styles"
 import { Header } from "../../common/header/header"
 import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"

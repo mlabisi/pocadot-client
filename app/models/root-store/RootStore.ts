@@ -1,7 +1,7 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { RootStoreBase } from "./RootStore.base"
-import { ListingsMode } from "../../screens/listings/listings-mode"
-import { FavesMode } from "../../screens/faves/faves-mode"
+import { ListingsMode } from "../../screens/old/listings/listings-mode"
+import { FavesMode } from "../../screens/old/faves/faves-mode"
 import { TalentUnionModel } from "../talent/TalentUnionModel"
 
 /**

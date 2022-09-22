@@ -11,13 +11,13 @@ import {
   SEGMENT_TITLE,
   TABS_CONTAINER,
   TITLE,
-} from "../../../screens/faves/styles"
+} from "../../../screens/old/faves/styles"
 import { Spacer } from "../../common/spacer/spacer"
 import SegmentedControlTab from "react-native-segmented-control-tab"
 import { translate } from "../../../i18n"
 import { useContext } from "react"
 import { RootStoreContext } from "../../../models"
-import { FavesMode } from "../../../screens/faves/faves-mode"
+import { FavesMode } from "../../../screens/old/faves/faves-mode"
 
 export const FavesHeader = observer(function FavesHeader() {
   const rootStore = useContext(RootStoreContext)

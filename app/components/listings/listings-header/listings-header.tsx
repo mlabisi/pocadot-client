@@ -9,14 +9,14 @@ import {
   SEGMENT_TITLE,
   TABS_CONTAINER,
   TITLE,
-} from "../../../screens/listings/styles"
+} from "../../../screens/old/listings/styles"
 import { Spacer } from "../../common/spacer/spacer"
 import SegmentedControlTab from "react-native-segmented-control-tab"
 import { translate } from "../../../i18n"
 import { Header } from "../../common/header/header"
 import { useContext } from "react"
 import { RootStoreContext } from "../../../models"
-import { ListingsMode } from "../../../screens/listings/listings-mode"
+import { ListingsMode } from "../../../screens/old/listings/listings-mode"
 
 export const ListingsHeader = observer(function ListingsHeader() {
   const rootStore = useContext(RootStoreContext)

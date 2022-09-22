@@ -5,6 +5,7 @@ import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { Text, Button, Layout, ViewPager } from "@ui-kitten/components"
 import { OnboardingPanel } from "../../components"
+import { translate } from "../../i18n"
 
 const data = [
   {
@@ -32,13 +33,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     height: Dimensions.get("window").height,
   },
-  Column: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: Dimensions.get("window").width,
-  },
-  Row: {
+  Footer: {
     display: "flex",
     flex: 3,
     flexDirection: "row",
@@ -47,6 +42,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
   },
   PageIndicators: {
+    top: 50,
     flex: 1,
     display: "flex",
     flexDirection: "row",
@@ -66,10 +62,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginRight: 8,
   },
-  Frame: {
-    width: 24,
-    height: 24,
-  },
 })
 
 export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboarding">> = observer(
@@ -78,32 +70,40 @@ export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboardi
 
     return (
       <Layout style={styles.Container} level="1">
-        <ViewPager selectedIndex={selectedIndex} onSelect={(index) => setSelectedIndex(index)}>
+        <ViewPager
+          style={{ top: 50 }}
+          selectedIndex={selectedIndex}
+          onSelect={(index) => setSelectedIndex(index)}
+        >
           {data.map((item, index) => (
             <OnboardingPanel data={item} key={index} />
           ))}
         </ViewPager>
-        <Layout style={styles.Column}>
-          <Layout style={styles.Row}>
-            <Layout style={{ flex: 1 }} />
-            <Layout style={{ flex: 1 }}>
-              <Layout style={styles.PageIndicators}>
-                <Layout style={selectedIndex === 0 ? styles.FilledIndicator : styles.Indicator} />
-                <Layout style={selectedIndex === 1 ? styles.FilledIndicator : styles.Indicator} />
-                <Layout style={selectedIndex === 2 ? styles.FilledIndicator : styles.Indicator} />
-              </Layout>
+        <Layout style={styles.Footer}>
+          <Layout style={{ flex: 1 }} />
+          <Layout style={{ flex: 1 }}>
+            <Layout style={styles.PageIndicators}>
+              <Layout style={selectedIndex === 0 ? styles.FilledIndicator : styles.Indicator} />
+              <Layout style={selectedIndex === 1 ? styles.FilledIndicator : styles.Indicator} />
+              <Layout style={selectedIndex === 2 ? styles.FilledIndicator : styles.Indicator} />
             </Layout>
-            <Layout style={{ flex: 1 }}>
-              {selectedIndex === data.length - 1 && (
-                <Button
-                  appearance={"ghost"}
-                  style={{ flex: 1 }}
-                  onPress={() => navigation.navigate("welcomeTab")}
-                >
-                  {(evaProps) => <Text {...evaProps}>Let's Go!</Text>}
-                </Button>
-              )}
-            </Layout>
+          </Layout>
+          <Layout
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {selectedIndex === data.length - 1 && (
+              <Button
+                style={{ paddingTop: 0 }}
+                appearance={"ghost"}
+                onPress={() => navigation.navigate("welcomeTab")}
+              >
+                {(evaProps) => <Text {...evaProps}>{translate("onboarding.start")}</Text>}
+              </Button>
+            )}
           </Layout>
         </Layout>
       </Layout>
