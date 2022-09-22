@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from "react-native"
 import { observer } from "mobx-react-lite"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Button, Layout, ViewPager } from "@ui-kitten/components"
+import { Text, Button, Layout, ViewPager } from "@ui-kitten/components"
 import { OnboardingPanel } from "../../components"
 
 const data = [
@@ -18,7 +18,7 @@ const data = [
     desc: "List the photocards you Want To Trade and/or Buy",
   },
   {
-    image: require("../../../assets/images/tada.png"),
+    image: require("../../../assets/images/wishlist.png"),
     label: "Fulfill Your Wishlist",
     desc: "We'll recommend photocard listings that match your preferences",
   },
@@ -40,10 +40,14 @@ const styles = StyleSheet.create({
   },
   Row: {
     display: "flex",
+    flex: 3,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    width: Dimensions.get("window").width,
   },
   PageIndicators: {
+    flex: 1,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -63,8 +67,8 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   Frame: {
-    width: 10,
-    height: 10,
+    width: 24,
+    height: 24,
   },
 })
 
@@ -81,14 +85,25 @@ export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboardi
         </ViewPager>
         <Layout style={styles.Column}>
           <Layout style={styles.Row}>
-            <Layout style={styles.PageIndicators}>
-              <Layout style={selectedIndex === 0 ? styles.FilledIndicator : styles.Indicator} />
-              <Layout style={selectedIndex === 1 ? styles.FilledIndicator : styles.Indicator} />
-              <Layout style={selectedIndex === 2 ? styles.FilledIndicator : styles.Indicator} />
+            <Layout style={{ flex: 1 }} />
+            <Layout style={{ flex: 1 }}>
+              <Layout style={styles.PageIndicators}>
+                <Layout style={selectedIndex === 0 ? styles.FilledIndicator : styles.Indicator} />
+                <Layout style={selectedIndex === 1 ? styles.FilledIndicator : styles.Indicator} />
+                <Layout style={selectedIndex === 2 ? styles.FilledIndicator : styles.Indicator} />
+              </Layout>
             </Layout>
-            {selectedIndex === data.length - 1 && (
-              <Button onPress={() => navigation.navigate("welcomeTab")} style={styles.Frame} />
-            )}
+            <Layout style={{ flex: 1 }}>
+              {selectedIndex === data.length - 1 && (
+                <Button
+                  appearance={"ghost"}
+                  style={{ flex: 1 }}
+                  onPress={() => navigation.navigate("welcomeTab")}
+                >
+                  {(evaProps) => <Text {...evaProps}>Let's Go!</Text>}
+                </Button>
+              )}
+            </Layout>
           </Layout>
         </Layout>
       </Layout>

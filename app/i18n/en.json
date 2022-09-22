@@ -18,6 +18,9 @@
     "edit": "Edit",
     "save": "Save"
   },
+  "onboarding": {
+    "start": "Let's Go!"
+  },
   "errors": {
     "invalidEmail": "Invalid email address."
   },

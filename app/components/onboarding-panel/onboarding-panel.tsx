@@ -1,8 +1,9 @@
 import * as React from "react"
-import { Dimensions, Image, StyleSheet } from "react-native"
+import { Dimensions, StyleSheet } from "react-native"
 import { observer } from "mobx-react-lite"
 import { color } from "../../theme"
 import { Layout, Text } from "@ui-kitten/components"
+import { AutoImage } from "../common/auto-image/auto-image"
 
 const styles = StyleSheet.create({
   Container: {
@@ -105,7 +106,7 @@ export const OnboardingPanel = observer(function OnboardingPanel(props: Onboardi
 
   return (
     <Layout style={styles.Column}>
-      <Image style={styles.KpopIllustration} source={image} />
+      <AutoImage style={styles.KpopIllustration} source={image} />
       <Text style={styles.Txt137}>{label}</Text>
       <Text style={styles.Txt077}>{desc}</Text>
     </Layout>
