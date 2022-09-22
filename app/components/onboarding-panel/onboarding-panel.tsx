@@ -2,7 +2,7 @@ import * as React from "react"
 import { StyleSheet } from "react-native"
 import { observer } from "mobx-react-lite"
 import { Layout, Text } from "@ui-kitten/components"
-import { AutoImage } from "../common/auto-image/auto-image"
+import { AutoImage } from "../old/common/auto-image/auto-image"
 
 const styles = StyleSheet.create({
   Column: {

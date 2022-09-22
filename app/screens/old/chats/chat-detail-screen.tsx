@@ -12,7 +12,7 @@ import {
   userModelPrimitives,
 } from "../../../models"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { ROOT, TITLE } from "../../../components/listings/all-listings/styles"
+import { ROOT, TITLE } from "../../../components/old/listings/all-listings/styles"
 import { KeyboardAvoidingView, Platform, View } from "react-native"
 import { HEADER, headerHeight } from "../listings/listing-detail/styles"
 import { HEADER_TEXT } from "../listings/styles"
