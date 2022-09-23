@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useCallback, useMemo, useRef, useState } from "react"
 import { StyleSheet, View } from "react-native"
 import { observer } from "mobx-react-lite"
 import { StackScreenProps } from "@react-navigation/stack"
@@ -7,6 +7,7 @@ import { Text, Button, Layout } from "@ui-kitten/components"
 import { OnboardingPager } from "../../components"
 import { translate } from "../../i18n"
 import { widthPercentageToDP as wp } from "react-native-responsive-screen"
+import { BottomSheetModal, BottomSheetModalProvider } from "@gorhom/bottom-sheet"
 
 const data = [
   {
@@ -57,35 +58,66 @@ const styles = StyleSheet.create({
     margin: 5,
     width: wp(50),
   },
+  contentContainer: {
+    flex: 1,
+    alignItems: "center",
+  },
 })
 
 export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboarding">> = observer(
   function OnboardingScreen({ navigation }) {
     const [selectedIndex, setSelectedIndex] = useState(0)
 
+    // ref
+    const bottomSheetModalRef = useRef<BottomSheetModal>(null)
+
+    // variables
+    const snapPoints = useMemo(() => ["50%", "75%"], [])
+
+    // callbacks
+    const handlePresentModalPress = useCallback(() => {
+      bottomSheetModalRef.current?.present()
+    }, [])
+    const handleSheetChanges = useCallback((index: number) => {
+      console.log("handleSheetChanges", index)
+    }, [])
+
     return (
-      <Layout style={styles.Container}>
-        <OnboardingPager
-          selectedIndex={selectedIndex}
-          updateState={(index) => setSelectedIndex(index)}
-          data={data}
-        />
+      <BottomSheetModalProvider>
+        <Layout style={styles.Container}>
+          <OnboardingPager
+            selectedIndex={selectedIndex}
+            updateState={(index) => setSelectedIndex(index)}
+            data={data}
+          />
 
-        <View style={styles.PageIndicators}>
-          <View style={selectedIndex === 0 ? styles.FilledIndicator : styles.Indicator} />
-          <View style={selectedIndex === 1 ? styles.FilledIndicator : styles.Indicator} />
-          <View style={selectedIndex === 2 ? styles.FilledIndicator : styles.Indicator} />
-        </View>
+          <View style={styles.PageIndicators}>
+            <View style={selectedIndex === 0 ? styles.FilledIndicator : styles.Indicator} />
+            <View style={selectedIndex === 1 ? styles.FilledIndicator : styles.Indicator} />
+            <View style={selectedIndex === 2 ? styles.FilledIndicator : styles.Indicator} />
+          </View>
 
-        <View style={styles.ButtonContainer}>
-          <Button onPress={() => {}} style={styles.Button}>
-            <Text>Create Account</Text>
-          </Button>
-          <Button onPress={() => {}} style={styles.Button}>
-            <Text>Sign In</Text>
-          </Button>
-        </View>
-      </Layout>
+          <View style={styles.ButtonContainer}>
+            <Button onPress={handlePresentModalPress} style={styles.Button}>
+              <Text>Create Account</Text>
+            </Button>
+            <Button onPress={handlePresentModalPress} style={styles.Button}>
+              <Text>Sign In</Text>
+            </Button>
+          </View>
+
+          <BottomSheetModal
+            ref={bottomSheetModalRef}
+            index={1}
+            snapPoints={snapPoints}
+            onChange={handleSheetChanges}
+          >
+            <View style={styles.contentContainer}>
+              <Text>Awesome 🎉</Text>
+            </View>
+          </BottomSheetModal>
+        </Layout>
+      </BottomSheetModalProvider>
     )
   },
 )
