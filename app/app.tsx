@@ -21,7 +21,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { ViewStyle } from "react-native"
 import * as eva from "@eva-design/eva"
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components"
-import theme from "./theme/theme"
+import { theme } from "./theme/theme"
 import { EvaIconsPack } from "@ui-kitten/eva-icons"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
