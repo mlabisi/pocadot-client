@@ -1,11 +1,12 @@
 import React, { FC, useState } from "react"
-import { StyleSheet, Dimensions } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { observer } from "mobx-react-lite"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Text, Button, Layout, ViewPager } from "@ui-kitten/components"
-import { OnboardingPanel } from "../../components"
+import { Text, Button, Layout } from "@ui-kitten/components"
+import { OnboardingPager } from "../../components"
 import { translate } from "../../i18n"
+import { widthPercentageToDP as wp } from "react-native-responsive-screen"
 
 const data = [
   {
@@ -27,40 +28,34 @@ const data = [
 
 const styles = StyleSheet.create({
   Container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignContent: "center",
-    height: Dimensions.get("window").height,
-  },
-  Footer: {
-    display: "flex",
-    flex: 3,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: Dimensions.get("window").width,
+    flex: 1,
+    justifyContent: "space-evenly",
   },
   PageIndicators: {
-    top: 50,
-    flex: 1,
-    display: "flex",
     flexDirection: "row",
     justifyContent: "center",
   },
   FilledIndicator: {
     backgroundColor: "rgba(163,176,239,1)",
-    width: 10,
-    height: 10,
+    width: wp(2.5),
+    height: wp(2.5),
     borderRadius: 5,
-    marginRight: 8,
+    marginRight: wp(1.5),
   },
   Indicator: {
     backgroundColor: "rgba(230,230,230,1)",
-    width: 10,
-    height: 10,
+    width: wp(2.5),
+    height: wp(2.5),
     borderRadius: 5,
-    marginRight: 8,
+    marginRight: wp(1.5),
+  },
+  ButtonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  Button: {
+    margin: 5,
+    width: wp(50),
   },
 })
 
@@ -69,43 +64,27 @@ export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboardi
     const [selectedIndex, setSelectedIndex] = useState(0)
 
     return (
-      <Layout style={styles.Container} level="1">
-        <ViewPager
-          style={{ top: 50 }}
+      <Layout style={styles.Container}>
+        <OnboardingPager
           selectedIndex={selectedIndex}
-          onSelect={(index) => setSelectedIndex(index)}
-        >
-          {data.map((item, index) => (
-            <OnboardingPanel data={item} key={index} />
-          ))}
-        </ViewPager>
-        <Layout style={styles.Footer}>
-          <Layout style={{ flex: 1 }} />
-          <Layout style={{ flex: 1 }}>
-            <Layout style={styles.PageIndicators}>
-              <Layout style={selectedIndex === 0 ? styles.FilledIndicator : styles.Indicator} />
-              <Layout style={selectedIndex === 1 ? styles.FilledIndicator : styles.Indicator} />
-              <Layout style={selectedIndex === 2 ? styles.FilledIndicator : styles.Indicator} />
-            </Layout>
-          </Layout>
-          <Layout
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {selectedIndex === data.length - 1 && (
-              <Button
-                style={{ paddingTop: 0 }}
-                appearance={"ghost"}
-                onPress={() => navigation.navigate("welcomeTab")}
-              >
-                {(evaProps) => <Text {...evaProps}>{translate("onboarding.start")}</Text>}
-              </Button>
-            )}
-          </Layout>
-        </Layout>
+          updateState={(index) => setSelectedIndex(index)}
+          data={data}
+        />
+
+        <View style={styles.PageIndicators}>
+          <View style={selectedIndex === 0 ? styles.FilledIndicator : styles.Indicator} />
+          <View style={selectedIndex === 1 ? styles.FilledIndicator : styles.Indicator} />
+          <View style={selectedIndex === 2 ? styles.FilledIndicator : styles.Indicator} />
+        </View>
+
+        <View style={styles.ButtonContainer}>
+          <Button onPress={() => {}} style={styles.Button}>
+            <Text>Create Account</Text>
+          </Button>
+          <Button onPress={() => {}} style={styles.Button}>
+            <Text>Sign In</Text>
+          </Button>
+        </View>
       </Layout>
     )
   },

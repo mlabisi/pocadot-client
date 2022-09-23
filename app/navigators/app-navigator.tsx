@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
-import { WelcomeNav } from "./welcome-navigator"
-import { MainNav } from "./tab-navigator"
+// import { WelcomeNav } from "./welcome-navigator"
+// import { MainNav } from "./tab-navigator"
 import { OnboardingScreen } from "../screens"
 
 export type NavigatorParamList = {
@@ -31,6 +31,7 @@ export type NavigatorParamList = {
   notifications: undefined
 
   onboarding: undefined
+  loggedOut: undefined
 
   suggestions: undefined
   search: undefined
@@ -48,8 +49,8 @@ export const AppStackNav = () => {
       initialRouteName="onboarding"
     >
       <AppStack.Screen name="onboarding" component={OnboardingScreen} />
-      <AppStack.Screen name="welcomeTab" component={WelcomeNav} />
-      <AppStack.Screen name="tabs" component={MainNav} />
+      {/* <AppStack.Screen name="welcomeTab" component={WelcomeNav} /> */}
+      {/* <AppStack.Screen name="tabs" component={MainNav} /> */}
     </AppStack.Navigator>
   )
 }
