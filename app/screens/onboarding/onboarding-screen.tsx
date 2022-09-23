@@ -1,9 +1,9 @@
 import React, { FC, useCallback, useMemo, useRef, useState } from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, TouchableWithoutFeedback, View } from "react-native"
 import { observer } from "mobx-react-lite"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
-import { Text, Button, Layout } from "@ui-kitten/components"
+import { Text, Button, Layout, Input, Icon } from "@ui-kitten/components"
 import { OnboardingPager } from "../../components"
 import { translate } from "../../i18n"
 import { widthPercentageToDP as wp } from "react-native-responsive-screen"
@@ -59,14 +59,29 @@ const styles = StyleSheet.create({
     width: wp(50),
   },
   contentContainer: {
-    flex: 1,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-around",
   },
 })
 
 export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboarding">> = observer(
   function OnboardingScreen({ navigation }) {
     const [selectedIndex, setSelectedIndex] = useState(0)
+    const [authMode, setAuthMode] = useState(0)
+    const [emailInput, setEmailInput] = useState("")
+    const [passwordInput, setPasswordInput] = useState("")
+    const [secureRegPass, setSecureRegPass] = useState(true)
+
+    const toggleSecureRegPass = () => {
+      setSecureRegPass(!secureRegPass)
+    }
+
+    const renderIcon = (props) => (
+      <TouchableWithoutFeedback onPress={toggleSecureRegPass}>
+        <Icon {...props} name={secureRegPass ? "eye-off" : "eye"} />
+      </TouchableWithoutFeedback>
+    )
 
     // ref
     const bottomSheetModalRef = useRef<BottomSheetModal>(null)
@@ -98,10 +113,22 @@ export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboardi
           </View>
 
           <View style={styles.ButtonContainer}>
-            <Button onPress={handlePresentModalPress} style={styles.Button}>
+            <Button
+              onPress={() => {
+                setAuthMode(0)
+                handlePresentModalPress()
+              }}
+              style={styles.Button}
+            >
               <Text>Create Account</Text>
             </Button>
-            <Button onPress={handlePresentModalPress} style={styles.Button}>
+            <Button
+              onPress={() => {
+                setAuthMode(1)
+                handlePresentModalPress()
+              }}
+              style={styles.Button}
+            >
               <Text>Sign In</Text>
             </Button>
           </View>
@@ -113,8 +140,37 @@ export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboardi
             onChange={handleSheetChanges}
           >
             <View style={styles.contentContainer}>
-              <Text>Awesome 🎉</Text>
+              <Button
+                appearance={authMode === 0 ? "outline" : "ghost"}
+                onPress={() => {
+                  setAuthMode(0)
+                }}
+              >
+                Create Account
+              </Button>
+              <Button
+                appearance={authMode === 1 ? "outline" : "ghost"}
+                onPress={() => {
+                  setAuthMode(1)
+                }}
+              >
+                Sign In
+              </Button>
             </View>
+            <Input
+              label={"Email Address"}
+              placeholder={"Enter your Text"}
+              value={emailInput}
+              onChangeText={(newValue) => setEmailInput(newValue)}
+            />
+            <Input
+              label={"Password"}
+              placeholder={"Enter your Password"}
+              value={passwordInput}
+              accessoryRight={renderIcon}
+              secureTextEntry={secureRegPass}
+              onChangeText={(newValue) => setPasswordInput(newValue)}
+            />
           </BottomSheetModal>
         </Layout>
       </BottomSheetModalProvider>
