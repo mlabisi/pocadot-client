@@ -4,10 +4,14 @@ import { observer } from "mobx-react-lite"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { Text, Button, Layout, Input, Icon } from "@ui-kitten/components"
-import { OnboardingPager } from "../../components"
+import { OnboardingPager, Spacer } from "../../components"
 import { translate } from "../../i18n"
-import { widthPercentageToDP as wp } from "react-native-responsive-screen"
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen"
 import { BottomSheetModal, BottomSheetModalProvider } from "@gorhom/bottom-sheet"
+import { color } from "../../theme"
 
 const data = [
   {
@@ -58,10 +62,42 @@ const styles = StyleSheet.create({
     margin: 5,
     width: wp(50),
   },
-  contentContainer: {
+  ContentContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
+  },
+  SelectedTabText: {
+    color: color.palette.lavender,
+    paddingBottom: 3,
+  },
+  Underlined: {
+    borderBottomWidth: 3,
+    borderBottomColor: color.palette.lavender,
+  },
+  InputContainer: {
+    flex: 0.95,
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+  },
+  Input: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "rgba(190,197,209,1)",
+    width: wp(95),
+  },
+  Disclaimer: {
+    textAlign: "center",
+  },
+  Fields: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
 })
 
@@ -87,7 +123,7 @@ export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboardi
     const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
     // variables
-    const snapPoints = useMemo(() => ["50%", "75%"], [])
+    const snapPoints = useMemo(() => ["85%"], [])
 
     // callbacks
     const handlePresentModalPress = useCallback(() => {
@@ -135,42 +171,83 @@ export const OnboardingScreen: FC<StackScreenProps<NavigatorParamList, "onboardi
 
           <BottomSheetModal
             ref={bottomSheetModalRef}
-            index={1}
+            index={0}
             snapPoints={snapPoints}
             onChange={handleSheetChanges}
           >
-            <View style={styles.contentContainer}>
-              <Button
-                appearance={authMode === 0 ? "outline" : "ghost"}
-                onPress={() => {
-                  setAuthMode(0)
-                }}
-              >
-                Create Account
-              </Button>
-              <Button
-                appearance={authMode === 1 ? "outline" : "ghost"}
-                onPress={() => {
-                  setAuthMode(1)
-                }}
-              >
-                Sign In
-              </Button>
+            <View style={styles.ContentContainer}>
+              <View style={[authMode === 0 ? styles.Underlined : {}]}>
+                <Text
+                  category={"h6"}
+                  style={[authMode === 0 ? styles.SelectedTabText : { paddingBottom: 3 }]}
+                  onPress={() => {
+                    setAuthMode(0)
+                  }}
+                >
+                  Create Account
+                </Text>
+              </View>
+
+              <View style={[authMode === 1 ? styles.Underlined : {}]}>
+                <Text
+                  category={"h6"}
+                  style={[authMode === 1 ? styles.SelectedTabText : { paddingBottom: 3 }]}
+                  onPress={() => {
+                    setAuthMode(1)
+                  }}
+                >
+                  Sign In
+                </Text>
+              </View>
             </View>
-            <Input
-              label={"Email Address"}
-              placeholder={"Enter your Text"}
-              value={emailInput}
-              onChangeText={(newValue) => setEmailInput(newValue)}
-            />
-            <Input
-              label={"Password"}
-              placeholder={"Enter your Password"}
-              value={passwordInput}
-              accessoryRight={renderIcon}
-              secureTextEntry={secureRegPass}
-              onChangeText={(newValue) => setPasswordInput(newValue)}
-            />
+
+            <Spacer n={1 - styles.InputContainer.flex} />
+
+            <View style={styles.InputContainer}>
+              <View style={styles.Fields}>
+                <Input
+                  label={"Email Address"}
+                  placeholder={"Enter your email"}
+                  style={styles.Input}
+                  value={emailInput}
+                  onChangeText={(newValue) => setEmailInput(newValue)}
+                />
+                <Input
+                  label={"Password"}
+                  placeholder={"Enter your password"}
+                  value={passwordInput}
+                  style={styles.Input}
+                  accessoryRight={renderIcon}
+                  secureTextEntry={secureRegPass}
+                  onChangeText={(newValue) => setPasswordInput(newValue)}
+                />
+              </View>
+
+              <View style={styles.ButtonContainer}>
+                <Button
+                  onPress={() => {
+                    setAuthMode(0)
+                    handlePresentModalPress()
+                  }}
+                  style={styles.Button}
+                >
+                  <Text>Create Account</Text>
+                </Button>
+                <Button
+                  onPress={() => {
+                    setAuthMode(1)
+                    handlePresentModalPress()
+                  }}
+                  style={styles.Button}
+                >
+                  <Text>Sign In</Text>
+                </Button>
+              </View>
+
+              <Text style={styles.Disclaimer}>
+                By logging in or registering, you agree to Our Terms of Service and Privacy Policy.
+              </Text>
+            </View>
           </BottomSheetModal>
         </Layout>
       </BottomSheetModalProvider>
