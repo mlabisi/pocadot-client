@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite"
 import { Text, Button, Icon, Input, useStyleSheet } from "@ui-kitten/components"
 import { widthPercentageToDP as wp } from "react-native-responsive-screen"
 import { useState } from "react"
+import { useNavigation } from "@react-navigation/native"
 
 const themedStyles = StyleSheet.create({
   ButtonContainer: {
@@ -43,6 +44,7 @@ const themedStyles = StyleSheet.create({
 
 export const Register = observer(function Register() {
   const styles = useStyleSheet(themedStyles)
+  const navigator = useNavigation()
 
   const [emailInput, setEmailInput] = useState("")
   const [passwordInput, setPasswordInput] = useState("")
@@ -57,6 +59,11 @@ export const Register = observer(function Register() {
       <Icon {...props} name={secureRegPass ? "eye-off" : "eye"} />
     </TouchableWithoutFeedback>
   )
+
+  const register = () => {
+    // @ts-ignore
+    navigator.navigate("welcomeTab")
+  }
 
   return (
     <View style={styles.InputContainer}>
@@ -80,11 +87,11 @@ export const Register = observer(function Register() {
       </View>
 
       <View style={styles.ButtonContainer}>
-        <Button style={styles.Button}>
+        <Button style={styles.Button} onPress={register}>
           <Text>Create Account</Text>
         </Button>
-        <Button style={styles.Button}>
-          <Text>Sign In</Text>
+        <Button style={styles.Button} onPress={register}>
+          <Text>Sign Up with Google</Text>
         </Button>
       </View>
 

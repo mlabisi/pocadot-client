@@ -6,6 +6,8 @@ import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 // import { WelcomeNav } from "./welcome-navigator"
 // import { MainNav } from "./tab-navigator"
 import { OnboardingScreen } from "../screens"
+import { WelcomeNav } from "./welcome-navigator"
+import { MainNav } from "./tab-navigator"
 
 export type NavigatorParamList = {
   welcome: undefined
@@ -49,8 +51,8 @@ export const AppStackNav = () => {
       initialRouteName="onboarding"
     >
       <AppStack.Screen name="onboarding" component={OnboardingScreen} />
-      {/* <AppStack.Screen name="welcomeTab" component={WelcomeNav} /> */}
-      {/* <AppStack.Screen name="tabs" component={MainNav} /> */}
+      <AppStack.Screen name="welcomeTab" component={WelcomeNav} />
+      <AppStack.Screen name="tabs" component={MainNav} />
     </AppStack.Navigator>
   )
 }

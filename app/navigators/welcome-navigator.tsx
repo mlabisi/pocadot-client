@@ -10,7 +10,7 @@ export const WelcomeNav = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="welcome"
+      initialRouteName="tabs"
     >
       <WelcomeStack.Screen name="tabs" component={MainNav} />
     </WelcomeStack.Navigator>
