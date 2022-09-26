@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     width: 330,
     height: 330,
   },
+  Title: {
+    paddingVertical: 10,
+  },
   Description: {
     textAlign: "center",
     marginTop: 5,
@@ -30,7 +33,9 @@ export const OnboardingPanel = observer(function OnboardingPanel(props: Onboardi
   return (
     <Layout style={styles.Container}>
       <AutoImage style={styles.Illustration} source={image} />
-      <Text category={"h4"}>{label}</Text>
+      <Text category={"h4"} style={styles.Title}>
+        {label}
+      </Text>
       <Text style={styles.Description}>{desc}</Text>
     </Layout>
   )

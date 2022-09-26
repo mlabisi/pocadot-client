@@ -45,10 +45,10 @@ export const theme = {
   "color-danger-800": "#932215",
   "color-danger-900": "#7A100D",
 
-  "background-basic-color-1": "$color-basic-100",
-  "background-basic-color-2": "$color-basic-200",
-  "background-basic-color-3": "$color-basic-300",
-  "background-basic-color-4": "$color-basic-400",
+  "background-basic-color-1": "#FFFFFF",
+  "background-basic-color-2": "#F8FAFB",
+  "background-basic-color-3": "#F2F3FB",
+  "background-basic-color-4": "#C3CAEEFF",
 
   "border-basic-color-1": "$color-basic-100",
   "border-basic-color-2": "$color-basic-200",
@@ -58,8 +58,8 @@ export const theme = {
 
   /* Basic colors - for backgrounds and borders and texts */
 
-  "color-basic-100": "#F8FAFB",
-  "color-basic-200": "#D4D4D4",
+  "color-basic-100": "#FFFFFF",
+  "color-basic-200": "#F8FAFB",
   "color-basic-300": "#D4D4D4",
   "color-basic-400": "#B3B3B3",
   "color-basic-500": "#808080",
