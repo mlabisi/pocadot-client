@@ -14,12 +14,6 @@ export const color = {
    * The palette is available to use, but prefer using the name.
    */
   palette,
-
-  /**
-   * The default fill color.
-   */
-  fill: palette.fill,
-
   /**
    * A helper for making something see-thru. Use sparingly as many layers of transparency
    * can cause older Android devices to slow down due to the excessive compositing required
@@ -29,42 +23,42 @@ export const color = {
   /**
    * The screen background.
    */
-  background: palette.white,
+  background: palette.Greyscale50,
   /**
    * The main tinting color.
    */
-  primary: palette.lavender,
+  primary: palette.Primary500,
   /**
    * The main tinting color, but darker.
    */
-  primaryDarker: palette.orangeDarker,
+  primaryDarker: palette.ButtonDisabled,
   /**
    * A subtle color used for borders and lines.
    */
-  line: palette.offWhite,
+  line: palette.Greyscale200,
   /**
    * The default color of text in many components.
    */
-  text: palette.white,
+  text: palette.Greyscale900,
   /**
    * Secondary information.
    */
-  dim: palette.lightGrey,
+  dim: palette.Greyscale700,
   /**
    * Error messages and icons.
    */
-  error: palette.angry,
+  error: palette.Error,
 
   /**
    * Storybook background for Text stories, or any stories where
    * the text color is color.text, which is white by default, and does not show
    * in Stories against the default white background
    */
-  storybookDarkBg: palette.black,
+  storybookDarkBg: palette.White,
 
   /**
    * Storybook text color for stories that display Text components against the
    * white background
    */
-  storybookTextColor: palette.black,
+  storybookTextColor: palette.Greyscale900,
 }

@@ -11,18 +11,14 @@
  */
 import "./i18n"
 import "./utils/ignore-warnings"
-import React, { useEffect, useState } from "react"
+import React, { useState, useEffect } from "react"
+import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context"
 import { initFonts } from "./theme/fonts" // expo
 import * as storage from "./utils/storage"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
-import { RootStoreProvider, RootStoreType, setupRootStore } from "./models/root-store"
-import { ErrorBoundary } from "./screens"
-import { GestureHandlerRootView } from "react-native-gesture-handler"
-import { ViewStyle } from "react-native"
-import * as eva from "@eva-design/eva"
-import { ApplicationProvider, IconRegistry } from "@ui-kitten/components"
-import { theme } from "./theme/theme"
-import { EvaIconsPack } from "@ui-kitten/eva-icons"
+import { RootStore, RootStoreProvider, setupRootStore } from "./models"
+import { ToggleStorybook } from "../storybook/toggle-storybook"
+import { ErrorBoundary } from "./screens/error/error-boundary"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -30,22 +26,18 @@ import { EvaIconsPack } from "@ui-kitten/eva-icons"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
-const ROOT: ViewStyle = {
-  flex: 1,
-}
-
 /**
  * This is the root component of our app.
  */
 function App() {
-  const [rootStore, setRootStore] = useState<RootStoreType | undefined>(undefined)
+  const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
   const {
     initialNavigationState,
     onNavigationStateChange,
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
-  // Kick off initial async loading actions, like loading fonts and RootStoreType
+  // Kick off initial async loading actions, like loading fonts and RootStore
   useEffect(() => {
     ;(async () => {
       await initFonts() // expo
@@ -63,19 +55,18 @@ function App() {
 
   // otherwise, we're ready to render the app
   return (
-    <GestureHandlerRootView style={ROOT}>
+    <ToggleStorybook>
       <RootStoreProvider value={rootStore}>
-        <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={"always"}>
             <AppNavigator
               initialState={initialNavigationState}
               onStateChange={onNavigationStateChange}
             />
           </ErrorBoundary>
-        </ApplicationProvider>
+        </SafeAreaProvider>
       </RootStoreProvider>
-    </GestureHandlerRootView>
+    </ToggleStorybook>
   )
 }
 

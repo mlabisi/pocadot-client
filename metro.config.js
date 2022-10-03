@@ -1,14 +1,29 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require("expo/metro-config")
+/**
+ * We're using a custom metro config because we want to support symlinks
+ * out of the box. This allows you to use pnpm and/or play better in a monorepo.
+ *
+ * You can safely delete this file and remove @rnx-kit/metro-* if you're not
+ * using PNPM or monorepo or symlinks at all.
+ *
+ * However, it doesn't hurt to have it either.
+ */
+const { makeMetroConfig } = require("@rnx-kit/metro-config")
+const MetroSymlinksResolver = require("@rnx-kit/metro-resolver-symlinks")
+const { getDefaultConfig } = require("metro-config")
 
-// For one idea on how to support symlinks in Expo, see:
-// https://github.com/infinitered/ignite/issues/1904#issuecomment-1054535068
-const MetroConfig = require("@ui-kitten/metro-config")
-
-const evaConfig = {
-  evaPackage: "@eva-design/eva",
-  // Optional, but may be useful when using mapping customization feature.
-  // customMappingPath: './custom-mapping.json',
-}
-
-module.exports = MetroConfig.create(evaConfig, getDefaultConfig(__dirname))
+module.exports = (async () => {
+  const defaultConfig = await getDefaultConfig()
+  return makeMetroConfig({
+    projectRoot: __dirname,
+    // watchFolders: [`${__dirname}/../..`], // for monorepos
+    resolver: {
+      /**
+       * This custom resolver is for if you're using symlinks.
+       *
+       * You can disable it if you're not using pnpm or a monorepo or symlinks.
+       */
+      resolveRequest: MetroSymlinksResolver(),
+      assetExts: [...defaultConfig.resolver.assetExts, "bin"],
+    },
+  })
+})()

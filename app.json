@@ -1,17 +1,16 @@
 {
-  "name": "pocadotClient",
-  "displayName": "pocadotClient",
+  "name": "pocadot",
+  "displayName": "pocadot",
   "expo": {
-    "name": "pocadotClient",
-    "slug": "pocadotClient",
-    "jsEngine": "hermes",
+    "name": "pocadot",
+    "slug": "pocadot",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-all.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#A3B0EF"
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -28,8 +27,7 @@
     },
     "ios": {
       "icon": "./assets/images/app-icon-ios.png",
-      "supportsTablet": true,
-      "bundleIdentifier": "com.itsjustmora.pocadotClient"
+      "supportsTablet": true
     },
     "web": {
       "favicon": "./assets/images/app-icon-web-favicon.png"

@@ -1,12 +1,12 @@
 import { Tron } from "./tron"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ArgType } from "reactotron-core-client"
-import { RootStoreType } from "../../models"
+import { RootStore } from "../../models/root-store/root-store"
 import { onSnapshot } from "mobx-state-tree"
 import { ReactotronConfig, DEFAULT_REACTOTRON_CONFIG } from "./reactotron-config"
 import { mst } from "reactotron-mst"
 import { clear } from "../../utils/storage"
-import { goBack, resetRoot, navigate } from "../../navigators"
+import { goBack, resetRoot, navigate } from "../../navigators/navigation-utilities"
 import { Platform } from "react-native"
 
 // Teach TypeScript about the bad things we want to do.
@@ -86,7 +86,7 @@ export class Reactotron {
    */
   setRootStore(rootStore: any, initialData: any) {
     if (__DEV__) {
-      rootStore = rootStore as RootStoreType // typescript hack
+      rootStore = rootStore as RootStore // typescript hack
       this.rootStore = rootStore
 
       const { initial, snapshots } = this.config.state

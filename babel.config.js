@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ["babel-preset-expo"],
+  presets: ["module:metro-react-native-babel-preset"],
   env: {
     production: {},
   },
@@ -11,6 +11,5 @@ module.exports = {
       },
     ],
     ["@babel/plugin-proposal-optional-catch-binding"],
-    "react-native-reanimated/plugin",
   ],
 }
