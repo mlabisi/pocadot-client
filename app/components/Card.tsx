@@ -13,7 +13,7 @@ export interface CardProps {
   /**
    * The content to be displayed by the card
    */
-  children?: string
+  children?: React.ReactNode[] | React.ReactNode
 }
 
 /**
@@ -35,5 +35,11 @@ const styles = StyleSheet.create({
     height: 245,
     borderRadius: 28,
     backgroundColor: colors.cardBackground,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: 15,
+    elevation: 6,
   },
 })
