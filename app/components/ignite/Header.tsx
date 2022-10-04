@@ -8,10 +8,10 @@ import {
   ViewStyle,
 } from "react-native"
 import { Edge, SafeAreaView, SafeAreaViewProps } from "react-native-safe-area-context"
-import { colors, spacing } from "../theme"
+import { colors, spacing } from "../../theme"
 import { Icon, IconTypes } from "./Icon"
 import { Text, TextProps } from "./Text"
-import { isRTL, translate } from "../i18n"
+import { isRTL, translate } from "../../i18n"
 
 export interface HeaderProps {
   /**

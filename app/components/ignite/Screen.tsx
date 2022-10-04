@@ -13,7 +13,7 @@ import {
 import { StatusBar, StatusBarProps } from "expo-status-bar"
 import { Edge, SafeAreaView, SafeAreaViewProps } from "react-native-safe-area-context"
 import { useScrollToTop } from "@react-navigation/native"
-import { colors } from "../theme"
+import { colors } from "../../theme"
 
 interface BaseScreenProps {
   /**

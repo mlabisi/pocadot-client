@@ -13,7 +13,7 @@ import {
   ViewStyle,
 } from "react-native"
 import Animated, { FadeIn, useAnimatedStyle, withTiming } from "react-native-reanimated"
-import { colors, spacing } from "../theme"
+import { colors, spacing } from "../../theme"
 import { iconRegistry } from "./Icon"
 import { Text, TextProps } from "./Text"
 

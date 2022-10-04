@@ -7,7 +7,7 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native"
-import { colors, spacing, typography } from "../theme"
+import { colors, spacing, typography } from "../../theme"
 import { Text, TextProps } from "./Text"
 
 type Presets = keyof typeof $viewPresets
@@ -152,29 +152,29 @@ const $viewPresets = {
     $baseViewStyle,
     {
       borderWidth: 1,
-      borderColor: colors.palette.neutral400,
-      backgroundColor: colors.palette.neutral100,
+      borderColor: colors.greyscale["400"],
+      backgroundColor: colors.greyscale["100"],
     },
   ] as StyleProp<ViewStyle>,
 
-  filled: [$baseViewStyle, { backgroundColor: colors.palette.neutral300 }] as StyleProp<ViewStyle>,
+  filled: [$baseViewStyle, { backgroundColor: colors.greyscale["300"] }] as StyleProp<ViewStyle>,
 
   reversed: [
     $baseViewStyle,
-    { backgroundColor: colors.palette.neutral800 },
+    { backgroundColor: colors.greyscale["800"] },
   ] as StyleProp<ViewStyle>,
 }
 
 const $textPresets: Record<Presets, StyleProp<TextStyle>> = {
   default: $baseTextStyle,
   filled: $baseTextStyle,
-  reversed: [$baseTextStyle, { color: colors.palette.neutral100 }],
+  reversed: [$baseTextStyle, { color: colors.greyscale["100"] }],
 }
 
 const $pressedViewPresets: Record<Presets, StyleProp<ViewStyle>> = {
-  default: { backgroundColor: colors.palette.neutral200 },
-  filled: { backgroundColor: colors.palette.neutral400 },
-  reversed: { backgroundColor: colors.palette.neutral700 },
+  default: { backgroundColor: colors.greyscale["200"] },
+  filled: { backgroundColor: colors.greyscale["400"] },
+  reversed: { backgroundColor: colors.greyscale["700"] },
 }
 
 const $pressedTextPresets: Record<Presets, StyleProp<TextStyle>> = {
