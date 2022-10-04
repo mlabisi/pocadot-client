@@ -138,4 +138,8 @@ export const colors = {
    * Error messages and icons.
    */
   errorBackground: palette.transparentColors.red,
+  /**
+   * The background for cards.
+   */
+  cardBackground: palette.other.white
 }
