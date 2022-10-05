@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite"
 import { colors, typography } from "../theme"
 import { Card } from "./Card"
 import { AutoImage } from "./ignite/AutoImage"
+import { Text } from "./ignite/Text"
 
 export interface ListingCardProps {
   /**
