@@ -19,15 +19,13 @@ export interface CardProps {
 /**
  * Describe your component here
  */
-export const Card = observer(function Card({children, ...props}: CardProps) {
+export function Card(props: CardProps) {
   return (
     <Shadow level={3} containerStyle={[styles.container, props.containerStyle]}>
-      <View style={[styles.container, props.containerStyle]}>
-        {children}
-      </View>
+      <View style={[styles.container, props.containerStyle]}>{props.children}</View>
     </Shadow>
   )
-})
+}
 
 const styles = StyleSheet.create({
   container: {

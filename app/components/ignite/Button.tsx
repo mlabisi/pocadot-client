@@ -152,29 +152,29 @@ const $viewPresets = {
     $baseViewStyle,
     {
       borderWidth: 1,
-      borderColor: colors.greyscale["400"],
-      backgroundColor: colors.greyscale["100"],
+      borderColor: colors.palette.greyscale["400"],
+      backgroundColor: colors.palette.greyscale["100"],
     },
   ] as StyleProp<ViewStyle>,
 
-  filled: [$baseViewStyle, { backgroundColor: colors.greyscale["300"] }] as StyleProp<ViewStyle>,
+  filled: [$baseViewStyle, { backgroundColor: colors.palette.greyscale["300"] }] as StyleProp<ViewStyle>,
 
   reversed: [
     $baseViewStyle,
-    { backgroundColor: colors.greyscale["800"] },
+    { backgroundColor: colors.palette.greyscale["800"] },
   ] as StyleProp<ViewStyle>,
 }
 
 const $textPresets: Record<Presets, StyleProp<TextStyle>> = {
   default: $baseTextStyle,
   filled: $baseTextStyle,
-  reversed: [$baseTextStyle, { color: colors.greyscale["100"] }],
+  reversed: [$baseTextStyle, { color: colors.palette.greyscale["100"] }],
 }
 
 const $pressedViewPresets: Record<Presets, StyleProp<ViewStyle>> = {
-  default: { backgroundColor: colors.greyscale["200"] },
-  filled: { backgroundColor: colors.greyscale["400"] },
-  reversed: { backgroundColor: colors.greyscale["700"] },
+  default: { backgroundColor: colors.palette.greyscale["200"] },
+  filled: { backgroundColor: colors.palette.greyscale["400"] },
+  reversed: { backgroundColor: colors.palette.greyscale["700"] },
 }
 
 const $pressedTextPresets: Record<Presets, StyleProp<TextStyle>> = {

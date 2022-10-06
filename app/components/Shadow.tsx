@@ -19,67 +19,65 @@ export interface ShadowProps {
 /**
  * Describe your component here
  */
-export const Shadow = observer(function Shadow({ level, ...props }: ShadowProps) {
+export function Shadow(props: ShadowProps) {
   return (
-    <View style={[styles[`shadow${level}`], props.containerStyle]}>
-      {props.children}
-    </View>
-  );
-})
+    <View style={[styles[`shadow${props.level}`], props.containerStyle]}>{props.children}</View>
+  )
+}
 
 const styles = StyleSheet.create({
   shadow1: {
     shadowColor: "rgba(4, 6, 15, 0.08)",
     shadowOffset: {
       width: 0,
-      height: 4
+      height: 4,
     },
     shadowRadius: 60,
-    shadowOpacity: 1
+    shadowOpacity: 1,
   },
   shadow2: {
     shadowColor: "rgba(4, 6, 15, 0.05)",
     shadowOffset: {
       width: 0,
-      height: 4
+      height: 4,
     },
     shadowRadius: 60,
-    shadowOpacity: 1
+    shadowOpacity: 1,
   },
   shadow3: {
     shadowColor: "rgba(4, 6, 15, 0.08)",
     shadowOffset: {
       width: 0,
-      height: 20
+      height: 20,
     },
     shadowRadius: 100,
-    shadowOpacity: 1
+    shadowOpacity: 1,
   },
   shadow4: {
     shadowColor: "rgba(67, 83, 255, 0.25)",
     shadowOffset: {
       width: 4,
-      height: 8
+      height: 8,
     },
     shadowRadius: 24,
-    shadowOpacity: 1
+    shadowOpacity: 1,
   },
   shadow5: {
     shadowColor: "rgba(67, 83, 255, 0.2)",
     shadowOffset: {
       width: 4,
-      height: 12
+      height: 12,
     },
     shadowRadius: 32,
-    shadowOpacity: 1
+    shadowOpacity: 1,
   },
   shadow6: {
     shadowColor: "rgba(67, 83, 255, 0.2)",
     shadowOffset: {
       width: 4,
-      height: 16
+      height: 16,
     },
     shadowRadius: 32,
-    shadowOpacity: 1
+    shadowOpacity: 1,
   },
-});
+})

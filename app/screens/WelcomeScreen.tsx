@@ -56,7 +56,7 @@ const $bottomContainer: ViewStyle = {
   flexShrink: 1,
   flexGrow: 0,
   flexBasis: "43%",
-  backgroundColor: colors.palette.neutral100,
+  backgroundColor: colors.palette.greyscale["100"],
   borderTopLeftRadius: 16,
   borderTopRightRadius: 16,
 }

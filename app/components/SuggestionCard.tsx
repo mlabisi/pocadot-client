@@ -13,7 +13,7 @@ import { Card } from "./Card"
 import { AutoImage } from "./ignite/AutoImage"
 import { Text } from "./ignite/Text"
 
-export interface ListingCardProps {
+export interface SuggestionCardProps {
   /**
    * The image to be featured for this listing.
    */
@@ -43,7 +43,7 @@ export interface ListingCardProps {
 /**
  * Describe your component here
  */
-export function ListingCard(props: ListingCardProps) {
+export function SuggestionCard(props: SuggestionCardProps) {
   const { artistName, releaseName, listingTag, featuredImage, avatar } = props
 
   return (
