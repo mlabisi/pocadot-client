@@ -1,38 +1,53 @@
 {
-  "name": "pocadotClient",
-  "displayName": "pocadotClient",
+  "name": "PocadotFrontend",
+  "displayName": "PocadotFrontend",
   "expo": {
-    "name": "pocadotClient",
-    "slug": "pocadotClient",
-    "jsEngine": "hermes",
+    "name": "PocadotFrontend",
+    "slug": "PocadotFrontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-all.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/splash-logo-all.png",
       "resizeMode": "contain",
-      "backgroundColor": "#A3B0EF"
+      "backgroundColor": "#191015"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "jsEngine": "hermes",
+    "assetBundlePatterns": ["**/*"],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
+      "package": "com.morasaek.pocadot",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
         "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
+      },
+      "splash": {
+        "image": "./assets/images/splash-logo-android-universal.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#191015"
       }
     },
     "ios": {
       "icon": "./assets/images/app-icon-ios.png",
       "supportsTablet": true,
-      "bundleIdentifier": "com.itsjustmora.pocadotClient"
+      "bundleIdentifier": "com.morasaek.pocadot",
+      "splash": {
+        "image": "./assets/images/splash-logo-ios-mobile.png",
+        "tabletImage": "./assets/images/splash-logo-ios-tablet.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#191015"
+      }
     },
     "web": {
-      "favicon": "./assets/images/app-icon-web-favicon.png"
+      "favicon": "./assets/images/app-icon-web-favicon.png",
+      "splash": {
+        "image": "./assets/images/splash-logo-web.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#191015"
+      }
     }
   }
 }
