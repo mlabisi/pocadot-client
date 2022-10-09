@@ -136,28 +136,6 @@ export const MoreNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="NotificationSettings"
-        component={WelcomeScreen}
-        options={{
-          header: (props: NativeStackHeaderProps) => (
-            <Header
-              titleTx={"more.settings.notifications"}
-              titleMode={"flex"}
-              LeftActionComponent={
-                <TouchableOpacity
-                  onPress={() => {
-                    props.navigation.goBack()
-                  }}
-                  style={{paddingLeft: spacing.extraSmall}}
-                >
-                  <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
-                </TouchableOpacity>
-              }
-            />
-          ),
-        }}
-      />
-      <Stack.Screen
         name="SecuritySettings"
         component={WelcomeScreen}
         options={{
