@@ -121,7 +121,7 @@ interface CardProps extends TouchableOpacityProps {
  *
  * - [Documentation and Examples](https://github.com/infinitered/ignite/blob/master/docs/Components-Card.md)
  */
-export function Card(props: CardProps) {
+export function IgniteCard(props: CardProps) {
   const {
     content,
     contentTx,
