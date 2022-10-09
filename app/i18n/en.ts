@@ -23,6 +23,32 @@ const en = {
       button: "Let's try this again",
     },
   },
+  suggestions: {
+    title: "Recommendations",
+    preferences: {
+      title: "Recommendation Preferences",
+    },
+  },
+  explore: {
+    title: "Explore",
+    listings: {
+      add: "Add a New Listing",
+      featured: "Featured Listings",
+    },
+    search: {
+      placeholder: "Search from groups and idols",
+      filter: "Filter Listings"
+    },
+  },
+  saved: {
+    title: "Saved",
+  },
+  myProfile: {
+    title: "My Profile",
+  },
+  more: {
+    title: "More",
+  },
 }
 
 export default en

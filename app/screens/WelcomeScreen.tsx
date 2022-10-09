@@ -9,8 +9,8 @@ import {
 import { isRTL } from "../i18n"
 import { colors, spacing } from "../theme"
 
-const welcomeLogo = require("../../assets/images/logo.png")
-const welcomeFace = require("../../assets/images/welcome-face.png")
+const welcomeLogo = require("../../assets/images/ignite/logo.png")
+const welcomeFace = require("../../assets/images/ignite/welcome-face.png")
 
 
 export const WelcomeScreen = observer(function WelcomeScreen(
@@ -56,7 +56,7 @@ const $bottomContainer: ViewStyle = {
   flexShrink: 1,
   flexGrow: 0,
   flexBasis: "43%",
-  backgroundColor: colors.palette.neutral100,
+  backgroundColor: colors.palette.greyscale["100"],
   borderTopLeftRadius: 16,
   borderTopRightRadius: 16,
 }
