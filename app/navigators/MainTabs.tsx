@@ -77,12 +77,18 @@ export const MainTabs = () => {
               </TouchableOpacity>
             }
             RightActionComponent={
-              <Ionicons
-                name={"notifications-outline"}
-                size={20}
-                color={colors.tint}
-                style={{ paddingLeft: spacing.medium }}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("SuggestionPreferences")
+                }}
+              >
+                <Ionicons
+                  name={"notifications-outline"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              </TouchableOpacity>
             }
           />
         ),
@@ -106,75 +112,99 @@ export const MainTabs = () => {
               </TouchableOpacity>
             }
             RightActionComponent={
-              <Ionicons
-                name={"notifications-outline"}
-                size={20}
-                color={colors.tint}
-                style={{ paddingLeft: spacing.medium }}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("SuggestionPreferences")
+                }}
+              >
+                <Ionicons
+                  name={"notifications-outline"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              </TouchableOpacity>
             }
           />
         ),
       }} />
       <Tab.Screen name="SavedScreen" component={WelcomeScreen} options={{
-          header: () => (
-            <Header
-              titleTx={"saved.title"}
-              RightActionComponent={
+        header: (props: BottomTabHeaderProps) => (
+          <Header
+            titleTx={"saved.title"}
+            RightActionComponent={
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("SuggestionPreferences")
+                }}
+              >
                 <Ionicons
                   name={"notifications-outline"}
                   size={20}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
-              }
-            />
-          ),
-        }} />
+              </TouchableOpacity>
+            }
+          />
+        ),
+      }} />
       <Tab.Screen name="MyProfileScreen" component={WelcomeScreen} options={{
-          header: (props: BottomTabHeaderProps) => (
-            <Header
-              titleTx={"myProfile.title"}
-              LeftActionComponent={
-                <TouchableOpacity
-                  onPress={() => {
-                    props.navigation.navigate("EditProfile")
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name={"pencil-box-outline"}
-                    size={20}
-                    color={colors.tint}
-                    style={{ paddingLeft: spacing.medium }}
-                  />
-                </TouchableOpacity>
-              }
-              RightActionComponent={
+        header: (props: BottomTabHeaderProps) => (
+          <Header
+            titleTx={"myProfile.title"}
+            LeftActionComponent={
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("EditProfile")
+                }}
+              >
+                <MaterialCommunityIcons
+                  name={"pencil-box-outline"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              </TouchableOpacity>
+            }
+            RightActionComponent={
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("SuggestionPreferences")
+                }}
+              >
                 <Ionicons
                   name={"notifications-outline"}
                   size={20}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
-              }
-            />
-          ),
-        }} />
+              </TouchableOpacity>
+            }
+          />
+        ),
+      }} />
       <Tab.Screen name="MoreScreen" component={WelcomeScreen} options={{
-          header: () => (
-            <Header
-              titleTx={"more.title"}
-              RightActionComponent={
+        header: (props: BottomTabHeaderProps) => (
+          <Header
+            titleTx={"more.title"}
+            RightActionComponent={
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("SuggestionPreferences")
+                }}
+              >
                 <Ionicons
                   name={"notifications-outline"}
                   size={20}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
-              }
-            />
-          ),
-        }} />
+              </TouchableOpacity>
+            }
+          />
+        ),
+      }} />
     </Tab.Navigator>
   )
 }
