@@ -12,7 +12,6 @@ import React from "react"
 import { TouchableOpacity, useColorScheme } from "react-native"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
-import { AuthNavigator } from "./AuthNavigator"
 import { useStores } from "../models"
 import { MainTabs } from "./MainTabs"
 import { WelcomeScreen } from "../screens"
@@ -34,8 +33,11 @@ import { Ionicons } from "@expo/vector-icons"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Auth: undefined
+  Onboarding: undefined
   Main: undefined
+
+  ForgotPassword: undefined
+  ResetPassword: undefined
 
   SuggestionPreferences: undefined
 
@@ -81,12 +83,13 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: true }}
-      initialRouteName={isAuthenticated ? "Main" : "Auth"}
+      initialRouteName={isAuthenticated ? "Main" : "Onboarding"}
     >
       {isAuthenticated ? (
         <>
           <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: false }} />
 
+          {/* Suggestions */}
           <Stack.Group>
             <Stack.Screen
               name="SuggestionPreferences"
@@ -111,6 +114,8 @@ const AppStack = observer(function AppStack() {
               }}
             />
           </Stack.Group>
+
+          {/* Explore */}
           <Stack.Group>
             <Stack.Screen
               name="AddListing"
@@ -245,6 +250,8 @@ const AppStack = observer(function AppStack() {
               }}
             />
           </Stack.Group>
+
+          {/* MyProfile */}
           <Stack.Group>
             <Stack.Screen
               name="EditProfile"
@@ -313,6 +320,8 @@ const AppStack = observer(function AppStack() {
               }}
             />
           </Stack.Group>
+
+          {/* More */}
           <Stack.Group>
             <Stack.Screen
               name="EditBiases"
@@ -494,7 +503,9 @@ const AppStack = observer(function AppStack() {
         </>
       ) : (
         <>
-          <Stack.Screen name="Auth" component={AuthNavigator} />
+          <Stack.Screen name="Onboarding" component={WelcomeScreen} />
+          <Stack.Screen name="ForgotPassword" component={WelcomeScreen} />
+          <Stack.Screen name="ResetPassword" component={WelcomeScreen} />
         </>
       )}
     </Stack.Navigator>
