@@ -1,15 +1,18 @@
 import React from "react"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { colors } from "../theme"
+import { BottomTabHeaderProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { colors, spacing } from "../theme"
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
-import { SuggestionsNavigator } from "./SuggestionsNavigator"
 import { ExploreNavigator } from "./ExploreNavigator"
 import { SavedNavigator } from "./SavedNavigator"
 import { MyProfileNavigator } from "./MyProfileNavigator"
 import { MoreNavigator } from "./MoreNavigator"
+import { WelcomeScreen } from "../screens"
+import { NativeStackHeaderProps } from "@react-navigation/native-stack"
+import { Header } from "../components"
+import { TouchableOpacity } from "react-native"
 
 export type MainNavigatorParamList = {
-  Suggestions: undefined
+  SuggestionsScreen: undefined
   Explore: undefined
   Saved: undefined
   MyProfile: undefined
@@ -17,7 +20,7 @@ export type MainNavigatorParamList = {
 }
 
 const Tab = createBottomTabNavigator<MainNavigatorParamList>()
-export const MainNavigator = () => {
+export const MainTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -25,7 +28,7 @@ export const MainNavigator = () => {
           let iconName
 
           switch (route.name) {
-            case "Suggestions":
+            case "SuggestionsScreen":
               iconName = focused
                 ? "cards-playing-heart-multiple"
                 : "cards-playing-heart-multiple-outline"
@@ -65,13 +68,29 @@ export const MainNavigator = () => {
         tabBarShowLabel: false,
       })}
     >
-      <Tab.Screen
-        name="Suggestions"
-        component={SuggestionsNavigator}
-        options={{
-          headerShown: false
-        }}
-      />
+      <Tab.Screen name="SuggestionsScreen" component={WelcomeScreen} options={{header: (props: BottomTabHeaderProps) => (
+          <Header
+            titleTx={"suggestions.title"}
+            LeftActionComponent={
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("Preferences")
+                }}
+              >
+                <Ionicons name={"options-outline"} size={20} color={colors.tint} />
+              </TouchableOpacity>
+            }
+            RightActionComponent={
+              <Ionicons
+                name={"notifications-outline"}
+                size={20}
+                color={colors.tint}
+                style={{ paddingLeft: spacing.medium }}
+              />
+            }
+          />
+        ),}}/>
+
       <Tab.Screen
         name="Explore"
         component={ExploreNavigator}

@@ -5,16 +5,20 @@
  * and a "main" flow which the user will use once logged in.
  */
 import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { createNativeStackNavigator, NativeStackHeaderProps } from "@react-navigation/native-stack"
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
 import React from "react"
-import { useColorScheme } from "react-native"
+import { TouchableOpacity, useColorScheme } from "react-native"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { AuthNavigator } from "./AuthNavigator"
 import { useStores } from "../models"
-import { MainNavigator } from "./MainNavigator"
+import { MainTabs } from "./MainTabs"
+import { WelcomeScreen } from "../screens"
+import { Header } from "../components"
+import { colors, spacing } from "../theme"
+import { Ionicons } from "@expo/vector-icons"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -32,6 +36,8 @@ import { MainNavigator } from "./MainNavigator"
 export type AppStackParamList = {
   Auth: undefined
   Main: undefined
+
+  Preferences: undefined
 }
 
 /**
@@ -60,7 +66,33 @@ const AppStack = observer(function AppStack() {
     >
       {isAuthenticated ? (
         <>
-          <Stack.Screen name="Main" component={MainNavigator} />
+          <Stack.Screen name="Main" component={MainTabs} />
+
+          <Stack.Group>
+            <Stack.Screen
+              name="Preferences"
+              component={WelcomeScreen}
+              options={{
+                headerShown: true,
+                header: (props: NativeStackHeaderProps) => (
+                  <Header
+                    titleTx={"suggestions.preferences.title"}
+                    titleMode={"flex"}
+                    LeftActionComponent={
+                      <TouchableOpacity
+                        onPress={() => {
+                          props.navigation.goBack()
+                        }}
+                        style={{paddingLeft: spacing.extraSmall}}
+                      >
+                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                      </TouchableOpacity>
+                    }
+                  />
+                ),
+              }}
+            />
+          </Stack.Group>
         </>
       ) : (
         <>
