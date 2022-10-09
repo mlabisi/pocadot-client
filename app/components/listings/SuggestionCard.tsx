@@ -6,6 +6,7 @@ import { Text } from "../ignite/Text"
 import { ListingTag } from "./ListingTag"
 import { SkipButton } from "./SkipButton"
 import { SaveButton } from "./SaveButton"
+import { Card } from "../common/Card"
 
 export interface SuggestionCardProps {
   /**
@@ -26,17 +27,22 @@ export interface SuggestionCardProps {
 export const SuggestionCard = observer(function SuggestionCard(props: SuggestionCardProps) {
 
   return (
-    <View style={styles.AutoLayoutVertical}>
-      <Text style={styles.ArtistName}>{props.artistName}</Text>
-      <Text style={styles.ReleaseName}>{props.releaseName}</Text>
-      <View style={styles.AutoLayoutHorizontal}>
-        <ListingTag tag={props.listingTag} />
+    <Card>
+      <View style={styles.AutoLayoutVertical}>
+        <Text style={styles.ArtistName}>{props.artistName}</Text>
+        <Text style={styles.ReleaseName}>{props.releaseName}</Text>
+        <View style={styles.AutoLayoutHorizontal}>
+          <ListingTag tag={props.listingTag} />
+        </View>
+        <View style={styles.Buttons}>
+          <SkipButton onPress={() => {/****/
+          }} />
+          <SaveButton onPress={() => {/****/
+          }} />
+        </View>
       </View>
-      <View style={styles.Buttons}>
-        <SkipButton onPress={() => {/****/}}/>
-        <SaveButton onPress={() => {/****/}} />
-      </View>
-    </View>
+    </Card>
+
   )
 })
 
