@@ -1,9 +1,10 @@
 import * as React from "react"
 import { StyleSheet, StyleProp, View, ViewStyle } from "react-native"
-import { colors} from "../../theme"
-import { Octicons } from "@expo/vector-icons"
+import { colors } from "../../theme"
+import { Ionicons } from "@expo/vector-icons"
+import { observer } from "mobx-react-lite"
 
-export interface SkipButtonProps {
+export interface SaveButtonProps {
   /**
    * An optional style override useful for padding & margin.
    */
@@ -11,20 +12,20 @@ export interface SkipButtonProps {
 }
 
 /**
- * Skip button for suggestion cards
+ * Save button for suggestion cards
  */
-export default function SkipButton(props: SkipButtonProps) {
+export const SaveButton = observer(function SaveButton(props: SaveButtonProps) {
   return (
-    <View style={[styles.LeftButton, props.style]}>
-      <Octicons name={"x"} color={colors.palette.other.white}/>
+    <View style={[styles.RightButton, props.style]}>
+      <Ionicons name={"heart"} color={colors.palette.other.white} />
     </View>
   )
-}
+})
 
 const styles = StyleSheet.create({
-  LeftButton: {
+  RightButton: {
     alignItems: "center",
-    backgroundColor: colors.error,
+    backgroundColor: colors.tint,
     borderRadius: 31,
     display: "flex",
     elevation: 3,
