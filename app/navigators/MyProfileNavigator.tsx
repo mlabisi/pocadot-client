@@ -1,5 +1,4 @@
 import React from "react"
-import { createStackNavigator } from "@react-navigation/stack"
 import {
   WelcomeScreen
 } from "../screens"
@@ -12,6 +11,8 @@ import { TouchableOpacity } from "react-native"
 export type MyProfileNavigatorParamList = {
   MyProfileScreen: undefined
   EditProfile: undefined
+  MyListings: undefined
+  MyOffers: undefined
 }
 
 const Stack = createNativeStackNavigator<MyProfileNavigatorParamList>()

@@ -1,13 +1,12 @@
 import React from "react"
-import { BottomTabHeaderProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { AuthNavigator } from "./AuthNavigator"
-import { colors, spacing } from "../theme"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { colors } from "../theme"
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
-import { Header } from "../components"
 import { SuggestionsNavigator } from "./SuggestionsNavigator"
 import { ExploreNavigator } from "./ExploreNavigator"
 import { SavedNavigator } from "./SavedNavigator"
 import { MyProfileNavigator } from "./MyProfileNavigator"
+import { MoreNavigator } from "./MoreNavigator"
 
 export type MainNavigatorParamList = {
   Suggestions: undefined
@@ -96,21 +95,9 @@ export const MainNavigator = () => {
       />
       <Tab.Screen
         name="More"
-        component={AuthNavigator}
+        component={MoreNavigator}
         options={{
-          header: (props: BottomTabHeaderProps) => (
-            <Header
-              titleTx={"more.title"}
-              RightActionComponent={
-                <Ionicons
-                  name={"notifications-outline"}
-                  size={20}
-                  color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
-                />
-              }
-            />
-          ),
+          headerShown: false
         }}
       />
     </Tab.Navigator>

@@ -37,7 +37,7 @@ const en = {
     },
     search: {
       placeholder: "Search from groups and idols",
-      filter: "Filter Listings"
+      filter: "Filter Listings",
     },
   },
   saved: {
@@ -46,11 +46,24 @@ const en = {
   myProfile: {
     title: "My Profile",
     edit: {
-      title: "Edit Profile"
-    }
+      title: "Edit Profile",
+    },
   },
   more: {
     title: "More",
+    biases: {
+      title: "My Biases"
+    },
+    settings: {
+      title: "Settings",
+      delete: "Delete Account",
+      password: "Change Password",
+      notifications: "Push Notifications",
+      security: "Security",
+      language: "Language",
+      country: "Country",
+      help: "Help Center",
+    }
   },
 }
 
