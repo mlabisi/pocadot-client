@@ -1,5 +1,5 @@
 import * as React from "react"
-import { StyleSheet, StyleProp, View, ViewStyle } from "react-native"
+import { StyleSheet, StyleProp, ViewStyle, TouchableOpacity, GestureResponderEvent } from "react-native"
 import { colors } from "../../theme"
 import { Octicons } from "@expo/vector-icons"
 import { observer } from "mobx-react-lite"
@@ -9,6 +9,8 @@ export interface SkipButtonProps {
    * An optional style override useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>
+
+  onPress: (event: GestureResponderEvent) => void
 }
 
 /**
@@ -16,9 +18,9 @@ export interface SkipButtonProps {
  */
 export const SkipButton = observer(function SkipButton(props: SkipButtonProps) {
   return (
-    <View style={[styles.LeftButton, props.style]}>
+    <TouchableOpacity style={[styles.LeftButton, props.style]} onPress={props.onPress}>
       <Octicons name={"x"} color={colors.palette.other.white} />
-    </View>
+    </TouchableOpacity>
   )
 })
 
