@@ -70,7 +70,7 @@ export const MainTabs = () => {
             LeftActionComponent={
               <TouchableOpacity
                 onPress={() => {
-                  props.navigation.navigate("Preferences")
+                  props.navigation.navigate("SuggestionPreferences")
                 }}
               >
                 <Ionicons name={"options-outline"} size={20} color={colors.tint} />

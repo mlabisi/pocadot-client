@@ -8,7 +8,7 @@ import { createNativeStackNavigator, NativeStackHeaderProps } from "@react-navig
 
 export type SuggestionsNavigatorParamList = {
   SuggestionsScreen: undefined
-  Preferences: undefined
+  SuggestionPreferences: undefined
 }
 
 const Stack = createNativeStackNavigator<SuggestionsNavigatorParamList>()
@@ -22,7 +22,7 @@ export const SuggestionsNavigator = () => {
             LeftActionComponent={
               <TouchableOpacity
                 onPress={() => {
-                  props.navigation.navigate("Preferences")
+                  props.navigation.navigate("SuggestionPreferences")
                 }}
               >
                 <Ionicons name={"options-outline"} size={20} color={colors.tint} />
@@ -42,7 +42,7 @@ export const SuggestionsNavigator = () => {
     >
       <Stack.Screen name="SuggestionsScreen" component={WelcomeScreen} />
       <Stack.Screen
-        name="Preferences"
+        name="SuggestionPreferences"
         component={WelcomeScreen}
         options={{
           header: (props: NativeStackHeaderProps) => (
