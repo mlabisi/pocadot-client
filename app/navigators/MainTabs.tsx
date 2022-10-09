@@ -1,22 +1,17 @@
 import React from "react"
 import { BottomTabHeaderProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { colors, spacing } from "../theme"
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
-import { ExploreNavigator } from "./ExploreNavigator"
-import { SavedNavigator } from "./SavedNavigator"
-import { MyProfileNavigator } from "./MyProfileNavigator"
-import { MoreNavigator } from "./MoreNavigator"
+import { Ionicons, MaterialCommunityIcons, Octicons } from "@expo/vector-icons"
 import { WelcomeScreen } from "../screens"
-import { NativeStackHeaderProps } from "@react-navigation/native-stack"
 import { Header } from "../components"
 import { TouchableOpacity } from "react-native"
 
 export type MainNavigatorParamList = {
   SuggestionsScreen: undefined
-  Explore: undefined
-  Saved: undefined
-  MyProfile: undefined
-  More: undefined
+  ExploreScreen: undefined
+  SavedScreen: undefined
+  MyProfileScreen: undefined
+  MoreScreen: undefined
 }
 
 const Tab = createBottomTabNavigator<MainNavigatorParamList>()
@@ -39,16 +34,16 @@ export const MainTabs = () => {
                   size={24}
                 />
               )
-            case "Explore":
+            case "ExploreScreen":
               iconName = focused ? "search" : "search-outline"
               break
-            case "Saved":
+            case "SavedScreen":
               iconName = focused ? "heart" : "heart-outline"
               break
-            case "MyProfile":
+            case "MyProfileScreen":
               iconName = focused ? "person" : "person-outline"
               break
-            case "More":
+            case "MoreScreen":
               iconName = focused
                 ? "ellipsis-horizontal-circle-sharp"
                 : "ellipsis-horizontal-circle-outline"
@@ -68,7 +63,8 @@ export const MainTabs = () => {
         tabBarShowLabel: false,
       })}
     >
-      <Tab.Screen name="SuggestionsScreen" component={WelcomeScreen} options={{header: (props: BottomTabHeaderProps) => (
+      <Tab.Screen name="SuggestionsScreen" component={WelcomeScreen} options={{
+        header: (props: BottomTabHeaderProps) => (
           <Header
             titleTx={"suggestions.title"}
             LeftActionComponent={
@@ -89,36 +85,96 @@ export const MainTabs = () => {
               />
             }
           />
-        ),}}/>
-
-      <Tab.Screen
-        name="Explore"
-        component={ExploreNavigator}
-        options={{
-          headerShown: false
-        }}
-      />
-      <Tab.Screen
-        name="Saved"
-        component={SavedNavigator}
-        options={{
-          headerShown: false
-        }}
-      />
-      <Tab.Screen
-        name="MyProfile"
-        component={MyProfileNavigator}
-        options={{
-          headerShown: false
-        }}
-      />
-      <Tab.Screen
-        name="More"
-        component={MoreNavigator}
-        options={{
-          headerShown: false
-        }}
-      />
+        ),
+      }} />
+      <Tab.Screen name="ExploreScreen" component={WelcomeScreen} options={{
+        header: (props: BottomTabHeaderProps) => (
+          <Header
+            titleTx={"explore.title"}
+            LeftActionComponent={
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("AddListing")
+                }}
+              >
+                <Octicons
+                  name={"diff-added"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              </TouchableOpacity>
+            }
+            RightActionComponent={
+              <Ionicons
+                name={"notifications-outline"}
+                size={20}
+                color={colors.tint}
+                style={{ paddingLeft: spacing.medium }}
+              />
+            }
+          />
+        ),
+      }} />
+      <Tab.Screen name="SavedScreen" component={WelcomeScreen} options={{
+          header: () => (
+            <Header
+              titleTx={"saved.title"}
+              RightActionComponent={
+                <Ionicons
+                  name={"notifications-outline"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              }
+            />
+          ),
+        }} />
+      <Tab.Screen name="MyProfileScreen" component={WelcomeScreen} options={{
+          header: (props: BottomTabHeaderProps) => (
+            <Header
+              titleTx={"myProfile.title"}
+              LeftActionComponent={
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("EditProfile")
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name={"pencil-box-outline"}
+                    size={20}
+                    color={colors.tint}
+                    style={{ paddingLeft: spacing.medium }}
+                  />
+                </TouchableOpacity>
+              }
+              RightActionComponent={
+                <Ionicons
+                  name={"notifications-outline"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              }
+            />
+          ),
+        }} />
+      <Tab.Screen name="MoreScreen" component={WelcomeScreen} options={{
+          header: () => (
+            <Header
+              titleTx={"more.title"}
+              RightActionComponent={
+                <Ionicons
+                  name={"notifications-outline"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              }
+            />
+          ),
+        }} />
     </Tab.Navigator>
   )
 }

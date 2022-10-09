@@ -45,6 +45,8 @@ const en = {
   },
   myProfile: {
     title: "My Profile",
+    listings: "My Listings",
+    offers: "My Offers",
     edit: {
       title: "Edit Profile",
     },

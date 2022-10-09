@@ -53,7 +53,33 @@ export const MyProfileNavigator = () => {
         name="MyProfileScreen"
         component={WelcomeScreen}
         options={{
-          headerTransparent: false,
+          header: (props: NativeStackHeaderProps) => (
+            <Header
+              titleTx={"myProfile.title"}
+              LeftActionComponent={
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("EditProfile")
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name={"pencil-box-outline"}
+                    size={20}
+                    color={colors.tint}
+                    style={{ paddingLeft: spacing.medium }}
+                  />
+                </TouchableOpacity>
+              }
+              RightActionComponent={
+                <Ionicons
+                  name={"notifications-outline"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              }
+            />
+          ),
         }}
       />
       <Stack.Screen

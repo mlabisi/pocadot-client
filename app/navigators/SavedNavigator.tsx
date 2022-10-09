@@ -35,7 +35,19 @@ export const SavedNavigator = () => {
         name="SavedScreen"
         component={WelcomeScreen}
         options={{
-          headerTransparent: false,
+          header: (props: NativeStackHeaderProps) => (
+            <Header
+              titleTx={"saved.title"}
+              RightActionComponent={
+                <Ionicons
+                  name={"notifications-outline"}
+                  size={20}
+                  color={colors.tint}
+                  style={{ paddingLeft: spacing.medium }}
+                />
+              }
+            />
+          ),
         }}
       />
     </Stack.Navigator>
