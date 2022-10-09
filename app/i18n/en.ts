@@ -45,6 +45,9 @@ const en = {
   },
   myProfile: {
     title: "My Profile",
+    edit: {
+      title: "Edit Profile"
+    }
   },
   more: {
     title: "More",

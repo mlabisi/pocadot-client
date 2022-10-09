@@ -6,6 +6,8 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import { Header } from "../components"
 import { SuggestionsNavigator } from "./SuggestionsNavigator"
 import { ExploreNavigator } from "./ExploreNavigator"
+import { SavedNavigator } from "./SavedNavigator"
+import { MyProfileNavigator } from "./MyProfileNavigator"
 
 export type MainNavigatorParamList = {
   Suggestions: undefined
@@ -80,40 +82,16 @@ export const MainNavigator = () => {
       />
       <Tab.Screen
         name="Saved"
-        component={AuthNavigator}
+        component={SavedNavigator}
         options={{
-          header: (props: BottomTabHeaderProps) => (
-            <Header
-              titleTx={"saved.title"}
-              RightActionComponent={
-                <Ionicons
-                  name={"notifications-outline"}
-                  size={20}
-                  color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
-                />
-              }
-            />
-          ),
+          headerShown: false
         }}
       />
       <Tab.Screen
         name="MyProfile"
-        component={AuthNavigator}
+        component={MyProfileNavigator}
         options={{
-          header: (props: BottomTabHeaderProps) => (
-            <Header
-              titleTx={"myProfile.title"}
-              RightActionComponent={
-                <Ionicons
-                  name={"notifications-outline"}
-                  size={20}
-                  color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
-                />
-              }
-            />
-          ),
+          headerShown: false
         }}
       />
       <Tab.Screen

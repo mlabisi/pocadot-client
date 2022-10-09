@@ -1,6 +1,6 @@
 import { Platform } from "react-native"
 
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
 import { Jua_400Regular as juaRegular } from "@expo-google-fonts/jua"
 import {
   Urbanist_400Regular as urbanistRegular,
@@ -19,6 +19,7 @@ export const customFontsToLoad = {
   urbanistBold,
   ionIcons: Ionicons.font.ionicons,
   materialCommunityIcons: MaterialCommunityIcons.font['material-community'],
+  octicons: Octicons.font.octicons
 }
 
 const fonts = {
