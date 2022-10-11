@@ -2,6 +2,7 @@ import * as React from "react"
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors} from "../../theme"
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
 
 export interface CardProps {
   /**
@@ -29,16 +30,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.palette.other.white,
     borderRadius: 28,
     display: "flex",
-    elevation: 6,
+    elevation: 8,
     flexDirection: "column",
-    height: 513.79,
+    height: hp(50),
     justifyContent: "center",
-    paddingBottom: 23,
-    paddingLeft: 13,
-    paddingRight: 13,
-    paddingTop: 13,
-    shadowColor: colors.palette.other.black,
-    shadowOffset: { width: 0, height: 4 },
-    width: 343,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    width: wp(80),
   },
 })
