@@ -1,5 +1,11 @@
 import * as React from "react"
-import { StyleSheet, StyleProp, ViewStyle, TouchableOpacity, GestureResponderEvent } from "react-native"
+import {
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  TouchableOpacity,
+  GestureResponderEvent,
+} from "react-native"
 import { colors } from "../../theme"
 import { Octicons } from "@expo/vector-icons"
 import { observer } from "mobx-react-lite"
@@ -19,7 +25,7 @@ export interface SkipButtonProps {
 export const SkipButton = observer(function SkipButton(props: SkipButtonProps) {
   return (
     <TouchableOpacity style={[styles.LeftButton, props.style]} onPress={props.onPress}>
-      <Octicons name={"x"} color={colors.palette.other.white} />
+      <Octicons name={"x"} color={colors.palette.other.white} size={20}/>
     </TouchableOpacity>
   )
 })
@@ -32,14 +38,8 @@ const styles = StyleSheet.create({
     display: "flex",
     elevation: 3,
     flexDirection: "column",
-    height: 25,
+    height: 30,
     justifyContent: "center",
-    paddingBottom: 15,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 15,
-    shadowColor: colors.palette.other.black,
-    shadowOffset: { width: 0, height: 20 },
-    width: 25,
+    width: 30,
   },
 })
