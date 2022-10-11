@@ -3,9 +3,9 @@ import { observer } from "mobx-react-lite"
 import { StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
-import { MainNavigatorParamList } from "../navigators"
-import { SuggestionCard, Text } from "../components"
-import { colors } from "../theme"
+import { MainNavigatorParamList } from "../../navigators"
+import { SuggestionCard, Text } from "../../components"
+import { colors } from "../../theme"
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -13,6 +13,10 @@ import {
 import Animated from "react-native-reanimated"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
+
+const nayeon = require("./nayeon.png");
+const seulgi = require("./seulgi.png");
+const j = require("./j.png");
 
 const cardHeight = hp(60)
 const cardWidth = wp(90)
@@ -22,16 +26,19 @@ const suggestions = [
     artistName: "Nayeon",
     releaseName: "IM NAYEON",
     listingTag: "WTS",
+    image: nayeon,
   },
   {
     artistName: "Seulgi",
     releaseName: "28 Reasons",
     listingTag: "WTT",
+    image: seulgi,
   },
   {
     artistName: "J",
-    releaseName: "BEAUTIFUL MONSTER",
+    releaseName: "SO BAD",
     listingTag: "WTS/WTT",
+    image: j,
   },
 ]
 
@@ -54,6 +61,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
           artistName={props.artistName}
           releaseName={props.releaseName}
           listingTag={props.listingTag}
+          image={props.image}
           cardHeight={cardHeight}
           cardWidth={cardWidth}
           swiper={swiperRef}
@@ -82,12 +90,11 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
           ref={swiperRef}
           cards={suggestions}
           onSwiping={(x, y) => {
-            if (Math.abs(x) > Math.abs(y) && Math.abs(x) > (cardWidth * 0.25)) {
+            if (Math.abs(x) > Math.abs(y) && Math.abs(x) > cardWidth * 0.25) {
               if (x > 0) {
                 setIsSwipingRight(true)
                 setIsSwipingLeft(false)
-              }
-              else {
+              } else {
                 setIsSwipingLeft(true)
                 setIsSwipingRight(false)
               }
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
   Root: {
     backgroundColor: colors.background,
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   SaveOverlay: {
     alignContent: "center",

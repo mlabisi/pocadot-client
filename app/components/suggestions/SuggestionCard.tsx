@@ -10,6 +10,7 @@ import { Card } from "../common/Card"
 import { widthPercentageToDP as wp } from "react-native-responsive-screen"
 import Swiper from "react-native-deck-swiper"
 import { MutableRefObject } from "react"
+import { AutoImage } from "../ignite/AutoImage"
 
 export interface SuggestionCardProps {
   cardHeight: number
@@ -27,6 +28,8 @@ export interface SuggestionCardProps {
   setIsSwipingLeft:  React.Dispatch<React.SetStateAction<boolean>>
 
   setIsSwipingRight:  React.Dispatch<React.SetStateAction<boolean>>
+
+  image: any
 }
 
 /**
@@ -38,7 +41,7 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
   return (
     <Card height={props.cardHeight} width={props.cardWidth}>
       <View style={[styles.AutoLayoutVertical, {height: props.cardHeight}]}>
-        <View style={[styles.Image, { width: picDimensions, height: picDimensions }]} />
+        <AutoImage source={props.image} style={[styles.Image, { width: picDimensions, height: picDimensions }]} />
         <Text preset={"h6"} style={styles.ArtistName}>{props.artistName}</Text>
         <Text preset={"bodyXS"} style={styles.ReleaseName}>{props.releaseName}</Text>
         <View style={styles.AutoLayoutHorizontal}>
