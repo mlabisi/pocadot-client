@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useRef, useState } from "react"
+import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
@@ -22,7 +22,7 @@ const j = require("./j.png")
 const cardHeight = hp(60)
 const cardWidth = wp(90)
 
-const mockSuggestions = [
+const suggestions = [
   {
     artistName: "Nayeon",
     releaseName: "IM NAYEON",
@@ -54,8 +54,6 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
     const [isSwipingLeft, setIsSwipingLeft] = useState(false)
     const [isSwipingRight, setIsSwipingRight] = useState(false)
     const [swipedAll, setSwipedAll] = useState(false)
-
-    const [suggestions, setSuggestions] = useState(mockSuggestions)
 
     const swiperRef = useRef<Swiper<any>>(null)
 
@@ -127,7 +125,10 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
         />
         {swipedAll && (
           <Card
-            style={[styles.CardStyle, {top: (hp(100) - cardHeight) * 0.0625, left: (wp(100) - cardWidth) * 0.5 }]}
+            style={[
+              styles.CardStyle,
+              { top: (hp(100) - cardHeight) * 0.0625, left: (wp(100) - cardWidth) * 0.5 },
+            ]}
             height={cardHeight}
             width={cardWidth}
           >
@@ -141,7 +142,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
                 swiperRef.current.jumpToCardIndex(0)
               }}
               text={
-                <Text preset={"h6"} style={{ color: colors.palette.other.white, paddingLeft: 5 }}>
+                <Text preset={"h6"} style={styles.ButtonText}>
                   Review
                 </Text>
               }
@@ -154,6 +155,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
   })
 
 const styles = StyleSheet.create({
+  ButtonText: { color: colors.palette.other.white, paddingLeft: 5 },
   CardStyle: {
     marginTop: (hp(100) - cardHeight) * 0.0625,
   },
