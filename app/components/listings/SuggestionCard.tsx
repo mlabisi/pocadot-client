@@ -10,6 +10,10 @@ import { Card } from "../common/Card"
 import { widthPercentageToDP as wp } from "react-native-responsive-screen"
 
 export interface SuggestionCardProps {
+  cardHeight: number
+
+  cardWidth: number
+
   artistName: string
 
   releaseName: string
@@ -21,21 +25,22 @@ export interface SuggestionCardProps {
  * Suggestion card for users to choose to skip, save, or view
  */
 export const SuggestionCard = observer(function SuggestionCard(props: SuggestionCardProps) {
+  const picDimensions = props.cardWidth * 0.85
 
   return (
-    <Card>
-        <View style={styles.Image} />
+    <Card height={props.cardHeight} width={props.cardWidth}>
+      <View style={[styles.AutoLayoutVertical, {height: props.cardHeight}]}>
+        <View style={[styles.Image, { width: picDimensions, height: picDimensions }]} />
         <Text preset={"h6"} style={styles.ArtistName}>{props.artistName}</Text>
         <Text preset={"bodyXS"} style={styles.ReleaseName}>{props.releaseName}</Text>
         <View style={styles.AutoLayoutHorizontal}>
           <ListingTag tag={props.listingTag} />
         </View>
-        <View style={styles.Buttons}>
-          <SkipButton onPress={() => {/****/
-          }} />
-          <SaveButton onPress={() => {/****/
-          }} />
+        <View style={[styles.Buttons, { width: wp(75), paddingTop: props.cardHeight * .10 }]}>
+          <SkipButton onPress={() => {/****/}} />
+          <SaveButton onPress={() => {/****/}} />
         </View>
+      </View>
     </Card>
 
   )
@@ -44,7 +49,8 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
 const styles = StyleSheet.create({
   ArtistName: {
     lineHeight: 22,
-    marginBottom: 3
+    marginBottom: 3,
+    marginTop: 30
   },
   AutoLayoutHorizontal: {
     alignItems: "center",
@@ -57,22 +63,27 @@ const styles = StyleSheet.create({
     paddingRight: 0,
     paddingTop: 4,
   },
+  AutoLayoutVertical: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    paddingBottom: 20,
+  },
   Buttons: {
     alignItems: "flex-start",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    width: wp(75),
   },
   Image: {
     backgroundColor: colors.palette.greyscale["100"],
     borderRadius: 20,
-    height: wp(65),
     marginBottom: 10,
-    width: wp(65),
+    paddingTop: 25,
   },
   ReleaseName: {
-    color: colors.palette.greyscale["700"]
+    color: colors.palette.greyscale["700"],
   },
 })

@@ -5,10 +5,9 @@ import { colors} from "../../theme"
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
 
 export interface CardProps {
-  /**
-   * An optional style override useful for padding & margin.
-   */
-  style?: StyleProp<ViewStyle>
+  height: number
+
+  width: number
 
   children: any
 }
@@ -18,7 +17,7 @@ export interface CardProps {
  */
 export const Card = observer(function Card(props: CardProps) {
   return (
-    <View style={styles.Card}>
+    <View style={[styles.Card, {width: props.width, height: props.height}]}>
       {props.children}
     </View>
   )
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
     display: "flex",
     elevation: 8,
     flexDirection: "column",
-    height: hp(50),
     justifyContent: "center",
     shadowOffset: {
       width: 0,
@@ -40,6 +38,5 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 10,
-    width: wp(80),
   },
 })
