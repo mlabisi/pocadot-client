@@ -1,10 +1,10 @@
 import React, { FC, useRef } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../navigators"
-import { SuggestionCard} from "../components"
+import { SuggestionCard, Text } from "../components"
 import { colors } from "../theme"
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
 // import { useNavigation } from "@react-navigation/native"
@@ -43,25 +43,67 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
   const renderSuggestionCard = (props) => {
     return (
       <SuggestionCard artistName={props.artistName} releaseName={props.releaseName} listingTag={props.listingTag}
-                      cardHeight={cardHeight} cardWidth={cardWidth} swiper={swiperRef}/>)
+                      cardHeight={cardHeight} cardWidth={cardWidth} swiper={swiperRef} />)
   }
   return (
-    <Swiper
-      ref={swiperRef}
-      cards={suggestions}
-      verticalSwipe={false}
-      stackScale={10}
-      stackSeparation={25}
-      renderCard={renderSuggestionCard}
-      stackSize={3}
-      containerStyle={styles.Root}
-      cardHorizontalMargin={(wp(100) - cardWidth) * 0.5}
-    />
+    <>
+      {/* {swiperRef.current?.state.labelType === 'left' &&  */}
+      <View style={styles.SkipOverlay}>
+        <Text preset={"h6"} style={styles.OverlayText}>Not
+          Interested!</Text>
+      </View>
+      {/* } */}
+      {/* {swiperRef.current?.state.labelType === 'right' && */}
+      <View style={styles.SaveOverlay}>
+        <Text preset={"h6"} style={styles.OverlayText}>Saved!</Text>
+      </View>
+      {/* } */}
+      <Swiper
+        ref={swiperRef}
+        cards={suggestions}
+        verticalSwipe={false}
+        stackScale={10}
+        stackSeparation={25}
+        renderCard={renderSuggestionCard}
+        stackSize={3}
+        containerStyle={styles.Root}
+        cardHorizontalMargin={(wp(100) - cardWidth) * 0.5}
+        cardStyle={styles.CardStyle}
+      />
+    </>
   )
 })
 
 const styles = StyleSheet.create({
+  CardStyle: {
+    marginTop: (hp(100) - cardHeight) * 0.0625,
+  },
+  OverlayText: {
+    color: colors.palette.other.white,
+    textAlign: "center",
+  },
   Root: {
     backgroundColor: colors.background,
+  },
+  SaveOverlay: {
+    alignContent: "center",
+    backgroundColor: colors.tint,
+    borderRadius: 100,
+    elevation: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    top: 0,
+    width: 380,
+    zIndex: 10,
+  },
+  SkipOverlay: {
+    alignContent: "center",
+    backgroundColor: colors.palette.status.error,
+    borderRadius: 100,
+    elevation: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    width: 380,
+    zIndex: 10,
   },
 })
