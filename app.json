@@ -6,7 +6,7 @@
     "slug": "PocadotApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/ignite/app-icon-all.png",
+    "icon": "./assets/images/app-icon-all.png",
     "splash": {
       "image": "./assets/images/splash-logo-all.png",
       "resizeMode": "contain",
@@ -20,11 +20,11 @@
       "**/*"
     ],
     "android": {
-      "icon": "./assets/images/ignite/app-icon-android-legacy.png",
+      "icon": "./assets/images/app-icon-android-legacy.png",
       "package": "com.morasaek.pocadot",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/ignite/app-icon-android-adaptive-foreground.png",
-        "backgroundImage": "./assets/images/ignite/app-icon-android-adaptive-background.png"
+        "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
+        "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
       },
       "splash": {
         "image": "./assets/images/splash-logo-android-universal.png",
@@ -33,7 +33,7 @@
       }
     },
     "ios": {
-      "icon": "./assets/images/ignite/app-icon-ios.png",
+      "icon": "./assets/images/app-icon-ios.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.morasaek.pocadot",
       "splash": {
@@ -44,7 +44,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/images/ignite/app-icon-web-favicon.png",
+      "favicon": "./assets/images/app-icon-web-favicon.png",
       "splash": {
         "image": "./assets/images/splash-logo-web.png",
         "resizeMode": "contain",
