@@ -1,5 +1,5 @@
 import * as React from "react"
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native"
+import { StyleSheet, View} from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors } from "../../theme"
 import { Text } from "../ignite/Text"
@@ -8,6 +8,8 @@ import { SkipButton } from "./SkipButton"
 import { SaveButton } from "./SaveButton"
 import { Card } from "../common/Card"
 import { widthPercentageToDP as wp } from "react-native-responsive-screen"
+import Swiper from "react-native-deck-swiper"
+import { MutableRefObject } from "react"
 
 export interface SuggestionCardProps {
   cardHeight: number
@@ -19,6 +21,8 @@ export interface SuggestionCardProps {
   releaseName: string
 
   listingTag: string
+
+  swiper: MutableRefObject<Swiper<any>>
 }
 
 /**
@@ -36,9 +40,9 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
         <View style={styles.AutoLayoutHorizontal}>
           <ListingTag tag={props.listingTag} />
         </View>
-        <View style={[styles.Buttons, { width: wp(75), paddingTop: props.cardHeight * .10 }]}>
-          <SkipButton onPress={() => {/****/}} />
-          <SaveButton onPress={() => {/****/}} />
+        <View style={[styles.Buttons, { width: wp(75)}]}>
+          <SkipButton onPress={() => props.swiper.current.swipeLeft()} />
+          <SaveButton onPress={() => props.swiper.current.swipeRight()} />
         </View>
       </View>
     </Card>

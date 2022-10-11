@@ -1,17 +1,17 @@
-import React, { FC } from "react"
+import React, { FC, useRef } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ViewStyle, StyleSheet } from "react-native"
+import { StyleSheet } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../navigators"
-import { Screen, SuggestionCard, Text } from "../components"
+import { SuggestionCard} from "../components"
 import { colors } from "../theme"
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
-const cardHeight = hp(60);
-const cardWidth = wp(80);
+const cardHeight = hp(60)
+const cardWidth = wp(90)
 
 const suggestions = [
   {
@@ -38,12 +38,16 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
   // Pull in navigation via hook
   // const navigation = useNavigation()
 
+  const swiperRef = useRef<Swiper<any>>(null)
+
   const renderSuggestionCard = (props) => {
     return (
-      <SuggestionCard artistName={props.artistName} releaseName={props.releaseName} listingTag={props.listingTag} cardHeight={cardHeight} cardWidth={cardWidth} />)
+      <SuggestionCard artistName={props.artistName} releaseName={props.releaseName} listingTag={props.listingTag}
+                      cardHeight={cardHeight} cardWidth={cardWidth} swiper={swiperRef}/>)
   }
   return (
-      <Swiper
+    <Swiper
+      ref={swiperRef}
       cards={suggestions}
       verticalSwipe={false}
       stackScale={10}
@@ -58,6 +62,6 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
 
 const styles = StyleSheet.create({
   Root: {
-    backgroundColor: colors.background
-  }
+    backgroundColor: colors.background,
+  },
 })

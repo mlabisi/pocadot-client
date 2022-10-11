@@ -1,8 +1,7 @@
 import * as React from "react"
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native"
+import { StyleSheet, View} from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors} from "../../theme"
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
 
 export interface CardProps {
   height: number
