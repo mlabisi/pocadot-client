@@ -23,6 +23,10 @@ export interface SuggestionCardProps {
   listingTag: string
 
   swiper: MutableRefObject<Swiper<any>>
+
+  setIsSwipingLeft:  React.Dispatch<React.SetStateAction<boolean>>
+
+  setIsSwipingRight:  React.Dispatch<React.SetStateAction<boolean>>
 }
 
 /**
@@ -41,8 +45,14 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
           <ListingTag tag={props.listingTag} />
         </View>
         <View style={[styles.Buttons, { width: wp(75)}]}>
-          <SkipButton onPress={() => props.swiper.current.swipeLeft()} />
-          <SaveButton onPress={() => props.swiper.current.swipeRight()} />
+          <SkipButton onPress={() => {
+            props.swiper.current.swipeLeft()
+            props.setIsSwipingLeft(true)
+          }} />
+          <SaveButton onPress={() => {
+            props.swiper.current.swipeRight()
+            props.setIsSwipingRight(true)
+          }} />
         </View>
       </View>
     </Card>
