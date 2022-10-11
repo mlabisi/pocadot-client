@@ -1,9 +1,12 @@
 import * as React from "react"
-import { StyleSheet, View} from "react-native"
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors} from "../../theme"
 
 export interface CardProps {
+
+  style?: StyleProp<ViewStyle>
+
   height: number
 
   width: number
@@ -16,7 +19,7 @@ export interface CardProps {
  */
 export const Card = observer(function Card(props: CardProps) {
   return (
-    <View style={[styles.Card, {width: props.width, height: props.height}]}>
+    <View style={[styles.Card, props.style, {width: props.width, height: props.height}]}>
       {props.children}
     </View>
   )

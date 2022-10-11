@@ -4,24 +4,25 @@ import { StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
-import { SuggestionCard, Text } from "../../components"
+import { Card, SuggestionCard, Text, TintedButton } from "../../components"
 import { colors } from "../../theme"
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen"
 import Animated from "react-native-reanimated"
+import { Ionicons } from "@expo/vector-icons"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
-const nayeon = require("./nayeon.png");
-const seulgi = require("./seulgi.png");
-const j = require("./j.png");
+const nayeon = require("./nayeon.png")
+const seulgi = require("./seulgi.png")
+const j = require("./j.png")
 
 const cardHeight = hp(60)
 const cardWidth = wp(90)
 
-const suggestions = [
+const mockSuggestions = [
   {
     artistName: "Nayeon",
     releaseName: "IM NAYEON",
@@ -52,6 +53,9 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
 
     const [isSwipingLeft, setIsSwipingLeft] = useState(false)
     const [isSwipingRight, setIsSwipingRight] = useState(false)
+    const [swipedAll, setSwipedAll] = useState(false)
+
+    const [suggestions, setSuggestions] = useState(mockSuggestions)
 
     const swiperRef = useRef<Swiper<any>>(null)
 
@@ -109,6 +113,9 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
           onSwipedRight={() => {
             setIsSwipingRight(false)
           }}
+          onSwipedAll={() => {
+            setSwipedAll(true)
+          }}
           verticalSwipe={false}
           stackScale={10}
           stackSeparation={25}
@@ -118,6 +125,30 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
           cardHorizontalMargin={(wp(100) - cardWidth) * 0.5}
           cardStyle={styles.CardStyle}
         />
+        {swipedAll && (
+          <Card
+            style={[styles.CardStyle, {top: (hp(100) - cardHeight) * 0.0625, left: (wp(100) - cardWidth) * 0.5 }]}
+            height={cardHeight}
+            width={cardWidth}
+          >
+            <Text style={styles.MessageText}>
+              Check back later for more recommendations, or click the button below to review your
+              already-seen photocard suggestions!
+            </Text>
+            <TintedButton
+              onPress={() => {
+                setSwipedAll(false)
+                swiperRef.current.jumpToCardIndex(0)
+              }}
+              text={
+                <Text preset={"h6"} style={{ color: colors.palette.other.white, paddingLeft: 5 }}>
+                  Review
+                </Text>
+              }
+              icon={<Ionicons name={"refresh"} color={colors.palette.other.white} />}
+            />
+          </Card>
+        )}
       </>
     )
   })
@@ -125,6 +156,10 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
 const styles = StyleSheet.create({
   CardStyle: {
     marginTop: (hp(100) - cardHeight) * 0.0625,
+  },
+  MessageText: {
+    paddingHorizontal: 15,
+    textAlign: "center",
   },
   OverlayText: {
     color: colors.palette.other.white,
