@@ -8,15 +8,17 @@
     "orientation": "portrait",
     "icon": "./assets/images/ignite/app-icon-all.png",
     "splash": {
-      "image": "./assets/images/ignite/splash-logo-all.png",
+      "image": "./assets/images/splash-logo-all.png",
       "resizeMode": "contain",
-      "backgroundColor": "#191015"
+      "backgroundColor": "#a3b0ef"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "jsEngine": "hermes",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "icon": "./assets/images/ignite/app-icon-android-legacy.png",
       "package": "com.morasaek.pocadot",
@@ -25,9 +27,9 @@
         "backgroundImage": "./assets/images/ignite/app-icon-android-adaptive-background.png"
       },
       "splash": {
-        "image": "./assets/images/ignite/splash-logo-android-universal.png",
+        "image": "./assets/images/splash-logo-android-universal.png",
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#a3b0ef"
       }
     },
     "ios": {
@@ -35,18 +37,18 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.morasaek.pocadot",
       "splash": {
-        "image": "./assets/images/ignite/splash-logo-ios-mobile.png",
+        "image": "./assets/images/splash-logo-ios-mobile.png",
         "tabletImage": "./assets/images/ignite/splash-logo-ios-tablet.png",
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#a3b0ef"
       }
     },
     "web": {
       "favicon": "./assets/images/ignite/app-icon-web-favicon.png",
       "splash": {
-        "image": "./assets/images/ignite/splash-logo-web.png",
+        "image": "./assets/images/splash-logo-web.png",
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#a3b0ef"
       }
     }
   }
