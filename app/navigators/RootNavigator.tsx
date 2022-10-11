@@ -41,7 +41,6 @@ export type AppStackParamList = {
 
   SuggestionPreferences: undefined
 
-  ExploreScreen: undefined
   AddListing: undefined
   Curation: undefined
   FeaturedListings: undefined

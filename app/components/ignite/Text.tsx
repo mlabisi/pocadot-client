@@ -80,6 +80,12 @@ const $sizeStyles = {
   sm: { fontSize: 16, lineHeight: 24 } as TextStyle,
   xs: { fontSize: 14, lineHeight: 21 } as TextStyle,
   xxs: { fontSize: 12, lineHeight: 18 } as TextStyle,
+  h1: { fontSize: 48, lineHeight: 44 } as TextStyle,
+  h2: { fontSize: 40, lineHeight: 44 } as TextStyle,
+  h3: { fontSize: 32, lineHeight: 44 } as TextStyle,
+  h4: { fontSize: 24, lineHeight: 44 } as TextStyle,
+  h5: { fontSize: 20, lineHeight: 44 } as TextStyle,
+  h6: { fontSize: 18, lineHeight: 44 } as TextStyle,
 }
 
 const $fontWeightStyles = Object.entries(typography.primary).reduce((acc, [weight, fontFamily]) => {
@@ -104,6 +110,22 @@ const $presets = {
   formLabel: [$baseStyle, $fontWeightStyles.medium] as StyleProp<TextStyle>,
 
   formHelper: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+
+  h1: [$baseStyle, $sizeStyles.h1, {fontFamily: typography.secondary.normal}] as StyleProp<TextStyle>,
+  h2: [$baseStyle, $sizeStyles.h2, {fontFamily: typography.secondary.normal}] as StyleProp<TextStyle>,
+  h3: [$baseStyle, $sizeStyles.h3, {fontFamily: typography.secondary.normal}] as StyleProp<TextStyle>,
+  h4: [$baseStyle, $sizeStyles.h4, {fontFamily: typography.secondary.normal}] as StyleProp<TextStyle>,
+  h5: [$baseStyle, $sizeStyles.h5, {fontFamily: typography.secondary.normal}] as StyleProp<TextStyle>,
+  h6: [$baseStyle, $sizeStyles.h6, {fontFamily: typography.secondary.normal}] as StyleProp<TextStyle>,
+
+  bodyXXS: [$baseStyle, $sizeStyles.xxs, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+  bodyXS: [$baseStyle, $sizeStyles.xs, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+  bodySM: [$baseStyle, $sizeStyles.sm, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+  bodyMD: [$baseStyle, $sizeStyles.md, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+  bodyLG: [$baseStyle, $sizeStyles.lg, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+  bodyXL: [$baseStyle, $sizeStyles.xl, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+  bodyXXL: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.normal] as StyleProp<TextStyle>,
+
 }
 
 const $rtlStyle: TextStyle = isRTL ? { writingDirection: "rtl" } : {}

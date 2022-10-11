@@ -2,7 +2,7 @@ import React from "react"
 import { BottomTabHeaderProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { colors, spacing } from "../theme"
 import { Ionicons, MaterialCommunityIcons, Octicons } from "@expo/vector-icons"
-import { WelcomeScreen } from "../screens"
+import { SuggestionsScreen, WelcomeScreen } from "../screens"
 import { Header } from "../components"
 import { TouchableOpacity } from "react-native"
 
@@ -63,7 +63,7 @@ export const MainTabs = () => {
         tabBarShowLabel: false,
       })}
     >
-      <Tab.Screen name="SuggestionsScreen" component={WelcomeScreen} options={{
+      <Tab.Screen name="SuggestionsScreen" component={SuggestionsScreen} options={{
         header: (props: BottomTabHeaderProps) => (
           <Header
             titleTx={"suggestions.title"}

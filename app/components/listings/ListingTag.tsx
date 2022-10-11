@@ -1,7 +1,7 @@
 import * as React from "react"
 import { StyleSheet, StyleProp, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors} from "../../theme"
+import { colors, typography } from "../../theme"
 import { Text } from "../ignite/Text"
 
 export interface ListingTagProps {
@@ -31,18 +31,13 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     display: "flex",
     flexDirection: "row",
-    height: 14,
     justifyContent: "center",
-    paddingBottom: 5,
-    paddingLeft: 9,
-    paddingRight: 9,
-    paddingTop: 5,
-    width: 74,
+    paddingHorizontal: 10,
   },
   TagText: {
     color: colors.tint,
+    fontFamily: typography.fonts.urbanist.bold,
     fontSize: 8,
-    fontWeight: "600",
     letterSpacing: 0.2,
   },
 })
