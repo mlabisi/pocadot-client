@@ -1,12 +1,14 @@
 import * as React from "react"
 import {
   ScrollView,
-  StyleProp,
+  StyleProp, StyleSheet,
   ViewStyle,
 } from "react-native"
 import { observer } from "mobx-react-lite"
 import { Tab} from "./Tab"
 import { widthPercentageToDP } from "react-native-responsive-screen"
+import { colors, typography } from "../../theme"
+import { MutableRefObject } from "react"
 
 export interface TabsProps {
   /**
@@ -15,6 +17,10 @@ export interface TabsProps {
   style?: StyleProp<ViewStyle>
 
   tabs: { label: string }[]
+
+  tabWidth: number
+
+  tabContent: MutableRefObject<ScrollView>
 
   selectedIndex: number
 
@@ -25,7 +31,6 @@ export interface TabsProps {
  * Describe your component here
  */
 export const Tabs = observer(function Tabs(props: TabsProps) {
-  const width = widthPercentageToDP(100) / props.tabs.length
   return (
     <ScrollView
       scrollEnabled={false}
@@ -42,7 +47,8 @@ export const Tabs = observer(function Tabs(props: TabsProps) {
             index={i}
             selectedIndex={props.selectedIndex}
             setSelectedIndex={props.setSelectedIndex}
-            width={width}
+            width={props.tabWidth}
+            tabContent={props.tabContent}
           />
         )
       })}

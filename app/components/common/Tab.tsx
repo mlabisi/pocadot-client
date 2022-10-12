@@ -1,8 +1,10 @@
 import * as React from "react"
-import { StyleProp, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from "react-native"
+import { ScrollView, StyleProp, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, spacing, typography } from "../../theme"
 import { Text } from "../"
+import { MutableRefObject } from "react"
+import { widthPercentageToDP } from "react-native-responsive-screen"
 
 export interface TabProps {
   /**
@@ -19,6 +21,8 @@ export interface TabProps {
   setSelectedIndex: React.Dispatch<React.SetStateAction<number>>
 
   width: number
+
+  tabContent: MutableRefObject<ScrollView>
 }
 
 /**
@@ -31,6 +35,7 @@ export const Tab = observer(function Tab(props: TabProps) {
       style={{ width: props.width }}
       onPress={() => {
         props.setSelectedIndex(props.index)
+        props.tabContent.current.scrollTo({x: widthPercentageToDP(100) * props.index, animated: true} )
       }}
     >
       <View style={{ width: props.width }}>
