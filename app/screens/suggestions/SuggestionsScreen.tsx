@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     paddingLeft: spacing.extraSmall,
   },
   CardStyle: {
-    top: (hp(100) - cardHeight) * 0.2,
+    top: (hp(100) - cardHeight) * 0.25,
   },
   MessageText: {
     paddingHorizontal: spacing.medium,

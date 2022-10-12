@@ -19,32 +19,30 @@ export const SuggestionPreferencesScreen: FC<
 
   return (
     <Screen preset={"scroll"}>
-      <View style={styles.Column}>
-        <View style={styles.Container}>
-          <Text preset={"bodySM"} style={styles.SectionTitle}>
-            Personal Preferences
-          </Text>
-          <View style={styles.Column}>
-            <LightDivider style={styles.Divider} />
-            <OptionRow
-              icon={<Icon icon={"fingerHeart"} />}
-              title={"My Biases"}
-              description={"Update your biases to help pocadot make better recommendations!"}
-            />
-          </View>
+      <View style={styles.Container}>
+        <Text preset={"bodySM"} style={styles.SectionTitle}>
+          Personal Preferences
+        </Text>
+        <View style={styles.Column}>
+          <LightDivider style={styles.Divider} />
+          <OptionRow
+            iconName={"fingerHeart"}
+            title={"My Biases"}
+            description={"Update your biases to help pocadot make better recommendations!"}
+          />
         </View>
-        <View style={styles.Container}>
-          <Text preset={"bodySM"} style={styles.SectionTitle}>
-            Recommendation Preferences
-          </Text>
-          <View style={styles.Column}>
-            <LightDivider style={styles.Divider} />
-            <View style={styles.Row}>
-              <Text preset={"bodySM"} style={styles.SwitchLabel}>
-                Only show me listings that feature one of my biases
-              </Text>
-              <Toggle variant={"switch"} value={biasesOnlyMode} onValueChange={setBiasesOnlyMode} />
-            </View>
+      </View>
+      <View style={styles.Container}>
+        <Text preset={"bodySM"} style={styles.SectionTitle}>
+          Recommendation Preferences
+        </Text>
+        <View style={styles.Column}>
+          <LightDivider style={styles.Divider} />
+          <View style={styles.Row}>
+            <Text preset={"bodySM"} style={styles.SwitchLabel}>
+              Only show me listings that feature one of my biases
+            </Text>
+            <Toggle variant={"switch"} value={biasesOnlyMode} onValueChange={setBiasesOnlyMode} />
           </View>
         </View>
       </View>
@@ -67,7 +65,8 @@ const styles = StyleSheet.create({
     marginTop: spacing.large,
   },
   Divider: {
-    width: widthPercentageToDP(92),
+    paddingHorizontal: spacing.medium,
+    width: widthPercentageToDP(100) - (spacing.large)
   },
   Row: {
     alignItems: "center",
