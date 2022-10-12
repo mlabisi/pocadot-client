@@ -64,8 +64,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginLeft: spacing.small,
-    marginRight: spacing.small,
+    marginHorizontal: spacing.small,
     padding: spacing.medium,
   },
 })
