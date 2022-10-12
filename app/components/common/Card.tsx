@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    paddingVertical: spacing.huge
+    paddingVertical: spacing.extraLarge
   },
   Card: {
     alignItems: "center",

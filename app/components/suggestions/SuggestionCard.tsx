@@ -49,7 +49,7 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
           style={[styles.Image, { width: picDimensions, height: picDimensions }]}
         />
         <View style={styles.AutoLayoutVertical}>
-          <Text preset={"h3"}>{props.artistName}</Text>
+          <Text preset={"h3"} style={styles.ArtistName}>{props.artistName}</Text>
           <Text preset={"bodySM"} style={styles.ReleaseName}>
             {props.releaseName}
           </Text>
@@ -77,6 +77,9 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
 })
 
 const styles = StyleSheet.create({
+  ArtistName: {
+    paddingVertical: spacing.small
+  },
   AutoLayoutHorizontal: {
     alignItems: "center",
     display: "flex",
