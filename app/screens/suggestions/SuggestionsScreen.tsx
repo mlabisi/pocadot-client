@@ -6,42 +6,15 @@ import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
 import { Card, Screen, SuggestionCard, Text, TintedButton } from "../../components"
 import { colors, spacing } from "../../theme"
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from "react-native-responsive-screen"
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
 import Animated from "react-native-reanimated"
 import { Ionicons } from "@expo/vector-icons"
+import { suggestions } from "./demo/suggestions"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
-const nayeon = require("./nayeon.png")
-const seulgi = require("./seulgi.png")
-const j = require("./j.png")
-
 const cardHeight = hp(70)
 const cardWidth = wp(85)
-
-const suggestions = [
-  {
-    artistName: "Nayeon",
-    releaseName: "IM NAYEON",
-    listingTag: "Want to Sell",
-    image: nayeon,
-  },
-  {
-    artistName: "Seulgi",
-    releaseName: "28 Reasons",
-    listingTag: "Want to Trade",
-    image: seulgi,
-  },
-  {
-    artistName: "J",
-    releaseName: "SO BAD",
-    listingTag: "Want to Sell/Want to Trade",
-    image: j,
-  },
-]
 
 export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "SuggestionsScreen">> =
   observer(function SuggestionsScreen() {
@@ -192,6 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flexDirection: "column",
     justifyContent: "center",
+    marginBottom: spacing.massive
   },
   SaveOverlay: {
     backgroundColor: colors.tint,
