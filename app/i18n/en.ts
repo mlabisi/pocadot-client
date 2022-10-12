@@ -29,6 +29,13 @@ const en = {
       title: "Recommendation Preferences",
     },
   },
+  notifications: {
+    title: "Notifications",
+    tabs: {
+      general: "General",
+      offers: "Offers"
+    }
+  },
   explore: {
     title: "Explore",
     listings: {

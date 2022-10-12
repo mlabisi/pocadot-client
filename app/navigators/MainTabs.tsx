@@ -79,7 +79,7 @@ export const MainTabs = () => {
             RightActionComponent={
               <TouchableOpacity
                 onPress={() => {
-                  props.navigation.navigate("SuggestionPreferences")
+                  props.navigation.navigate("Notifications")
                 }}
               >
                 <Ionicons
@@ -114,7 +114,7 @@ export const MainTabs = () => {
             RightActionComponent={
               <TouchableOpacity
                 onPress={() => {
-                  props.navigation.navigate("SuggestionPreferences")
+                  props.navigation.navigate("Notifications")
                 }}
               >
                 <Ionicons
@@ -135,7 +135,7 @@ export const MainTabs = () => {
             RightActionComponent={
               <TouchableOpacity
                 onPress={() => {
-                  props.navigation.navigate("SuggestionPreferences")
+                  props.navigation.navigate("Notifications")
                 }}
               >
                 <Ionicons
@@ -170,7 +170,7 @@ export const MainTabs = () => {
             RightActionComponent={
               <TouchableOpacity
                 onPress={() => {
-                  props.navigation.navigate("SuggestionPreferences")
+                  props.navigation.navigate("Notifications")
                 }}
               >
                 <Ionicons
@@ -191,7 +191,7 @@ export const MainTabs = () => {
             RightActionComponent={
               <TouchableOpacity
                 onPress={() => {
-                  props.navigation.navigate("SuggestionPreferences")
+                  props.navigation.navigate("Notifications")
                 }}
               >
                 <Ionicons

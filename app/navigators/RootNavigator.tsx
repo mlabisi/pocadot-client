@@ -14,7 +14,7 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useStores } from "../models"
 import { MainTabs } from "./MainTabs"
-import { SuggestionPreferencesScreen, WelcomeScreen } from "../screens"
+import { NotificationsScreen, SuggestionPreferencesScreen, WelcomeScreen } from "../screens"
 import { Header } from "../components"
 import { colors, spacing } from "../theme"
 import { Ionicons } from "@expo/vector-icons"
@@ -38,6 +38,8 @@ export type AppStackParamList = {
 
   ForgotPassword: undefined
   ResetPassword: undefined
+
+  Notifications: undefined
 
   SuggestionPreferences: undefined
 
@@ -87,6 +89,32 @@ const AppStack = observer(function AppStack() {
       {isAuthenticated ? (
         <>
           <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: false }} />
+
+          {/* Notifications */}
+          <Stack.Group>
+            <Stack.Screen
+              name="Notifications"
+              component={NotificationsScreen}
+              options={{
+                header: (props: NativeStackHeaderProps) => (
+                  <Header
+                    titleTx={"notifications.title"}
+                    titleMode={"flex"}
+                    LeftActionComponent={
+                      <TouchableOpacity
+                        onPress={() => {
+                          props.navigation.goBack()
+                        }}
+                        style={{ paddingLeft: spacing.extraSmall }}
+                      >
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
+                      </TouchableOpacity>
+                    }
+                  />
+                ),
+              }}
+            />
+          </Stack.Group>
 
           {/* Suggestions */}
           <Stack.Group>
