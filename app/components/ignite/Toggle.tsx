@@ -228,28 +228,28 @@ function Checkbox(props: ToggleInputProps) {
   } = props
 
   const offBackgroundColor = [
-    disabled && colors.palette.neutral400,
+    disabled && colors.palette.greyscale["400"],
     status === "error" && colors.errorBackground,
-    colors.palette.neutral200,
+    colors.palette.greyscale["200"],
   ].filter(Boolean)[0]
 
   const outerBorderColor = [
-    disabled && colors.palette.neutral400,
+    disabled && colors.palette.greyscale["400"],
     status === "error" && colors.error,
-    !on && colors.palette.neutral800,
-    colors.palette.secondary500,
+    !on && colors.palette.greyscale["800"],
+    colors.palette.primary["500"],
   ].filter(Boolean)[0]
 
   const onBackgroundColor = [
     disabled && colors.transparent,
     status === "error" && colors.errorBackground,
-    colors.palette.secondary500,
+    colors.palette.primary["500"],
   ].filter(Boolean)[0]
 
   const iconTintColor = [
-    disabled && colors.palette.neutral600,
+    disabled && colors.palette.greyscale["600"],
     status === "error" && colors.error,
-    colors.palette.accent100,
+    colors.palette.primary["100"],
   ].filter(Boolean)[0]
 
   return (
@@ -288,28 +288,28 @@ function Radio(props: ToggleInputProps) {
   } = props
 
   const offBackgroundColor = [
-    disabled && colors.palette.neutral400,
+    disabled && colors.palette.greyscale["400"],
     status === "error" && colors.errorBackground,
-    colors.palette.neutral200,
+    colors.palette.greyscale["200"],
   ].filter(Boolean)[0]
 
   const outerBorderColor = [
-    disabled && colors.palette.neutral400,
+    disabled && colors.palette.greyscale["400"],
     status === "error" && colors.error,
-    !on && colors.palette.neutral800,
-    colors.palette.secondary500,
+    !on && colors.palette.greyscale["800"],
+    colors.palette.primary["500"],
   ].filter(Boolean)[0]
 
   const onBackgroundColor = [
     disabled && colors.transparent,
     status === "error" && colors.errorBackground,
-    colors.palette.neutral100,
+    colors.palette.greyscale["100"],
   ].filter(Boolean)[0]
 
   const dotBackgroundColor = [
-    disabled && colors.palette.neutral600,
+    disabled && colors.palette.greyscale["600"],
     status === "error" && colors.error,
-    colors.palette.secondary500,
+    colors.palette.primary["500"],
   ].filter(Boolean)[0]
 
   return (
@@ -357,15 +357,15 @@ function Switch(props: ToggleInputProps) {
   }, [$detailStyleOverride?.width])
 
   const offBackgroundColor = [
-    disabled && colors.palette.neutral400,
+    disabled && colors.palette.greyscale["400"],
     status === "error" && colors.errorBackground,
-    colors.palette.neutral300,
+    colors.palette.greyscale["300"],
   ].filter(Boolean)[0]
 
   const onBackgroundColor = [
     disabled && colors.transparent,
     status === "error" && colors.errorBackground,
-    colors.palette.secondary500,
+    colors.palette.primary["500"],
   ].filter(Boolean)[0]
 
   const knobBackgroundColor = (function () {
@@ -373,15 +373,15 @@ function Switch(props: ToggleInputProps) {
       return [
         $detailStyleOverride?.backgroundColor,
         status === "error" && colors.error,
-        disabled && colors.palette.neutral600,
-        colors.palette.neutral100,
+        disabled && colors.palette.greyscale["600"],
+        colors.palette.greyscale["100"],
       ].filter(Boolean)[0]
     } else {
       return [
         $innerStyleOverride?.backgroundColor,
-        disabled && colors.palette.neutral600,
+        disabled && colors.palette.greyscale["600"],
         status === "error" && colors.error,
-        colors.palette.neutral200,
+        colors.palette.greyscale["200"],
       ].filter(Boolean)[0]
     }
   })()
@@ -460,10 +460,10 @@ function SwitchAccessibilityLabel(props: ToggleInputProps & { role: "on" | "off"
   ]
 
   const color = (function () {
-    if (disabled) return colors.palette.neutral600
+    if (disabled) return colors.palette.greyscale["600"]
     if (status === "error") return colors.error
-    if (!on) return innerStyle?.backgroundColor || colors.palette.secondary500
-    return detailStyle?.backgroundColor || colors.palette.neutral100
+    if (!on) return innerStyle?.backgroundColor || colors.palette.primary["500"]
+    return detailStyle?.backgroundColor || colors.palette.greyscale["100"]
   })()
 
   return (

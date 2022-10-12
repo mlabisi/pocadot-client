@@ -94,6 +94,7 @@ export const iconRegistry = {
   community: require("../../../assets/icons/ignite/community.png"),
   components: require("../../../assets/icons/ignite/components.png"),
   debug: require("../../../assets/icons/ignite/debug.png"),
+  fingerHeart: require("../../../assets/icons/fingerHeart.png"),
   github: require("../../../assets/icons/ignite/github.png"),
   heart: require("../../../assets/icons/ignite/heart.png"),
   hidden: require("../../../assets/icons/ignite/hidden.png"),

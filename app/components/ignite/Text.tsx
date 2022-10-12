@@ -80,12 +80,12 @@ const $sizeStyles = {
   sm: { fontSize: 16, lineHeight: 24 } as TextStyle,
   xs: { fontSize: 14, lineHeight: 21 } as TextStyle,
   xxs: { fontSize: 12, lineHeight: 18 } as TextStyle,
-  h1: { fontSize: 48, lineHeight: 44 } as TextStyle,
-  h2: { fontSize: 40, lineHeight: 44 } as TextStyle,
-  h3: { fontSize: 32, lineHeight: 44 } as TextStyle,
-  h4: { fontSize: 24, lineHeight: 44 } as TextStyle,
-  h5: { fontSize: 20, lineHeight: 44 } as TextStyle,
-  h6: { fontSize: 18, lineHeight: 44 } as TextStyle,
+  h1: { fontSize: 48, lineHeight: 50 } as TextStyle,
+  h2: { fontSize: 40, lineHeight: 42 } as TextStyle,
+  h3: { fontSize: 32, lineHeight: 34 } as TextStyle,
+  h4: { fontSize: 24, lineHeight: 26 } as TextStyle,
+  h5: { fontSize: 20, lineHeight: 22 } as TextStyle,
+  h6: { fontSize: 18, lineHeight: 20 } as TextStyle,
 }
 
 const $fontWeightStyles = Object.entries(typography.primary).reduce((acc, [weight, fontFamily]) => {

@@ -14,7 +14,7 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useStores } from "../models"
 import { MainTabs } from "./MainTabs"
-import { WelcomeScreen } from "../screens"
+import { SuggestionPreferencesScreen, WelcomeScreen } from "../screens"
 import { Header } from "../components"
 import { colors, spacing } from "../theme"
 import { Ionicons } from "@expo/vector-icons"
@@ -92,7 +92,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Group>
             <Stack.Screen
               name="SuggestionPreferences"
-              component={WelcomeScreen}
+              component={SuggestionPreferencesScreen}
               options={{
                 header: (props: NativeStackHeaderProps) => (
                   <Header
