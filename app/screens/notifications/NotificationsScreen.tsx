@@ -161,6 +161,7 @@ export const NotificationsScreen: FC<StackScreenProps<AppStackParamList, "Notifi
         />
         <ScrollView
           ref={tabContent}
+          bounces={false}
           horizontal={true}
           pagingEnabled={true}
           scrollEventThrottle={10}
