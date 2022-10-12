@@ -12,6 +12,7 @@ import { colors, spacing, typography } from "../../theme"
 import { Icon, IconTypes } from "./Icon"
 import { Text, TextProps } from "./Text"
 import { isRTL, translate } from "../../i18n"
+import { heightPercentageToDP } from "react-native-responsive-screen"
 
 export interface HeaderProps {
   /**

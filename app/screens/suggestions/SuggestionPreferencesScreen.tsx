@@ -24,12 +24,14 @@ export const SuggestionPreferencesScreen: FC<
           <Text preset={"bodySM"} style={styles.SectionTitle}>
             Personal Preferences
           </Text>
-          <LightDivider style={styles.Divider} />
-          <OptionRow
-            icon={<Icon icon={"fingerHeart"} />}
-            title={"My Biases"}
-            description={"Update your biases to help pocadot make better recommendations!"}
-          />
+          <View style={styles.Column}>
+            <LightDivider style={styles.Divider} />
+            <OptionRow
+              icon={<Icon icon={"fingerHeart"} />}
+              title={"My Biases"}
+              description={"Update your biases to help pocadot make better recommendations!"}
+            />
+          </View>
         </View>
         <View style={styles.Container}>
           <Text preset={"bodySM"} style={styles.SectionTitle}>
@@ -41,7 +43,7 @@ export const SuggestionPreferencesScreen: FC<
               <Text preset={"bodySM"} style={styles.SwitchLabel}>
                 Only show me listings that feature one of my biases
               </Text>
-              <Toggle variant={"switch"} value={biasesOnlyMode} onValueChange={setBiasesOnlyMode}/>
+              <Toggle variant={"switch"} value={biasesOnlyMode} onValueChange={setBiasesOnlyMode} />
             </View>
           </View>
         </View>
@@ -83,7 +85,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start",
+    justifyContent: "center",
+    width: widthPercentageToDP(100)
   },
   Container: {
     display: "flex",

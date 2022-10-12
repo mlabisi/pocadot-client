@@ -514,14 +514,14 @@ const AppStack = observer(function AppStack() {
 interface NavigationProps extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 export const RootNavigator = observer(function AppNavigator(props: NavigationProps) {
-  const colorScheme = useColorScheme()
 
   useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
 
   return (
     <NavigationContainer
       ref={navigationRef}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+      theme={DefaultTheme}
+      // theme={useColorScheme() === "dark" ? DarkTheme : DefaultTheme}
       {...props}
     >
       <AppStack />

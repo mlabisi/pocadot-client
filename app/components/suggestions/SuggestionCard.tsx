@@ -40,13 +40,13 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
 
   return (
     <Card height={props.cardHeight} width={props.cardWidth}>
-      <View style={[styles.AutoLayoutVertical, {height: props.cardHeight}]}>
+      <View style={[styles.AutoLayoutVertical, {height: props.cardHeight * 0.95, width: props.cardWidth}]}>
         <AutoImage source={props.image} style={[styles.Image, { width: picDimensions, height: picDimensions }]} />
-        <Text preset={"h6"} style={styles.ArtistName}>{props.artistName}</Text>
-        <Text preset={"bodyXS"} style={styles.ReleaseName}>{props.releaseName}</Text>
-        <View style={styles.AutoLayoutHorizontal}>
-          <ListingTag tag={props.listingTag} />
-        </View>
+        <View style={styles.AutoLayoutVertical}><Text preset={"h3"} style={styles.ArtistName}>{props.artistName}</Text>
+          <Text preset={"bodySM"} style={styles.ReleaseName}>{props.releaseName}</Text>
+          <View style={styles.AutoLayoutHorizontal}>
+            <ListingTag tag={props.listingTag} />
+          </View></View>
         <View style={[styles.Buttons, { width: wp(75)}]}>
           <SkipButton onPress={() => {
             props.swiper.current.swipeLeft()
@@ -65,40 +65,28 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
 
 const styles = StyleSheet.create({
   ArtistName: {
-    lineHeight: 22,
-    marginBottom: 3,
-    marginTop: 30
   },
   AutoLayoutHorizontal: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 3,
-    paddingBottom: 0,
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingTop: 4,
   },
   AutoLayoutVertical: {
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-end",
-    paddingBottom: 20,
+    justifyContent: "space-evenly",
   },
   Buttons: {
     alignItems: "flex-start",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 10,
   },
   Image: {
     backgroundColor: colors.palette.greyscale["100"],
     borderRadius: 20,
-    marginBottom: 10,
-    paddingTop: 25,
   },
   ReleaseName: {
     color: colors.palette.greyscale["700"],

@@ -19,7 +19,7 @@ export interface ListingTagProps {
 export const ListingTag = observer(function ListingTag(props: ListingTagProps) {
   return (
     <View style={[styles.Tag, props.style]}>
-      <Text style={styles.TagText}>{props.tag}</Text>
+      <Text preset={"bodyXXS"} style={styles.TagText}>{props.tag}</Text>
     </View>
   )
 })
@@ -37,7 +37,5 @@ const styles = StyleSheet.create({
   TagText: {
     color: colors.tint,
     fontFamily: typography.fonts.urbanist.bold,
-    fontSize: 8,
-    letterSpacing: 0.2,
   },
 })

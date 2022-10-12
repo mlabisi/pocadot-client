@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
@@ -19,26 +19,26 @@ const nayeon = require("./nayeon.png")
 const seulgi = require("./seulgi.png")
 const j = require("./j.png")
 
-const cardHeight = hp(60)
-const cardWidth = wp(90)
+const cardHeight = hp(70)
+const cardWidth = wp(85)
 
 const suggestions = [
   {
     artistName: "Nayeon",
     releaseName: "IM NAYEON",
-    listingTag: "WTS",
+    listingTag: "Want to Sell",
     image: nayeon,
   },
   {
     artistName: "Seulgi",
     releaseName: "28 Reasons",
-    listingTag: "WTT",
+    listingTag: "Want to Trade",
     image: seulgi,
   },
   {
     artistName: "J",
     releaseName: "SO BAD",
-    listingTag: "WTS/WTT",
+    listingTag: "Want to Sell/Want to Trade",
     image: j,
   },
 ]
@@ -56,6 +56,33 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
     const [swipedAll, setSwipedAll] = useState(false)
 
     const swiperRef = useRef<Swiper<any>>(null)
+
+    const handleSwipe = (x, y) => {
+      if (Math.abs(x) > Math.abs(y) && Math.abs(x) > cardWidth * 0.25) {
+        if (x > 0) {
+          setIsSwipingRight(true)
+          setIsSwipingLeft(false)
+        } else {
+          setIsSwipingLeft(true)
+          setIsSwipingRight(false)
+        }
+      } else {
+        setIsSwipingRight(false)
+        setIsSwipingLeft(false)
+      }
+    }
+
+    const handleSwipedLeft = () => {
+      setIsSwipingLeft(false)
+    }
+
+    const handleSwipedRight = () => {
+      setIsSwipingRight(false)
+    }
+
+    const handleSwipedAll = () => {
+      setSwipedAll(true)
+    }
 
     const renderSuggestionCard = (props) => {
       return (
@@ -75,14 +102,14 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
     return (
       <>
         {isSwipingLeft && (
-          <Animated.View style={styles.SkipOverlay}>
+          <Animated.View style={[styles.Overlay, styles.SkipOverlay]}>
             <Text preset={"h6"} style={styles.OverlayText}>
               Not Interested!
             </Text>
           </Animated.View>
         )}
         {isSwipingRight && (
-          <Animated.View style={styles.SaveOverlay}>
+          <Animated.View style={[styles.Overlay, styles.SaveOverlay]}>
             <Text preset={"h6"} style={styles.OverlayText}>
               Saved!
             </Text>
@@ -91,29 +118,10 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
         <Swiper
           ref={swiperRef}
           cards={suggestions}
-          onSwiping={(x, y) => {
-            if (Math.abs(x) > Math.abs(y) && Math.abs(x) > cardWidth * 0.25) {
-              if (x > 0) {
-                setIsSwipingRight(true)
-                setIsSwipingLeft(false)
-              } else {
-                setIsSwipingLeft(true)
-                setIsSwipingRight(false)
-              }
-            } else {
-              setIsSwipingRight(false)
-              setIsSwipingLeft(false)
-            }
-          }}
-          onSwipedLeft={() => {
-            setIsSwipingLeft(false)
-          }}
-          onSwipedRight={() => {
-            setIsSwipingRight(false)
-          }}
-          onSwipedAll={() => {
-            setSwipedAll(true)
-          }}
+          onSwiping={handleSwipe}
+          onSwipedLeft={handleSwipedLeft}
+          onSwipedRight={handleSwipedRight}
+          onSwipedAll={handleSwipedAll}
           verticalSwipe={false}
           stackScale={10}
           stackSeparation={25}
@@ -125,10 +133,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
         />
         {swipedAll && (
           <Card
-            style={[
-              styles.CardStyle,
-              { top: (hp(100) - cardHeight) * 0.0625, left: (wp(100) - cardWidth) * 0.5 },
-            ]}
+            style={[styles.CardStyle, { left: (wp(100) - cardWidth) * 0.5 }]}
             height={cardHeight}
             width={cardWidth}
           >
@@ -157,11 +162,24 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
 const styles = StyleSheet.create({
   ButtonText: { color: colors.palette.other.white, paddingLeft: 5 },
   CardStyle: {
-    marginTop: (hp(100) - cardHeight) * 0.0625,
+    top: (hp(100) - cardHeight) * 0.2,
   },
   MessageText: {
     paddingHorizontal: 15,
     textAlign: "center",
+  },
+  Overlay: {
+    alignContent: "center",
+    alignSelf: "center",
+    backgroundColor: colors.tint,
+    borderRadius: 100,
+    elevation: 10,
+    flexDirection: "column",
+    height: hp(5),
+    justifyContent: "center",
+    top: 0,
+    width: wp(80),
+    zIndex: 10,
   },
   OverlayText: {
     color: colors.palette.other.white,
@@ -173,26 +191,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   SaveOverlay: {
-    alignContent: "center",
-    alignSelf: "center",
     backgroundColor: colors.tint,
-    borderRadius: 100,
-    elevation: 10,
-    flexDirection: "row",
-    justifyContent: "center",
-    top: 0,
-    width: wp(80),
-    zIndex: 10,
   },
   SkipOverlay: {
-    alignContent: "center",
-    alignSelf: "center",
     backgroundColor: colors.palette.status.error,
-    borderRadius: 100,
-    elevation: 10,
-    flexDirection: "row",
-    justifyContent: "center",
-    width: wp(80),
-    zIndex: 10,
   },
 })
