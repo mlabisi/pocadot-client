@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
-import { Card, SuggestionCard, Text, TintedButton } from "../../components"
+import { Card, Screen, SuggestionCard, Text, TintedButton } from "../../components"
 import { colors } from "../../theme"
 import {
   heightPercentageToDP as hp,
@@ -100,7 +100,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
       )
     }
     return (
-      <>
+      <Screen preset={"fixed"}>
         {isSwipingLeft && (
           <Animated.View style={[styles.Overlay, styles.SkipOverlay]}>
             <Text preset={"h6"} style={styles.OverlayText}>
@@ -124,7 +124,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
           onSwipedAll={handleSwipedAll}
           verticalSwipe={false}
           stackScale={10}
-          stackSeparation={25}
+          stackSeparation={40}
           renderCard={renderSuggestionCard}
           stackSize={3}
           containerStyle={styles.Root}
@@ -155,7 +155,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
             />
           </Card>
         )}
-      </>
+      </Screen>
     )
   })
 

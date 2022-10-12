@@ -105,7 +105,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -131,7 +131,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -153,7 +153,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -175,7 +175,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -197,7 +197,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -219,7 +219,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -241,7 +241,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -267,7 +267,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -289,7 +289,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -311,7 +311,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -337,7 +337,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -359,7 +359,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -381,7 +381,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -403,7 +403,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -425,7 +425,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -447,7 +447,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -469,7 +469,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />
@@ -491,7 +491,7 @@ const AppStack = observer(function AppStack() {
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
                       >
-                        <Ionicons name={"arrow-back"} size={20} color={colors.tint} />
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
                       </TouchableOpacity>
                     }
                   />

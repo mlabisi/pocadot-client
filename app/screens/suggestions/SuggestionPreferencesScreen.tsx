@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { View, StyleSheet } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { Icon, LightDivider, OptionRow, Text, Toggle } from "../../components"
+import { Icon, LightDivider, OptionRow, Screen, Text, Toggle } from "../../components"
 import { colors, spacing, typography } from "../../theme"
 import { widthPercentageToDP } from "react-native-responsive-screen"
 
@@ -18,7 +18,7 @@ export const SuggestionPreferencesScreen: FC<
   const [biasesOnlyMode, setBiasesOnlyMode] = useState(false)
 
   return (
-    <>
+    <Screen preset={"scroll"}>
       <View style={styles.Column}>
         <View style={styles.Container}>
           <Text preset={"bodySM"} style={styles.SectionTitle}>
@@ -48,7 +48,7 @@ export const SuggestionPreferencesScreen: FC<
           </View>
         </View>
       </View>
-    </>
+    </Screen>
   )
 })
 
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     width: 44,
   },
   SwitchLabel: {
-    fontFamily: typography.primary.semiBold,
+    // fontFamily: typography.primary.semiBold,
     width: widthPercentageToDP(70),
   },
 })
