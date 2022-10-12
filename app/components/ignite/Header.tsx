@@ -12,7 +12,11 @@ import { colors, spacing, typography } from "../../theme"
 import { Icon, IconTypes } from "./Icon"
 import { Text, TextProps } from "./Text"
 import { isRTL, translate } from "../../i18n"
-import { heightPercentageToDP } from "react-native-responsive-screen"
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
+
+const leftHeightPercent = 4
+const heightPercent = 3
+
 
 export interface HeaderProps {
   /**
@@ -177,25 +181,52 @@ export function Header(props: HeaderProps) {
       style={[$safeArea, SafeAreaViewProps?.style, { backgroundColor }]}
     >
       {titleMode === "left" ? (
-        <View style={[$container, $containerStyleOverride]}>
-          {!!titleContent && (
-            <Text
-              weight="medium"
-              size="md"
-              text={titleContent}
-              style={[$leftTitle, $titleStyleOverride]}
-            />
-          )}
+        <View style={$column}>
+          <View style={[$container, $containerStyleOverride]}>
+            {!!titleContent && (
+              <Text
+                weight="medium"
+                size="md"
+                text={titleContent}
+                style={[$leftTitle, $titleStyleOverride]}
+              />
+            )}
 
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingHorizontal: spacing.medium,
-            }}
-          >
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingHorizontal: spacing.medium,
+              }}
+            >
+              <HeaderAction
+                tx={leftTx}
+                text={leftText}
+                icon={leftIcon}
+                iconColor={leftIconColor}
+                onPress={onLeftPress}
+                txOptions={leftTxOptions}
+                backgroundColor={backgroundColor}
+                ActionComponent={LeftActionComponent}
+              />
+              <HeaderAction
+                tx={rightTx}
+                text={rightText}
+                icon={rightIcon}
+                iconColor={rightIconColor}
+                onPress={onRightPress}
+                txOptions={rightTxOptions}
+                backgroundColor={backgroundColor}
+                ActionComponent={RightActionComponent}
+              />
+            </View>
+          </View>
+        </View>
+      ) : (
+        <View style={$column}>
+          <View style={[$container, $containerStyleOverride]}>
             <HeaderAction
               tx={leftTx}
               text={leftText}
@@ -206,6 +237,20 @@ export function Header(props: HeaderProps) {
               backgroundColor={backgroundColor}
               ActionComponent={LeftActionComponent}
             />
+
+            {!!titleContent && (
+              <Text
+                weight="medium"
+                size="md"
+                text={titleContent}
+                style={[
+                  titleMode === "center" && $centerTitle,
+                  titleMode === "flex" && $flexTitle,
+                  $titleStyleOverride,
+                ]}
+              />
+            )}
+
             <HeaderAction
               tx={rightTx}
               text={rightText}
@@ -217,43 +262,6 @@ export function Header(props: HeaderProps) {
               ActionComponent={RightActionComponent}
             />
           </View>
-        </View>
-      ) : (
-        <View style={[$container, $containerStyleOverride]}>
-          <HeaderAction
-            tx={leftTx}
-            text={leftText}
-            icon={leftIcon}
-            iconColor={leftIconColor}
-            onPress={onLeftPress}
-            txOptions={leftTxOptions}
-            backgroundColor={backgroundColor}
-            ActionComponent={LeftActionComponent}
-          />
-
-          {!!titleContent && (
-            <Text
-              weight="medium"
-              size="md"
-              text={titleContent}
-              style={[
-                titleMode === "center" && $centerTitle,
-                titleMode === "flex" && $flexTitle,
-                $titleStyleOverride,
-              ]}
-            />
-          )}
-
-          <HeaderAction
-            tx={rightTx}
-            text={rightText}
-            icon={rightIcon}
-            iconColor={rightIconColor}
-            onPress={onRightPress}
-            txOptions={rightTxOptions}
-            backgroundColor={backgroundColor}
-            ActionComponent={RightActionComponent}
-          />
         </View>
       )}
     </Wrapper>
@@ -300,8 +308,14 @@ const $safeArea: ViewStyle = {
   width: "100%",
 }
 
+const $column: ViewStyle = {
+  height: heightPercentageToDP(10),
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "flex-end",
+}
+
 const $container: ViewStyle = {
-  height: 56,
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
@@ -314,7 +328,8 @@ const $centerTitle: TextStyle = {
   paddingHorizontal: spacing.huge,
   zIndex: 1,
   color: colors.tint,
-}
+  fontSize: heightPercentageToDP(heightPercent),
+  lineHeight: 40}
 
 const $flexTitle: TextStyle = {
   flex: 1,
@@ -322,7 +337,8 @@ const $flexTitle: TextStyle = {
   paddingLeft: spacing.extraSmall,
   fontFamily: typography.fonts.jua.normal,
   color: colors.tint,
-}
+  fontSize: heightPercentageToDP(heightPercent),
+  lineHeight: 40}
 
 const $leftTitle: TextStyle = {
   flex: 1,
@@ -330,7 +346,8 @@ const $leftTitle: TextStyle = {
   paddingLeft: spacing.medium,
   fontFamily: typography.fonts.jua.normal,
   color: colors.tint,
-  fontSize: 24,
+  fontSize: heightPercentageToDP(leftHeightPercent),
+lineHeight: heightPercentageToDP(leftHeightPercent)
 }
 
 const $actionTextContainer: ViewStyle = {

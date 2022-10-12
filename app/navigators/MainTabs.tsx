@@ -5,6 +5,9 @@ import { Ionicons, MaterialCommunityIcons, Octicons } from "@expo/vector-icons"
 import { SuggestionsScreen, WelcomeScreen } from "../screens"
 import { Header } from "../components"
 import { TouchableOpacity } from "react-native"
+import { heightPercentageToDP } from "react-native-responsive-screen"
+
+const responsiveDimensions = heightPercentageToDP(3.75)
 
 export type MainNavigatorParamList = {
   SuggestionsScreen: undefined
@@ -73,7 +76,7 @@ export const MainTabs = () => {
                   props.navigation.navigate("SuggestionPreferences")
                 }}
               >
-                <Ionicons name={"options-outline"} size={20} color={colors.tint} />
+                <Ionicons name={"options-outline"} size={responsiveDimensions} color={colors.tint} />
               </TouchableOpacity>
             }
             RightActionComponent={
@@ -84,7 +87,7 @@ export const MainTabs = () => {
               >
                 <Ionicons
                   name={"notifications-outline"}
-                  size={20}
+                  size={responsiveDimensions}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
@@ -105,7 +108,7 @@ export const MainTabs = () => {
               >
                 <Octicons
                   name={"diff-added"}
-                  size={20}
+                  size={responsiveDimensions}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
@@ -119,7 +122,7 @@ export const MainTabs = () => {
               >
                 <Ionicons
                   name={"notifications-outline"}
-                  size={20}
+                  size={responsiveDimensions}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
@@ -140,7 +143,7 @@ export const MainTabs = () => {
               >
                 <Ionicons
                   name={"notifications-outline"}
-                  size={20}
+                  size={responsiveDimensions}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
@@ -161,7 +164,7 @@ export const MainTabs = () => {
               >
                 <MaterialCommunityIcons
                   name={"pencil-box-outline"}
-                  size={20}
+                  size={responsiveDimensions}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
@@ -175,7 +178,7 @@ export const MainTabs = () => {
               >
                 <Ionicons
                   name={"notifications-outline"}
-                  size={20}
+                  size={responsiveDimensions}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
@@ -196,7 +199,7 @@ export const MainTabs = () => {
               >
                 <Ionicons
                   name={"notifications-outline"}
-                  size={20}
+                  size={responsiveDimensions}
                   color={colors.tint}
                   style={{ paddingLeft: spacing.medium }}
                 />
