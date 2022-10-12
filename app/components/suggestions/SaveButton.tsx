@@ -3,6 +3,9 @@ import { StyleSheet, StyleProp, ViewStyle, GestureResponderEvent, TouchableOpaci
 import { colors } from "../../theme"
 import { Ionicons } from "@expo/vector-icons"
 import { observer } from "mobx-react-lite"
+import { heightPercentageToDP } from "react-native-responsive-screen"
+
+const heightPercent = 5
 
 export interface SaveButtonProps {
   /**
@@ -19,7 +22,7 @@ export interface SaveButtonProps {
 export const SaveButton = observer(function SaveButton(props: SaveButtonProps) {
   return (
     <TouchableOpacity style={[styles.RightButton, props.style]} onPress={props.onPress}>
-      <Ionicons name={"heart"} color={colors.palette.other.white} />
+      <Ionicons name={"heart"} color={colors.palette.other.white} size={heightPercent * 3} />
     </TouchableOpacity>
   )
 })
@@ -32,8 +35,8 @@ const styles = StyleSheet.create({
     display: "flex",
     elevation: 3,
     flexDirection: "column",
-    height: 30,
+    height: heightPercentageToDP(heightPercent),
     justifyContent: "center",
-    width: 30,
+    width: heightPercentageToDP(heightPercent),
   },
 })

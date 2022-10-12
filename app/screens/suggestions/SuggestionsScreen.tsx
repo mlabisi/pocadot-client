@@ -1,11 +1,11 @@
 import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
 import { Card, Screen, SuggestionCard, Text, TintedButton } from "../../components"
-import { colors } from "../../theme"
+import { colors, spacing } from "../../theme"
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -160,12 +160,15 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
   })
 
 const styles = StyleSheet.create({
-  ButtonText: { color: colors.palette.other.white, paddingLeft: 5 },
+  ButtonText: {
+    color: colors.palette.other.white,
+    paddingLeft: spacing.extraSmall,
+  },
   CardStyle: {
     top: (hp(100) - cardHeight) * 0.2,
   },
   MessageText: {
-    paddingHorizontal: 15,
+    paddingHorizontal: spacing.medium,
     textAlign: "center",
   },
   Overlay: {

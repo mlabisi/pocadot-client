@@ -53,51 +53,21 @@ export const SuggestionPreferencesScreen: FC<
 })
 
 const styles = StyleSheet.create({
-  AutoLayoutHorizontal: {
-    height: 56,
-    marginRight: 20,
-    width: 51.11,
-  },
-  AutoLayoutHorizontal1: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    width: 380,
-  },
-  AutoLayoutVertical: {
-    alignItems: "flex-start",
-    display: "flex",
-    flexDirection: "column",
-    flex: 1,
-    justifyContent: "flex-start",
-    marginRight: 20,
-    width: 268.89,
-  },
-  AutoLayoutVertical2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 380,
-  },
   Column: {
     alignItems: "flex-start",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: widthPercentageToDP(100)
+    width: widthPercentageToDP(100),
   },
   Container: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    marginTop: 25,
+    marginTop: spacing.large,
   },
-  Divider: { width: widthPercentageToDP(92) },
-  IconlyLightArrowRight2: {
-    height: 20,
-    width: 20,
+  Divider: {
+    width: widthPercentageToDP(92),
   },
   Row: {
     alignItems: "center",
@@ -107,18 +77,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.small,
     width: widthPercentageToDP(100),
   },
-
   SectionTitle: {
     color: colors.textDim,
     fontFamily: typography.primary.bold,
     paddingHorizontal: spacing.small,
   },
-  StateDisabledThemeLightComponentToggle: {
-    height: 24,
-    width: 44,
-  },
   SwitchLabel: {
-    // fontFamily: typography.primary.semiBold,
     width: widthPercentageToDP(70),
   },
 })

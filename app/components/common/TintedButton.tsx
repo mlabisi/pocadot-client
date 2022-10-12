@@ -2,7 +2,6 @@ import * as React from "react"
 import { GestureResponderEvent, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors } from "../../theme"
-import { Text } from "../index"
 import { ReactElement } from "react"
 
 export interface TintedButtonProps {

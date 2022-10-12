@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   Card: {
     alignItems: "center",
     backgroundColor: colors.palette.other.white,
-    borderRadius: 28,
+    borderRadius: 30,
     display: "flex",
     elevation: 8,
     flexDirection: "column",

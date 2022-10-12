@@ -9,6 +9,9 @@ import {
 import { colors } from "../../theme"
 import { Octicons } from "@expo/vector-icons"
 import { observer } from "mobx-react-lite"
+import { heightPercentageToDP } from "react-native-responsive-screen"
+
+const heightPercent = 5
 
 export interface SkipButtonProps {
   /**
@@ -25,7 +28,7 @@ export interface SkipButtonProps {
 export const SkipButton = observer(function SkipButton(props: SkipButtonProps) {
   return (
     <TouchableOpacity style={[styles.LeftButton, props.style]} onPress={props.onPress}>
-      <Octicons name={"x"} color={colors.palette.other.white} size={20}/>
+      <Octicons name={"x"} color={colors.palette.other.white} size={heightPercent * 3}/>
     </TouchableOpacity>
   )
 })
@@ -38,8 +41,8 @@ const styles = StyleSheet.create({
     display: "flex",
     elevation: 3,
     flexDirection: "column",
-    height: 30,
+    height: heightPercentageToDP(heightPercent),
     justifyContent: "center",
-    width: 30,
+    width: heightPercentageToDP(heightPercent),
   },
 })

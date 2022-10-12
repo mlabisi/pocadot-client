@@ -5,6 +5,9 @@ import { colors, spacing } from "../../theme"
 import { Text } from "../index"
 import { ReactElement } from "react"
 import { Ionicons } from "@expo/vector-icons"
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
+
+const heightPercent = 7
 
 export interface OptionRowProps {
   /**
@@ -30,7 +33,7 @@ export const OptionRow = observer(function OptionRow(props: OptionRowProps) {
         <Text preset={"h6"}>{props.title}</Text>
         <Text preset={"bodySM"} style={{color: colors.palette.greyscale["700"]}}>{props.description}</Text>
       </View>
-      <Ionicons name={"chevron-forward"} size={20} />
+      <Ionicons name={"chevron-forward"} size={heightPercent * 3} />
     </TouchableOpacity>
   )
 })
@@ -48,9 +51,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    height: 70,
     justifyContent: "flex-start",
-    width: 380,
+    width: widthPercentageToDP(100),
   },
   IconContainer: {
     alignItems: "center",
@@ -58,11 +60,11 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     display: "flex",
     flexDirection: "column",
-    height: 50,
+    height: heightPercentageToDP(heightPercent),
     justifyContent: "center",
     marginLeft: spacing.small,
     marginRight: spacing.small,
-    padding:15,
-    width: 50,
+    padding: spacing.medium,
+    width: heightPercentageToDP(heightPercent),
   },
 })

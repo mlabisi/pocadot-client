@@ -1,7 +1,7 @@
 import * as React from "react"
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors} from "../../theme"
+import { colors, spacing } from "../../theme"
 
 export interface LightDividerProps {
   /**
@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: colors.palette.greyscale["300"],
     height: 1,
-    marginVertical: 15
+    marginVertical: spacing.medium
   },
 })
