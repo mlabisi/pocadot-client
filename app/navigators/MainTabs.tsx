@@ -7,7 +7,7 @@ import { Header } from "../components"
 import { TouchableOpacity } from "react-native"
 import { heightPercentageToDP } from "react-native-responsive-screen"
 
-const responsiveDimensions = heightPercentageToDP(3.75)
+const responsiveDimensions = heightPercentageToDP(3)
 
 export type MainNavigatorParamList = {
   SuggestionsScreen: undefined

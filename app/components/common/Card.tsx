@@ -1,13 +1,10 @@
 import * as React from "react"
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors} from "../../theme"
+import { colors, spacing } from "../../theme"
 
 export interface CardProps {
-
   style?: StyleProp<ViewStyle>
-
-  height: number
 
   width: number
 
@@ -19,13 +16,20 @@ export interface CardProps {
  */
 export const Card = observer(function Card(props: CardProps) {
   return (
-    <View style={[styles.Card, props.style, {width: props.width, height: props.height}]}>
-      {props.children}
+    <View style={[styles.Card, props.style, { width: props.width }]}>
+      <View style={styles.AutoLayoutVertical}>{props.children}</View>
     </View>
   )
 })
 
 const styles = StyleSheet.create({
+  AutoLayoutVertical: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    paddingVertical: spacing.huge
+  },
   Card: {
     alignItems: "center",
     backgroundColor: colors.palette.other.white,

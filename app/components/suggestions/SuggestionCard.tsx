@@ -1,7 +1,7 @@
 import * as React from "react"
 import { StyleSheet, View } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors } from "../../theme"
+import { colors, spacing } from "../../theme"
 import { Text } from "../ignite/Text"
 import { ListingTag } from "./ListingTag"
 import { SkipButton } from "./SkipButton"
@@ -13,8 +13,6 @@ import { MutableRefObject } from "react"
 import { AutoImage } from "../ignite/AutoImage"
 
 export interface SuggestionCardProps {
-  cardHeight: number
-
   cardWidth: number
 
   artistName: string
@@ -39,11 +37,11 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
   const picDimensions = props.cardWidth * 0.85
 
   return (
-    <Card height={props.cardHeight} width={props.cardWidth}>
+    <Card width={props.cardWidth}>
       <View
         style={[
           styles.AutoLayoutVertical,
-          { height: props.cardHeight * 0.95, width: props.cardWidth },
+          { width: props.cardWidth },
         ]}
       >
         <AutoImage

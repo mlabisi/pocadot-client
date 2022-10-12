@@ -17,9 +17,9 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
-const yoonListing = require("./yoonListing.png")
-const lisaListing = require("./lisaListing.png")
-const yejiListing = require("./yejiListing.png")
+const yoonListing = require("./demo/yoonListing.png")
+const lisaListing = require("./demo/lisaListing.png")
+const yejiListing = require("./demo/yejiListing.png")
 
 const generalNotifis = [
   {
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     width: widthPercentageToDP(100) - spacing.large,
   },
   ContentContainer: {
-    paddingBottom: spacing.massive,
+    paddingBottom: spacing.massive + spacing.large,
     width: widthPercentageToDP(100),
   },
 })

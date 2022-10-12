@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
@@ -13,7 +13,6 @@ import { suggestions } from "./demo/suggestions"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
-const cardHeight = hp(70)
 const cardWidth = wp(85)
 
 export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "SuggestionsScreen">> =
@@ -64,7 +63,6 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
           releaseName={props.releaseName}
           listingTag={props.listingTag}
           image={props.image}
-          cardHeight={cardHeight}
           cardWidth={cardWidth}
           swiper={swiperRef}
           setIsSwipingLeft={setIsSwipingLeft}
@@ -73,7 +71,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
       )
     }
     return (
-      <Screen preset={"fixed"}>
+      <>
         {isSwipingLeft && (
           <Animated.View style={[styles.Overlay, styles.SkipOverlay]}>
             <Text preset={"h6"} style={styles.OverlayText}>
@@ -105,9 +103,8 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
           cardStyle={styles.CardStyle}
         />
         {swipedAll && (
-          <Card
+          <View style={styles.Centered}><Card
             style={[styles.CardStyle, { left: (wp(100) - cardWidth) * 0.5 }]}
-            height={cardHeight}
             width={cardWidth}
           >
             <Text style={styles.MessageText}>
@@ -126,9 +123,9 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
               }
               icon={<Ionicons name={"refresh"} color={colors.palette.other.white} />}
             />
-          </Card>
+          </Card></View>
         )}
-      </Screen>
+      </>
     )
   })
 
@@ -139,6 +136,11 @@ const styles = StyleSheet.create({
   },
   CardStyle: {
     top: hp(5),
+  },
+  Centered: {
+    flexDirection: "column",
+    flex: .9,
+    justifyContent: "center"
   },
   MessageText: {
     paddingHorizontal: spacing.medium,
@@ -165,7 +167,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flexDirection: "column",
     justifyContent: "center",
-    marginBottom: spacing.massive
   },
   SaveOverlay: {
     backgroundColor: colors.tint,

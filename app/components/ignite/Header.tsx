@@ -14,7 +14,7 @@ import { Text, TextProps } from "./Text"
 import { isRTL, translate } from "../../i18n"
 import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
 
-const leftHeightPercent = 4
+const leftHeightPercent = 3
 const heightPercent = 3
 
 
