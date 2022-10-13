@@ -38,10 +38,10 @@ export const GeneralNotification = observer(function GeneralNotification(
       <View style={styles.Row}>
         <View style={styles.TopRow}>
           <View style={[styles.Row, styles.TopLeftRow]}>
-            {props.icon && <View style={styles.IconContainer}>{props.icon}</View>}
+            {props.icon && <View style={[styles.IconContainer, props.style]}>{props.icon}</View>}
             {props.iconName && (
               <Icon
-                containerStyle={styles.IconContainer}
+                containerStyle={[styles.IconContainer, props.style]}
                 icon={props.iconName}
                 size={widthPercent * 2}
               />

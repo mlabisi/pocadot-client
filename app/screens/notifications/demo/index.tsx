@@ -13,7 +13,8 @@ export const generalNotifis = [
     label: "Security Updates!",
     timestamp: "Dec 20, 2022 | 10:49 PM",
     isNew: true,
-    icon: <Ionicons name={"shield-checkmark"} color={colors.tint} size={20} />,
+    icon: <Ionicons name={"shield-checkmark"} color={colors.palette.other.green} size={20} />,
+    style: { backgroundColor: colors.palette.backgroundColors.green}
   },
   {
     description: "You can now track your real-life photocard collections using pocadot!",
@@ -27,7 +28,24 @@ export const generalNotifis = [
     label: "pocadot Has Updates!",
     timestamp: "Dec 10, 2022 | 11:54 AM",
     isNew: false,
-    icon: <MaterialCommunityIcons name={"shield-star"} color={colors.tint} size={20} />,
+    icon: <Ionicons name={"warning-outline"} color={colors.palette.other.orange} size={20} />,
+    style: { backgroundColor: colors.palette.backgroundColors.orange}
+  },
+  {
+    description: "Update pocadot now to get access to the latest features!",
+    label: "New Updates Available!",
+    timestamp: "Dec 4, 2022 | 3:38 PM",
+    isNew: false,
+    icon: <Ionicons name={"warning-outline"} color={colors.palette.other.orange} size={20} />,
+    style: { backgroundColor: colors.palette.backgroundColors.orange}
+  },
+  {
+    description: "Your instagram has been connected to your pocadot account! Now you can display it on your profile.",
+    label: "Instagram Connected!",
+    timestamp: "Dec 2, 2022 | 4:23 PM",
+    isNew: false,
+    icon: <Ionicons name={"logo-instagram"} color={colors.palette.other.green} size={20} />,
+    style: { backgroundColor: colors.palette.backgroundColors.green}
   },
 ]
 export const offerNotifs = [

@@ -38,6 +38,7 @@ export const NotificationsScreen: FC<StackScreenProps<AppStackParamList, "Notifi
           timestamp={item.timestamp}
           isNew={item.isNew}
           icon={item.icon}
+          style={item.style ?? {}}
         />
       )
     }
