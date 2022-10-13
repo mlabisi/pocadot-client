@@ -2,7 +2,7 @@ import React from "react"
 import { BottomTabHeaderProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { colors, spacing } from "../theme"
 import { Ionicons, MaterialCommunityIcons, Octicons } from "@expo/vector-icons"
-import { SuggestionsScreen, WelcomeScreen } from "../screens"
+import { ExploreScreen, SuggestionsScreen, WelcomeScreen } from "../screens"
 import { Header } from "../components"
 import { TouchableOpacity } from "react-native"
 import { heightPercentageToDP } from "react-native-responsive-screen"
@@ -96,7 +96,7 @@ export const MainTabs = () => {
           />
         ),
       }} />
-      <Tab.Screen name="ExploreScreen" component={WelcomeScreen} options={{
+      <Tab.Screen name="ExploreScreen" component={ExploreScreen} options={{
         header: (props: BottomTabHeaderProps) => (
           <Header
             titleTx={"explore.title"}

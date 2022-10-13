@@ -18,7 +18,7 @@ export const SuggestionPreferencesScreen: FC<
   const [biasesOnlyMode, setBiasesOnlyMode] = useState(false)
 
   return (
-    <Screen preset={"scroll"}>
+    <View style={styles.Root}>
       <View style={styles.Container}>
         <Text preset={"bodySM"} style={styles.SectionTitle}>
           Personal Preferences
@@ -46,7 +46,7 @@ export const SuggestionPreferencesScreen: FC<
           </View>
         </View>
       </View>
-    </Screen>
+    </View>
   )
 })
 
@@ -67,6 +67,10 @@ const styles = StyleSheet.create({
   Divider: {
     paddingHorizontal: spacing.medium,
     width: widthPercentageToDP(100) - (spacing.large)
+  },
+  Root: {
+    backgroundColor: colors.background,
+    flex: 1,
   },
   Row: {
     alignItems: "center",

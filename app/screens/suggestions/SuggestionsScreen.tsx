@@ -71,7 +71,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
       )
     }
     return (
-      <>
+      <View style={styles.Root}>
         {isSwipingLeft && (
           <Animated.View style={[styles.Overlay, styles.SkipOverlay]}>
             <Text preset={"h6"} style={styles.OverlayText}>
@@ -125,7 +125,7 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
             />
           </Card></View>
         )}
-      </>
+      </View>
     )
   })
 
@@ -165,8 +165,7 @@ const styles = StyleSheet.create({
   },
   Root: {
     backgroundColor: colors.background,
-    flexDirection: "column",
-    justifyContent: "center",
+    flex: 1,
   },
   SaveOverlay: {
     backgroundColor: colors.tint,

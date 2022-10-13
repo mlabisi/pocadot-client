@@ -84,6 +84,7 @@ export const NotificationsScreen: FC<StackScreenProps<AppStackParamList, "Notifi
     // const navigation = useNavigation()
     return (
       <TabView
+        style={styles.Root}
         navigationState={{ index: selectedIndex, routes: tabs }}
         renderScene={renderTab}
         renderTabBar={(props) => (
@@ -109,6 +110,10 @@ const styles = StyleSheet.create({
   ContentContainer: {
     paddingVertical: spacing.large,
     width: widthPercentageToDP(100),
+  },
+  Root: {
+    backgroundColor: colors.background,
+    flex: 1,
   },
   SelectedContainer: {
     alignSelf: "center",
