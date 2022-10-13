@@ -1,10 +1,10 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons"
 import { colors } from "../../../theme"
 import React from "react"
 
-const yoonListing = require("./yoonListing.png")
-const lisaListing = require("./lisaListing.png")
-const yejiListing = require("./yejiListing.png")
+export const yoonListing = require("../../../../assets/images/demo/yoonListing.png")
+export const lisaListing = require("../../../../assets/images/demo/lisaListing.png")
+export const yejiListing = require("../../../../assets/images/demo/yejiListing.png")
 
 export const generalNotifis = [
   {

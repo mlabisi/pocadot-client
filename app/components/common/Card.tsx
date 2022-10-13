@@ -8,6 +8,8 @@ export interface CardProps {
 
   width: number
 
+  paddingVertical?: number
+
   children: any
 }
 
@@ -17,7 +19,7 @@ export interface CardProps {
 export const Card = observer(function Card(props: CardProps) {
   return (
     <View style={[styles.Card, props.style, { width: props.width }]}>
-      <View style={styles.AutoLayoutVertical}>{props.children}</View>
+      <View style={[styles.AutoLayoutVertical, props.paddingVertical ? { paddingVertical: props.paddingVertical } : {}]}>{props.children}</View>
     </View>
   )
 })
@@ -28,7 +30,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    paddingVertical: spacing.extraLarge
   },
   Card: {
     alignItems: "center",

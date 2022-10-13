@@ -18,6 +18,7 @@ import { NotificationsScreen, SuggestionPreferencesScreen, WelcomeScreen } from 
 import { Header } from "../components"
 import { colors, spacing } from "../theme"
 import { Ionicons } from "@expo/vector-icons"
+import { StatusBar } from "expo-status-bar"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -553,6 +554,10 @@ export const RootNavigator = observer(function AppNavigator(props: NavigationPro
       {...props}
     >
       <AppStack />
+      <StatusBar
+        style="dark"
+        // style={useColorScheme() === "dark" ? "light" : "dark"}
+      />
     </NavigationContainer>
   )
 })

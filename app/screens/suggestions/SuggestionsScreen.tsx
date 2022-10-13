@@ -9,7 +9,7 @@ import { colors, spacing } from "../../theme"
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
 import Animated from "react-native-reanimated"
 import { Ionicons } from "@expo/vector-icons"
-import { suggestions } from "./demo/suggestions"
+import { suggestions } from "./demo"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 

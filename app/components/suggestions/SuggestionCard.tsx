@@ -37,7 +37,7 @@ export const SuggestionCard = observer(function SuggestionCard(props: Suggestion
   const picDimensions = props.cardWidth * 0.85
 
   return (
-    <Card width={props.cardWidth}>
+    <Card width={props.cardWidth} paddingVertical={spacing.extraLarge}>
       <View
         style={[
           styles.AutoLayoutVertical,

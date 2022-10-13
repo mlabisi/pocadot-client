@@ -15,13 +15,13 @@ import { useFonts } from "expo-font"
 import React from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import { useInitialRootStore } from "./models"
-import { useNavigationPersistence } from "./navigators"
+import { useNavigationPersistence, RootNavigator} from "./navigators"
 import { ErrorBoundary } from "./screens"
 import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import { setupReactotron } from "./services/reactotron"
 import Config from "./config"
-import { RootNavigator } from "./navigators/RootNavigator"
+import { StatusBar } from 'expo-status-bar';
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
 // React Native apps. Learn more here: https://github.com/infinitered/reactotron
