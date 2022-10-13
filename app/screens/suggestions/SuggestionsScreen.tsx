@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
-import { Card, Screen, SuggestionCard, Text, TintedButton } from "../../components"
+import { Card, SuggestionCard, Text, TintedButton } from "../../components"
 import { colors, spacing } from "../../theme"
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
 import Animated from "react-native-reanimated"
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: hp(5),
     justifyContent: "center",
-    top: 0,
+    top: 5,
     width: wp(80),
     zIndex: 10,
   },
