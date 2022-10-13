@@ -1,117 +1,34 @@
-import React, { FC, useRef, useState } from "react"
+import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import {
-  FlatList,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  ScrollView,
-  StyleSheet,
-} from "react-native"
+import { FlatList, StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { GeneralNotification, OfferNotification, Screen, Tabs } from "../../components"
+import { GeneralNotification, OfferNotification, Screen, Text } from "../../components"
 import { translate } from "../../i18n"
-import { colors, spacing } from "../../theme"
+import { colors, spacing, typography } from "../../theme"
 import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
+import { SceneMap, TabView, TabBar } from "react-native-tab-view"
+import { generalNotifis, offerNotifs } from "./demo"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
-
-const yoonListing = require("./demo/yoonListing.png")
-const lisaListing = require("./demo/lisaListing.png")
-const yejiListing = require("./demo/yejiListing.png")
-
-const generalNotifis = [
-  {
-    description:
-      "pocadot has Two-Factor Authentication! Try it now to make your account more secure.",
-    label: "Security Updates!",
-    timestamp: "Dec 20, 2022 | 10:49 PM",
-    isNew: true,
-    icon: <Ionicons name={"shield-checkmark"} color={colors.tint} size={20} />,
-  },
-  {
-    description: "You can now track your real-life photocard collections using pocadot!",
-    label: "Track Your Photocards!",
-    timestamp: "Dec 19, 2022 | 7:22 AM",
-    isNew: true,
-    icon: <Ionicons name={"file-tray-full"} color={colors.tint} size={20} />,
-  },
-  {
-    description: "Now you can offer one of your existing listings when making a trade!",
-    label: "pocadot Has Updates!",
-    timestamp: "Dec 10, 2022 | 11:54 AM",
-    isNew: false,
-    icon: <MaterialCommunityIcons name={"shield-star"} color={colors.tint} size={20} />,
-  },
-]
-
-const offerNotifs = [
-  {
-    image: yoonListing,
-    topLabel: "papagowon wants to trade for...",
-    topRightLabel: "New Trade Offer!",
-    mainLabel: "Yoon · STEREOTYPE",
-    bottomRightLabel: "24 seconds ago",
-    actionLabel: "+ view offer",
-  },
-  {
-    image: yoonListing,
-    topLabel: "itsgoingdownnn wants to buy...",
-    topRightLabel: "New Buy Offer!",
-    mainLabel: "Yoon · STEREOTYPE",
-    bottomRightLabel: "18 minutes ago",
-    actionLabel: "+ view offer",
-  },
-  {
-    image: lisaListing,
-    topLabel: "oonmixxoo accepted your offer for...",
-    topRightLabel: "Offer Accepted!",
-    mainLabel: "Lisa · BLINK 2021",
-    bottomRightLabel: "25 minutes ago",
-    actionLabel: "+ message oonmixxoo",
-  },
-  {
-    image: yoonListing,
-    topLabel: "likeasticker wants to trade for...",
-    topRightLabel: "New Trade Offer!",
-    mainLabel: "Yoon · STEREOTYPE",
-    bottomRightLabel: "46 minutes ago",
-    actionLabel: "+ view offer",
-  },
-  {
-    image: lisaListing,
-    topLabel: "You placed an offer for...",
-    topRightLabel: "Offer Placed",
-    mainLabel: "Lisa · BLINK 2021",
-    bottomRightLabel: "6 hours ago",
-    actionLabel: "+ view oonmixxoo's listing",
-  },
-  {
-    image: yejiListing,
-    topLabel: "You placed an offer for...",
-    topRightLabel: "Offer Placed",
-    mainLabel: "Yeji · Crazy In Love",
-    bottomRightLabel: "8 hours ago",
-    actionLabel: "+ view oop's listing",
-  },
-]
 
 export const NotificationsScreen: FC<StackScreenProps<AppStackParamList, "Notifications">> =
   observer(function NotificationsScreen() {
     const [selectedIndex, setSelectedIndex] = useState(0)
-
-    const tabs = [
+    const [tabs] = useState([
       {
-        label: translate("notifications.tabs.general"),
+        key: "notifications.tabs.general",
+        title: translate("notifications.tabs.general"),
       },
       {
-        label: translate("notifications.tabs.offers"),
+        key: "notifications.tabs.offers",
+        title: translate("notifications.tabs.offers"),
       },
-    ]
+    ])
 
-    const tabContent = useRef<ScrollView>(null)
-    const tabWidth = widthPercentageToDP(100) / tabs.length
+    const setIndex = (index) => {
+      setSelectedIndex(index)
+    }
 
     const renderGeneralNotification = ({ item }) => {
       return (
@@ -138,11 +55,26 @@ export const NotificationsScreen: FC<StackScreenProps<AppStackParamList, "Notifi
       )
     }
 
-    const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const x = event.nativeEvent.contentOffset.x
-      console.log(`${x}px, selectedIndex: ${selectedIndex} --> ${x / widthPercentageToDP(100)}`)
-      setSelectedIndex(x / widthPercentageToDP(100))
-    }
+    const offerNotificationsList = () => (
+      <FlatList
+        data={offerNotifs}
+        renderItem={renderOfferNotification}
+        contentContainerStyle={styles.ContentContainer}
+      />
+    )
+
+    const generalNotificationsList = () => (
+      <FlatList
+        data={generalNotifis}
+        renderItem={renderGeneralNotification}
+        contentContainerStyle={styles.ContentContainer}
+      />
+    )
+
+    const renderTab = SceneMap({
+      "notifications.tabs.general": generalNotificationsList,
+      "notifications.tabs.offers": offerNotificationsList,
+    })
 
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
@@ -150,50 +82,45 @@ export const NotificationsScreen: FC<StackScreenProps<AppStackParamList, "Notifi
     // Pull in navigation via hook
     // const navigation = useNavigation()
     return (
-      <Screen preset="fixed">
-        <Tabs
-          style={styles.Container}
-          tabs={tabs}
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          tabContent={tabContent}
-          tabWidth={tabWidth}
-        />
-        <ScrollView
-          ref={tabContent}
-          bounces={false}
-          horizontal={true}
-          pagingEnabled={true}
-          scrollEventThrottle={10}
-          onMomentumScrollEnd={handleScroll}
-        >
-          <FlatList
-            data={generalNotifis}
-            renderItem={renderGeneralNotification}
-            contentContainerStyle={styles.ContentContainer}
+      <TabView
+        navigationState={{ index: selectedIndex, routes: tabs }}
+        renderScene={renderTab}
+        renderTabBar={(props) => (
+          <TabBar
+            {...props}
+            style={{ backgroundColor: colors.background }}
+            labelStyle={styles.Text}
+            renderLabel={({ route, focused, color }) =>
+              <Text style={[styles.Text, focused ? styles.SelectedText : {color}]}>
+                {route.title}
+              </Text>
+            }
+            indicatorStyle={styles.SelectedContainer}
           />
-          <FlatList
-            data={offerNotifs}
-            renderItem={renderOfferNotification}
-            contentContainerStyle={styles.ContentContainer}
-          />
-        </ScrollView>
-      </Screen>
+        )}
+        onIndexChange={setIndex}
+        initialLayout={{ width: widthPercentageToDP(100) }}
+      />
     )
   })
 
 const styles = StyleSheet.create({
-  Container: {
-    alignItems: "flex-start",
-    display: "flex",
-    flexDirection: "row",
-    height: heightPercentageToDP(10),
-    justifyContent: "flex-start",
-    paddingVertical: spacing.large,
-    width: widthPercentageToDP(100) - spacing.large,
-  },
   ContentContainer: {
-    paddingBottom: spacing.massive + spacing.large,
+    paddingVertical: spacing.large,
     width: widthPercentageToDP(100),
+  },
+  SelectedContainer: {
+    alignSelf: "center",
+    backgroundColor: colors.tint,
+    borderRadius: 100,
+    height: 4,
+  },
+  SelectedText: {
+    color: colors.tint,
+  },
+  Text: {
+    color: colors.palette.greyscale["500"],
+    fontFamily: typography.primary.semiBold,
+    textAlign: "center",
   },
 })

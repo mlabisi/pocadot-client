@@ -36,17 +36,17 @@ export const OfferNotification = observer(function OfferNotification(
         <TouchableOpacity>
           <AutoImage style={styles.ImageContainer} source={props.image} />
         </TouchableOpacity>
-          <TouchableOpacity style={styles.Column}>
-            <Text preset={"bodyXS"} style={styles.Label}>
-              {props.topLabel}
-            </Text>
-            <Text preset={"h6"} style={styles.MainLabel}>
-              {props.mainLabel}
-            </Text>
-            <Text preset={"bodyXS"} style={styles.Label}>
-              {props.actionLabel}
-            </Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.Column}>
+          <Text preset={"bodyXS"} style={styles.Label}>
+            {props.topLabel}
+          </Text>
+          <Text preset={"h6"} style={styles.MainLabel}>
+            {props.mainLabel}
+          </Text>
+          <Text preset={"bodyXS"} style={styles.Label}>
+            {props.actionLabel}
+          </Text>
+        </TouchableOpacity>
 
         <View style={styles.RightColumn}>
           <Text preset={"bodyXS"} style={styles.Bold}>
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     width: widthPercentageToDP(100) - spacing.medium,
   },
   Divider: {
+    marginLeft: spacing.medium,
     width: widthPercentageToDP(100) - spacing.medium,
   },
   ImageContainer: {

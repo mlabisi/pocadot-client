@@ -63,7 +63,9 @@ export const GeneralNotification = observer(function GeneralNotification(
         </View>
       </View>
       <View style={[styles.Row, styles.BottomRow]}>
-        <Text preset={"bodySM"} style={styles.Description}>{props.description}</Text>
+        <Text preset={"bodySM"} style={styles.Description}>
+          {props.description}
+        </Text>
       </View>
       <LightDivider style={styles.Divider} />
     </View>
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   Divider: {
+    marginLeft: spacing.medium,
     width: widthPercentageToDP(100) - spacing.medium,
   },
   Header: {
