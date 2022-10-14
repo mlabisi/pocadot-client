@@ -14,10 +14,16 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useStores } from "../models"
 import { MainTabs } from "./MainTabs"
-import { CurationScreen, NotificationsScreen, SuggestionPreferencesScreen, WelcomeScreen } from "../screens"
+import {
+  AddListingScreen,
+  CurationScreen,
+  NotificationsScreen,
+  SuggestionPreferencesScreen,
+  WelcomeScreen,
+} from "../screens"
 import { Header } from "../components"
 import { colors, spacing } from "../theme"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, Octicons } from "@expo/vector-icons"
 import { StatusBar } from "expo-status-bar"
 
 const hitRect = spacing.extraLarge
@@ -151,7 +157,7 @@ const AppStack = observer(function AppStack() {
           <Stack.Group>
             <Stack.Screen
               name="AddListing"
-              component={WelcomeScreen}
+              component={AddListingScreen}
               options={{
                 header: (props: NativeStackHeaderProps) => (
                   <Header
@@ -162,10 +168,10 @@ const AppStack = observer(function AppStack() {
                         onPress={() => {
                           props.navigation.goBack()
                         }}
-                        style={{ paddingLeft: spacing.extraSmall }}
+                        style={{ paddingLeft: spacing.small, paddingRight: spacing.small }}
                         hitSlop={hitRect}
                       >
-                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
+                        <Octicons name={"x"} size={24} color={colors.tint} />
                       </Pressable>
                     }
                   />
