@@ -12,7 +12,7 @@ export * from "./ignite/EmptyState"
 
 export * from "./suggestions/SkipButton"
 export * from "./suggestions/SaveButton"
-export * from "./suggestions/ListingTag"
+export * from "./common/ListingTag"
 export * from "./suggestions/SuggestionCard"
 export * from "./common/Card"
 export * from "./common/TintedButton"

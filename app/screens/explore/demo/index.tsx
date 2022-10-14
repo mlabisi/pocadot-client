@@ -3,7 +3,7 @@ export const featuredListings = [
     listedBy: "uriddeulgi",
     artistName: "Nayeon",
     releaseName: "IM NAYEON",
-    listingTag: "WTS",
+    listingTag: "Want to Sell",
     avatar: require("../../../../assets/images/demo/uriddeulgi.png"),
     image: require("../../../../assets/images/demo/nayeon.png"),
   },
@@ -11,7 +11,7 @@ export const featuredListings = [
     listedBy: "papagowon",
     artistName: "Seulgi",
     releaseName: "28 Reasons",
-    listingTag: "WTT",
+    listingTag: "Want to Trade",
     avatar: require("../../../../assets/images/demo/papagowon.png"),
     image: require("../../../../assets/images/demo/seulgi.png"),
   },
@@ -19,7 +19,7 @@ export const featuredListings = [
     listedBy: "likeasticker",
     artistName: "J",
     releaseName: "SO BAD",
-    listingTag: "WTS/T",
+    listingTag: "Want to Sell/Trade",
     avatar: require("../../../../assets/images/demo/likeasticker.png"),
     image: require("../../../../assets/images/demo/j.png"),
   },
@@ -27,7 +27,7 @@ export const featuredListings = [
     listedBy: "itsgoindownnn",
     artistName: "Gowon",
     releaseName: "++",
-    listingTag: "WTS",
+    listingTag: "Want to Sell",
     avatar: require("../../../../assets/images/demo/itsgoindownnn.png"),
     image: require("../../../../assets/images/demo/gowon.png"),
   },
@@ -35,7 +35,7 @@ export const featuredListings = [
     listedBy: "oonmixxoo",
     artistName: "Lisa",
     releaseName: "BLINK 2021",
-    listingTag: "WTT",
+    listingTag: "Want to Trade",
     avatar: require("../../../../assets/images/demo/oonmixxoo.png"),
     image: require("../../../../assets/images/demo/lisaListing.png"),
   },
@@ -43,7 +43,7 @@ export const featuredListings = [
     listedBy: "oop",
     artistName: "Yeji",
     releaseName: "Crazy in Love",
-    listingTag: "WTS/T",
+    listingTag: "Want to Sell/Trade",
     avatar: require("../../../../assets/images/demo/oop.png"),
     image: require("../../../../assets/images/demo/yejiListing.png"),
   },
@@ -51,8 +51,20 @@ export const featuredListings = [
     listedBy: "like_puppy_puppy",
     artistName: "Yoon",
     releaseName: "STEREOTYPE",
-    listingTag: "WTS/T",
+    listingTag: "Want to Sell/Trade",
     avatar: require("../../../../assets/images/demo/like_puppy_puppy.png"),
     image: require("../../../../assets/images/demo/yoonListing.png"),
   },
+]
+
+export const ggs = require("../../../../assets/images/demo/girlGroups.png")
+export const bgs = require("../../../../assets/images/demo/boyGroups.png")
+
+export const curations = [
+  {
+    image: ggs
+  },
+  {
+    image: bgs
+  }
 ]

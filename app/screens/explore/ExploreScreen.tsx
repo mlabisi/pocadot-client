@@ -4,10 +4,14 @@ import { StyleSheet, View, Image, TouchableOpacity, ScrollView } from "react-nat
 import { StackScreenProps } from "@react-navigation/stack"
 import { MainNavigatorParamList } from "../../navigators"
 import { AutoImage, ListingCard, Text } from "../../components"
-import { widthPercentageToDP as wp, widthPercentageToDP } from "react-native-responsive-screen"
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "react-native-responsive-screen"
 import { colors, spacing } from "../../theme"
-import { featuredListings } from "./demo"
+import { curations, featuredListings } from "./demo"
 import { FlashList } from "@shopify/flash-list"
+import { Asset } from "expo-asset"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -22,7 +26,7 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
     // Pull in navigation via hook
     // const navigation = useNavigation()
 
-    const renderListingCard = ({item}) => {
+    const renderListingCard = ({ item }) => {
       return (
         <ListingCard
           listedBy={item.listedBy}
@@ -36,19 +40,30 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
       )
     }
 
+    const renderCuration = ({ item, index }) => {
+      return (
+        <TouchableOpacity key={item + index}>
+          <AutoImage
+            source={{ uri: Asset.fromModule(item.image).uri }}
+            style={styles.CollectionImage}
+            maxHeight={hp(15)}
+          />
+        </TouchableOpacity>
+      )
+    }
+
     return (
       <View style={styles.Root}>
         <Image source={searchBar} style={styles.SearchBar} />
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Text preset={"h6"} style={styles.SectionTitle}>
             Curated Listings
           </Text>
-          <ScrollView horizontal={true}>
-            <Image source={searchBar} />
-            <Image source={searchBar} />
-            <Image source={searchBar} />
-            <Image source={searchBar} />
-          </ScrollView>
+          <View style={styles.CuratedCollections}>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              {curations.map((item, index) => renderCuration({ item, index }))}
+            </ScrollView>
+          </View>
           <View style={styles.Row}>
             <Text preset={"h6"}>Featured Listings</Text>
             <TouchableOpacity>
@@ -57,13 +72,35 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
               </Text>
             </TouchableOpacity>
           </View>
-          <FlashList data={featuredListings} renderItem={renderListingCard} numColumns={2} estimatedItemSize={cardWidth}/>
+          <View style={styles.Container}>
+            <FlashList
+              data={featuredListings}
+              renderItem={renderListingCard}
+              numColumns={2}
+              scrollEnabled={false}
+              estimatedItemSize={cardWidth}
+              ListFooterComponentStyle={{
+                padding: spacing.large,
+              }}
+            />
+          </View>
         </ScrollView>
       </View>
     )
   })
 
 const styles = StyleSheet.create({
+  CollectionImage: {
+    marginHorizontal: spacing.small,
+  },
+  Container: {
+    minHeight: hp(100),
+    width: wp(100),
+  },
+  CuratedCollections: {
+    height: hp(15),
+    width: wp(100),
+  },
   Link: {
     color: colors.tint,
   },
@@ -82,7 +119,7 @@ const styles = StyleSheet.create({
   SearchBar: {
     marginHorizontal: spacing.medium,
     marginVertical: spacing.large,
-    width: widthPercentageToDP(100) - spacing.large,
+    width: wp(100) - spacing.large,
   },
   SectionTitle: {
     marginBottom: spacing.large,

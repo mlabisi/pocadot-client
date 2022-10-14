@@ -6,7 +6,10 @@ import Swiper from "react-native-deck-swiper"
 import { MainNavigatorParamList } from "../../navigators"
 import { Card, SuggestionCard, Text, TintedButton } from "../../components"
 import { colors, spacing } from "../../theme"
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen"
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "react-native-responsive-screen"
 import Animated from "react-native-reanimated"
 import { Ionicons } from "@expo/vector-icons"
 import { suggestions } from "./demo"
@@ -103,27 +106,32 @@ export const SuggestionsScreen: FC<StackScreenProps<MainNavigatorParamList, "Sug
           cardStyle={styles.CardStyle}
         />
         {swipedAll && (
-          <View style={styles.Centered}><Card
-            style={[styles.CardStyle, { left: (wp(100) - cardWidth) * 0.5 }]}
-            width={cardWidth}
-          >
-            <Text style={styles.MessageText}>
-              Check back later for more recommendations, or click the button below to review your
-              already-seen photocard suggestions!
-            </Text>
-            <TintedButton
-              onPress={() => {
-                setSwipedAll(false)
-                swiperRef.current.jumpToCardIndex(0)
-              }}
-              text={
-                <Text preset={"h6"} style={styles.ButtonText}>
-                  Review
-                </Text>
-              }
-              icon={<Ionicons name={"refresh"} color={colors.palette.other.white} />}
-            />
-          </Card></View>
+          <View style={styles.Centered}>
+            <Card
+              style={[
+                styles.CardStyle,
+                { left: (wp(100) - cardWidth) * 0.5, padding: spacing.medium },
+              ]}
+              width={cardWidth}
+            >
+              <Text style={styles.MessageText}>
+                Check back later for more recommendations, or click the button below to review your
+                already-seen photocard suggestions!
+              </Text>
+              <TintedButton
+                onPress={() => {
+                  setSwipedAll(false)
+                  swiperRef.current.jumpToCardIndex(0)
+                }}
+                text={
+                  <Text preset={"h6"} style={styles.ButtonText}>
+                    Review
+                  </Text>
+                }
+                icon={<Ionicons name={"refresh"} color={colors.palette.other.white} />}
+              />
+            </Card>
+          </View>
         )}
       </View>
     )
@@ -139,8 +147,8 @@ const styles = StyleSheet.create({
   },
   Centered: {
     flexDirection: "column",
-    flex: .9,
-    justifyContent: "center"
+    flex: 0.9,
+    justifyContent: "center",
   },
   MessageText: {
     paddingHorizontal: spacing.medium,

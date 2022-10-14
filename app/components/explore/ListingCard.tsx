@@ -27,31 +27,32 @@ export const ListingCard = observer(function ListingCard(props: ListingCardProps
   const picDimensions = props.cardWidth * 0.85
 
   return (
-    <Card width={props.cardWidth}>
+    <Card width={props.cardWidth} style={styles.Spacing}>
       <View style={[styles.Container, { width: props.cardWidth }]}>
         <AutoImage
           source={props.image}
           style={[styles.Image, { width: picDimensions, height: picDimensions }]}
         />
-        <View style={styles.Info}>
-          <View style={styles.ListingName}>
-            <Text preset={"h6"} style={styles.ArtistName}>
-              {props.artistName}
-            </Text>
-            <View style={styles.TagContainer}>
-              <ListingTag tag={props.listingTag} />
-            </View>
-          </View>
-            <Text preset={"bodyXXS"} style={styles.ReleaseName}>
-              {props.releaseName}
-            </Text>
-          <View style={styles.ListerInfo}>
-            <View style={styles.ListedBy}>
-              <AutoImage style={styles.Avatar} source={props.avatar} />
-              <Text preset={"bold"}>@{props.listedBy}</Text>
-            </View>
-          </View>
+
+        <View style={styles.TagContainer}>
+          <ListingTag tag={props.listingTag} />
         </View>
+
+        <View style={styles.Info}>
+          <Text preset={"h6"} style={styles.ArtistName}>
+            {props.artistName}
+          </Text>
+          <Text preset={"bodyXXS"} style={styles.ReleaseName}>
+            { props.releaseName}
+          </Text>
+        </View>
+
+          <View style={styles.ListedBy}>
+            <AutoImage style={styles.Avatar} source={props.avatar} />
+            <Text numberOfLines={1} preset={"semiBold"} style={styles.Username}>@{props.listedBy}</Text>
+          </View>
+
+
       </View>
     </Card>
   )
@@ -60,13 +61,12 @@ export const ListingCard = observer(function ListingCard(props: ListingCardProps
 const styles = StyleSheet.create({
   ArtistName: {
     marginRight: spacing.tiny,
-    paddingTop: spacing.small,
   },
   Avatar: {
     borderRadius: 8,
-    height: 16,
-    marginRight: 6,
-    width: 16,
+    height: spacing.medium,
+    marginRight: spacing.tiny,
+    width: spacing.medium,
   },
   Container: {
     alignItems: "center",
@@ -77,13 +77,15 @@ const styles = StyleSheet.create({
   },
   Image: {
     borderRadius: 20,
+    marginBottom: spacing.small
   },
   Info: {
-    alignItems: "flex-start",
+    alignItems: "flex-end",
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    marginHorizontal: spacing.tiny,
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: spacing.tiny
+
   },
   ListedBy: {
     alignItems: "center",
@@ -91,13 +93,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     justifyContent: "flex-start",
+    marginTop: spacing.tiny
   },
   ListerInfo: {
     alignItems: "flex-end",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
-    paddingLeft: spacing.small,
   },
   ListingName: {
     alignItems: "center",
@@ -108,10 +110,16 @@ const styles = StyleSheet.create({
   ReleaseName: {
     color: colors.palette.greyscale["700"],
   },
+  Spacing: {
+    margin: spacing.small,
+  },
   TagContainer: {
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
   },
+  Username: {
+    fontSize: spacing.small
+  }
 })
