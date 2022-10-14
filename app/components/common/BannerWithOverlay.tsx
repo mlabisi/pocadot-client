@@ -1,10 +1,8 @@
 import * as React from "react"
 import { ImageBackground, StyleProp, StyleSheet, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "../../theme"
-import { AutoImage, Text, useAutoImage } from "../index"
-import { Asset } from "expo-asset"
-import { widthPercentageToDP } from "react-native-responsive-screen"
+import { spacing} from "../../theme"
+import { AutoImage, useAutoImage } from "../index"
 
 export interface BannerWithOverlayProps {
   /**
