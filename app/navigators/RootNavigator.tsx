@@ -14,7 +14,7 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useStores } from "../models"
 import { MainTabs } from "./MainTabs"
-import { NotificationsScreen, SuggestionPreferencesScreen, WelcomeScreen } from "../screens"
+import { CurationScreen, NotificationsScreen, SuggestionPreferencesScreen, WelcomeScreen } from "../screens"
 import { Header } from "../components"
 import { colors, spacing } from "../theme"
 import { Ionicons } from "@expo/vector-icons"
@@ -47,7 +47,7 @@ export type AppStackParamList = {
   SuggestionPreferences: undefined
 
   AddListing: undefined
-  Curation: undefined
+  CurationScreen: undefined
   FeaturedListings: undefined
   Search: undefined
   Filter: undefined
@@ -173,12 +173,12 @@ const AppStack = observer(function AppStack() {
               }}
             />
             <Stack.Screen
-              name="Curation"
-              component={WelcomeScreen}
+              name="CurationScreen"
+              component={CurationScreen}
               options={{
                 header: (props: NativeStackHeaderProps) => (
                   <Header
-                    title={"collection name"}
+                    title={"Girl Groups"}
                     titleMode={"flex"}
                     LeftActionComponent={
                       <Pressable

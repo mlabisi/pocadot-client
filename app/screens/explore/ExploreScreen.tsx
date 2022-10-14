@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { StyleSheet, View, Image, TouchableOpacity, ScrollView } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { MainNavigatorParamList } from "../../navigators"
-import { AutoImage, ListingCard, Text } from "../../components"
+import { AutoImage, ListingCard, Text, TintedButton } from "../../components"
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -16,15 +16,18 @@ import { Asset } from "expo-asset"
 // import { useStores } from "../models"
 
 const searchBar = require("./searchBar.png")
-const cardWidth = wp(45)
+const cardWidth = wp(42)
+const bannerHeight = hp(20)
 
 export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "ExploreScreen">> =
-  observer(function ExploreScreen() {
+  observer(function ExploreScreen({ navigation }) {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
     // const navigation = useNavigation()
+
+    const goToCuration = () => navigation.getParent().navigate("CurationScreen")
 
     const renderListingCard = ({ item }) => {
       return (
@@ -36,17 +39,18 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
           listingTag={item.listingTag}
           avatar={item.avatar}
           image={item.image}
+          style={styles.Card}
         />
       )
     }
 
     const renderCuration = ({ item, index }) => {
       return (
-        <TouchableOpacity key={item + index}>
+        <TouchableOpacity key={item + index} onPress={goToCuration}>
           <AutoImage
             source={{ uri: Asset.fromModule(item.image).uri }}
             style={styles.CollectionImage}
-            maxHeight={hp(15)}
+            maxHeight={bannerHeight}
           />
         </TouchableOpacity>
       )
@@ -66,7 +70,7 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
           </View>
           <View style={styles.Row}>
             <Text preset={"h6"}>Featured Listings</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={goToCuration}>
               <Text preset={"bold"} style={styles.Link}>
                 See All
               </Text>
@@ -74,14 +78,23 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
           </View>
           <View style={styles.Container}>
             <FlashList
-              data={featuredListings}
+              data={featuredListings.slice(0, 6)}
               renderItem={renderListingCard}
               numColumns={2}
               scrollEnabled={false}
               estimatedItemSize={cardWidth}
-              ListFooterComponentStyle={{
-                padding: spacing.large,
-              }}
+              ListFooterComponent={
+                <View style={{ padding: spacing.large }}>
+                  <TintedButton
+                    onPress={goToCuration}
+                    text={
+                      <Text preset={"h6"} style={styles.ButtonText}>
+                        See All
+                      </Text>
+                    }
+                  />
+                </View>
+              }
             />
           </View>
         </ScrollView>
@@ -90,6 +103,12 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
   })
 
 const styles = StyleSheet.create({
+  ButtonText: {
+    color: colors.palette.other.white,
+  },
+  Card: {
+    flex: 1
+  },
   CollectionImage: {
     marginHorizontal: spacing.small,
   },
@@ -98,7 +117,7 @@ const styles = StyleSheet.create({
     width: wp(100),
   },
   CuratedCollections: {
-    height: hp(15),
+    height: bannerHeight,
     width: wp(100),
   },
   Link: {

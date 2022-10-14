@@ -10,9 +10,9 @@ export interface TintedButtonProps {
    */
   style?: StyleProp<ViewStyle>
 
-  icon: ReactElement
+  icon?: ReactElement
 
-  text: ReactElement
+  text?: ReactElement
 
   onPress: (event: GestureResponderEvent) => void
 }

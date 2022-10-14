@@ -1,10 +1,15 @@
 import * as React from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, spacing } from "../../theme"
 import { AutoImage, Card, ListingTag, Text } from "../index"
 
 export interface ListingCardProps {
+  /**
+   * An optional style override useful for padding & margin.
+   */
+  style?: StyleProp<ViewStyle>
+
   listedBy: string
 
   cardWidth: number
@@ -27,7 +32,7 @@ export const ListingCard = observer(function ListingCard(props: ListingCardProps
   const picDimensions = props.cardWidth * 0.85
 
   return (
-    <Card width={props.cardWidth} style={styles.Spacing}>
+    <Card width={props.cardWidth} style={[styles.Spacing, props.style]}>
       <View style={[styles.Container, { width: props.cardWidth }]}>
         <AutoImage
           source={props.image}
