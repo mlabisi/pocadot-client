@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { ScrollView, StyleSheet, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { LightDivider, ListingCard, Text } from "../../components"
+import { BannerWithOverlay, LightDivider, ListingCard, Text } from "../../components"
 import { colors, spacing } from "../../theme"
 import {
   heightPercentageToDP as hp,
@@ -11,10 +11,14 @@ import {
 } from "react-native-responsive-screen"
 import { featuredListings } from "./demo"
 import { FlashList } from "@shopify/flash-list"
+import { Asset } from "expo-asset"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
 const cardWidth = wp(42)
+
+const rv = require("../../../assets/images/demo/rv.png")
+const logo = require("../../../assets/images/demo/squareLogo.png")
 
 export const CurationScreen: FC<StackScreenProps<AppStackParamList, "CurationScreen">> = observer(
   function CuratedCollectionScreen() {
@@ -23,6 +27,9 @@ export const CurationScreen: FC<StackScreenProps<AppStackParamList, "CurationScr
 
     // Pull in navigation via hook
     // const navigation = useNavigation()
+
+    const bannerImage = Asset.fromModule(rv)
+    const overlayImage = Asset.fromModule(logo)
 
     const renderListingCard = ({ item }) => {
       return (
@@ -43,7 +50,13 @@ export const CurationScreen: FC<StackScreenProps<AppStackParamList, "CurationScr
       <View style={styles.Root}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.Container}>
-            <View style={styles.ThemeLightComponentNftCreatorHeader} />
+            <View style={styles.BannerContainer}>
+              <BannerWithOverlay
+                width={wp(100) - spacing.medium * 2}
+                bannerImage={bannerImage}
+                overlayImage={overlayImage}
+              />
+            </View>
             <Text preset={"h3"}>Girl Group Photocards</Text>
             <Text preset={"bodySM"} style={styles.Description}>
               September has been a busy month for Girl Groups in Kpop! Check out the latest Girl
@@ -72,6 +85,11 @@ export const CurationScreen: FC<StackScreenProps<AppStackParamList, "CurationScr
 )
 
 const styles = StyleSheet.create({
+  BannerContainer: {
+    height: hp(25),
+    marginBottom: spacing.medium,
+    width: wp(100)
+  },
   Card: {
     flex: 1,
   },
@@ -80,7 +98,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginLeft: spacing.medium,
+    margin: spacing.medium,
     width: wp(100) - spacing.medium * 2,
   },
   Description: {
@@ -97,10 +115,5 @@ const styles = StyleSheet.create({
   Root: {
     backgroundColor: colors.background,
     flex: 1,
-  },
-  ThemeLightComponentNftCreatorHeader: {
-    height: 177,
-    marginBottom: 16,
-    width: 380,
   },
 })

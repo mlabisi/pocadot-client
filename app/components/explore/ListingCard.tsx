@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     marginRight: spacing.tiny,
   },
   Avatar: {
-    borderRadius: 8,
+    borderRadius: spacing.medium * 0.5,
     height: spacing.medium,
     marginRight: spacing.tiny,
     width: spacing.medium,

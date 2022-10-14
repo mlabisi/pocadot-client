@@ -48,7 +48,7 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
       return (
         <TouchableOpacity key={item + index} onPress={goToCuration}>
           <AutoImage
-            source={{ uri: Asset.fromModule(item.image).uri }}
+            source={item.image}
             style={styles.CollectionImage}
             maxHeight={bannerHeight}
           />

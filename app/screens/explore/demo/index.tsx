@@ -1,3 +1,5 @@
+import { Asset } from "expo-asset"
+
 export const featuredListings = [
   {
     listedBy: "uriddeulgi",
@@ -57,14 +59,11 @@ export const featuredListings = [
   },
 ]
 
-export const ggs = require("../../../../assets/images/demo/girlGroups.png")
-export const bgs = require("../../../../assets/images/demo/boyGroups.png")
-
 export const curations = [
   {
-    image: ggs
+    image: { uri: Asset.fromModule(require("../../../../assets/images/demo/girlGroups.png")).uri },
   },
   {
-    image: bgs
-  }
+    image: { uri: Asset.fromModule(require("../../../../assets/images/demo/boyGroups.png")).uri },
+  },
 ]
