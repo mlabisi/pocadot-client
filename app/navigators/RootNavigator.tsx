@@ -9,7 +9,7 @@ import { createNativeStackNavigator, NativeStackHeaderProps } from "@react-navig
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
 import React from "react"
-import { TouchableOpacity, useColorScheme } from "react-native"
+import { Pressable, useColorScheme } from "react-native"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useStores } from "../models"
@@ -19,6 +19,8 @@ import { Header } from "../components"
 import { colors, spacing } from "../theme"
 import { Ionicons } from "@expo/vector-icons"
 import { StatusBar } from "expo-status-bar"
+
+const hitRect = spacing.extraLarge
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -102,14 +104,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"notifications.title"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -128,14 +131,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"suggestions.preferences.title"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -154,14 +158,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"explore.listings.add"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -176,14 +181,15 @@ const AppStack = observer(function AppStack() {
                     title={"collection name"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -198,14 +204,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"explore.listings.featured"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -220,14 +227,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"explore.listings.featured"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -242,14 +250,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"explore.search.filter"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -264,14 +273,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"explore.listings.featured"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -290,14 +300,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"myProfile.edit.title"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -312,14 +323,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"myProfile.edit.title"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -334,14 +346,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"myProfile.edit.title"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -360,14 +373,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"more.biases.title"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -382,14 +396,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"more.settings.delete"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -404,14 +419,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"more.settings.title"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -426,14 +442,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"more.settings.notifications"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -448,14 +465,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"more.settings.security"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -470,14 +488,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"more.settings.language"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -492,14 +511,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"more.settings.country"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),
@@ -514,14 +534,15 @@ const AppStack = observer(function AppStack() {
                     titleTx={"more.settings.help"}
                     titleMode={"flex"}
                     LeftActionComponent={
-                      <TouchableOpacity
+                      <Pressable
                         onPress={() => {
                           props.navigation.goBack()
                         }}
                         style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
                       >
                         <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </TouchableOpacity>
+                      </Pressable>
                     }
                   />
                 ),

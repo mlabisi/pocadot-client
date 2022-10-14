@@ -89,7 +89,7 @@ export const MainTabs = () => {
                   name={"notifications-outline"}
                   size={responsiveDimensions}
                   color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
+                  style={{ paddingLeft: spacing.large }}
                 />
               </TouchableOpacity>
             }
@@ -110,7 +110,7 @@ export const MainTabs = () => {
                   name={"diff-added"}
                   size={responsiveDimensions}
                   color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
+                  style={{ paddingLeft: spacing.large }}
                 />
               </TouchableOpacity>
             }
@@ -124,7 +124,7 @@ export const MainTabs = () => {
                   name={"notifications-outline"}
                   size={responsiveDimensions}
                   color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
+                  style={{ paddingLeft: spacing.large }}
                 />
               </TouchableOpacity>
             }
@@ -145,7 +145,7 @@ export const MainTabs = () => {
                   name={"notifications-outline"}
                   size={responsiveDimensions}
                   color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
+                  style={{ paddingLeft: spacing.large }}
                 />
               </TouchableOpacity>
             }
@@ -166,7 +166,7 @@ export const MainTabs = () => {
                   name={"pencil-box-outline"}
                   size={responsiveDimensions}
                   color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
+                  style={{ paddingLeft: spacing.large }}
                 />
               </TouchableOpacity>
             }
@@ -180,7 +180,7 @@ export const MainTabs = () => {
                   name={"notifications-outline"}
                   size={responsiveDimensions}
                   color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
+                  style={{ paddingLeft: spacing.large }}
                 />
               </TouchableOpacity>
             }
@@ -201,7 +201,7 @@ export const MainTabs = () => {
                   name={"notifications-outline"}
                   size={responsiveDimensions}
                   color={colors.tint}
-                  style={{ paddingLeft: spacing.medium }}
+                  style={{ paddingLeft: spacing.large }}
                 />
               </TouchableOpacity>
             }
