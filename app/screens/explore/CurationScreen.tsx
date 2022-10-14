@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     margin: spacing.medium,
+    marginTop: spacing.large,
     width: wp(100) - spacing.medium * 2,
   },
   Description: {
