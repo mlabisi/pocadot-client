@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 8,
+    shadowRadius: 18,
     width: widthPercentageToDP(30),
   },
   ButtonContainer: {
