@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
@@ -7,18 +7,25 @@ import { FormSection, Text, TintedButton } from "../../components"
 import { colors, spacing } from "../../theme"
 import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
 import { Ionicons } from "@expo/vector-icons"
+import SearchableDropdown from "react-native-searchable-dropdown"
+import { idols } from "./demo"
+
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
 export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListing">> = observer(
-  function AddListingScreen() {
+  function AddListingScreen({ navigation }) {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
     // const navigation = useNavigation()
 
+    const [selectedItems, setSelectedItems] = useState([])
+
     const handlePress = () => {}
+
+    const cancelButtonPress = () => navigation.goBack()
 
     const scanBack = () => {}
 
@@ -42,7 +49,7 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
 
     return (
       <View style={styles.Root}>
-        <ScrollView style={styles.Form}>
+        <ScrollView contentContainerStyle={styles.Form}>
           <FormSection
             title={"Photocard Scans"}
             description={
@@ -51,7 +58,7 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
             inputComponent={
               <View style={styles.UploadsRow}>
                 <TouchableOpacity onPress={scanFront} style={styles.UploadItem}>
-                  <Ionicons name={"scan-circle-sharp"} color={colors.tint} size={45}/>
+                  <Ionicons name={"scan-circle-sharp"} color={colors.tint} size={45} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={scanBack} style={styles.UploadItem}>
                   <Ionicons name={"scan-circle-sharp"} color={colors.tint} size={45} />
@@ -59,7 +66,55 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
               </View>
             }
           />
-          <FormSection title={"Idol"} inputComponent={<View />} />
+          <FormSection
+            title={"Idol"}
+            inputComponent={
+              <View>
+                <SearchableDropdown
+                  multi={true}
+                  selectedItems={selectedItems}
+                  onItemSelect={(item) => {
+
+                  }}
+                  containerStyle={{ padding: 5 }}
+                  onRemoveItem={(item, index) => {
+
+                  }}
+                  itemStyle={{
+                    padding: 10,
+                    marginTop: 2,
+                    backgroundColor: '#ddd',
+                    borderColor: '#bbb',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                  }}
+                  itemTextStyle={{ color: '#222' }}
+                  itemsContainerStyle={{ maxHeight: 140 }}
+                  items={idols}
+                  chip={true}
+                  resetValue={false}
+                  textInputProps={
+                    {
+                      placeholder: "placeholder",
+                      underlineColorAndroid: "transparent",
+                      style: {
+                        padding: 12,
+                        borderWidth: 1,
+                        borderColor: '#ccc',
+                        borderRadius: 5,
+                      },
+                      onTextChange: text => {}
+                    }
+                  }
+                  listProps={
+                    {
+                      nestedScrollEnabled: true,
+                    }
+                  }
+                ></SearchableDropdown>
+              </View>
+            }
+          />
           <FormSection
             title={"Era / Release"}
             description={
@@ -92,7 +147,7 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
         <View style={styles.ButtonContainer}>
           <View style={styles.Row}>
             <TintedButton
-              onPress={handlePress}
+              onPress={cancelButtonPress}
               style={[styles.Button, styles.CancelButton]}
               text={
                 <Text preset={"h6"} style={styles.CancelButtonText}>
