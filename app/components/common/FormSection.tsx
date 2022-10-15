@@ -2,8 +2,9 @@ import * as React from "react"
 import { StyleSheet, View } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, spacing, typography } from "../../theme"
-import { Text } from "../index"
+import { LightDivider, Text } from "../index"
 import { ReactElement } from "react"
+import { widthPercentageToDP } from "react-native-responsive-screen"
 
 export interface FormSectionProps {
   title: string
@@ -19,6 +20,8 @@ export interface FormSectionProps {
 export const FormSection = observer(function FormSection(props: FormSectionProps) {
   return (
     <View style={styles.Container}>
+      <LightDivider style={styles.Divider}/>
+
       <Text preset={"h5"} style={styles.Title}>{props.title}</Text>
       {props.description ? <Text preset={"bodyXS"}>{props.description}</Text> : null}
       {props.inputComponent}
@@ -35,7 +38,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     margin: spacing.medium
   },
+  Divider: {
+    left: spacing.medium,
+    backgroundColor: colors.palette.greyscale["200"],
+    width: widthPercentageToDP(100) - (spacing.large)
+  },
   Title: {
-    marginBottom: spacing.small
+    // marginTop: spacing.small
   }
 })

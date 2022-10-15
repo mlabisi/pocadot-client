@@ -1,12 +1,12 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
+import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { FormSection, Text, TintedButton } from "../../components"
+import { FormSection, Header, Screen, Text, TextField, TintedButton, Toggle } from "../../components"
 import { colors, spacing } from "../../theme"
 import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, Octicons } from "@expo/vector-icons"
 import SearchableDropdown from "react-native-searchable-dropdown"
 import { idols } from "./demo"
 
@@ -22,6 +22,7 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
     // const navigation = useNavigation()
 
     const [selectedItems, setSelectedItems] = useState([])
+    const [internationalShippingEnabled, setInternationalShippingEnabled] = useState(false)
 
     const handlePress = () => {}
 
@@ -50,6 +51,21 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
     return (
       <View style={styles.Root}>
         <ScrollView contentContainerStyle={styles.Form}>
+          <Header
+            titleTx={"explore.listings.add"}
+            titleMode={"flex"}
+            LeftActionComponent={
+              <Pressable
+                onPress={() => {
+                  navigation.goBack()
+                }}
+                style={{ paddingLeft: spacing.small, paddingRight: spacing.small }}
+                hitSlop={25}
+              >
+                <Octicons name={"x"} size={24} color={colors.tint} />
+              </Pressable>
+            }
+          />
           <FormSection
             title={"Photocard Scans"}
             description={
@@ -73,44 +89,36 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
                 <SearchableDropdown
                   multi={true}
                   selectedItems={selectedItems}
-                  onItemSelect={(item) => {
-
-                  }}
+                  onItemSelect={(item) => {}}
                   containerStyle={{ padding: 5 }}
-                  onRemoveItem={(item, index) => {
-
-                  }}
+                  onRemoveItem={(item, index) => {}}
                   itemStyle={{
                     padding: 10,
                     marginTop: 2,
-                    backgroundColor: '#ddd',
-                    borderColor: '#bbb',
+                    backgroundColor: "#ddd",
+                    borderColor: "#bbb",
                     borderWidth: 1,
                     borderRadius: 5,
                   }}
-                  itemTextStyle={{ color: '#222' }}
+                  itemTextStyle={{ color: "#222" }}
                   itemsContainerStyle={{ maxHeight: 140 }}
                   items={idols}
                   chip={true}
                   resetValue={false}
-                  textInputProps={
-                    {
-                      placeholder: "placeholder",
-                      underlineColorAndroid: "transparent",
-                      style: {
-                        padding: 12,
-                        borderWidth: 1,
-                        borderColor: '#ccc',
-                        borderRadius: 5,
-                      },
-                      onTextChange: text => {}
-                    }
-                  }
-                  listProps={
-                    {
-                      nestedScrollEnabled: true,
-                    }
-                  }
+                  textInputProps={{
+                    placeholder: "placeholder",
+                    underlineColorAndroid: "transparent",
+                    style: {
+                      padding: 12,
+                      borderWidth: 1,
+                      borderColor: "#ccc",
+                      borderRadius: 5,
+                    },
+                    onTextChange: (text) => {},
+                  }}
+                  listProps={{
+                    nestedScrollEnabled: true,
+                  }}
                 ></SearchableDropdown>
               </View>
             }
@@ -120,14 +128,14 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
             description={
               "Share the name of the album, season’s greetings, era, etc that this photocard came from."
             }
-            inputComponent={<View />}
+            inputComponent={<TextField />}
           />
           <FormSection
             title={"Description"}
             description={
               "This description will be included on your listing’s detail page underneath the image. If you'd like to trade, be sure to provide a description of what you're looking for."
             }
-            inputComponent={<View />}
+            inputComponent={<TextField />}
           />
           <FormSection title={"Condition"} inputComponent={<View />} />
           <FormSection
@@ -140,9 +148,23 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
           <FormSection
             title={"Starting Price"}
             description={"What’s the lowest amount you’d be willing to accept for this photocard?"}
-            inputComponent={<View />}
+            inputComponent={<TextField />}
           />
-          <FormSection title={"International Shipping"} inputComponent={<View />} />
+          <FormSection
+            title={"International Shipping"}
+            inputComponent={
+              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <Text preset={"bodySM"} style={styles.SwitchLabel}>
+                  Are you willing to ship outside of USA/CA?
+                </Text>
+                <Toggle
+                  variant={"switch"}
+                  value={internationalShippingEnabled}
+                  onValueChange={setInternationalShippingEnabled}
+                />
+              </View>
+            }
+          />
         </ScrollView>
         <View style={styles.ButtonContainer}>
           <View style={styles.Row}>
@@ -209,7 +231,7 @@ const styles = StyleSheet.create({
   Form: {
     alignContent: "center",
     paddingBottom: heightPercentageToDP(10),
-    width: widthPercentageToDP(100) - spacing.extraLarge,
+    width: widthPercentageToDP(100),
   },
   Root: {
     backgroundColor: colors.background,
@@ -222,6 +244,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: spacing.medium,
     width: widthPercentageToDP(100),
+  },
+  SwitchLabel: {
+    width: widthPercentageToDP(70),
   },
   UploadItem: {
     alignItems: "center",

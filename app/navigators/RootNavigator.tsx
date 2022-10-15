@@ -9,7 +9,7 @@ import { createNativeStackNavigator, NativeStackHeaderProps } from "@react-navig
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
 import React from "react"
-import { Pressable, useColorScheme } from "react-native"
+import { Pressable, useColorScheme, View } from "react-native"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useStores } from "../models"
@@ -25,6 +25,8 @@ import { Header } from "../components"
 import { colors, spacing } from "../theme"
 import { Ionicons, Octicons } from "@expo/vector-icons"
 import { StatusBar } from "expo-status-bar"
+import Constants from 'expo-constants';
+import { heightPercentageToDP } from "react-native-responsive-screen"
 
 const hitRect = spacing.extraLarge
 
@@ -159,23 +161,7 @@ const AppStack = observer(function AppStack() {
               name="AddListing"
               component={AddListingScreen}
               options={{
-                header: (props: NativeStackHeaderProps) => (
-                  <Header
-                    titleTx={"explore.listings.add"}
-                    titleMode={"flex"}
-                    LeftActionComponent={
-                      <Pressable
-                        onPress={() => {
-                          props.navigation.goBack()
-                        }}
-                        style={{ paddingLeft: spacing.small, paddingRight: spacing.small }}
-                        hitSlop={hitRect}
-                      >
-                        <Octicons name={"x"} size={24} color={colors.tint} />
-                      </Pressable>
-                    }
-                  />
-                ),
+                header: () => (<View style={{height: Constants.statusBarHeight, backgroundColor: colors.background}}/> )
               }}
             />
             <Stack.Screen
