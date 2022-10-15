@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
+import { Modal, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { FormSection, Header, Screen, Text, TextField, TintedButton, Toggle } from "../../components"
+import { Card, FormSection, Header, Text, TextField, TintedButton, Toggle } from "../../components"
 import { colors, spacing } from "../../theme"
 import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
 import { Ionicons, Octicons } from "@expo/vector-icons"
@@ -21,7 +21,8 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
     // Pull in navigation via hook
     // const navigation = useNavigation()
 
-    const [selectedItems, setSelectedItems] = useState([])
+    const [selectedIdols, setSelectedIdols] = useState([])
+    const [idolModalVisible, setIdolModalVisible] = useState(false)
     const [internationalShippingEnabled, setInternationalShippingEnabled] = useState(false)
 
     const handlePress = () => {}
@@ -83,43 +84,88 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
             }
           />
           <FormSection
-            title={"Idol"}
+            title={"Idol(s)"}
             inputComponent={
               <View>
-                <SearchableDropdown
-                  multi={true}
-                  selectedItems={selectedItems}
-                  onItemSelect={(item) => {}}
-                  containerStyle={{ padding: 5 }}
-                  onRemoveItem={(item, index) => {}}
-                  itemStyle={{
-                    padding: 10,
-                    marginTop: 2,
-                    backgroundColor: "#ddd",
-                    borderColor: "#bbb",
-                    borderWidth: 1,
-                    borderRadius: 5,
+                <TouchableOpacity onPress={() => setIdolModalVisible(!idolModalVisible)}>
+                  <View style={styles.SelectIdol}>
+                    <Text preset={"bodySM"}>Select an Idol</Text>
+                    <Ionicons name={"add"}/>
+                  </View>
+                </TouchableOpacity>
+                <Modal
+                  animationType={"fade"}
+                  transparent={true}
+                  visible={idolModalVisible}
+                  onRequestClose={() => {
+                    setIdolModalVisible(!idolModalVisible)
                   }}
-                  itemTextStyle={{ color: "#222" }}
-                  itemsContainerStyle={{ maxHeight: 140 }}
-                  items={idols}
-                  chip={true}
-                  resetValue={false}
-                  textInputProps={{
-                    placeholder: "placeholder",
-                    underlineColorAndroid: "transparent",
-                    style: {
-                      padding: 12,
-                      borderWidth: 1,
-                      borderColor: "#ccc",
-                      borderRadius: 5,
-                    },
-                    onTextChange: (text) => {},
-                  }}
-                  listProps={{
-                    nestedScrollEnabled: true,
-                  }}
-                ></SearchableDropdown>
+                >
+                  <View style={styles.ModalContainer}>
+                    <Card width={widthPercentageToDP(85)} style={styles.ModalContents}>
+                      <SearchableDropdown
+                        multi={true}
+                        selectedItems={selectedIdols}
+                        onItemSelect={(item) => {
+                          setSelectedIdols((prev) => [...prev, item])
+                        }}
+                        containerStyle={{
+                          height: heightPercentageToDP(35),
+                          width: widthPercentageToDP(80),
+                          paddingVertical: spacing.medium,
+                        }}
+                        onRemoveItem={(item, index) => {
+                          setSelectedIdols((prev) => prev.filter((it) => it.id !== item.id))
+                        }}
+                        itemStyle={{
+                          padding: 10,
+                          marginTop: 2,
+                          backgroundColor: "#ddd",
+                          borderColor: "#bbb",
+                          borderWidth: 1,
+                          borderRadius: 5,
+                        }}
+                        itemTextStyle={{ color: "#222" }}
+                        itemsContainerStyle={{ height: heightPercentageToDP(40) }}
+                        items={idols.sort((a, b) => (a.stageName.localeCompare(b.stageName))).map(idol => ({id: idol.id, name: `${idol.stageName} ${idol.groups.length ? `- ${idol.groups.map((group) => group.name).join(", ")}` : ""}` }))}
+                        chip={true}
+                        resetValue={false}
+                        textInputProps={{
+                          placeholder: "Search for an idol",
+                          underlineColorAndroid: "transparent",
+                          style: {
+                            padding: 12,
+                            borderWidth: 1,
+                            borderColor: "#ccc",
+                            borderRadius: 5,
+                          },
+                          onTextChange: (text) => {},
+                        }}
+                        listProps={{
+                          nestedScrollEnabled: true,
+                        }}
+                      />
+                      <TintedButton
+                        onPress={() => setIdolModalVisible(!idolModalVisible)}
+                        text={
+                          <Text preset={"h6"} style={styles.ButtonText}>
+                            Save
+                          </Text>
+                        }
+                      />
+                    </Card>
+                  </View>
+                </Modal>
+                {selectedIdols.length > 0 ? (
+                  selectedIdols.map((idol, i) => (
+                    <View key={idol + i} style={styles.SelectIdol}>
+                      <Text preset={"bodySM"}>{idol.name}</Text>
+                      <TouchableOpacity onPress={() => setSelectedIdols((prev) => prev.filter((it) => it.id !== idol.id))}>
+                        <Octicons name={"x-circle-fill"} />
+                      </TouchableOpacity>
+                    </View>
+                  ))
+                ) : null}
               </View>
             }
           />
@@ -233,6 +279,15 @@ const styles = StyleSheet.create({
     paddingBottom: heightPercentageToDP(10),
     width: widthPercentageToDP(100),
   },
+  ModalContainer: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
+    marginTop: 22,
+  },
+  ModalContents: {
+    height: heightPercentageToDP(45),
+  },
   Root: {
     backgroundColor: colors.background,
     flex: 1,
@@ -245,12 +300,24 @@ const styles = StyleSheet.create({
     marginBottom: spacing.medium,
     width: widthPercentageToDP(100),
   },
+  SelectIdol: {
+    alignItems: "center",
+    backgroundColor: colors.palette.transparentColors.blue,
+    borderRadius: 16,
+    display: "flex",
+    flexDirection: "row",
+    height: 56,
+    justifyContent: "space-between",
+    marginTop: spacing.medium,
+    padding: spacing.medium,
+    width: widthPercentageToDP(100) - spacing.extraLarge,
+  },
   SwitchLabel: {
     width: widthPercentageToDP(70),
   },
   UploadItem: {
     alignItems: "center",
-    backgroundColor: colors.palette.greyscale["50"],
+    backgroundColor: colors.palette.transparentColors.blue,
     borderColor: colors.border,
     borderRadius: 20,
     borderStyle: "dashed",
