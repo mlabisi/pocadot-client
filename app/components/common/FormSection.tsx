@@ -20,8 +20,6 @@ export interface FormSectionProps {
 export const FormSection = observer(function FormSection(props: FormSectionProps) {
   return (
     <View style={styles.Container}>
-      <LightDivider style={styles.Divider}/>
-
       <Text preset={"h5"} style={styles.Title}>{props.title}</Text>
       {props.description ? <Text preset={"bodyXS"}>{props.description}</Text> : null}
       {props.inputComponent}
@@ -36,14 +34,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     justifyContent: "flex-start",
-    margin: spacing.medium
-  },
-  Divider: {
-    left: spacing.medium,
-    backgroundColor: colors.palette.greyscale["200"],
-    width: widthPercentageToDP(100) - (spacing.large)
+    marginHorizontal: spacing.medium,
+    marginVertical: spacing.extraSmall,
   },
   Title: {
-    // marginTop: spacing.small
+   marginTop: spacing.small
   }
 })

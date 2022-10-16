@@ -1,15 +1,35 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { Modal, Pressable, ScrollView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { Card, FormSection, Header, Text, TextField, TintedButton, Toggle } from "../../components"
+import {
+  Card,
+  FormSection,
+  Header,
+  LightDivider,
+  Text,
+  TextField,
+  TintedButton,
+  Toggle,
+} from "../../components"
 import { colors, spacing } from "../../theme"
 import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
 import { Ionicons, Octicons } from "@expo/vector-icons"
 import SearchableDropdown from "react-native-searchable-dropdown"
 import { idols } from "./demo"
 import { BlurView } from "expo-blur"
+import {AirbnbRating, Rating} from "react-native-ratings"
+
+const conditionStrings = ['Damaged', 'Okay', 'Great','Like New','Unopened']
 
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
@@ -25,6 +45,9 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
     const [selectedIdols, setSelectedIdols] = useState([])
     const [idolModalVisible, setIdolModalVisible] = useState(false)
     const [internationalShippingEnabled, setInternationalShippingEnabled] = useState(false)
+    const [wtsEnabled, setWtsEnabled] = useState(false)
+    const [wttEnabled, setWttEnabled] = useState(false)
+    const [condition, setCondition] = useState(3);
 
     const handlePress = () => {}
 
@@ -89,9 +112,9 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
             inputComponent={
               <View>
                 <TouchableOpacity onPress={() => setIdolModalVisible(!idolModalVisible)}>
-                  <View style={styles.SelectIdol}>
+                  <View style={[styles.SelectIdol, { borderColor: colors.border, borderWidth: 1 }]}>
                     <Text preset={"bodySM"}>Select an Idol</Text>
-                    <Ionicons name={"add"}/>
+                    <Ionicons name={"add"} />
                   </View>
                 </TouchableOpacity>
                 <Modal
@@ -106,84 +129,99 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
                     <Pressable
                       // style={styles.container}
                       style={styles.ModalContainer}
-                      onPressOut={() => {setIdolModalVisible(!idolModalVisible)}}
+                      onPressOut={() => {
+                        setIdolModalVisible(!idolModalVisible)
+                      }}
                     >
-                        <TouchableWithoutFeedback>
-                          <View style={styles.ModalContents}>
-                            <Card width={widthPercentageToDP(75)} style={styles.ModalContents}>
-                              <SearchableDropdown
-                                multi={true}
-                                selectedItems={selectedIdols}
-                                onItemSelect={(item) => {
-                                  setSelectedIdols((prev) => [...prev, item])
-                                }}
-                                containerStyle={{
-                                  height: heightPercentageToDP(35),
-                                  width: widthPercentageToDP(65),
-                                  paddingVertical: spacing.medium,
-                                }}
-                                onRemoveItem={(item, index) => {
-                                  setSelectedIdols((prev) => prev.filter((it) => it.id !== item.id))
-                                }}
-                                itemStyle={{
+                      <TouchableWithoutFeedback>
+                        <View style={styles.ModalContents}>
+                          <Card width={widthPercentageToDP(75)} style={styles.ModalContents}>
+                            <SearchableDropdown
+                              multi={true}
+                              selectedItems={selectedIdols}
+                              onItemSelect={(item) => {
+                                setSelectedIdols((prev) => [...prev, item])
+                              }}
+                              containerStyle={{
+                                height: heightPercentageToDP(35),
+                                width: widthPercentageToDP(65),
+                                paddingVertical: spacing.medium,
+                              }}
+                              onRemoveItem={(item, index) => {
+                                setSelectedIdols((prev) => prev.filter((it) => it.id !== item.id))
+                              }}
+                              itemStyle={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                marginVertical: spacing.extraSmall,
+                                padding: spacing.small,
+                                borderRadius: 16,
+                                backgroundColor: colors.palette.transparentColors.blue,
+                              }}
+                              itemsContainerStyle={{ height: heightPercentageToDP(40) }}
+                              items={idols
+                                .sort((a, b) => a.stageName.localeCompare(b.stageName))
+                                .map((idol) => ({
+                                  id: idol.id,
+                                  name: `${idol.stageName} ${
+                                    idol.groups.length
+                                      ? `- ${idol.groups.map((group) => group.name).join(", ")}`
+                                      : ""
+                                  }`,
+                                }))}
+                              chip={false}
+                              resetValue={false}
+                              textInputProps={{
+                                placeholder: "Search for an idol",
+                                underlineColorAndroid: "transparent",
+                                style: {
                                   display: "flex",
                                   flexDirection: "row",
                                   justifyContent: "flex-start",
                                   alignItems: "center",
-                                  marginVertical: spacing.extraSmall,
-                                  padding: spacing.small,
+                                  padding: spacing.medium,
                                   borderRadius: 16,
                                   backgroundColor: colors.palette.transparentColors.blue,
-                                }}
-                                itemsContainerStyle={{ height: heightPercentageToDP(40) }}
-                                items={idols.sort((a, b) => (a.stageName.localeCompare(b.stageName))).map(idol => ({id: idol.id, name: `${idol.stageName} ${idol.groups.length ? `- ${idol.groups.map((group) => group.name).join(", ")}` : ""}` }))}
-                                chip={false}
-                                resetValue={false}
-                                textInputProps={{
-                                  placeholder: "Search for an idol",
-                                  underlineColorAndroid: "transparent",
-                                  style: {
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    justifyContent: "flex-start",
-                                    alignItems: "center",
-                                    padding: spacing.medium,
-                                    borderRadius: 16,
-                                    backgroundColor: "rgba(163,176,239,0.08)",
-                                    borderWidth: 1,
-                                    borderStyle: "solid",
-                                    borderColor: "rgba(163,176,239,1)",
-                                  },
-                                  onTextChange: (text) => {},
-                                }}
-                                listProps={{
-                                  nestedScrollEnabled: true,
-                                }}
-                              />
-                              <TintedButton
-                                onPress={() => setIdolModalVisible(!idolModalVisible)}
-                                text={
-                                  <Text preset={"h6"} style={styles.ButtonText}>
-                                    Save
-                                  </Text>
-                                }
-                              />
-                            </Card>
-                          </View>
-                        </TouchableWithoutFeedback>
+                                  borderWidth: 1,
+                                  borderStyle: "solid",
+                                  borderColor: colors.tint,
+                                },
+                                onTextChange: (text) => {},
+                              }}
+                              listProps={{
+                                nestedScrollEnabled: true,
+                              }}
+                            />
+                            <TintedButton
+                              onPress={() => setIdolModalVisible(!idolModalVisible)}
+                              text={
+                                <Text preset={"h6"} style={styles.ButtonText}>
+                                  Save
+                                </Text>
+                              }
+                            />
+                          </Card>
+                        </View>
+                      </TouchableWithoutFeedback>
                     </Pressable>
                   </BlurView>
                 </Modal>
-                {selectedIdols.length > 0 ? (
-                  selectedIdols.map((idol, i) => (
-                    <View key={idol + i} style={styles.SelectIdol}>
-                      <Text preset={"bodySM"}>{idol.name}</Text>
-                      <TouchableOpacity onPress={() => setSelectedIdols((prev) => prev.filter((it) => it.id !== idol.id))}>
-                        <Octicons name={"x-circle-fill"} color={colors.tint} />
-                      </TouchableOpacity>
-                    </View>
-                  ))
-                ) : null}
+                {selectedIdols.length > 0
+                  ? selectedIdols.map((idol, i) => (
+                      <View key={idol + i} style={styles.SelectIdol}>
+                        <Text preset={"bodySM"}>{idol.name}</Text>
+                        <TouchableOpacity
+                          onPress={() =>
+                            setSelectedIdols((prev) => prev.filter((it) => it.id !== idol.id))
+                          }
+                        >
+                          <Octicons name={"x-circle-fill"} color={colors.tint} />
+                        </TouchableOpacity>
+                      </View>
+                    ))
+                  : null}
               </View>
             }
           />
@@ -192,32 +230,141 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
             description={
               "Share the name of the album, season’s greetings, era, etc that this photocard came from."
             }
-            inputComponent={<TextField />}
+            inputComponent={
+              <View style={{ marginTop: spacing.extraSmall }}>
+                <TextField
+                  placeholder={"Ex: Album Version A, Season's Greeting '22, Fanmade, etc..."}
+                  inputWrapperStyle={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    marginVertical: spacing.extraSmall,
+                    padding: spacing.small,
+                    borderRadius: 16,
+                    backgroundColor: colors.palette.transparentColors.blue,
+                    width: widthPercentageToDP(100) - spacing.extraLarge,
+                  }}
+                  style={{ fontSize: spacing.small, marginHorizontal: 0 }}
+                />
+              </View>
+            }
           />
+          <LightDivider style={styles.Divider} />
+
           <FormSection
             title={"Description"}
             description={
-              "This description will be included on your listing’s detail page underneath the image. If you'd like to trade, be sure to provide a description of what you're looking for."
+              "This description will be included on your listing’s detail page underneath the image."
             }
-            inputComponent={<TextField />}
+            inputComponent={
+              <View style={{ marginTop: spacing.extraSmall }}>
+                <TextField
+                  multiline={true}
+                  placeholder={"Provide a detailed description of the photocard you're listing.  If you'd like to trade, be sure to provide a description of what kind of photocard you're looking for."}
+                  inputWrapperStyle={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    marginVertical: spacing.extraSmall,
+                    padding: spacing.small,
+                    borderRadius: 16,
+                    backgroundColor: colors.palette.transparentColors.blue,
+                    width: widthPercentageToDP(100) - spacing.extraLarge,
+                  }}
+                  style={{ fontSize: spacing.small, marginHorizontal: 0 }}
+                />
+              </View>
+            }
           />
-          <FormSection title={"Condition"} inputComponent={<View />} />
+          <FormSection
+            title={"Condition"}
+            inputComponent={
+              <View
+                style={{
+                  marginTop: spacing.extraSmall,
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  flex: 1
+                }}
+              >
+                <AirbnbRating
+                  reviews={conditionStrings}
+                  selectedColor={colors.tint}
+                  unSelectedColor={colors.palette.greyscale["200"]}
+                  showRating={false}
+                  size={spacing.large}
+                  onFinishRating={(value) => setCondition(value)}
+                  starContainerStyle={{
+                    marginVertical: spacing.extraSmall,
+                  }}
+                />
+                <Text preset={"bodySM"}>{conditionStrings[condition - 1]}</Text>
+              </View>
+            }
+          />
           <FormSection
             title={"Listing Type"}
             description={
               "Whether you would like to list your item as for sale or as available to trade. You can mark your listing as both if you’d like!"
             }
-            inputComponent={<View />}
+            inputComponent={
+              <View
+                style={{
+                  marginTop: spacing.extraSmall,
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <Toggle
+                  variant={"checkbox"}
+                  value={wtsEnabled}
+                  onValueChange={setWtsEnabled}
+                  containerStyle={{ paddingRight: spacing.tiny }}
+                />
+                <Text preset={"bodyXS"} style={{ paddingRight: spacing.small }}>
+                  WTS (Want To Sell)
+                </Text>
+                <Toggle
+                  variant={"checkbox"}
+                  value={wttEnabled}
+                  onValueChange={setWttEnabled}
+                  containerStyle={{ paddingRight: spacing.tiny }}
+                />
+                <Text preset={"bodyXS"} style={{ paddingRight: spacing.small }}>
+                  WTT (Want To Trade)
+                </Text>
+              </View>
+            }
           />
           <FormSection
             title={"Starting Price"}
             description={"What’s the lowest amount you’d be willing to accept for this photocard?"}
-            inputComponent={<TextField />}
+            inputComponent={
+              <View style={{ marginTop: spacing.extraSmall }}>
+                <TextField
+                  placeholder={"Ex: $25"}
+                  inputWrapperStyle={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    marginVertical: spacing.extraSmall,
+                    padding: spacing.small,
+                    borderRadius: 16,
+                    backgroundColor: colors.palette.transparentColors.blue,
+                    width: widthPercentageToDP(100) - spacing.extraLarge,
+                  }}
+                  style={{ fontSize: spacing.small, marginHorizontal: 0 }}
+                />
+              </View>
+            }
           />
           <FormSection
             title={"International Shipping"}
             inputComponent={
-              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <View style={styles.Row}>
                 <Text preset={"bodySM"} style={styles.SwitchLabel}>
                   Are you willing to ship outside of USA/CA?
                 </Text>
@@ -231,7 +378,7 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
           />
         </ScrollView>
         <View style={styles.ButtonContainer}>
-          <View style={styles.Row}>
+          <View style={styles.ButtonRow}>
             <TintedButton
               onPress={cancelButtonPress}
               style={[styles.Button, styles.CancelButton]}
@@ -292,6 +439,11 @@ const styles = StyleSheet.create({
   CancelButtonText: {
     color: colors.tint,
   },
+  Divider: {
+    left: spacing.medium,
+    backgroundColor: colors.palette.greyscale["200"],
+    width: widthPercentageToDP(100) - spacing.large,
+  },
   Form: {
     alignContent: "center",
     paddingBottom: heightPercentageToDP(10),
@@ -301,7 +453,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     justifyContent: "center",
-    width: widthPercentageToDP(100)
+    width: widthPercentageToDP(100),
   },
   ModalContents: {
     height: heightPercentageToDP(45),
@@ -310,13 +462,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
-  Row: {
+  ButtonRow: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: spacing.medium,
     width: widthPercentageToDP(100),
+  },
+  Row: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: spacing.medium,
+    width: widthPercentageToDP(100) - spacing.extraLarge,
   },
   SelectIdol: {
     alignItems: "center",
