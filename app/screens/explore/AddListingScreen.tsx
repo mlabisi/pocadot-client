@@ -261,7 +261,7 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
               <View style={{ marginTop: spacing.extraSmall }}>
                 <TextField
                   multiline={true}
-                  placeholder={"Provide a detailed description of the photocard you're listing.  If you'd like to trade, be sure to provide a description of what kind of photocard you're looking for."}
+                  placeholder={"Provide a detailed description of the photocard you're listing. If you'd like to trade, be sure to provide a description of what kind of photocard you're looking for."}
                   inputWrapperStyle={{
                     display: "flex",
                     flexDirection: "row",
@@ -283,16 +283,24 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
             inputComponent={
               <View
                 style={{
-                  marginTop: spacing.extraSmall,
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  flex: 1
+                  flex: 1,
+                  alignItems: "center",
+                  backgroundColor: colors.palette.transparentColors.blue,
+                  borderColor: colors.border,
+                  borderRadius: 20,
+                  borderWidth: 1,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: spacing.medium,
+                  padding: spacing.medium,
+                  width: widthPercentageToDP(100) - spacing.extraLarge,
                 }}
               >
                 <AirbnbRating
                   reviews={conditionStrings}
                   selectedColor={colors.tint}
-                  unSelectedColor={colors.palette.greyscale["200"]}
+                  unSelectedColor={colors.palette.greyscale["400"]}
                   showRating={false}
                   size={spacing.large}
                   onFinishRating={(value) => setCondition(value)}
@@ -484,7 +492,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     display: "flex",
     flexDirection: "row",
-    height: 56,
     justifyContent: "space-between",
     marginTop: spacing.medium,
     padding: spacing.medium,
