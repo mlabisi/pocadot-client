@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     marginVertical: spacing.extraSmall,
-    padding: spacing.small,
+    padding: spacing.extraSmall,
     width: widthPercentageToDP(100) - spacing.extraLarge,
   },
 })

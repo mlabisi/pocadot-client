@@ -1,10 +1,9 @@
 import * as React from "react"
 import { StyleSheet, View } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "../../theme"
-import { LightDivider, Text } from "../index"
+import { spacing} from "../../theme"
+import { Text } from "../index"
 import { ReactElement } from "react"
-import { widthPercentageToDP } from "react-native-responsive-screen"
 
 export interface FormSectionProps {
   title: string
