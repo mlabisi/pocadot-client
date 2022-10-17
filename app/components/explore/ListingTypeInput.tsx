@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
   InputWrapper: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    marginTop: spacing.extraSmall,
+    marginTop: spacing.small,
   },
 })
