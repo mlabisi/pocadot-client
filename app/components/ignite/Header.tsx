@@ -225,7 +225,7 @@ export function Header(props: HeaderProps) {
           </View>
         </View>
       ) : (
-        <View style={$column}>
+        <View style={[$column,  {justifyContent: "flex-start", height: $flexTitle.lineHeight}]}>
           <View style={[$container, $containerStyleOverride]}>
             <HeaderAction
               tx={leftTx}

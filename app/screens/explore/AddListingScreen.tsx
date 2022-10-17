@@ -60,6 +60,7 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
           <Header
             titleTx={"explore.listings.add"}
             titleMode={"flex"}
+            containerStyle={{justifyContent: "flex-start"}}
             LeftActionComponent={
               <Pressable
                 onPress={() => {
