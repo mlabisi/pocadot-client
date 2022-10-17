@@ -124,6 +124,8 @@ export interface HeaderProps {
    * Pass any additional props directly to the SafeAreaView component.
    */
   SafeAreaViewProps?: SafeAreaViewProps
+
+  isInline?: boolean
 }
 
 interface HeaderActionProps {
@@ -166,6 +168,7 @@ export function Header(props: HeaderProps) {
     titleMode = "left",
     titleTx,
     titleTxOptions,
+    isInline = false,
     titleStyle: $titleStyleOverride,
     containerStyle: $containerStyleOverride,
   } = props
@@ -225,7 +228,7 @@ export function Header(props: HeaderProps) {
           </View>
         </View>
       ) : (
-        <View style={[$column,  {justifyContent: "flex-start", height: $flexTitle.lineHeight}]}>
+        <View style={[$column, isInline ? {justifyContent: "flex-start", height: $flexTitle.lineHeight} : {}]}>
           <View style={[$container, $containerStyleOverride]}>
             <HeaderAction
               tx={leftTx}

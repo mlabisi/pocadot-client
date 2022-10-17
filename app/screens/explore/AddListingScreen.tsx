@@ -58,6 +58,7 @@ export const AddListingScreen: FC<StackScreenProps<AppStackParamList, "AddListin
       <View style={styles.Root}>
         <ScrollView contentContainerStyle={styles.Form}>
           <Header
+            isInline={true}
             titleTx={"explore.listings.add"}
             titleMode={"flex"}
             containerStyle={{justifyContent: "flex-start"}}
