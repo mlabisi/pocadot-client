@@ -17,16 +17,15 @@ import { MainTabs } from "./MainTabs"
 import {
   AddListingScreen,
   CurationScreen,
-  NotificationsScreen,
+  NotificationsScreen, SearchResultsScreen,
   SuggestionPreferencesScreen,
   WelcomeScreen,
 } from "../screens"
 import { Header } from "../components"
 import { colors, spacing } from "../theme"
-import { Ionicons, Octicons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons"
 import { StatusBar } from "expo-status-bar"
 import Constants from 'expo-constants';
-import { heightPercentageToDP } from "react-native-responsive-screen"
 
 const hitRect = spacing.extraLarge
 
@@ -56,8 +55,8 @@ export type AppStackParamList = {
 
   AddListing: undefined
   CurationScreen: undefined
-  FeaturedListings: undefined
   Search: undefined
+  SearchResults: undefined
   Filter: undefined
   AllListings: undefined
 
@@ -188,7 +187,7 @@ const AppStack = observer(function AppStack() {
               }}
             />
             <Stack.Screen
-              name="FeaturedListings"
+              name="Search"
               component={WelcomeScreen}
               options={{
                 header: (props: NativeStackHeaderProps) => (
@@ -211,26 +210,28 @@ const AppStack = observer(function AppStack() {
               }}
             />
             <Stack.Screen
-              name="Search"
-              component={WelcomeScreen}
+              name="SearchResults"
+              component={SearchResultsScreen}
               options={{
-                header: (props: NativeStackHeaderProps) => (
-                  <Header
-                    titleTx={"explore.listings.featured"}
-                    titleMode={"flex"}
-                    LeftActionComponent={
-                      <Pressable
-                        onPress={() => {
-                          props.navigation.goBack()
-                        }}
-                        style={{ paddingLeft: spacing.extraSmall }}
-                        hitSlop={hitRect}
-                      >
-                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </Pressable>
-                    }
-                  />
-                ),
+                headerShown: false,
+                animation: "none"
+              //   header: (props: NativeStackHeaderProps) => (
+              //     <Header
+              //       titleTx={"explore.listings.featured"}
+              //       titleMode={"flex"}
+              //       LeftActionComponent={
+              //         <Pressable
+              //           onPress={() => {
+              //             props.navigation.goBack()
+              //           }}
+              //           style={{ paddingLeft: spacing.extraSmall }}
+              //           hitSlop={hitRect}
+              //         >
+              //           <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
+              //         </Pressable>
+              //       }
+              //     />
+              //   ),
               }}
             />
             <Stack.Screen

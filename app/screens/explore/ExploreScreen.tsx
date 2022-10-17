@@ -27,6 +27,7 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
     // const navigation = useNavigation()
 
     const goToCuration = () => navigation.getParent().navigate("CurationScreen")
+    const goToSearch = () => navigation.getParent().navigate("SearchResults")
 
     const renderListingCard = ({ item }) => {
       return (
@@ -54,18 +55,13 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
     return (
       <View style={styles.Root}>
         <TouchableOpacity
-          onPress={() => {
-            /**/
-          }}
+          onPress={() => goToSearch()}
         >
           <View style={styles.SearchContainer}>
             <View style={styles.SearchLeft}>
               <Ionicons name={"search"} color={colors.palette.greyscale["400"]} size={18} style={styles.MagnifyingGlass} />
               <Text preset={"bodySM"} style={styles.SearchText}>Search for groups and idols</Text>
             </View>
-            {/* <View style={styles.SearchRight}> */}
-            {/*   <Ionicons name={"options"} color={colors.palette.greyscale["400"]} size={18}/> */}
-            {/* </View> */}
           </View>
         </TouchableOpacity>
         <ScrollView showsVerticalScrollIndicator={false}>
