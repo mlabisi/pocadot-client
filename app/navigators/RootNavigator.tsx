@@ -9,7 +9,7 @@ import { createNativeStackNavigator, NativeStackHeaderProps } from "@react-navig
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
 import React from "react"
-import { Pressable, useColorScheme, View } from "react-native"
+import { Pressable, TouchableOpacity, useColorScheme, View } from "react-native"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useStores } from "../models"
@@ -17,15 +17,16 @@ import { MainTabs } from "./MainTabs"
 import {
   AddListingScreen,
   CurationScreen,
-  NotificationsScreen, SearchResultsScreen,
+  NotificationsScreen, SearchResultsScreen, SearchScreen,
   SuggestionPreferencesScreen,
   WelcomeScreen,
 } from "../screens"
 import { Header } from "../components"
 import { colors, spacing } from "../theme"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, Octicons } from "@expo/vector-icons"
 import { StatusBar } from "expo-status-bar"
 import Constants from 'expo-constants';
+import { heightPercentageToDP } from "react-native-responsive-screen"
 
 const hitRect = spacing.extraLarge
 
@@ -188,8 +189,34 @@ const AppStack = observer(function AppStack() {
             />
             <Stack.Screen
               name="Search"
-              component={WelcomeScreen}
+              component={SearchScreen}
               options={{
+                headerShown: false,
+                animation: "none"
+                //   header: (props: NativeStackHeaderProps) => (
+                //     <Header
+                //       titleTx={"explore.listings.featured"}
+                //       titleMode={"flex"}
+                //       LeftActionComponent={
+                //         <Pressable
+                //           onPress={() => {
+                //             props.navigation.goBack()
+                //           }}
+                //           style={{ paddingLeft: spacing.extraSmall }}
+                //           hitSlop={hitRect}
+                //         >
+                //           <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
+                //         </Pressable>
+                //       }
+                //     />
+                //   ),
+              }}
+            />
+            <Stack.Screen
+              name="SearchResults"
+              component={SearchResultsScreen}
+              options={{
+                animation: "none",
                 header: (props: NativeStackHeaderProps) => (
                   <Header
                     titleTx={"explore.listings.featured"}
@@ -207,31 +234,6 @@ const AppStack = observer(function AppStack() {
                     }
                   />
                 ),
-              }}
-            />
-            <Stack.Screen
-              name="SearchResults"
-              component={SearchResultsScreen}
-              options={{
-                headerShown: false,
-                animation: "none"
-              //   header: (props: NativeStackHeaderProps) => (
-              //     <Header
-              //       titleTx={"explore.listings.featured"}
-              //       titleMode={"flex"}
-              //       LeftActionComponent={
-              //         <Pressable
-              //           onPress={() => {
-              //             props.navigation.goBack()
-              //           }}
-              //           style={{ paddingLeft: spacing.extraSmall }}
-              //           hitSlop={hitRect}
-              //         >
-              //           <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-              //         </Pressable>
-              //       }
-              //     />
-              //   ),
               }}
             />
             <Stack.Screen

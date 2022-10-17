@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { AppStackParamList, goBack } from "../../navigators"
+import { AppStackParamList } from "../../navigators"
 import {
   AutoImage,
   Card,

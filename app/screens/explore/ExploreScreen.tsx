@@ -27,7 +27,7 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
     // const navigation = useNavigation()
 
     const goToCuration = () => navigation.getParent().navigate("CurationScreen")
-    const goToSearch = () => navigation.getParent().navigate("SearchResults")
+    const goToSearch = () => navigation.getParent().navigate("Search")
 
     const renderListingCard = ({ item }) => {
       return (
