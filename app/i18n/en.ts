@@ -43,7 +43,7 @@ const en = {
       featured: "Featured Listings",
     },
     search: {
-      placeholder: "Search from groups and idols",
+      placeholder: "Search for groups and idols",
       filter: "Filter Listings",
     },
   },

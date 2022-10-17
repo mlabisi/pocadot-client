@@ -21,6 +21,8 @@ export const ListingDescriptionInput = observer(function ListingDescriptionInput
         <View style={{ marginTop: spacing.extraSmall }}>
           <TextField
             multiline={true}
+            numberOfLines={5}
+            placeholderTextColor={colors.palette.greyscale["600"]}
             placeholder={"Provide a detailed description of the photocard you're listing. If you'd like to trade, be sure to provide a description of what kind of photocard you're looking for."}
             inputWrapperStyle={styles.InputWrapper}
             style={styles.InputStyle}
@@ -33,7 +35,6 @@ export const ListingDescriptionInput = observer(function ListingDescriptionInput
 
 const styles = StyleSheet.create({
   InputStyle: {
-    fontSize: spacing.small,
     marginHorizontal: 0,
   },
   InputWrapper: {
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     marginVertical: spacing.extraSmall,
-    padding: spacing.extraSmall,
+    paddingHorizontal: spacing.extraSmall,
     width: widthPercentageToDP(100) - spacing.extraLarge,
   },
 })

@@ -11,7 +11,8 @@ import {
 import { colors, spacing } from "../../theme"
 import { curations, featuredListings } from "./demo"
 import { FlashList } from "@shopify/flash-list"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, Octicons } from "@expo/vector-icons"
+import SearchBar from "react-native-dynamic-search-bar"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -54,16 +55,32 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
 
     return (
       <View style={styles.Root}>
-        <TouchableOpacity
-          onPress={() => goToSearch()}
-        >
-          <View style={styles.SearchContainer}>
-            <View style={styles.SearchLeft}>
-              <Ionicons name={"search"} color={colors.palette.greyscale["400"]} size={18} style={styles.MagnifyingGlass} />
-              <Text preset={"bodySM"} style={styles.SearchText}>Search for groups and idols</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.SearchContainer}>
+          <SearchBar
+            placeholder={""}
+            textInputStyle={styles.DisabledInput}
+            placeholderTextColor={styles.SearchText.color}
+            onSearchPress={() => goToSearch()}
+            onClearPress={() => goToSearch()}
+            onPress={() => goToSearch()}
+            searchIconComponent={
+              <View style={styles.SearchLeft}>
+                <Ionicons
+                  name={"search"}
+                  color={colors.palette.greyscale["400"]}
+                  size={18}
+                  style={styles.MagnifyingGlass}
+                />
+                <Text preset={"bodySM"} style={styles.SearchText}>
+                  Search for groups and idols
+                </Text>
+              </View>
+            }
+            clearIconComponent={
+              <Octicons name={"x"} color={colors.palette.greyscale["400"]} size={18} />
+            }
+          />
+        </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text preset={"h6"} style={styles.SectionTitle}>
             Curated Listings
@@ -125,13 +142,16 @@ const styles = StyleSheet.create({
     height: bannerHeight,
     width: wp(100),
   },
+  DisabledInput: {
+    width: 0,
+  },
   Link: {
     color: colors.tint,
   },
   MagnifyingGlass: {
     flexDirection: "column",
     justifyContent: "flex-end",
-    paddingRight: spacing.extraSmall
+    paddingRight: spacing.extraSmall,
   },
   Root: {
     backgroundColor: colors.background,
@@ -146,28 +166,15 @@ const styles = StyleSheet.create({
     marginVertical: spacing.large,
   },
   SearchContainer: {
-    alignItems: "center",
-    backgroundColor: colors.palette.greyscale["100"],
-    borderRadius: 16,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginLeft: spacing.small,
-    marginVertical: spacing.small,
-    padding: spacing.medium,
-    width: wp(100) - spacing.large,
+    marginVertical: spacing.small
   },
   SearchLeft: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "flex-start",
   },
-  SearchRight: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-  },
   SearchText: {
-    color: colors.palette.greyscale["400"]
+    color: colors.palette.greyscale["400"],
+    fontSize: spacing.medium,
   },
   SectionTitle: {
     marginBottom: spacing.large,

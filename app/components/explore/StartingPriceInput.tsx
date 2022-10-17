@@ -32,7 +32,6 @@ export const StartingPriceInput = observer(function StartingPriceInput(
 
 const styles = StyleSheet.create({
   InputStyle: {
-    fontSize: spacing.small,
     marginHorizontal: 0,
   },
   InputWrapper: {

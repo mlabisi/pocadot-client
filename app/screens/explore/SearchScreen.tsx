@@ -4,7 +4,7 @@ import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList, MainNavigatorParamList } from "../../navigators"
 import { Screen, Text, TintedButton } from "../../components"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, Octicons } from "@expo/vector-icons"
 import { colors, spacing } from "../../theme"
 import { curations, featuredListings } from "./demo"
 import { FlashList } from "@shopify/flash-list"
@@ -13,6 +13,8 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen"
+import SearchBar from "react-native-dynamic-search-bar"
+import { translate } from "../../i18n"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -32,27 +34,29 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
             onPress={() => {
               navigation.goBack()
             }}
-            style={{ paddingLeft: spacing.extraSmall, alignSelf: "center" }}
+            style={styles.BackButton}
             hitSlop={hitRect}
           >
             <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
           </Pressable>
-          <View style={styles.SearchContainer}>
-            <View style={styles.SearchLeft}>
-              <Ionicons
-                name={"search"}
-                color={colors.palette.greyscale["400"]}
-                size={18}
-                style={styles.MagnifyingGlass}
-              />
-              <Text preset={"bodySM"} style={styles.SearchText}>
-                Search for groups and idols
-              </Text>
-            </View>
-            <View style={styles.SearchRight}>
-              <Ionicons name={"options"} color={colors.palette.greyscale["400"]} size={18}/>
-            </View>
-          </View>
+          <SearchBar
+            autoFocus={true}
+            placeholder={translate("explore.search.placeholder")}
+            onPress={() => alert("onPress")}
+            onChangeText={(text) => console.log(text)}
+            // textInputStyle={styles.SearchText}
+            placeholderTextColor={styles.SearchText.color}
+            style={styles.SearchContainer}
+            onClearPress={() => {
+              /**/
+            }}
+            searchIconComponent={
+              <Ionicons name={"search"} color={colors.palette.greyscale["400"]} size={18} />
+            }
+            clearIconComponent={
+              <Octicons name={"x"} color={colors.palette.greyscale["400"]} size={18} />
+            }
+          />
         </View>
       </View>
     )
@@ -60,6 +64,10 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
 )
 
 const styles = StyleSheet.create({
+  BackButton: {
+    alignSelf: "center",
+    paddingLeft: spacing.extraSmall,
+  },
   MagnifyingGlass: {
     flexDirection: "column",
     justifyContent: "flex-end",
@@ -78,24 +86,10 @@ const styles = StyleSheet.create({
   SearchContainer: {
     alignItems: "center",
     backgroundColor: colors.palette.greyscale["100"],
-    borderRadius: 16,
-    display: "flex",
-    flexDirection: "row",
-    flex: 1,
-    justifyContent: "flex-start",
     marginRight: spacing.small,
-    padding: spacing.medium
-  },
-  SearchLeft: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-start",
-  },
-  SearchRight: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
   },
   SearchText: {
     color: colors.palette.greyscale["400"],
+    fontSize: spacing.medium,
   },
 })
