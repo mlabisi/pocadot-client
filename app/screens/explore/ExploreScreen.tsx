@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet, View, Image, TouchableOpacity, ScrollView } from "react-native"
+import { StyleSheet, View, TouchableOpacity, ScrollView } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { MainNavigatorParamList } from "../../navigators"
 import { AutoImage, ListingCard, Text, TintedButton } from "../../components"
@@ -11,11 +11,10 @@ import {
 import { colors, spacing } from "../../theme"
 import { curations, featuredListings } from "./demo"
 import { FlashList } from "@shopify/flash-list"
-import { Asset } from "expo-asset"
+import { Ionicons } from "@expo/vector-icons"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
-const searchBar = require("./searchBar.png")
 const cardWidth = wp(42)
 const bannerHeight = hp(20)
 
@@ -47,18 +46,28 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
     const renderCuration = ({ item, index }) => {
       return (
         <TouchableOpacity key={item + index} onPress={goToCuration}>
-          <AutoImage
-            source={item.image}
-            style={styles.CollectionImage}
-            maxHeight={bannerHeight}
-          />
+          <AutoImage source={item.image} style={styles.CollectionImage} maxHeight={bannerHeight} />
         </TouchableOpacity>
       )
     }
 
     return (
       <View style={styles.Root}>
-        <Image source={searchBar} style={styles.SearchBar} />
+        <TouchableOpacity
+          onPress={() => {
+            /**/
+          }}
+        >
+          <View style={styles.SearchContainer}>
+            <View style={styles.SearchLeft}>
+              <Ionicons name={"search"} color={colors.palette.greyscale["400"]} size={18} style={styles.MagnifyingGlass} />
+              <Text preset={"bodySM"} style={styles.SearchText}>Search for groups and idols</Text>
+            </View>
+            {/* <View style={styles.SearchRight}> */}
+            {/*   <Ionicons name={"options"} color={colors.palette.greyscale["400"]} size={18}/> */}
+            {/* </View> */}
+          </View>
+        </TouchableOpacity>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text preset={"h6"} style={styles.SectionTitle}>
             Curated Listings
@@ -107,7 +116,7 @@ const styles = StyleSheet.create({
     color: colors.palette.other.white,
   },
   Card: {
-    flex: 1
+    flex: 1,
   },
   CollectionImage: {
     marginHorizontal: spacing.small,
@@ -123,6 +132,11 @@ const styles = StyleSheet.create({
   Link: {
     color: colors.tint,
   },
+  MagnifyingGlass: {
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    paddingRight: spacing.extraSmall
+  },
   Root: {
     backgroundColor: colors.background,
     flex: 1,
@@ -135,10 +149,29 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.medium,
     marginVertical: spacing.large,
   },
-  SearchBar: {
-    marginHorizontal: spacing.medium,
-    marginVertical: spacing.large,
+  SearchContainer: {
+    alignItems: "center",
+    backgroundColor: colors.palette.greyscale["100"],
+    borderRadius: 16,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginLeft: spacing.small,
+    marginVertical: spacing.small,
+    padding: spacing.medium,
     width: wp(100) - spacing.large,
+  },
+  SearchLeft: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+  },
+  SearchRight: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+  SearchText: {
+    color: colors.palette.greyscale["400"]
   },
   SectionTitle: {
     marginBottom: spacing.large,
