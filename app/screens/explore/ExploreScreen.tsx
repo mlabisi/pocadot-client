@@ -77,7 +77,7 @@ export const ExploreScreen: FC<StackScreenProps<MainNavigatorParamList, "Explore
               </View>
             }
             clearIconComponent={
-              <Octicons name={"x"} color={colors.palette.greyscale["400"]} size={18} />
+              <Octicons name={"x"} color={colors.palette.greyscale["400"]} size={0.0001} />
             }
           />
         </View>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     marginVertical: spacing.large,
   },
   SearchContainer: {
-    marginVertical: spacing.small
+    marginVertical: spacing.small,
   },
   SearchLeft: {
     flexDirection: "row",
