@@ -15,13 +15,13 @@ import { useFonts } from "expo-font"
 import React from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import { useInitialRootStore } from "./models"
-import { useNavigationPersistence, RootNavigator} from "./navigators"
+import { useNavigationPersistence, RootNavigator } from "./navigators"
 import { ErrorBoundary } from "./screens"
 import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import { setupReactotron } from "./services/reactotron"
 import Config from "./config"
-import { StatusBar } from 'expo-status-bar';
+import { SelectProvider } from "@mobile-reality/react-native-select-pro"
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
 // React Native apps. Learn more here: https://github.com/infinitered/reactotron
@@ -79,10 +79,12 @@ function App(props: AppProps) {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <ErrorBoundary catchErrors={Config.catchErrors}>
-        <RootNavigator
-          initialState={initialNavigationState}
-          onStateChange={onNavigationStateChange}
-        />
+        <SelectProvider>
+          <RootNavigator
+            initialState={initialNavigationState}
+            onStateChange={onNavigationStateChange}
+          />
+        </SelectProvider>
       </ErrorBoundary>
     </SafeAreaProvider>
   )
