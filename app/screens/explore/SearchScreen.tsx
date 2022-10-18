@@ -1,16 +1,9 @@
 import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native"
+import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { FilterResults, ListingCard, Text, TintedButton } from "../../components"
+import { ListingCard, Text, TintedButton } from "../../components"
 import { Ionicons, Octicons } from "@expo/vector-icons"
 import { colors, spacing } from "../../theme"
 import { featuredListings as listings } from "./demo"
@@ -19,23 +12,28 @@ import ModalDropdown from "react-native-modal-dropdown-v2"
 import {
   heightPercentageToDP,
   heightPercentageToDP as hp,
-  widthPercentageToDP,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen"
 import SearchBar from "react-native-dynamic-search-bar"
 import { translate } from "../../i18n"
-import { BlurView } from "expo-blur"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
 const hitRect = spacing.extraLarge
 const cardWidth = wp(42)
-const filterOptions = ["A-Z", "Recently Listed", "Price Low to High", "Price High to Low", "Oldest"]
+const optionLineHeight = 45
+const filterOptions = [
+  "Default",
+  "A-Z",
+  "Recently Listed",
+  "Price Low to High",
+  "Price High to Low",
+  "Oldest",
+]
 
 export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = observer(
   function SearchScreen({ navigation }) {
     const [results, setResults] = useState([])
-    const [sortModalVisible, setSortModalVisible] = useState(false)
 
     const sortModal = useRef<ModalDropdown>(null)
 
@@ -70,6 +68,7 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
           >
             <Ionicons name={"arrow-back"} size={24} color={colors.tint} />
           </Pressable>
+
           <SearchBar
             autoFocus={true}
             placeholder={translate("explore.search.placeholder")}
@@ -93,7 +92,7 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
               }
             }}
             // textInputStyle={styles.SearchText}
-            placeholderTextColor={colors.palette.greyscale["400"]}
+            placeholderTextColor={colors.text}
             style={styles.SearchContainer}
             onClearPress={() => {
               setResults([])
@@ -109,24 +108,33 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
 
         <View style={styles.ResultsHeader}>
           <View style={styles.ResultsHeaderLeft}>
-            <Text preset={"h6"}>
+            <Text preset={"h4"}>
               {results.length === 1 ? `${results.length} Result` : `${results.length} Results`}
             </Text>
           </View>
           <View style={styles.ResultsHeaderRight}>
             <ModalDropdown
               ref={sortModal}
-              dropdownStyle={[styles.ModalContainer]}
+              dropdownStyle={styles.ModalContainer}
               defaultValue={""}
-              textStyle={{color: colors.textDim}}
-              adjustFrame={(props) => ({...props, height: (40) * filterOptions.length})}
+              defaultIndex={0}
+              dropdownTextStyle={{ fontSize: spacing.medium }}
+              textStyle={{ color: colors.textDim }}
+              adjustFrame={(props) => ({ ...props, height: filterOptions.length * optionLineHeight })}
               /*
               // @ts-ignore */
-              renderRightComponent={() => <Ionicons name={"swap-vertical"} color={colors.textDim} size={20} />}
+              renderRightComponent={() => (
+                <Ionicons name={"swap-vertical"} color={colors.textDim} size={24} />
+              )}
               options={filterOptions}
             />
             <TouchableOpacity>
-              <Ionicons name={"options"} color={colors.textDim} size={20} />
+              <Ionicons
+                name={"options"}
+                color={colors.textDim}
+                size={24}
+                style={{ paddingLeft: spacing.small }}
+              />
             </TouchableOpacity>
           </View>
         </View>
