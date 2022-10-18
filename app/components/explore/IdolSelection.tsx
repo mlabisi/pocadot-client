@@ -15,6 +15,7 @@ import { BlurView } from "expo-blur"
 import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
 import { idols } from "../../screens/explore/demo"
 import SearchableDropdown from "react-native-searchable-dropdown"
+import ModalDropdown from "react-native-modal-dropdown-v2"
 
 export interface IdolSelectionProps {
   idolModalVisible: boolean
@@ -37,31 +38,63 @@ export const IdolSelection = observer(function IdolSelection({
       title={"Idol(s)"}
       inputComponent={
         <View>
-          <TouchableOpacity onPress={() => setIdolModalVisible(!idolModalVisible)}>
-            <View style={styles.SelectButtonContainer}>
-              <Text preset={"bodySM"}>Select an Idol</Text>
-              <Ionicons name={"add"} />
-            </View>
-          </TouchableOpacity>
-          <Modal
-            animationType={"fade"}
-            transparent={true}
-            visible={idolModalVisible}
-            onRequestClose={() => {
-              setIdolModalVisible(!idolModalVisible)
-            }}
-          >
-            <BlurView intensity={5} style={styles.ModalContainer}>
-              <Pressable
-                // style={styles.container}
-                style={styles.ModalContainer}
-                onPressOut={() => {
-                  setIdolModalVisible(!idolModalVisible)
-                }}
-              >
-                <TouchableWithoutFeedback>
-                  <View style={styles.ModalContents}>
-                    <Card width={widthPercentageToDP(75)} style={styles.ModalContents}>
+          {/* <ModalDropdown */}
+          {/*   showSearch={true} */}
+          {/*   options={idols */}
+          {/*     .map((idol) => ({ */}
+          {/*       name: idol.StageName, */}
+          {/*       groups: [idol.Group, idol.OtherGroup, idol.FormerGroup].filter(Boolean), */}
+          {/*     })) */}
+          {/*     .map( */}
+          {/*       (idol) => */}
+          {/*         `${idol.name} ${ */}
+          {/*           idol.groups.length > 0 */}
+          {/*             ? `- ${idol.groups.map((group) => group).join(", ")}` */}
+          {/*             : "" */}
+          {/*         }`, */}
+          {/*     )} */}
+          {/* /> */}
+
+          {selectedIdols.length > 0
+            ? selectedIdols.map((idol, i) => (
+              <View key={idol + i} style={styles.SelectIdol}>
+                <Text preset={"bodySM"}>{(idol.name as string).substring(0, idol.name.indexOf("-"))}</Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    setSelectedIdols((prev) => prev.filter((it) => it.id !== idol.id))
+                  }
+                >
+                  <Octicons name={"x-circle-fill"} color={colors.tint} />
+                </TouchableOpacity>
+              </View>
+            ))
+            : null}
+
+          {/* <TouchableOpacity onPress={() => setIdolModalVisible(!idolModalVisible)}> */}
+          {/*   <View style={styles.SelectButtonContainer}> */}
+          {/*     <Text preset={"bodySM"}>Select an Idol</Text> */}
+          {/*     <Ionicons name={"add"} /> */}
+          {/*   </View> */}
+          {/* </TouchableOpacity> */}
+          {/* <Modal */}
+          {/*   animationType={"fade"} */}
+          {/*   transparent={true} */}
+          {/*   visible={idolModalVisible} */}
+          {/*   onRequestClose={() => { */}
+          {/*     setIdolModalVisible(!idolModalVisible) */}
+          {/*   }} */}
+          {/* > */}
+          {/*   <BlurView intensity={5} style={styles.ModalContainer}> */}
+          {/*     <Pressable */}
+          {/*       // style={styles.container} */}
+          {/*       style={styles.ModalContainer} */}
+          {/*       onPressOut={() => { */}
+          {/*         setIdolModalVisible(!idolModalVisible) */}
+          {/*       }} */}
+          {/*     > */}
+          {/*       <TouchableWithoutFeedback> */}
+          {/*         <View style={styles.ModalContents}> */}
+          {/*           <Card width={widthPercentageToDP(75)} style={styles.ModalContents}> */}
                       <SearchableDropdown
                         multi={true}
                         selectedItems={selectedIdols}
@@ -75,12 +108,14 @@ export const IdolSelection = observer(function IdolSelection({
                         itemStyle={styles.SeachableDropdownItem}
                         itemsContainerStyle={{ height: heightPercentageToDP(40) }}
                         items={idols
-                          .sort((a, b) => a.stageName.localeCompare(b.stageName))
                           .map((idol) => ({
-                            id: idol.id,
-                            name: `${idol.stageName} ${
+                            name: idol.StageName,
+                            groups: [idol.Group, idol.OtherGroup, idol.FormerGroup].filter(Boolean),
+                          }))
+                          .map((idol) => ({
+                            name: `${idol.name} ${
                               idol.groups.length
-                                ? `- ${idol.groups.map((group) => group.name).join(", ")}`
+                                ? `- ${idol.groups.map((group) => group).join(", ")}`
                                 : ""
                             }`,
                           }))}
@@ -103,26 +138,12 @@ export const IdolSelection = observer(function IdolSelection({
                           </Text>
                         }
                       />
-                    </Card>
-                  </View>
-                </TouchableWithoutFeedback>
-              </Pressable>
-            </BlurView>
-          </Modal>
-          {selectedIdols.length > 0
-            ? selectedIdols.map((idol, i) => (
-                <View key={idol + i} style={styles.SelectIdol}>
-                  <Text preset={"bodySM"}>{idol.name}</Text>
-                  <TouchableOpacity
-                    onPress={() =>
-                      setSelectedIdols((prev) => prev.filter((it) => it.id !== idol.id))
-                    }
-                  >
-                    <Octicons name={"x-circle-fill"} color={colors.tint} />
-                  </TouchableOpacity>
-                </View>
-              ))
-            : null}
+          {/*           </Card> */}
+          {/*         </View> */}
+          {/*       </TouchableWithoutFeedback> */}
+          {/*     </Pressable> */}
+          {/*   </BlurView> */}
+          {/* </Modal> */}
         </View>
       }
     />
