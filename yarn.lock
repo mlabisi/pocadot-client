@@ -12669,7 +12669,7 @@ prop-types@15.5.8:
   dependencies:
     fbjs "^0.8.9"
 
-prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -13081,6 +13081,13 @@ react-native-gradle-plugin@^0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.7.tgz#96602f909745239deab7b589443f14fce5da2056"
   integrity sha512-+4JpbIx42zGTONhBTIXSyfyHICHC29VTvhkkoUOJAh/XHPEixpuBduYgf6Y4y9wsN1ARlQhBBoptTvXvAFQf5g==
+
+react-native-modal-dropdown-v2@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-modal-dropdown-v2/-/react-native-modal-dropdown-v2-1.0.1.tgz#2bbcdba246d6b54880e461c08fdcc4014db79f9d"
+  integrity sha512-rAJzOnFLi7HXP1pNbFow71pGQa++cwUhRp91It2yLBEOtCWclHzjfbWsz6cQTf3YFaUzNaB4G/pWycuYpLa0eg==
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-pager-view@5.4.24:
   version "5.4.24"

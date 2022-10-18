@@ -69,6 +69,7 @@
     "react-native-deck-swiper": "2.0.10",
     "react-native-dynamic-search-bar": "WrathChaos/react-native-dynamic-search-bar#expo",
     "react-native-gesture-handler": "~2.5.0",
+    "react-native-modal-dropdown-v2": "1.0.1",
     "react-native-pager-view": "5.4.24",
     "react-native-ratings": "8.1.0",
     "react-native-reanimated": "~2.9.1",

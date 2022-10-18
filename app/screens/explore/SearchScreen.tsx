@@ -1,30 +1,43 @@
-import React, { FC, useState } from "react"
+import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { AppStackParamList, MainNavigatorParamList } from "../../navigators"
-import { ListingCard, Screen, Text, TintedButton } from "../../components"
+import { AppStackParamList } from "../../navigators"
+import { FilterResults, ListingCard, Text, TintedButton } from "../../components"
 import { Ionicons, Octicons } from "@expo/vector-icons"
 import { colors, spacing } from "../../theme"
-import { curations, featuredListings as listings } from "./demo"
+import { featuredListings as listings } from "./demo"
 import { FlashList } from "@shopify/flash-list"
+import ModalDropdown from "react-native-modal-dropdown-v2"
 import {
   heightPercentageToDP,
   heightPercentageToDP as hp,
+  widthPercentageToDP,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen"
 import SearchBar from "react-native-dynamic-search-bar"
 import { translate } from "../../i18n"
+import { BlurView } from "expo-blur"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
 const hitRect = spacing.extraLarge
 const cardWidth = wp(42)
+const filterOptions = ["A-Z", "Recently Listed", "Price Low to High", "Price High to Low", "Oldest"]
 
 export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = observer(
   function SearchScreen({ navigation }) {
     const [results, setResults] = useState([])
-    const [queryIsEmpty, setQueryIsEmpty] = useState(false)
+    const [sortModalVisible, setSortModalVisible] = useState(false)
+
+    const sortModal = useRef<ModalDropdown>(null)
 
     const renderListingCard = ({ item }) => {
       return (
@@ -66,10 +79,7 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
             onChangeText={(text) => {
               if (text.length === 0) {
                 setResults([])
-                setQueryIsEmpty(true)
               } else {
-                setQueryIsEmpty(false)
-
                 setResults(
                   listings.filter((item) => {
                     // @ts-ignore - Talent is guaranteed to be either a Group (with `name`) or Idol (with `stageName`)
@@ -96,48 +106,56 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
             }
           />
         </View>
-          <>
-            <View style={styles.ResultsHeader}>
-              <View style={styles.ResultsHeaderLeft}>
-                <Text preset={"h6"}>
-                  {results.length === 1 ? `${results.length} Result` : `${results.length} Results`}
-                </Text>
-              </View>
-              <View style={styles.ResultsHeaderRight}>
-                <TouchableOpacity>
-                  <Ionicons name={"options"} color={colors.palette.greyscale["400"]} size={20} />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Ionicons name={"swap-vertical"} color={colors.palette.greyscale["400"]} size={20} />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <ScrollView>
-              <View style={styles.Container}>
-                <FlashList
-                  data={results}
-                  renderItem={renderListingCard}
-                  numColumns={2}
-                  scrollEnabled={false}
-                  estimatedItemSize={cardWidth}
-                  ListFooterComponent={
-                    <View style={{ padding: spacing.large, marginBottom: spacing.medium }}>
-                      <TintedButton
-                        onPress={() => {
-                          /**/
-                        }}
-                        text={
-                          <Text preset={"h6"} style={styles.ButtonText}>
-                            See All
-                          </Text>
-                        }
-                      />
-                    </View>
-                  }
-                />
-              </View>
-            </ScrollView>
-          </>
+
+        <View style={styles.ResultsHeader}>
+          <View style={styles.ResultsHeaderLeft}>
+            <Text preset={"h6"}>
+              {results.length === 1 ? `${results.length} Result` : `${results.length} Results`}
+            </Text>
+          </View>
+          <View style={styles.ResultsHeaderRight}>
+            <ModalDropdown
+              ref={sortModal}
+              dropdownStyle={[styles.ModalContainer]}
+              defaultValue={""}
+              textStyle={{color: colors.textDim}}
+              adjustFrame={(props) => ({...props, height: (40) * filterOptions.length})}
+              /*
+              // @ts-ignore */
+              renderRightComponent={() => <Ionicons name={"swap-vertical"} color={colors.textDim} size={20} />}
+              options={filterOptions}
+            />
+            <TouchableOpacity>
+              <Ionicons name={"options"} color={colors.textDim} size={20} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <ScrollView>
+          <View style={styles.Container}>
+            <FlashList
+              data={results}
+              renderItem={renderListingCard}
+              numColumns={2}
+              scrollEnabled={false}
+              estimatedItemSize={cardWidth}
+              ListFooterComponent={
+                <View style={{ padding: spacing.large, marginBottom: spacing.medium }}>
+                  <TintedButton
+                    onPress={() => {
+                      /**/
+                    }}
+                    text={
+                      <Text preset={"h6"} style={styles.ButtonText}>
+                        See All
+                      </Text>
+                    }
+                  />
+                </View>
+              }
+            />
+          </View>
+        </ScrollView>
       </View>
     )
   },
@@ -157,6 +175,10 @@ const styles = StyleSheet.create({
   Container: {
     minHeight: hp(100),
     width: wp(100),
+  },
+  ModalContainer: {
+    borderRadius: 20,
+    padding: spacing.medium,
   },
   ResultsHeader: {
     flexDirection: "row",
