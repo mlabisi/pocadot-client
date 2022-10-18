@@ -8,12 +8,12 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { StyleSheet } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { MainNavigatorParamList } from "../navigators"
+import { AppStackParamList } from "../navigators"
 import { Screen, Text } from "../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
-export const <%= props.pascalCaseName %>Screen: FC<StackScreenProps<MainNavigatorParamList, "<%= props.pascalCaseName %>Screen">> = observer(function <%= props.pascalCaseName %>Screen() {
+export const <%= props.pascalCaseName %>Screen: FC<StackScreenProps<AppStackParamList, "<%= props.pascalCaseName %>Screen">> = observer(function <%= props.pascalCaseName %>Screen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 

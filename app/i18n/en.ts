@@ -33,8 +33,8 @@ const en = {
     title: "Notifications",
     tabs: {
       general: "General",
-      offers: "Offers"
-    }
+      offers: "Offers",
+    },
   },
   explore: {
     title: "Explore",
@@ -44,7 +44,15 @@ const en = {
     },
     search: {
       placeholder: "Search for groups and idols",
-      filter: "Filter Listings",
+      filter: {
+        title: "Filter Results",
+        tabs: {
+          category: "Category",
+          price: "Price",
+          type: "Type",
+          shipping: "Shipping"
+        }
+      },
     },
   },
   saved: {
@@ -61,7 +69,7 @@ const en = {
   more: {
     title: "More",
     biases: {
-      title: "My Biases"
+      title: "My Biases",
     },
     settings: {
       title: "Settings",
@@ -72,7 +80,7 @@ const en = {
       language: "Language",
       country: "Country",
       help: "Help Center",
-    }
+    },
   },
 }
 

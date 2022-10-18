@@ -16,7 +16,7 @@ import { useStores } from "../models"
 import { MainTabs } from "./MainTabs"
 import {
   AddListingScreen,
-  CurationScreen,
+  CurationScreen, FilterResultsScreen,
   NotificationsScreen, SearchResultsScreen, SearchScreen,
   SuggestionPreferencesScreen,
   WelcomeScreen,
@@ -57,8 +57,7 @@ export type AppStackParamList = {
   AddListing: undefined
   CurationScreen: undefined
   Search: undefined
-  SearchResults: undefined
-  Filter: undefined
+  FilterResults: undefined
   AllListings: undefined
 
   EditProfile: undefined
@@ -193,56 +192,15 @@ const AppStack = observer(function AppStack() {
               options={{
                 headerShown: false,
                 animation: "none"
-                //   header: (props: NativeStackHeaderProps) => (
-                //     <Header
-                //       titleTx={"explore.listings.featured"}
-                //       titleMode={"flex"}
-                //       LeftActionComponent={
-                //         <Pressable
-                //           onPress={() => {
-                //             props.navigation.goBack()
-                //           }}
-                //           style={{ paddingLeft: spacing.extraSmall }}
-                //           hitSlop={hitRect}
-                //         >
-                //           <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                //         </Pressable>
-                //       }
-                //     />
-                //   ),
               }}
             />
             <Stack.Screen
-              name="SearchResults"
-              component={SearchResultsScreen}
-              options={{
-                animation: "none",
-                header: (props: NativeStackHeaderProps) => (
-                  <Header
-                    titleTx={"explore.listings.featured"}
-                    titleMode={"flex"}
-                    LeftActionComponent={
-                      <Pressable
-                        onPress={() => {
-                          props.navigation.goBack()
-                        }}
-                        style={{ paddingLeft: spacing.extraSmall }}
-                        hitSlop={hitRect}
-                      >
-                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
-                      </Pressable>
-                    }
-                  />
-                ),
-              }}
-            />
-            <Stack.Screen
-              name="Filter"
-              component={WelcomeScreen}
+              name="FilterResults"
+              component={FilterResultsScreen}
               options={{
                 header: (props: NativeStackHeaderProps) => (
                   <Header
-                    titleTx={"explore.search.filter"}
+                    titleTx={"explore.search.filter.title"}
                     titleMode={"flex"}
                     LeftActionComponent={
                       <Pressable

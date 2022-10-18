@@ -37,6 +37,8 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
 
     const sortModal = useRef<ModalDropdown>(null)
 
+    const goToFilterScreen = () => navigation.navigate("FilterResults")
+
     const renderListingCard = ({ item }) => {
       return (
         <ListingCard
@@ -128,7 +130,7 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
               )}
               options={filterOptions}
             />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => goToFilterScreen()}>
               <Ionicons
                 name={"options"}
                 color={colors.textDim}
