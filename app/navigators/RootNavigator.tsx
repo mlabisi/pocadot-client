@@ -17,7 +17,7 @@ import { MainTabs } from "./MainTabs"
 import {
   AddListingScreen,
   CurationScreen, FilterResultsScreen,
-  NotificationsScreen, SearchResultsScreen, SearchScreen,
+  NotificationsScreen, SearchScreen,
   SuggestionPreferencesScreen,
   WelcomeScreen,
 } from "../screens"

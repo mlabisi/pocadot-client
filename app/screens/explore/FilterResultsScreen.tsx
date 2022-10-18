@@ -9,29 +9,6 @@ import { translate } from "../../i18n"
 // import { useStores } from "../models"
 
 export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "FilterResults">> = observer(function FilterResultsScreen() {
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [tabs] = useState([
-    {
-      key: "explore.search.filter.tabs.category",
-      title: translate("explore.search.filter.tabs.category"),
-    },
-    {
-      key: "explore.search.filter.tabs.price",
-      title: translate("explore.search.filter.tabs.price"),
-    },
-    {
-      key: "explore.search.filter.tabs.type",
-      title: translate("explore.search.filter.tabs.type"),
-    },
-    {
-      key: "explore.search.filter.tabs.shipping",
-      title: translate("explore.search.filter.tabs.shipping"),
-    },
-  ])
-
-  const setIndex = (index) => {
-    setSelectedIndex(index)
-  }
 
   return (
     <ScrollView contentContainerStyle={styles.AutoLayoutVertical3}>

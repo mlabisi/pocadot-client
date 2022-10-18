@@ -45,6 +45,8 @@ export const IdolSelection = observer(function IdolSelection({
             searchable={true}
             multiSelection={true}
             selectControlStyle={styles.SelectButtonContainer}
+            /*
+            // @ts-ignore */
             textInputProps={{width: styles.SelectButtonContainer.width - 150 }}
             optionStyle={styles.SeachableDropdownItem}
             optionsListStyle={styles.ModalContainer}
