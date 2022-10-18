@@ -39,12 +39,13 @@ export const IdolSelection = observer(function IdolSelection({
     <FormSection
       title={"Idol(s)"}
       inputComponent={
-        <View>
+        <View style={{marginTop: spacing.extraSmall}}>
           <Select
             ref={dropdown}
             searchable={true}
             multiSelection={true}
             selectControlStyle={styles.SelectButtonContainer}
+            textInputProps={{width: styles.SelectButtonContainer.width - 150 }}
             optionStyle={styles.SeachableDropdownItem}
             optionsListStyle={styles.ModalContainer}
             placeholderText={"Search for an idol..."}
