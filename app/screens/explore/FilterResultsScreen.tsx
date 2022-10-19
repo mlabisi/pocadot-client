@@ -1,38 +1,49 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet, View, Image, ScrollView } from "react-native"
+import { StyleSheet, View, Image, ScrollView, TouchableOpacity } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { Screen, Text, TintedButton, Toggle } from "../../components"
+import { Expandable, Screen, Text, TintedButton, Toggle } from "../../components"
 import { translate } from "../../i18n"
 import { widthPercentageToDP } from "react-native-responsive-screen"
+import Collapsible from "react-native-collapsible"
 import { colors, spacing } from "../../theme"
+import { Ionicons } from "@expo/vector-icons"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
 export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "FilterResults">> =
-  observer(function FilterResultsScreen() {
+  observer(function FilterResultsScreen({navigation}) {
+    const [categoryExpanded, setCategoryExpanded] = useState(true)
     const [bgFilter, setBgFilter] = useState(false)
     const [ggFilter, setGgFilter] = useState(false)
     const [soloFilter, setSoloFilter] = useState(false)
     const [coedFilter, setCoedFilter] = useState(false)
 
+    const [priceExpanded, setPriceExpanded] = useState(true)
+    const [priceFilter, setPriceFilter] = useState("")
+
+    const [typeExpanded, setTypeExpanded] = useState(true)
     const [wttFilter, setWttFilter] = useState(false)
     const [wtsFilter, setWtsFilter] = useState(false)
     const [bothFilter, setBothFilter] = useState(false)
 
+    const [shippingExpanded, setShippingExpanded] = useState(true)
+    const [i12Filter, seti12Filter] = useState(false)
+    const [otherCountryFilter, setOtherCountryFilter] = useState(false)
+
     return (
       <ScrollView contentContainerStyle={styles.Container}>
-        <View style={styles.GroupContainer}>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Text preset={"h5"}>Category</Text>
-            <Image
-              style={styles.IconlyLightOutlineArrowUp2}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-1539%3A24204?alt=media&token=6fba5bab-3953-433c-a565-2fe74244065d",
-              }}
-            />
-          </View>
+        <Expandable
+          isExpanded={categoryExpanded}
+          setIsExpanded={setCategoryExpanded}
+          title={`Category`}
+          collapsedSubtitle={`${
+            categoryExpanded
+              ? ""
+              : ` - ${[bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length} Selected`
+          }`}
+        >
           <View style={styles.InputWrapper}>
             <Toggle
               variant={"checkbox"}
@@ -44,6 +55,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               Boy Groups
             </Text>
           </View>
+
           <View style={styles.InputWrapper}>
             <Toggle
               variant={"checkbox"}
@@ -78,18 +90,16 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               Coed Groups
             </Text>
           </View>
-        </View>
+        </Expandable>
 
-        <View style={styles.GroupContainer}>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Text style={styles.Txt399}>Price</Text>
-            <Image
-              style={styles.IconlyLightOutlineArrowUp2}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-1539%3A24179?alt=media&token=f4a94f60-63e5-4814-9da7-37878393869c",
-              }}
-            />
-          </View>
+        <Expandable
+          isExpanded={priceExpanded}
+          setIsExpanded={setPriceExpanded}
+          title={"Price"}
+          collapsedSubtitle={`${
+            priceExpanded ? "" : ` - ${priceFilter.length > 0 ? priceFilter : "Not Set"}`
+          }`}
+        >
           <View style={styles.StatusFillTypeNormalStateFilledInputThemeLightComponentInputField}>
             <Image
               style={styles.ChainEthereumComponentNftSymbol}
@@ -116,18 +126,20 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               <Text style={styles.Txt453}>30.00</Text>
             </View>
           </View>
-        </View>
+        </Expandable>
 
-        <View style={styles.GroupContainer}>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Text style={styles.Txt399}>Type</Text>
-            <Image
-              style={styles.IconlyLightOutlineArrowUp2}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-1539%3A24197?alt=media&token=d753bb36-fef7-4ece-be20-842d26f6976f",
-              }}
-            />
-          </View>
+        <Expandable
+          isExpanded={typeExpanded}
+          setIsExpanded={setTypeExpanded}
+          title={"Type"}
+          collapsedSubtitle={`${
+            typeExpanded
+              ? ""
+              : ` - ${
+                  [wtsFilter, wttFilter, bothFilter].filter(Boolean).length > 0 ? "Set" : "Not Set"
+                }`
+          }`}
+        >
           <View style={styles.InputWrapper}>
             <Toggle
               variant={"radio"}
@@ -173,18 +185,18 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               WTS/WTT
             </Text>
           </View>
-        </View>
+        </Expandable>
 
-        <View style={styles.GroupContainer}>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Text style={styles.Txt399}>Shipping</Text>
-            <Image
-              style={styles.IconlyLightOutlineArrowUp2}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-1539%3A24214?alt=media&token=2f9eaaac-d91a-4b0a-8454-a644c5c5cfa8",
-              }}
-            />
-          </View>
+        <Expandable
+          isExpanded={shippingExpanded}
+          setIsExpanded={setShippingExpanded}
+          title={"Shipping"}
+          collapsedSubtitle={`${
+            shippingExpanded
+              ? ""
+              : ` - ${[i12Filter, otherCountryFilter].filter(Boolean).length} Selected`
+          }`}
+        >
           <View style={styles.AutoLayoutHorizontal2}>
             <Image
               style={styles.Vector}
@@ -212,11 +224,12 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
             />
             <Text style={styles.Txt436}>Ships from Another Country</Text>
           </View>
-        </View>
+        </Expandable>
+
         <TintedButton
           style={styles.ButtonContainer}
           onPress={() => {
-            /**/
+            navigation.goBack()
           }}
           text={
             <Text preset={"h6"} style={styles.ButtonText}>
@@ -229,54 +242,6 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
   })
 
 const styles = StyleSheet.create({
-  ButtonContainer: {
-    width: widthPercentageToDP(100) - spacing.extraLarge,
-  },
-  ButtonText: {
-    color: colors.palette.other.white,
-  },
-  CheckboxContainer: {
-    paddingRight: spacing.tiny,
-  },
-  CheckboxLabel: {
-    paddingRight: spacing.small,
-  },
-  GroupContainer: {
-    alignItems: "flex-start",
-    backgroundColor: colors.palette.other.white,
-    borderColor: colors.palette.other.offWhite,
-    borderRadius: 24,
-    borderStyle: "solid",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    marginBottom: spacing.large,
-    padding: spacing.large,
-  },
-  Container: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    paddingLeft: spacing.medium,
-    paddingVertical: spacing.extraLarge,
-    width: widthPercentageToDP(100) - spacing.medium,
-  },
-  InputWrapper: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginTop: spacing.small,
-  },
-  SectionHeader: {
-    alignItems: "flex-start",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-    width: widthPercentageToDP(100) - spacing.medium,
-  },
-
   AutoLayoutHorizontal: {
     alignItems: "center",
     display: "flex",
@@ -317,7 +282,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 340,
   },
-
   AutoLayoutHorizontal2: {
     alignItems: "center",
     display: "flex",
@@ -342,15 +306,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 340,
   },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-
   AutoLayoutHorizontal2: {
     alignItems: "center",
     display: "flex",
@@ -384,7 +339,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 340,
   },
-
   AutoLayoutHorizontal3: {
     alignItems: "center",
     display: "flex",
@@ -392,41 +346,41 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 340,
   },
+  AutoLayoutVertical: {
+    alignItems: "flex-start",
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    borderColor: "rgba(238,238,238,1)",
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    marginBottom: 24,
+    paddingBottom: 19,
+    paddingLeft: 19,
+    paddingRight: 19,
+    paddingTop: 19,
+    width: 380,
+  },
+  AutoLayoutVertical: {
+    alignItems: "flex-start",
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    borderColor: "rgba(238,238,238,1)",
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    marginBottom: 24,
+    paddingBottom: 19,
+    paddingLeft: 19,
+    paddingRight: 19,
+    paddingTop: 19,
+    width: 380,
+  },
 
-  AutoLayoutVertical: {
-    alignItems: "flex-start",
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderColor: "rgba(238,238,238,1)",
-    borderRadius: 24,
-    borderStyle: "solid",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    marginBottom: 24,
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 19,
-    width: 380,
-  },
-  AutoLayoutVertical: {
-    alignItems: "flex-start",
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderColor: "rgba(238,238,238,1)",
-    borderRadius: 24,
-    borderStyle: "solid",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    marginBottom: 24,
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 19,
-    width: 380,
-  },
   AutoLayoutVertical1: {
     alignItems: "flex-start",
     backgroundColor: "rgba(255, 255, 255, 1)",
@@ -450,27 +404,83 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: 380,
   },
+  ButtonContainer: {
+    width: widthPercentageToDP(100) - spacing.extraLarge,
+  },
+  ButtonText: {
+    color: colors.palette.other.white,
+  },
 
   ChainEthereumComponentNftSymbol: {
     height: 20,
     marginRight: 12,
     width: 20,
   },
+  CheckboxContainer: {
+    // paddingRight: spacing.tiny,
+  },
+
+  CheckboxLabel: {
+    // paddingRight: spacing.small,
+    // flex: 1
+  },
+  CollapsibleHeader: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  CollapsibleSection: {
+    alignItems: "flex-start",
+    backgroundColor: colors.palette.other.white,
+    borderColor: colors.palette.other.offWhite,
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    padding: spacing.large,
+    width: widthPercentageToDP(100) - spacing.medium,
+  },
+
+  Container: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    paddingLeft: spacing.medium,
+    paddingVertical: spacing.extraLarge,
+    width: widthPercentageToDP(100) - spacing.medium,
+  },
+  Group: {
+    height: 20,
+    marginRight: 16,
+    width: 20,
+  },
+  Group: {
+    height: 20,
+    marginRight: 16,
+    width: 20,
+  },
   Group: {
     height: 20,
     marginRight: 16,
     width: 20,
   },
 
-  Group: {
-    height: 20,
-    marginRight: 16,
-    width: 20,
-  },
-  Group: {
-    height: 20,
-    marginRight: 16,
-    width: 20,
+  GroupContainer: {
+    alignItems: "flex-start",
+    backgroundColor: colors.palette.other.white,
+    borderColor: colors.palette.other.offWhite,
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    padding: spacing.large,
   },
   IconTimesComponentAdditionalIcons: {
     height: 28,
@@ -499,12 +509,34 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
   },
+  InputWrapper: {
+    alignItems: "flex-start",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+  },
+
   Rectangle: {
     backgroundColor: "rgba(163,176,239,1)",
     borderRadius: 100,
     height: 4,
     width: 110,
   },
+  SectionHeader: {
+    alignItems: "flex-start",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    width: widthPercentageToDP(100) - spacing.medium,
+  },
+  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: 110,
+  },
 
   StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
     alignItems: "center",
@@ -528,13 +560,6 @@ const styles = StyleSheet.create({
     width: 110,
   },
 
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 110,
-  },
   StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField: {
     alignItems: "center",
     backgroundColor: "rgba(250,250,250,1)",
@@ -581,7 +606,6 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     width: 340,
   },
-
   StyleTextThemeLightStateUncheckedComponentCheckbox: {
     alignItems: "center",
     display: "flex",
@@ -589,6 +613,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: 340,
   },
+
   StyleTextThemeLightStateUncheckedComponentCheckbox: {
     alignItems: "center",
     display: "flex",
@@ -615,6 +640,9 @@ const styles = StyleSheet.create({
     paddingRight: 0,
     paddingTop: 11,
     width: 380,
+  },
+  TitleText: {
+    flex: 1,
   },
 
   Txt1101: {

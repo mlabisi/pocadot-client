@@ -23,7 +23,7 @@ export const ReleaseInput = observer(function ReleaseInput(props: ReleaseInputPr
         <View style={{ marginTop: spacing.extraSmall }}>
           <TextField
             multiline={true}
-            placeholder={"Ex: Album Title and Version, Season's Greetings and Year, Fanmade, etc..."}
+            placeholder={"Ex: Album Title and Version, Season's Greetings Name and Year, Fanmade, etc..."}
             inputWrapperStyle={styles.InputWrapper}
             style={styles.InputStyle}
           />

@@ -1,9 +1,9 @@
 import * as React from "react"
 import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, spacing} from "../../theme"
-import { Text} from "../index"
-import { ReactNode} from "react"
+import { colors, spacing } from "../../theme"
+import { Text } from "../index"
+import { ReactNode } from "react"
 import { Ionicons } from "@expo/vector-icons"
 import Collapsible from "react-native-collapsible"
 import { widthPercentageToDP } from "react-native-responsive-screen"
@@ -15,28 +15,44 @@ export interface ExpandableProps {
 
   title: string
 
+  collapsedSubtitle: string
+
   children: ReactNode
 }
 
 /**
  * Describe your component here
  */
-export const Expandable = observer(function Expandable({ children, isExpanded, setIsExpanded, title }: ExpandableProps) {
-
+export const Expandable = observer(function Expandable({
+  children,
+  isExpanded,
+  setIsExpanded,
+  title,
+  collapsedSubtitle
+}: ExpandableProps) {
   const toggle = () => {
     setIsExpanded((prev) => !prev)
   }
 
   return (
     <View style={styles.CollapsibleSection}>
-      <TouchableOpacity onPress={toggle} style={[styles.CollapsibleHeader, isExpanded ? styles.CollapsibleHeaderBottom : {}]}>
-        <Text preset={"h5"} style={styles.TitleText}>
-          {title}
-        </Text>
+      <TouchableOpacity
+        onPress={toggle}
+        style={[styles.CollapsibleHeader, isExpanded ? styles.CollapsibleHeaderBottom : {}]}
+      >
+        <View style={styles.TitleText}>
+          <Text preset={"h5"}>
+            {title}
+          </Text>
+          <Text preset={"bodyXS"}>
+            {collapsedSubtitle}
+          </Text>
+        </View>
+
         <Ionicons name={isExpanded ? "chevron-up" : "chevron-down"} color={colors.tint} size={24} />
       </TouchableOpacity>
 
-      <Collapsible collapsed={!isExpanded} style={{width: styles.CollapsibleSection.width}}>
+      <Collapsible collapsed={!isExpanded} style={{ width: styles.CollapsibleSection.width }}>
         {children}
       </Collapsible>
     </View>
@@ -54,7 +70,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: colors.palette.greyscale["200"],
     marginBottom: spacing.extraSmall,
-    paddingBottom: spacing.extraSmall
+    paddingBottom: spacing.extraSmall,
   },
   CollapsibleSection: {
     alignItems: "flex-start",
@@ -71,6 +87,9 @@ const styles = StyleSheet.create({
     width: widthPercentageToDP(100) - spacing.medium,
   },
   TitleText: {
+    alignContent: "center",
     flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start"
   },
 })
