@@ -207,10 +207,10 @@ const AppStack = observer(function AppStack() {
                         onPress={() => {
                           props.navigation.goBack()
                         }}
-                        style={{ paddingLeft: spacing.extraSmall }}
+                        style={{ paddingLeft: spacing.small }}
                         hitSlop={hitRect}
                       >
-                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
+                        <Octicons name={"x"} size={24} color={colors.tint} />
                       </Pressable>
                     }
                   />

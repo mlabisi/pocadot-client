@@ -3,47 +3,17 @@ import { observer } from "mobx-react-lite"
 import { StyleSheet, View, Image, ScrollView } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { Screen, Text } from "../../components"
+import { Screen, Text, TintedButton } from "../../components"
 import { translate } from "../../i18n"
+import { widthPercentageToDP } from "react-native-responsive-screen"
+import { colors, spacing } from "../../theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
-export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "FilterResults">> = observer(function FilterResultsScreen() {
-
-  return (
-    <ScrollView contentContainerStyle={styles.AutoLayoutVertical3}>
-      <View style={styles.AutoLayoutVertical2}>
-        <View style={styles.AutoLayoutHorizontal1}>
-          <View
-            style={
-              styles.StateActiveStyleNoneThemeDefaultComponentHorizontalTab
-            }
-          >
-            <Text style={styles.Txt129}>Category</Text>
-            <View style={styles.Rectangle} />
-          </View>
-          <View
-            style={
-              styles.StateActiveStyleNoneThemeDefaultComponentHorizontalTab
-            }
-          >
-            <Text style={styles.Txt155}>Price</Text>
-          </View>
-          <View
-            style={
-              styles.StateActiveStyleNoneThemeDefaultComponentHorizontalTab
-            }
-          >
-            <Text style={styles.Txt155}>Type</Text>
-          </View>
-          <View
-            style={
-              styles.StateActiveStyleNoneThemeDefaultComponentHorizontalTab
-            }
-          >
-            <Text style={styles.Txt155}>Shipping</Text>
-          </View>
-        </View>
+export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "FilterResults">> =
+  observer(function FilterResultsScreen() {
+    return (
+      <ScrollView contentContainerStyle={styles.Container}>
         <View style={styles.AutoLayoutVertical}>
           <View style={styles.AutoLayoutHorizontal2}>
             <Text style={styles.Txt399}>Category</Text>
@@ -90,9 +60,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
             />
             <Text style={styles.Txt436}>Coed Groups</Text>
           </View>
-          <View
-            style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}
-          >
+          <View style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}>
             <Image
               style={styles.Vector}
               source={{
@@ -112,11 +80,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               }}
             />
           </View>
-          <View
-            style={
-              styles.StatusFillTypeNormalStateFilledInputThemeLightComponentInputField
-            }
-          >
+          <View style={styles.StatusFillTypeNormalStateFilledInputThemeLightComponentInputField}>
             <Image
               style={styles.ChainEthereumComponentNftSymbol}
               source={{
@@ -132,18 +96,12 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
             />
           </View>
           <View style={styles.AutoLayoutHorizontal3}>
-            <View
-              style={
-                styles.StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField
-              }
-            >
+            <View style={styles.StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField}>
               <Text style={styles.Txt453}>10.00</Text>
             </View>
             <Text style={styles.Txt585}>To</Text>
             <View
-              style={
-                styles.StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField1
-              }
+              style={styles.StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField1}
             >
               <Text style={styles.Txt453}>30.00</Text>
             </View>
@@ -177,9 +135,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
             />
             <Text style={styles.Txt940}>WTT - Want To Trade</Text>
           </View>
-          <View
-            style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}
-          >
+          <View style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}>
             <Image
               style={styles.Group}
               source={{
@@ -217,9 +173,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
             />
             <Text style={styles.Txt436}>In-Person Delivery</Text>
           </View>
-          <View
-            style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}
-          >
+          <View style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}>
             <Image
               style={styles.Vector}
               source={{
@@ -229,665 +183,674 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
             <Text style={styles.Txt436}>Ships from Another Country</Text>
           </View>
         </View>
-      </View>
-    </ScrollView>
-  )
-})
-
-
+        <TintedButton
+          style={styles.ButtonContainer}
+          onPress={() => {/**/}}
+          text={
+            <Text preset={"h6"} style={styles.ButtonText}>
+              Apply
+            </Text>
+          }
+        />
+      </ScrollView>
+    )
+  })
 
 const styles = StyleSheet.create({
-  AutoLayoutVertical3: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 15,
-    paddingBottom: 47,
-    paddingLeft: 23,
-    paddingRight: 23,
-    width: 428,
-    height: 1331,
+  ButtonContainer: {
+    width: widthPercentageToDP(100) - spacing.extraLarge
   },
-  AutoLayoutVertical2: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: 380,
-  },
-  ThemeLightComponentNavbar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 11,
-    paddingBottom: 11,
-    paddingLeft: 0,
-    paddingRight: 0,
-    marginBottom: 24,
-    width: 380,
-    height: 48,
+  ButtonText: {
+    color: colors.palette.other.white
   },
   AutoLayoutHorizontal: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
     flex: 1,
+    justifyContent: "flex-start",
     width: 380,
   },
-  IconTimesComponentAdditionalIcons: {
-    width: 28,
-    height: 28,
-    marginRight: 16,
-  },
-  Txt1101: {
-    fontSize: 24,
-    fontFamily: "Jua, sans-serif",
-    fontWeight: "400",
-    lineHeight: 29,
-    color: "rgba(163,176,239,1)",
-    width: 337,
-  },
-
   AutoLayoutHorizontal1: {
+    alignItems: "flex-start",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "flex-start",
     marginBottom: 24,
     width: 380,
   },
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: 110,
-  },
-  Txt129: {
-    fontSize: 18,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 25,
-    letterSpacing: 0.2,
-    color: "rgba(163,176,239,1)",
-    textAlign: "center",
-    justifyContent: "center",
-    width: 111,
-    marginBottom: 12,
-  },
-  Rectangle: {
-    backgroundColor: "rgba(163,176,239,1)",
-    width: 110,
-    height: 4,
-    borderRadius: 100,
-  },
-
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: 110,
-  },
-  Txt155: {
-    fontSize: 18,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 25,
-    letterSpacing: 0.2,
-    color: "rgba(158,158,158,1)",
-    textAlign: "center",
-    justifyContent: "center",
-    width: 111,
-  },
-
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: 110,
-  },
-  Txt155: {
-    fontSize: 18,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 25,
-    letterSpacing: 0.2,
-    color: "rgba(158,158,158,1)",
-    textAlign: "center",
-    justifyContent: "center",
-    width: 111,
-  },
-
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: 110,
-  },
-  Txt155: {
-    fontSize: 18,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 25,
-    letterSpacing: 0.2,
-    color: "rgba(158,158,158,1)",
-    textAlign: "center",
-    justifyContent: "center",
-    width: 111,
-  },
-
-  AutoLayoutVertical: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    paddingTop: 19,
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
-    marginBottom: 24,
-    borderRadius: 24,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "rgba(238,238,238,1)",
-    width: 380,
-  },
   AutoLayoutHorizontal2: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center",
     marginBottom: 20,
     width: 340,
   },
-  Txt399: {
-    fontSize: 20,
-    fontFamily: "Jua, sans-serif",
-    fontWeight: "400",
-    lineHeight: 24,
-    color: "rgba(33,33,33,1)",
-    width: 305,
-    marginRight: 12,
+  AutoLayoutHorizontal2: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    width: 340,
   },
-  IconlyLightOutlineArrowUp2: {
-    width: 24,
-    height: 24,
+  AutoLayoutHorizontal2: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    width: 340,
+  },
+  AutoLayoutHorizontal2: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    width: 340,
   },
 
   AutoLayoutHorizontal2: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center",
     marginBottom: 20,
     width: 340,
   },
-  Vector: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
+  AutoLayoutHorizontal2: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    width: 340,
   },
-  Txt436: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 316,
+  AutoLayoutHorizontal2: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    width: 340,
+  },
+  AutoLayoutHorizontal2: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    width: 340,
   },
 
   AutoLayoutHorizontal2: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center",
     marginBottom: 20,
     width: 340,
   },
-  Vector: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-  },
-  Txt436: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 316,
+  AutoLayoutHorizontal2: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    width: 340,
   },
 
   AutoLayoutHorizontal2: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center",
     marginBottom: 20,
     width: 340,
-  },
-  Vector: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-  },
-  Txt436: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 316,
-  },
-
-  AutoLayoutHorizontal2: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 340,
-  },
-  Vector: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-  },
-  Txt436: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 316,
-  },
-
-  StyleTextThemeLightStateUncheckedComponentCheckbox: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: 340,
-  },
-  Vector: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-  },
-  Txt436: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 316,
-  },
-
-  AutoLayoutVertical: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    paddingTop: 19,
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
-    marginBottom: 24,
-    borderRadius: 24,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "rgba(238,238,238,1)",
-    width: 380,
   },
   AutoLayoutHorizontal2: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center",
     marginBottom: 20,
     width: 340,
-  },
-  Txt399: {
-    fontSize: 20,
-    fontFamily: "Jua, sans-serif",
-    fontWeight: "400",
-    lineHeight: 24,
-    color: "rgba(33,33,33,1)",
-    width: 305,
-    marginRight: 12,
-  },
-  IconlyLightOutlineArrowUp2: {
-    width: 24,
-    height: 24,
-  },
-
-  StatusFillTypeNormalStateFilledInputThemeLightComponentInputField: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 19,
-    paddingRight: 19,
-    marginBottom: 20,
-    borderRadius: 16,
-    backgroundColor: "rgba(250,250,250,1)",
-    width: 340,
-    height: 56,
-  },
-  ChainEthereumComponentNftSymbol: {
-    width: 20,
-    height: 20,
-    marginRight: 12,
-  },
-  Txt578: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 237,
-    marginRight: 12,
-  },
-  IconlyBoldArrowDown2: {
-    width: 20,
-    height: 20,
   },
 
   AutoLayoutHorizontal3: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
     width: 340,
   },
-  StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField: {
+  AutoLayoutVertical: {
+    alignItems: "flex-start",
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    borderColor: "rgba(238,238,238,1)",
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "flex-start",
-    alignItems: "center",
-    flex: 1,
-    paddingTop: 0,
-    paddingBottom: 0,
+    marginBottom: 24,
+    paddingBottom: 19,
     paddingLeft: 19,
     paddingRight: 19,
-    marginRight: 16,
-    borderRadius: 16,
-    backgroundColor: "rgba(250,250,250,1)",
-    width: 145,
-    height: 56,
-  },
-  Txt453: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 106,
-  },
-
-  Txt585: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    textAlign: "center",
-    justifyContent: "center",
-    marginRight: 16,
-  },
-  StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField1: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    flex: 1,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 19,
-    paddingRight: 19,
-    borderRadius: 16,
-    backgroundColor: "rgba(250,250,250,1)",
-    width: 145,
-    height: 56,
-  },
-  Txt453: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 106,
+    paddingTop: 19,
+    width: 380,
   },
 
   AutoLayoutVertical: {
+    alignItems: "flex-start",
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    borderColor: "rgba(238,238,238,1)",
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    alignItems: "flex-start",
-    paddingTop: 19,
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
     marginBottom: 24,
-    borderRadius: 24,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "rgba(238,238,238,1)",
-    width: 380,
-  },
-  AutoLayoutHorizontal2: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 340,
-  },
-  Txt399: {
-    fontSize: 20,
-    fontFamily: "Jua, sans-serif",
-    fontWeight: "400",
-    lineHeight: 24,
-    color: "rgba(33,33,33,1)",
-    width: 305,
-    marginRight: 12,
-  },
-  IconlyLightOutlineArrowUp2: {
-    width: 24,
-    height: 24,
-  },
-
-  AutoLayoutHorizontal2: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 340,
-  },
-  Group: {
-    width: 20,
-    height: 20,
-    marginRight: 16,
-  },
-  Txt940: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 305,
-  },
-
-  AutoLayoutHorizontal2: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 340,
-  },
-  Group: {
-    width: 20,
-    height: 20,
-    marginRight: 16,
-  },
-  Txt940: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 305,
-  },
-
-  StyleTextThemeLightStateUncheckedComponentCheckbox: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: 340,
-  },
-  Group: {
-    width: 20,
-    height: 20,
-    marginRight: 16,
-  },
-  Txt940: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 305,
-  },
-
-  AutoLayoutVertical1: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    paddingTop: 19,
     paddingBottom: 19,
     paddingLeft: 19,
     paddingRight: 19,
-    borderRadius: 24,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "rgba(238,238,238,1)",
+    paddingTop: 19,
     width: 380,
   },
-  AutoLayoutHorizontal2: {
+  AutoLayoutVertical: {
+    alignItems: "flex-start",
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    borderColor: "rgba(238,238,238,1)",
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "flex-start",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 340,
+    marginBottom: 24,
+    paddingBottom: 19,
+    paddingLeft: 19,
+    paddingRight: 19,
+    paddingTop: 19,
+    width: 380,
   },
-  Txt399: {
-    fontSize: 20,
-    fontFamily: "Jua, sans-serif",
-    fontWeight: "400",
-    lineHeight: 24,
-    color: "rgba(33,33,33,1)",
-    width: 305,
+  AutoLayoutVertical1: {
+    alignItems: "flex-start",
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    borderColor: "rgba(238,238,238,1)",
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    paddingBottom: 19,
+    paddingLeft: 19,
+    paddingRight: 19,
+    paddingTop: 19,
+    width: 380,
+  },
+  AutoLayoutVertical2: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: 380,
+  },
+
+  ChainEthereumComponentNftSymbol: {
+    height: 20,
     marginRight: 12,
+    width: 20,
+  },
+  Container: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    paddingLeft: spacing.medium,
+    paddingVertical: spacing.extraLarge,
+    width: widthPercentageToDP(100) - spacing.medium,
+  },
+  Group: {
+    height: 20,
+    marginRight: 16,
+    width: 20,
+  },
+
+  Group: {
+    height: 20,
+    marginRight: 16,
+    width: 20,
+  },
+  Group: {
+    height: 20,
+    marginRight: 16,
+    width: 20,
+  },
+  IconTimesComponentAdditionalIcons: {
+    height: 28,
+    marginRight: 16,
+    width: 28,
+  },
+
+  IconlyBoldArrowDown2: {
+    height: 20,
+    width: 20,
   },
   IconlyLightOutlineArrowUp2: {
-    width: 24,
     height: 24,
+    width: 24,
+  },
+  IconlyLightOutlineArrowUp2: {
+    height: 24,
+    width: 24,
   },
 
-  AutoLayoutHorizontal2: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 340,
+  IconlyLightOutlineArrowUp2: {
+    height: 24,
+    width: 24,
   },
-  Vector: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
+  IconlyLightOutlineArrowUp2: {
+    height: 24,
+    width: 24,
   },
-  Txt436: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 316,
+  Rectangle: {
+    backgroundColor: "rgba(163,176,239,1)",
+    borderRadius: 100,
+    height: 4,
+    width: 110,
   },
 
-  AutoLayoutHorizontal2: {
+  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: 110,
+  },
+  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: 110,
+  },
+  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: 110,
+  },
+
+  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: 110,
+  },
+  StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField: {
+    alignItems: "center",
+    backgroundColor: "rgba(250,250,250,1)",
+    borderRadius: 16,
     display: "flex",
     flexDirection: "row",
+    flex: 1,
+    height: 56,
     justifyContent: "flex-start",
+    marginRight: 16,
+    paddingBottom: 0,
+    paddingLeft: 19,
+    paddingRight: 19,
+    paddingTop: 0,
+    width: 145,
+  },
+  StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField1: {
     alignItems: "center",
+    backgroundColor: "rgba(250,250,250,1)",
+    borderRadius: 16,
+    display: "flex",
+    flexDirection: "row",
+    flex: 1,
+    height: 56,
+    justifyContent: "flex-start",
+    paddingBottom: 0,
+    paddingLeft: 19,
+    paddingRight: 19,
+    paddingTop: 0,
+    width: 145,
+  },
+  StatusFillTypeNormalStateFilledInputThemeLightComponentInputField: {
+    alignItems: "center",
+    backgroundColor: "rgba(250,250,250,1)",
+    borderRadius: 16,
+    display: "flex",
+    flexDirection: "row",
+    height: 56,
+    justifyContent: "flex-start",
     marginBottom: 20,
+    paddingBottom: 0,
+    paddingLeft: 19,
+    paddingRight: 19,
+    paddingTop: 0,
     width: 340,
-  },
-  Vector: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-  },
-  Txt436: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
-    color: "rgba(33,33,33,1)",
-    width: 316,
   },
 
   StyleTextThemeLightStateUncheckedComponentCheckbox: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center",
     width: 340,
   },
-  Vector: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
+  StyleTextThemeLightStateUncheckedComponentCheckbox: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    width: 340,
+  },
+  StyleTextThemeLightStateUncheckedComponentCheckbox: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    width: 340,
+  },
+  ThemeLightComponentNavbar: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    height: 48,
+    justifyContent: "flex-start",
+    marginBottom: 24,
+    paddingBottom: 11,
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 11,
+    width: 380,
+  },
+
+  Txt1101: {
+    color: "rgba(163,176,239,1)",
+    fontFamily: "Jua, sans-serif",
+    fontSize: 24,
+    fontWeight: "400",
+    lineHeight: 29,
+    width: 337,
+  },
+  Txt129: {
+    color: "rgba(163,176,239,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 18,
+    fontWeight: "600",
+    justifyContent: "center",
+    letterSpacing: 0.2,
+    lineHeight: 25,
+    marginBottom: 12,
+    textAlign: "center",
+    width: 111,
+  },
+  Txt155: {
+    color: "rgba(158,158,158,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 18,
+    fontWeight: "600",
+    justifyContent: "center",
+    letterSpacing: 0.2,
+    lineHeight: 25,
+    textAlign: "center",
+    width: 111,
+  },
+
+  Txt155: {
+    color: "rgba(158,158,158,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 18,
+    fontWeight: "600",
+    justifyContent: "center",
+    letterSpacing: 0.2,
+    lineHeight: 25,
+    textAlign: "center",
+    width: 111,
+  },
+  Txt155: {
+    color: "rgba(158,158,158,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 18,
+    fontWeight: "600",
+    justifyContent: "center",
+    letterSpacing: 0.2,
+    lineHeight: 25,
+    textAlign: "center",
+    width: 111,
+  },
+  Txt399: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Jua, sans-serif",
+    fontSize: 20,
+    fontWeight: "400",
+    lineHeight: 24,
+    marginRight: 12,
+    width: 305,
+  },
+
+  Txt399: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Jua, sans-serif",
+    fontSize: 20,
+    fontWeight: "400",
+    lineHeight: 24,
+    marginRight: 12,
+    width: 305,
+  },
+  Txt399: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Jua, sans-serif",
+    fontSize: 20,
+    fontWeight: "400",
+    lineHeight: 24,
+    marginRight: 12,
+    width: 305,
+  },
+  Txt399: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Jua, sans-serif",
+    fontSize: 20,
+    fontWeight: "400",
+    lineHeight: 24,
+    marginRight: 12,
+    width: 305,
   },
   Txt436: {
-    fontSize: 16,
-    fontFamily: "Urbanist, sans-serif",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.2,
     color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
     width: 316,
+  },
+
+  Txt436: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 316,
+  },
+  Txt436: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 316,
+  },
+  Txt436: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 316,
+  },
+
+  Txt436: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 316,
+  },
+  Txt436: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 316,
+  },
+  Txt436: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 316,
+  },
+
+  Txt436: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 316,
+  },
+  Txt453: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 106,
+  },
+  Txt453: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 106,
+  },
+
+  Txt578: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    marginRight: 12,
+    width: 237,
+  },
+  Txt585: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    justifyContent: "center",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    marginRight: 16,
+    textAlign: "center",
+  },
+  Txt940: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 305,
+  },
+  Txt940: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 305,
+  },
+
+  Txt940: {
+    color: "rgba(33,33,33,1)",
+    fontFamily: "Urbanist, sans-serif",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 0.2,
+    lineHeight: 22,
+    width: 305,
+  },
+  Vector: {
+    height: 20,
+    marginRight: 5,
+    width: 20,
+  },
+  Vector: {
+    height: 20,
+    marginRight: 5,
+    width: 20,
+  },
+
+  Vector: {
+    height: 20,
+    marginRight: 5,
+    width: 20,
+  },
+  Vector: {
+    height: 20,
+    marginRight: 5,
+    width: 20,
+  },
+  Vector: {
+    height: 20,
+    marginRight: 5,
+    width: 20,
+  },
+
+  Vector: {
+    height: 20,
+    marginRight: 5,
+    width: 20,
+  },
+  Vector: {
+    height: 20,
+    marginRight: 5,
+    width: 20,
+  },
+  Vector: {
+    height: 20,
+    marginRight: 5,
+    width: 20,
   },
 })
