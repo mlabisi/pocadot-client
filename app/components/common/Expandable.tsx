@@ -1,13 +1,17 @@
 import * as React from "react"
 import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "../../theme"
-import { LightDivider, Text } from "../index"
-import { ReactNode, useState } from "react"
+import { colors, spacing} from "../../theme"
+import { Text} from "../index"
+import { ReactNode} from "react"
 import { Ionicons } from "@expo/vector-icons"
+import Collapsible from "react-native-collapsible"
+import { widthPercentageToDP } from "react-native-responsive-screen"
 
 export interface ExpandableProps {
-  isExpanded?: boolean
+  isExpanded: boolean
+
+  setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>
 
   title: string
 
@@ -17,36 +21,45 @@ export interface ExpandableProps {
 /**
  * Describe your component here
  */
-export const Expandable = observer(function Expandable(props: ExpandableProps) {
-  const [isExpanded, setIsExpanded] = useState(props.isExpanded ?? false)
+export const Expandable = observer(function Expandable({ children, isExpanded, setIsExpanded, title }: ExpandableProps) {
 
   const toggle = () => {
     setIsExpanded((prev) => !prev)
   }
 
   return (
-    <View style={styles.Container}>
-      <View style={styles.TitleContainer}>
-        <Text preset={"h5"}>{props.title}</Text>
-        <TouchableOpacity onPress={toggle}>
-          {isExpanded ? (
-            <Ionicons name={"chevron-up"} color={colors.tint} size={spacing.large} />
-          ) : (
-            <Ionicons name={"chevron-down"} color={colors.tint} size={spacing.large} />
-          )}
-        </TouchableOpacity>
-      </View>
-      <LightDivider style={styles.Divider}/>
-      {props.children}
+    <View style={styles.CollapsibleSection}>
+      <TouchableOpacity onPress={toggle} style={[styles.CollapsibleHeader, isExpanded ? styles.CollapsibleHeaderBottom : {}]}>
+        <Text preset={"h5"} style={styles.TitleText}>
+          {title}
+        </Text>
+        <Ionicons name={isExpanded ? "chevron-up" : "chevron-down"} color={colors.tint} size={24} />
+      </TouchableOpacity>
+
+      <Collapsible collapsed={!isExpanded} style={{width: styles.CollapsibleSection.width}}>
+        {children}
+      </Collapsible>
     </View>
   )
 })
 
 const styles = StyleSheet.create({
-  Container: {
+  CollapsibleHeader: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  CollapsibleHeaderBottom: {
+    borderBottomWidth: 1,
+    borderColor: colors.palette.greyscale["200"],
+    marginBottom: spacing.extraSmall,
+    paddingBottom: spacing.extraSmall
+  },
+  CollapsibleSection: {
     alignItems: "flex-start",
     backgroundColor: colors.palette.other.white,
-    borderColor: colors.palette.other.offWhite,
+    borderColor: colors.palette.greyscale["200"],
     borderRadius: 24,
     borderStyle: "solid",
     borderWidth: 1,
@@ -55,13 +68,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     marginBottom: spacing.large,
     padding: spacing.large,
+    width: widthPercentageToDP(100) - spacing.medium,
   },
-  Divider: {
-    marginVertical: spacing.small
-  },
-  TitleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+  TitleText: {
+    flex: 1,
   },
 })
