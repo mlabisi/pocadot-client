@@ -41,6 +41,7 @@ const palette = {
       "linear-gradient(90deg, rgba(255, 77, 103, 1) 0%, rgba(255, 138, 155, 1) 100%)",
   },
   other: {
+    offWhite: "rgba(238,238,238,1)",
     white: "rgba(255, 255, 255, 1)",
     black: "rgba(0, 0, 0, 1)",
     red: "rgba(245, 67, 54, 1)",

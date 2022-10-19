@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { StyleSheet, View, Image, ScrollView } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackParamList } from "../../navigators"
-import { Screen, Text, TintedButton } from "../../components"
+import { Screen, Text, TintedButton, Toggle } from "../../components"
 import { translate } from "../../i18n"
 import { widthPercentageToDP } from "react-native-responsive-screen"
 import { colors, spacing } from "../../theme"
@@ -12,11 +12,20 @@ import { colors, spacing } from "../../theme"
 
 export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "FilterResults">> =
   observer(function FilterResultsScreen() {
+    const [bgFilter, setBgFilter] = useState(false)
+    const [ggFilter, setGgFilter] = useState(false)
+    const [soloFilter, setSoloFilter] = useState(false)
+    const [coedFilter, setCoedFilter] = useState(false)
+
+    const [wttFilter, setWttFilter] = useState(false)
+    const [wtsFilter, setWtsFilter] = useState(false)
+    const [bothFilter, setBothFilter] = useState(false)
+
     return (
       <ScrollView contentContainerStyle={styles.Container}>
-        <View style={styles.AutoLayoutVertical}>
+        <View style={styles.GroupContainer}>
           <View style={styles.AutoLayoutHorizontal2}>
-            <Text style={styles.Txt399}>Category</Text>
+            <Text preset={"h5"}>Category</Text>
             <Image
               style={styles.IconlyLightOutlineArrowUp2}
               source={{
@@ -24,53 +33,54 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               }}
             />
           </View>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Image
-              style={styles.Vector}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24206%3B1429%3A18113?alt=media&token=3811a8d4-6853-4e09-b37f-9c2ec10d07ae",
-              }}
+          <View style={styles.InputWrapper}>
+            <Toggle
+              variant={"checkbox"}
+              value={bgFilter}
+              onValueChange={setBgFilter}
+              containerStyle={styles.CheckboxContainer}
             />
-            <Text style={styles.Txt436}>Boy Groups</Text>
+            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+              Boy Groups
+            </Text>
           </View>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Image
-              style={styles.Vector}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24207%3B1429%3A18113?alt=media&token=242415e7-cf7d-44fb-a9c3-cbd33fd6b673",
-              }}
+          <View style={styles.InputWrapper}>
+            <Toggle
+              variant={"checkbox"}
+              value={ggFilter}
+              onValueChange={setGgFilter}
+              containerStyle={styles.CheckboxContainer}
             />
-            <Text style={styles.Txt436}>Girl Groups</Text>
+            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+              Girl Groups
+            </Text>
           </View>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Image
-              style={styles.Vector}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24208%3B442%3A2394?alt=media&token=ad8dad05-6866-4a08-9d46-e9a173f14095",
-              }}
+          <View style={styles.InputWrapper}>
+            <Toggle
+              variant={"checkbox"}
+              value={soloFilter}
+              onValueChange={setSoloFilter}
+              containerStyle={styles.CheckboxContainer}
             />
-            <Text style={styles.Txt436}>Solo Idols</Text>
+            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+              Solo Idols
+            </Text>
           </View>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Image
-              style={styles.Vector}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24209%3B442%3A2394?alt=media&token=e14ff02a-b96e-44e5-89d3-b441b67a504d",
-              }}
+          <View style={styles.InputWrapper}>
+            <Toggle
+              variant={"checkbox"}
+              value={coedFilter}
+              onValueChange={setCoedFilter}
+              containerStyle={styles.CheckboxContainer}
+              inputDetailStyle={{ tintColor: colors.palette.other.white }}
             />
-            <Text style={styles.Txt436}>Coed Groups</Text>
-          </View>
-          <View style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}>
-            <Image
-              style={styles.Vector}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24210%3B1429%3A18113?alt=media&token=45ba0bff-301b-4f90-9e0f-af9517601527",
-              }}
-            />
-            <Text style={styles.Txt436}>Other</Text>
+            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+              Coed Groups
+            </Text>
           </View>
         </View>
-        <View style={styles.AutoLayoutVertical}>
+
+        <View style={styles.GroupContainer}>
           <View style={styles.AutoLayoutHorizontal2}>
             <Text style={styles.Txt399}>Price</Text>
             <Image
@@ -107,7 +117,8 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
             </View>
           </View>
         </View>
-        <View style={styles.AutoLayoutVertical}>
+
+        <View style={styles.GroupContainer}>
           <View style={styles.AutoLayoutHorizontal2}>
             <Text style={styles.Txt399}>Type</Text>
             <Image
@@ -117,35 +128,54 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               }}
             />
           </View>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Image
-              style={styles.Group}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24199%3B433%3A1093?alt=media&token=22f07b66-b45d-489c-823f-4f93eda8e63d",
+          <View style={styles.InputWrapper}>
+            <Toggle
+              variant={"radio"}
+              value={wtsFilter}
+              onValueChange={() => {
+                setBothFilter(false)
+                setWttFilter(false)
+                setWtsFilter(!wtsFilter)
               }}
+              containerStyle={styles.CheckboxContainer}
             />
-            <Text style={styles.Txt940}>WTS - Want To Sell</Text>
+            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+              WTS - Want To Sell
+            </Text>
           </View>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Image
-              style={styles.Group}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24200%3B1429%3A18153?alt=media&token=d743ae2a-9dc4-437f-9f60-9591c751d985",
+          <View style={styles.InputWrapper}>
+            <Toggle
+              variant={"radio"}
+              value={wttFilter}
+              onValueChange={() => {
+                setBothFilter(false)
+                setWttFilter(!wttFilter)
+                setWtsFilter(false)
               }}
+              containerStyle={styles.CheckboxContainer}
             />
-            <Text style={styles.Txt940}>WTT - Want To Trade</Text>
+            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+              WTT - Want To Trade
+            </Text>
           </View>
-          <View style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}>
-            <Image
-              style={styles.Group}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24684%3B1429%3A18153?alt=media&token=c868f60c-7a59-4ee2-b071-086a893d67ab",
+          <View style={styles.InputWrapper}>
+            <Toggle
+              variant={"radio"}
+              value={bothFilter}
+              onValueChange={() => {
+                setBothFilter(!bothFilter)
+                setWttFilter(false)
+                setWtsFilter(false)
               }}
+              containerStyle={styles.CheckboxContainer}
             />
-            <Text style={styles.Txt940}>WTS/WTT</Text>
+            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+              WTS/WTT
+            </Text>
           </View>
         </View>
-        <View style={styles.AutoLayoutVertical1}>
+
+        <View style={styles.GroupContainer}>
           <View style={styles.AutoLayoutHorizontal2}>
             <Text style={styles.Txt399}>Shipping</Text>
             <Image
@@ -185,7 +215,9 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
         </View>
         <TintedButton
           style={styles.ButtonContainer}
-          onPress={() => {/**/}}
+          onPress={() => {
+            /**/
+          }}
           text={
             <Text preset={"h6"} style={styles.ButtonText}>
               Apply
@@ -198,11 +230,53 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
 
 const styles = StyleSheet.create({
   ButtonContainer: {
-    width: widthPercentageToDP(100) - spacing.extraLarge
+    width: widthPercentageToDP(100) - spacing.extraLarge,
   },
   ButtonText: {
-    color: colors.palette.other.white
+    color: colors.palette.other.white,
   },
+  CheckboxContainer: {
+    paddingRight: spacing.tiny,
+  },
+  CheckboxLabel: {
+    paddingRight: spacing.small,
+  },
+  GroupContainer: {
+    alignItems: "flex-start",
+    backgroundColor: colors.palette.other.white,
+    borderColor: colors.palette.other.offWhite,
+    borderRadius: 24,
+    borderStyle: "solid",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    marginBottom: spacing.large,
+    padding: spacing.large,
+  },
+  Container: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    paddingLeft: spacing.medium,
+    paddingVertical: spacing.extraLarge,
+    width: widthPercentageToDP(100) - spacing.medium,
+  },
+  InputWrapper: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginTop: spacing.small,
+  },
+  SectionHeader: {
+    alignItems: "flex-start",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    width: widthPercentageToDP(100) - spacing.medium,
+  },
+
   AutoLayoutHorizontal: {
     alignItems: "center",
     display: "flex",
@@ -218,14 +292,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     marginBottom: 24,
     width: 380,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
   },
   AutoLayoutHorizontal2: {
     alignItems: "center",
@@ -326,23 +392,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 340,
   },
-  AutoLayoutVertical: {
-    alignItems: "flex-start",
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderColor: "rgba(238,238,238,1)",
-    borderRadius: 24,
-    borderStyle: "solid",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    marginBottom: 24,
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 19,
-    width: 380,
-  },
 
   AutoLayoutVertical: {
     alignItems: "flex-start",
@@ -406,15 +455,6 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 12,
     width: 20,
-  },
-  Container: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    paddingLeft: spacing.medium,
-    paddingVertical: spacing.extraLarge,
-    width: widthPercentageToDP(100) - spacing.medium,
   },
   Group: {
     height: 20,
