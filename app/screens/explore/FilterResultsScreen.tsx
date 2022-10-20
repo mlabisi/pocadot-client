@@ -1,11 +1,11 @@
 import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet, View, TextInput, Pressable } from "react-native"
+import { StyleSheet, View, TextInput, Pressable, ScrollView } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import CurrencyInput from "react-native-currency-input"
 import { AppStackParamList } from "../../navigators"
 import { Expandable, Screen, Text, TintedButton, Toggle } from "../../components"
-import { widthPercentageToDP } from "react-native-responsive-screen"
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen"
 import { colors, spacing, typography } from "../../theme"
 import { Octicons } from "@expo/vector-icons"
 import { CurrencyInputProps } from "react-native-currency-input/lib/typescript/src/props"
@@ -94,293 +94,371 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
     }
 
     const renderSectionAction = (expanded, condition, clear) => {
-      return !expanded &&
-      condition && (
-        <Pressable
-          style={styles.InputWrapper}
-          onPress={() => {
-            clear()
-          }}
-        >
-          <Text preset={"bodyXXS"}>
-            {` | `}
-          </Text>
-          <Text preset={"bodyXXS"} style={styles.ClearButtonText}>
-            {`Clear`}
-          </Text>
-        </Pressable>
+      return (
+        !expanded &&
+        condition && (
+          <Pressable
+            style={styles.InputWrapper}
+            onPress={() => {
+              clear()
+            }}
+          >
+            <Text preset={"bodyXXS"}>{` | `}</Text>
+            <Text preset={"bodyXXS"} style={styles.ClearButtonText}>
+              {`Clear`}
+            </Text>
+          </Pressable>
+        )
       )
     }
     const renderInnerSectionAction = (condition, clear) => {
-      return condition && (
-        <Pressable
-          style={styles.InnerClearButton}
-          onPress={() => {
-            clear()
-          }}
-        >
-          <Text preset={"h6"} style={styles.ClearButtonText}>
-            Clear
-          </Text>
-        </Pressable>
+      return (
+        condition && (
+          <Pressable
+            style={styles.InnerClearButton}
+            onPress={() => {
+              clear()
+            }}
+          >
+            <Text preset={"h6"} style={styles.ClearButtonText}>
+              Clear
+            </Text>
+          </Pressable>
+        )
       )
     }
 
     return (
-      <Screen preset={"scroll"} contentContainerStyle={styles.Container}>
-        <Expandable
-          isExpanded={categoryExpanded}
-          setIsExpanded={setCategoryExpanded}
-          title={`Category`}
-          collapsedSubtitle={`${
-            categoryExpanded
-              ? ""
-              : ` - ${[bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length} Selected`
-          }`}
-          sectionActionButton={renderSectionAction(categoryExpanded, ([bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length > 0),  clearCategorySelections)}
-        >
-          <View style={styles.InputWrapper}>
-            <Toggle
-              variant={"checkbox"}
-              value={bgFilter}
-              onValueChange={setBgFilter}
-              containerStyle={styles.CheckboxContainer}
-              inputOuterStyle={styles.CheckboxStyle}
-            />
-            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
-              Boy Groups
-            </Text>
-          </View>
-          <View style={styles.InputWrapper}>
-            <Toggle
-              variant={"checkbox"}
-              value={ggFilter}
-              onValueChange={setGgFilter}
-              containerStyle={styles.CheckboxContainer}
-              inputOuterStyle={styles.CheckboxStyle}
-            />
-            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
-              Girl Groups
-            </Text>
-          </View>
-          <View style={styles.InputWrapper}>
-            <Toggle
-              variant={"checkbox"}
-              value={soloFilter}
-              onValueChange={setSoloFilter}
-              containerStyle={styles.CheckboxContainer}
-              inputOuterStyle={styles.CheckboxStyle}
-            />
-            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
-              Solo Idols
-            </Text>
-          </View>
-          <View style={styles.InputWrapper}>
-            <Toggle
-              variant={"checkbox"}
-              value={coedFilter}
-              onValueChange={setCoedFilter}
-              containerStyle={styles.CheckboxContainer}
-              inputOuterStyle={styles.CheckboxStyle}
-            />
-            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
-              Coed Groups
-            </Text>
-          </View>
-
-          {renderInnerSectionAction([bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length > 0, clearCategorySelections)}
-        </Expandable>
-
-        <Expandable
-          isExpanded={priceExpanded}
-          setIsExpanded={setPriceExpanded}
-          title={"Price"}
-          collapsedSubtitle={generatePriceSubtitle()}
-          sectionActionButton={renderSectionAction(priceExpanded,  ((minPrice && minPrice !== 0) || (maxPrice && maxPrice !== 0)),  clearPriceSelections)}
-        >
-          <View style={styles.PriceRangeInput}>
-            <View style={styles.PriceInputField}>
-              <CurrencyInput
-                ref={minInput}
-                placeholder={"$0"}
-                placeholderTextColor={colors.textDim}
-                value={minPrice}
-                style={{
-                  fontSize: spacing.medium + spacing.micro,
-                  fontFamily: typography.primary.semiBold,
-                }}
-                onChangeValue={(value) => setMinPrice(value || 0)}
-                delimiter={","}
-                separator={"."}
-                prefix="$"
-                precision={0}
-                minValue={0}
-                onChangeText={(formattedValue) => {
-                  setPriceMinFilter(formattedValue)
-                }}
+      <View style={styles.Root}>
+        <ScrollView contentContainerStyle={styles.Container}>
+          <Expandable
+            isExpanded={categoryExpanded}
+            setIsExpanded={setCategoryExpanded}
+            title={`Category`}
+            collapsedSubtitle={`${
+              categoryExpanded
+                ? ""
+                : ` - ${
+                    [bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length
+                  } Selected`
+            }`}
+            sectionActionButton={renderSectionAction(
+              categoryExpanded,
+              [bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length > 0,
+              clearCategorySelections,
+            )}
+          >
+            <View style={styles.InputWrapper}>
+              <Toggle
+                variant={"checkbox"}
+                value={bgFilter}
+                onValueChange={setBgFilter}
+                containerStyle={styles.CheckboxContainer}
+                inputOuterStyle={styles.CheckboxStyle}
               />
-              {minPrice && minPrice !== 0 ? (
-                <Pressable
-                  onPress={() => {
-                    minInput.current.clear()
-                    setMinPrice(0)
-                  }}
-                  hitSlop={hitRect}
-                >
-                  <Octicons name={"x-circle-fill"} color={colors.tint} />
-                </Pressable>
-              ) : null}
+              <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+                Boy Groups
+              </Text>
+            </View>
+            <View style={styles.InputWrapper}>
+              <Toggle
+                variant={"checkbox"}
+                value={ggFilter}
+                onValueChange={setGgFilter}
+                containerStyle={styles.CheckboxContainer}
+                inputOuterStyle={styles.CheckboxStyle}
+              />
+              <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+                Girl Groups
+              </Text>
+            </View>
+            <View style={styles.InputWrapper}>
+              <Toggle
+                variant={"checkbox"}
+                value={soloFilter}
+                onValueChange={setSoloFilter}
+                containerStyle={styles.CheckboxContainer}
+                inputOuterStyle={styles.CheckboxStyle}
+              />
+              <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+                Solo Idols
+              </Text>
+            </View>
+            <View style={styles.InputWrapper}>
+              <Toggle
+                variant={"checkbox"}
+                value={coedFilter}
+                onValueChange={setCoedFilter}
+                containerStyle={styles.CheckboxContainer}
+                inputOuterStyle={styles.CheckboxStyle}
+              />
+              <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+                Coed Groups
+              </Text>
             </View>
 
-            <Text preset={"semiBold"} style={styles.PriceRangeSeparator}>
-              to
-            </Text>
+            {renderInnerSectionAction(
+              [bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length > 0,
+              clearCategorySelections,
+            )}
+          </Expandable>
 
-            <View style={styles.PriceInputField}>
-              <CurrencyInput
-                ref={maxInput}
-                placeholder={"$0"}
-                placeholderTextColor={colors.textDim}
-                value={maxPrice}
-                style={{
-                  fontSize: spacing.medium + spacing.micro,
-                  fontFamily: typography.primary.semiBold,
-                }}
-                onChangeValue={(value) => setMaxPrice(value || 0)}
-                delimiter={","}
-                separator={"."}
-                prefix="$"
-                precision={0}
-                minValue={Math.min(minPrice, 0)}
-                onChangeText={(formattedValue) => {
-                  setPriceMaxFilter(formattedValue)
-                }}
-              />
-              {maxPrice && maxPrice !== 0 ? (
-                <Pressable
-                  onPress={() => {
-                    maxInput.current.clear()
-                    setMaxPrice(0)
+          <Expandable
+            isExpanded={priceExpanded}
+            setIsExpanded={setPriceExpanded}
+            title={"Price"}
+            collapsedSubtitle={generatePriceSubtitle()}
+            sectionActionButton={renderSectionAction(
+              priceExpanded,
+              (minPrice && minPrice !== 0) || (maxPrice && maxPrice !== 0),
+              clearPriceSelections,
+            )}
+          >
+            <View style={styles.PriceRangeInput}>
+              <View style={styles.PriceInputField}>
+                <CurrencyInput
+                  ref={minInput}
+                  placeholder={"$0"}
+                  placeholderTextColor={colors.textDim}
+                  value={minPrice}
+                  style={{
+                    fontSize: spacing.medium + spacing.micro,
+                    fontFamily: typography.primary.semiBold,
                   }}
-                  hitSlop={hitRect}
-                >
-                  <Octicons name={"x-circle-fill"} color={colors.tint} />
-                </Pressable>
-              ) : null}
+                  onChangeValue={(value) => setMinPrice(value || 0)}
+                  delimiter={","}
+                  separator={"."}
+                  prefix="$"
+                  precision={0}
+                  minValue={0}
+                  onChangeText={(formattedValue) => {
+                    setPriceMinFilter(formattedValue)
+                  }}
+                />
+                {minPrice && minPrice !== 0 ? (
+                  <Pressable
+                    onPress={() => {
+                      minInput.current.clear()
+                      setMinPrice(0)
+                    }}
+                    hitSlop={hitRect}
+                  >
+                    <Octicons name={"x-circle-fill"} color={colors.tint} />
+                  </Pressable>
+                ) : null}
+              </View>
+
+              <Text preset={"semiBold"} style={styles.PriceRangeSeparator}>
+                to
+              </Text>
+
+              <View style={styles.PriceInputField}>
+                <CurrencyInput
+                  ref={maxInput}
+                  placeholder={"$0"}
+                  placeholderTextColor={colors.textDim}
+                  value={maxPrice}
+                  style={{
+                    fontSize: spacing.medium + spacing.micro,
+                    fontFamily: typography.primary.semiBold,
+                  }}
+                  onChangeValue={(value) => setMaxPrice(value || 0)}
+                  delimiter={","}
+                  separator={"."}
+                  prefix="$"
+                  precision={0}
+                  minValue={Math.min(minPrice, 0)}
+                  onChangeText={(formattedValue) => {
+                    setPriceMaxFilter(formattedValue)
+                  }}
+                />
+                {maxPrice && maxPrice !== 0 ? (
+                  <Pressable
+                    onPress={() => {
+                      maxInput.current.clear()
+                      setMaxPrice(0)
+                    }}
+                    hitSlop={hitRect}
+                  >
+                    <Octicons name={"x-circle-fill"} color={colors.tint} />
+                  </Pressable>
+                ) : null}
+              </View>
             </View>
-          </View>
-        </Expandable>
+          </Expandable>
 
-        <Expandable
-          isExpanded={typeExpanded}
-          setIsExpanded={setTypeExpanded}
-          title={"Type"}
-          collapsedSubtitle={generateTypeSubtitle()}
-          sectionActionButton={renderSectionAction(typeExpanded,  (wtsFilter || wttFilter || bothFilter),  clearTypeSelections)}
-        >
-          <View style={styles.InputWrapper}>
-            <Toggle
-              variant={"radio"}
-              value={wtsFilter}
-              onValueChange={() => {
-                setBothFilter(false)
-                setWttFilter(false)
-                setWtsFilter(!wtsFilter)
+          <Expandable
+            isExpanded={typeExpanded}
+            setIsExpanded={setTypeExpanded}
+            title={"Type"}
+            collapsedSubtitle={generateTypeSubtitle()}
+            sectionActionButton={renderSectionAction(
+              typeExpanded,
+              wtsFilter || wttFilter || bothFilter,
+              clearTypeSelections,
+            )}
+          >
+            <View style={styles.InputWrapper}>
+              <Toggle
+                variant={"radio"}
+                value={wtsFilter}
+                onValueChange={() => {
+                  setBothFilter(false)
+                  setWttFilter(false)
+                  setWtsFilter(!wtsFilter)
+                }}
+                containerStyle={styles.CheckboxContainer}
+                inputOuterStyle={styles.RadioStyle}
+              />
+              <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+                WTS - Want To Sell
+              </Text>
+            </View>
+            <View style={styles.InputWrapper}>
+              <Toggle
+                variant={"radio"}
+                value={wttFilter}
+                onValueChange={() => {
+                  setBothFilter(false)
+                  setWttFilter(!wttFilter)
+                  setWtsFilter(false)
+                }}
+                containerStyle={styles.CheckboxContainer}
+                inputOuterStyle={styles.RadioStyle}
+              />
+              <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+                WTT - Want To Trade
+              </Text>
+            </View>
+            <View style={styles.InputWrapper}>
+              <Toggle
+                variant={"radio"}
+                value={bothFilter}
+                onValueChange={() => {
+                  setBothFilter(!bothFilter)
+                  setWttFilter(false)
+                  setWtsFilter(false)
+                }}
+                containerStyle={styles.CheckboxContainer}
+                inputOuterStyle={styles.RadioStyle}
+              />
+              <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+                WTS/WTT
+              </Text>
+            </View>
+
+            {renderInnerSectionAction(wtsFilter || wttFilter || bothFilter, clearTypeSelections)}
+          </Expandable>
+
+          <Expandable
+            isExpanded={shippingExpanded}
+            setIsExpanded={setShippingExpanded}
+            title={"Shipping"}
+            collapsedSubtitle={`${
+              shippingExpanded ? "" : ` - ${[i12Filter].filter(Boolean).length} Selected`
+            }`}
+            sectionActionButton={renderSectionAction(
+              shippingExpanded,
+              [i12Filter].filter(Boolean).length > 0,
+              clearShippingSelections,
+            )}
+          >
+            <View style={styles.InputWrapper}>
+              <Toggle
+                variant={"checkbox"}
+                value={i12Filter}
+                onValueChange={seti12Filter}
+                containerStyle={styles.CheckboxContainer}
+                inputOuterStyle={styles.CheckboxStyle}
+              />
+              <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+                International Shipping
+              </Text>
+            </View>
+
+            {renderInnerSectionAction(
+              [i12Filter].filter(Boolean).length > 0,
+              clearShippingSelections,
+            )}
+          </Expandable>
+        </ScrollView>
+
+        <View style={styles.ButtonContainer}>
+          <View style={styles.ButtonRow}>
+            <TintedButton
+              onPress={() => {
+                clearCategorySelections()
+                clearPriceSelections()
+                clearTypeSelections()
+                clearShippingSelections()
               }}
-              containerStyle={styles.CheckboxContainer}
-              inputOuterStyle={styles.RadioStyle}
+              style={[styles.Button, styles.CancelButton]}
+              text={
+                <Text preset={"h6"} style={styles.CancelButtonText}>
+                  Reset
+                </Text>
+              }
             />
-            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
-              WTS - Want To Sell
-            </Text>
-          </View>
-          <View style={styles.InputWrapper}>
-            <Toggle
-              variant={"radio"}
-              value={wttFilter}
-              onValueChange={() => {
-                setBothFilter(false)
-                setWttFilter(!wttFilter)
-                setWtsFilter(false)
+            <TintedButton
+              onPress={() => {
+                navigation.goBack()
               }}
-              containerStyle={styles.CheckboxContainer}
-              inputOuterStyle={styles.RadioStyle}
+              style={styles.Button}
+              text={
+                <Text preset={"h6"} style={styles.ButtonText}>
+                  Apply
+                </Text>
+              }
             />
-            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
-              WTT - Want To Trade
-            </Text>
           </View>
-          <View style={styles.InputWrapper}>
-            <Toggle
-              variant={"radio"}
-              value={bothFilter}
-              onValueChange={() => {
-                setBothFilter(!bothFilter)
-                setWttFilter(false)
-                setWtsFilter(false)
-              }}
-              containerStyle={styles.CheckboxContainer}
-              inputOuterStyle={styles.RadioStyle}
-            />
-            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
-              WTS/WTT
-            </Text>
-          </View>
+        </View>
 
-          {renderInnerSectionAction((wtsFilter || wttFilter || bothFilter),  clearTypeSelections)}
-        </Expandable>
-
-        <Expandable
-          isExpanded={shippingExpanded}
-          setIsExpanded={setShippingExpanded}
-          title={"Shipping"}
-          collapsedSubtitle={`${
-            shippingExpanded ? "" : ` - ${[i12Filter].filter(Boolean).length} Selected`
-          }`}
-          sectionActionButton={renderSectionAction(shippingExpanded,  ([i12Filter].filter(Boolean).length > 0),  clearShippingSelections)}
-        >
-          <View style={styles.InputWrapper}>
-            <Toggle
-              variant={"checkbox"}
-              value={i12Filter}
-              onValueChange={seti12Filter}
-              containerStyle={styles.CheckboxContainer}
-              inputOuterStyle={styles.CheckboxStyle}
-            />
-            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
-              International Shipping
-            </Text>
-          </View>
-
-          {renderInnerSectionAction(([i12Filter].filter(Boolean).length > 0),  clearShippingSelections)}
-        </Expandable>
-
-        <TintedButton
-          style={styles.ButtonContainer}
-          onPress={() => {
-            navigation.goBack()
-          }}
-          text={
-            <Text preset={"h6"} style={styles.ButtonText}>
-              Apply
-            </Text>
-          }
-        />
-      </Screen>
+      </View>
     )
   })
 
 const styles = StyleSheet.create({
+  Button: {
+    marginHorizontal: spacing.medium,
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 18,
+    width: widthPercentageToDP(30),
+  },
   ButtonContainer: {
-    width: widthPercentageToDP(100) - spacing.extraLarge,
+    alignItems: "center",
+    backgroundColor: colors.cardBackground,
+    display: "flex",
+    flexDirection: "column",
+    height: heightPercentageToDP(10),
+    justifyContent: "center",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    width: widthPercentageToDP(100),
+  },
+  ButtonRow: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: spacing.medium,
+    width: widthPercentageToDP(100),
   },
   ButtonText: {
     color: colors.palette.other.white,
   },
-  ChainEthereumComponentNftSymbol: {
-    height: 20,
-    marginRight: 12,
-    width: 20,
+  CancelButton: {
+    backgroundColor: colors.palette.primary["200"],
+  },
+  CancelButtonText: {
+    color: colors.tint,
   },
   CheckboxContainer: {
     margin: spacing.tiny,
@@ -402,19 +480,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  CollapsibleSection: {
-    alignItems: "flex-start",
-    backgroundColor: colors.palette.other.white,
-    borderColor: colors.palette.other.offWhite,
-    borderRadius: 24,
-    borderStyle: "solid",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    padding: spacing.large,
-    width: widthPercentageToDP(100) - spacing.medium,
-  },
   Container: {
     alignItems: "center",
     backgroundColor: colors.background,
@@ -435,7 +500,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: spacing.medium,
   },
-
   GroupContainer: {
     alignItems: "flex-start",
     backgroundColor: colors.palette.other.white,
@@ -453,9 +517,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
-    marginTop: spacing.small, width: widthPercentageToDP(100) - spacing.massive
+    marginTop: spacing.small,
+    width: widthPercentageToDP(100) - spacing.massive,
   },
-
   InputWrapper: {
     alignItems: "center",
     display: "flex",
@@ -480,13 +544,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 340,
   },
-
   PriceRangeSeparator: {
     marginHorizontal: spacing.small,
   },
   RadioStyle: {
     backgroundColor: colors.transparent,
     borderColor: colors.tint,
+  },
+  Root: {
+    backgroundColor: colors.background,
+    flex: 1,
   },
   SectionHeader: {
     alignItems: "flex-start",

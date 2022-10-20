@@ -58,7 +58,7 @@ export type AppStackParamList = {
   CurationScreen: undefined //
   Search: undefined //
   FilterResults: undefined //
-  AllListings: undefined
+  AllListings: undefined //
   ViewListing: undefined
   ViewProfile: undefined
 
