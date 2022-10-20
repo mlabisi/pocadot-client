@@ -1,23 +1,13 @@
 import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import {
-  StyleSheet,
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
-  Pressable,
-} from "react-native"
+import { StyleSheet, View, TextInput, Pressable } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import CurrencyInput from "react-native-currency-input"
 import { AppStackParamList } from "../../navigators"
 import { Expandable, Screen, Text, TintedButton, Toggle } from "../../components"
-import { translate } from "../../i18n"
 import { widthPercentageToDP } from "react-native-responsive-screen"
-import Collapsible from "react-native-collapsible"
 import { colors, spacing, typography } from "../../theme"
-import { Ionicons, Octicons } from "@expo/vector-icons"
+import { Octicons } from "@expo/vector-icons"
 import { CurrencyInputProps } from "react-native-currency-input/lib/typescript/src/props"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
@@ -83,7 +73,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
     const [i12Filter, seti12Filter] = useState(false)
 
     return (
-      <ScrollView contentContainerStyle={styles.Container}>
+      <Screen preset={"scroll"} contentContainerStyle={styles.Container}>
         <Expandable
           isExpanded={categoryExpanded}
           setIsExpanded={setCategoryExpanded}
@@ -312,166 +302,11 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
             </Text>
           }
         />
-      </ScrollView>
+      </Screen>
     )
   })
 
 const styles = StyleSheet.create({
-  AutoLayoutHorizontal: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    flex: 1,
-    justifyContent: "flex-start",
-    width: 380,
-  },
-  AutoLayoutHorizontal1: {
-    alignItems: "flex-start",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 24,
-    width: 380,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-
-  AutoLayoutHorizontal2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    width: 340,
-  },
-  AutoLayoutVertical: {
-    alignItems: "flex-start",
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderColor: "rgba(238,238,238,1)",
-    borderRadius: 24,
-    borderStyle: "solid",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    marginBottom: 24,
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 19,
-    width: 380,
-  },
-  AutoLayoutVertical: {
-    alignItems: "flex-start",
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderColor: "rgba(238,238,238,1)",
-    borderRadius: 24,
-    borderStyle: "solid",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    marginBottom: 24,
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 19,
-    width: 380,
-  },
-  AutoLayoutVertical1: {
-    alignItems: "flex-start",
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    borderColor: "rgba(238,238,238,1)",
-    borderRadius: 24,
-    borderStyle: "solid",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    paddingBottom: 19,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 19,
-    width: 380,
-  },
-  AutoLayoutVertical2: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 380,
-  },
-
   ButtonContainer: {
     width: widthPercentageToDP(100) - spacing.extraLarge,
   },
@@ -487,16 +322,12 @@ const styles = StyleSheet.create({
     margin: spacing.tiny,
   },
   CheckboxLabel: {
-    textAlignVertical: "center"
+    textAlignVertical: "center",
   },
   CheckboxStyle: {
     backgroundColor: colors.transparent,
     borderColor: colors.tint,
-    borderRadius: 8
-  },
-  RadioStyle: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.tint,
+    borderRadius: 8,
   },
   CollapsibleHeader: {
     alignItems: "center",
@@ -504,7 +335,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-
   CollapsibleSection: {
     alignItems: "flex-start",
     backgroundColor: colors.palette.other.white,
@@ -520,6 +350,7 @@ const styles = StyleSheet.create({
   },
   Container: {
     alignItems: "center",
+    backgroundColor: colors.background,
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
@@ -527,7 +358,6 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.extraLarge,
     width: widthPercentageToDP(100) - spacing.medium,
   },
-
   CurrencyDropdown: {
     alignItems: "center",
     backgroundColor: colors.background,
@@ -539,21 +369,6 @@ const styles = StyleSheet.create({
     padding: spacing.medium,
   },
 
-  Group: {
-    height: 20,
-    marginRight: 16,
-    width: 20,
-  },
-  Group: {
-    height: 20,
-    marginRight: 16,
-    width: 20,
-  },
-  Group: {
-    height: 20,
-    marginRight: 16,
-    width: 20,
-  },
   GroupContainer: {
     alignItems: "flex-start",
     backgroundColor: colors.palette.other.white,
@@ -567,33 +382,6 @@ const styles = StyleSheet.create({
     padding: spacing.large,
   },
 
-  IconTimesComponentAdditionalIcons: {
-    height: 28,
-    marginRight: 16,
-    width: 28,
-  },
-  IconlyBoldArrowDown2: {
-    height: 20,
-    width: 20,
-  },
-
-  IconlyLightOutlineArrowUp2: {
-    height: 24,
-    width: 24,
-  },
-  IconlyLightOutlineArrowUp2: {
-    height: 24,
-    width: 24,
-  },
-  IconlyLightOutlineArrowUp2: {
-    height: 24,
-    width: 24,
-  },
-
-  IconlyLightOutlineArrowUp2: {
-    height: 24,
-    width: 24,
-  },
   InputWrapper: {
     alignItems: "center",
     display: "flex",
@@ -610,7 +398,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: spacing.medium,
   },
-
   PriceRangeInput: {
     alignItems: "center",
     display: "flex",
@@ -618,16 +405,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 340,
   },
+
   PriceRangeSeparator: {
     marginHorizontal: spacing.small,
   },
-  Rectangle: {
-    backgroundColor: "rgba(163,176,239,1)",
-    borderRadius: 100,
-    height: 4,
-    width: 110,
+  RadioStyle: {
+    backgroundColor: colors.transparent,
+    borderColor: colors.tint,
   },
-
   SectionHeader: {
     alignItems: "flex-start",
     display: "flex",
@@ -636,364 +421,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: widthPercentageToDP(100) - spacing.medium,
   },
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 110,
-  },
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 110,
-  },
-
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 110,
-  },
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 110,
-  },
-  StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField: {
-    alignItems: "center",
-    backgroundColor: "rgba(250,250,250,1)",
-    borderRadius: 16,
-    display: "flex",
-    flexDirection: "row",
-    flex: 1,
-    height: 56,
-    justifyContent: "flex-start",
-    marginRight: 16,
-    paddingBottom: 0,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 0,
-    width: 145,
-  },
-  StyleTextThemeLightStateUncheckedComponentCheckbox: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    width: 340,
-  },
-
-  StyleTextThemeLightStateUncheckedComponentCheckbox: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    width: 340,
-  },
-  StyleTextThemeLightStateUncheckedComponentCheckbox: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    width: 340,
-  },
-  ThemeLightComponentNavbar: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    height: 48,
-    justifyContent: "flex-start",
-    marginBottom: 24,
-    paddingBottom: 11,
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingTop: 11,
-    width: 380,
-  },
   TitleText: {
     flex: 1,
-  },
-
-  Txt1101: {
-    color: "rgba(163,176,239,1)",
-    fontFamily: "Jua, sans-serif",
-    fontSize: 24,
-    fontWeight: "400",
-    lineHeight: 29,
-    width: 337,
-  },
-  Txt129: {
-    color: "rgba(163,176,239,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 18,
-    fontWeight: "600",
-    justifyContent: "center",
-    letterSpacing: 0.2,
-    lineHeight: 25,
-    marginBottom: 12,
-    textAlign: "center",
-    width: 111,
-  },
-  Txt155: {
-    color: "rgba(158,158,158,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 18,
-    fontWeight: "600",
-    justifyContent: "center",
-    letterSpacing: 0.2,
-    lineHeight: 25,
-    textAlign: "center",
-    width: 111,
-  },
-
-  Txt155: {
-    color: "rgba(158,158,158,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 18,
-    fontWeight: "600",
-    justifyContent: "center",
-    letterSpacing: 0.2,
-    lineHeight: 25,
-    textAlign: "center",
-    width: 111,
-  },
-  Txt155: {
-    color: "rgba(158,158,158,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 18,
-    fontWeight: "600",
-    justifyContent: "center",
-    letterSpacing: 0.2,
-    lineHeight: 25,
-    textAlign: "center",
-    width: 111,
-  },
-  Txt399: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Jua, sans-serif",
-    fontSize: 20,
-    fontWeight: "400",
-    lineHeight: 24,
-    marginRight: 12,
-    width: 305,
-  },
-
-  Txt399: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Jua, sans-serif",
-    fontSize: 20,
-    fontWeight: "400",
-    lineHeight: 24,
-    marginRight: 12,
-    width: 305,
-  },
-  Txt399: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Jua, sans-serif",
-    fontSize: 20,
-    fontWeight: "400",
-    lineHeight: 24,
-    marginRight: 12,
-    width: 305,
-  },
-  Txt399: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Jua, sans-serif",
-    fontSize: 20,
-    fontWeight: "400",
-    lineHeight: 24,
-    marginRight: 12,
-    width: 305,
-  },
-  Txt436: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 316,
-  },
-
-  Txt436: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 316,
-  },
-  Txt436: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 316,
-  },
-  Txt436: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 316,
-  },
-
-  Txt436: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 316,
-  },
-  Txt436: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 316,
-  },
-  Txt436: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 316,
-  },
-
-  Txt436: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 316,
-  },
-  Txt453: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 106,
-  },
-  Txt453: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 106,
-  },
-
-  Txt578: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    marginRight: 12,
-    width: 237,
-  },
-  Txt585: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    justifyContent: "center",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    marginRight: 16,
-    textAlign: "center",
-  },
-  Txt940: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 305,
-  },
-  Txt940: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 305,
-  },
-
-  Txt940: {
-    color: "rgba(33,33,33,1)",
-    fontFamily: "Urbanist, sans-serif",
-    fontSize: 16,
-    fontWeight: "600",
-    letterSpacing: 0.2,
-    lineHeight: 22,
-    width: 305,
-  },
-  Vector: {
-    height: 20,
-    marginRight: 5,
-    width: 20,
-  },
-  Vector: {
-    height: 20,
-    marginRight: 5,
-    width: 20,
-  },
-
-  Vector: {
-    height: 20,
-    marginRight: 5,
-    width: 20,
-  },
-  Vector: {
-    height: 20,
-    marginRight: 5,
-    width: 20,
-  },
-  Vector: {
-    height: 20,
-    marginRight: 5,
-    width: 20,
-  },
-
-  Vector: {
-    height: 20,
-    marginRight: 5,
-    width: 20,
-  },
-  Vector: {
-    height: 20,
-    marginRight: 5,
-    width: 20,
-  },
-  Vector: {
-    height: 20,
-    marginRight: 5,
-    width: 20,
   },
 })

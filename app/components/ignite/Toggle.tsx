@@ -269,7 +269,7 @@ function Checkbox(props: ToggleInputProps) {
           useAnimatedStyle(() => ({ opacity: withTiming(on ? 1 : 0) }), [on]),
         ]}
       >
-        <Octicons name={"check"} color={iconTintColor} size={$checkboxDetail.width} />
+        <Octicons name={"check"} color={iconTintColor} size={20} />
       </Animated.View>
     </View>
   )

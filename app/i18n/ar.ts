@@ -1,6 +1,12 @@
 import { Translations } from "./en"
 
 const ar: Translations = {
+  explore: { listings: undefined, search: undefined, title: undefined },
+  more: { biases: undefined, settings: undefined, title: undefined },
+  myProfile: { edit: undefined, listings: undefined, offers: undefined, title: undefined },
+  notifications: { tabs: undefined, title: undefined },
+  saved: { title: undefined },
+  suggestions: { preferences: undefined, title: undefined },
   common: {
     ok: "نعم",
     cancel: "حذف",
