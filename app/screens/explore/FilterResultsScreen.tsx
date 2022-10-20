@@ -21,12 +21,25 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
     const [ggFilter, setGgFilter] = useState(false)
     const [soloFilter, setSoloFilter] = useState(false)
     const [coedFilter, setCoedFilter] = useState(false)
+    const clearCategorySelections = () => {
+      setBgFilter(false)
+      setGgFilter(false)
+      setSoloFilter(false)
+      setCoedFilter(false)
+    }
 
     const [priceExpanded, setPriceExpanded] = useState(true)
     const [minPrice, setMinPrice] = useState(undefined)
     const [maxPrice, setMaxPrice] = useState(undefined)
     const [priceMinFilter, setPriceMinFilter] = useState("")
     const [priceMaxFilter, setPriceMaxFilter] = useState("")
+    const clearPriceSelections = () => {
+      setMinPrice(undefined)
+      setMaxPrice(undefined)
+      setPriceMinFilter("")
+      setPriceMaxFilter("")
+    }
+
     const generatePriceSubtitle = () => {
       const subtitle = []
 
@@ -51,6 +64,11 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
     const [wttFilter, setWttFilter] = useState(false)
     const [wtsFilter, setWtsFilter] = useState(false)
     const [bothFilter, setBothFilter] = useState(false)
+    const clearTypeSelections = () => {
+      setWttFilter(false)
+      setWtsFilter(false)
+      setBothFilter(false)
+    }
     const generateTypeSubtitle = () => {
       let subtitle = ""
 
@@ -71,6 +89,42 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
 
     const [shippingExpanded, setShippingExpanded] = useState(true)
     const [i12Filter, seti12Filter] = useState(false)
+    const clearShippingSelections = () => {
+      seti12Filter(false)
+    }
+
+    const renderSectionAction = (expanded, condition, clear) => {
+      return !expanded &&
+      condition && (
+        <Pressable
+          style={styles.InputWrapper}
+          onPress={() => {
+            clear()
+          }}
+        >
+          <Text preset={"bodyXXS"}>
+            {` | `}
+          </Text>
+          <Text preset={"bodyXXS"} style={styles.ClearButtonText}>
+            {`Clear`}
+          </Text>
+        </Pressable>
+      )
+    }
+    const renderInnerSectionAction = (condition, clear) => {
+      return condition && (
+        <Pressable
+          style={styles.InnerClearButton}
+          onPress={() => {
+            clear()
+          }}
+        >
+          <Text preset={"h6"} style={styles.ClearButtonText}>
+            Clear
+          </Text>
+        </Pressable>
+      )
+    }
 
     return (
       <Screen preset={"scroll"} contentContainerStyle={styles.Container}>
@@ -83,6 +137,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               ? ""
               : ` - ${[bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length} Selected`
           }`}
+          sectionActionButton={renderSectionAction(categoryExpanded, ([bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length > 0),  clearCategorySelections)}
         >
           <View style={styles.InputWrapper}>
             <Toggle
@@ -132,6 +187,8 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               Coed Groups
             </Text>
           </View>
+
+          {renderInnerSectionAction([bgFilter, ggFilter, coedFilter, soloFilter].filter(Boolean).length > 0, clearCategorySelections)}
         </Expandable>
 
         <Expandable
@@ -139,6 +196,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
           setIsExpanded={setPriceExpanded}
           title={"Price"}
           collapsedSubtitle={generatePriceSubtitle()}
+          sectionActionButton={renderSectionAction(priceExpanded,  ((minPrice && minPrice !== 0) || (maxPrice && maxPrice !== 0)),  clearPriceSelections)}
         >
           <View style={styles.PriceRangeInput}>
             <View style={styles.PriceInputField}>
@@ -218,6 +276,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
           setIsExpanded={setTypeExpanded}
           title={"Type"}
           collapsedSubtitle={generateTypeSubtitle()}
+          sectionActionButton={renderSectionAction(typeExpanded,  (wtsFilter || wttFilter || bothFilter),  clearTypeSelections)}
         >
           <View style={styles.InputWrapper}>
             <Toggle
@@ -267,6 +326,8 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               WTS/WTT
             </Text>
           </View>
+
+          {renderInnerSectionAction((wtsFilter || wttFilter || bothFilter),  clearTypeSelections)}
         </Expandable>
 
         <Expandable
@@ -276,6 +337,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
           collapsedSubtitle={`${
             shippingExpanded ? "" : ` - ${[i12Filter].filter(Boolean).length} Selected`
           }`}
+          sectionActionButton={renderSectionAction(shippingExpanded,  ([i12Filter].filter(Boolean).length > 0),  clearShippingSelections)}
         >
           <View style={styles.InputWrapper}>
             <Toggle
@@ -289,6 +351,8 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               International Shipping
             </Text>
           </View>
+
+          {renderInnerSectionAction(([i12Filter].filter(Boolean).length > 0),  clearShippingSelections)}
         </Expandable>
 
         <TintedButton
@@ -328,6 +392,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.transparent,
     borderColor: colors.tint,
     borderRadius: 8,
+  },
+  ClearButtonText: {
+    color: colors.tint,
   },
   CollapsibleHeader: {
     alignItems: "center",
@@ -381,12 +448,20 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     padding: spacing.large,
   },
+  InnerClearButton: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: spacing.small, width: widthPercentageToDP(100) - spacing.massive
+  },
 
   InputWrapper: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
+    width: widthPercentageToDP(100) - spacing.massive,
   },
   PriceInputField: {
     alignItems: "center",

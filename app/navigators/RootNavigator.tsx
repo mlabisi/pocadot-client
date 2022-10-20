@@ -15,7 +15,7 @@ import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useStores } from "../models"
 import { MainTabs } from "./MainTabs"
 import {
-  AddListingScreen,
+  AddListingScreen, AllListingsScreen,
   CurationScreen, FilterResultsScreen,
   NotificationsScreen, SearchScreen,
   SuggestionPreferencesScreen,
@@ -50,15 +50,17 @@ export type AppStackParamList = {
   ForgotPassword: undefined
   ResetPassword: undefined
 
-  Notifications: undefined
+  Notifications: undefined //
 
-  SuggestionPreferences: undefined
+  SuggestionPreferences: undefined //
 
-  AddListing: undefined
-  CurationScreen: undefined
-  Search: undefined
-  FilterResults: undefined
+  AddListing: undefined //
+  CurationScreen: undefined //
+  Search: undefined //
+  FilterResults: undefined //
   AllListings: undefined
+  ViewListing: undefined
+  ViewProfile: undefined
 
   EditProfile: undefined
   MyListings: undefined
@@ -219,6 +221,36 @@ const AppStack = observer(function AppStack() {
             />
             <Stack.Screen
               name="AllListings"
+              component={AllListingsScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="ViewListing"
+              component={WelcomeScreen}
+              options={{
+                header: (props: NativeStackHeaderProps) => (
+                  <Header
+                    titleTx={"explore.listings.featured"}
+                    titleMode={"flex"}
+                    LeftActionComponent={
+                      <Pressable
+                        onPress={() => {
+                          props.navigation.goBack()
+                        }}
+                        style={{ paddingLeft: spacing.extraSmall }}
+                        hitSlop={hitRect}
+                      >
+                        <Ionicons name={"chevron-back"} size={24} color={colors.tint} />
+                      </Pressable>
+                    }
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="ViewProfile"
               component={WelcomeScreen}
               options={{
                 header: (props: NativeStackHeaderProps) => (

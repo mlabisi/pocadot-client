@@ -18,6 +18,8 @@ export interface ExpandableProps {
   collapsedSubtitle: string
 
   children: ReactNode
+
+  sectionActionButton?: ReactNode
 }
 
 /**
@@ -28,7 +30,8 @@ export const Expandable = observer(function Expandable({
   isExpanded,
   setIsExpanded,
   title,
-  collapsedSubtitle
+  collapsedSubtitle,
+  sectionActionButton
 }: ExpandableProps) {
   const toggle = () => {
     setIsExpanded((prev) => !prev)
@@ -47,6 +50,7 @@ export const Expandable = observer(function Expandable({
           <Text preset={"bodyXS"}>
             {collapsedSubtitle}
           </Text>
+          {sectionActionButton || null}
         </View>
 
         <Ionicons name={isExpanded ? "chevron-up" : "chevron-down"} color={colors.tint} size={24} />

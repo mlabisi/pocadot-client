@@ -38,6 +38,7 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
     const sortModal = useRef<ModalDropdown>(null)
 
     const goToFilterScreen = () => navigation.navigate("FilterResults")
+    const goToAllListingsScreen = () => navigation.navigate("AllListings")
 
     const renderListingCard = ({ item }) => {
       return (
@@ -152,9 +153,7 @@ export const SearchScreen: FC<StackScreenProps<AppStackParamList, "Search">> = o
               ListFooterComponent={
                 <View style={{ padding: spacing.large, marginBottom: spacing.medium }}>
                   <TintedButton
-                    onPress={() => {
-                      /**/
-                    }}
+                    onPress={() => {goToAllListingsScreen()}}
                     text={
                       <Text preset={"h6"} style={styles.ButtonText}>
                         See All
