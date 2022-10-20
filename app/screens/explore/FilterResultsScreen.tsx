@@ -37,25 +37,23 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
     const [maxPrice, setMaxPrice] = useState(undefined)
     const [priceMinFilter, setPriceMinFilter] = useState("")
     const [priceMaxFilter, setPriceMaxFilter] = useState("")
-
-    const generateSubtitle = () => {
+    const generatePriceSubtitle = () => {
       const subtitle = []
 
       if (priceExpanded) {
         return ""
       } else {
-        if ((minPrice && (minPrice !== 0)) && (maxPrice && (maxPrice !== 0))) {
+        if (minPrice && minPrice !== 0 && maxPrice && maxPrice !== 0) {
           subtitle.push(`${priceMinFilter} to ${priceMaxFilter}`)
-        } else if ((minPrice && (minPrice !== 0))) {
+        } else if (minPrice && minPrice !== 0) {
           subtitle.push(`${priceMinFilter}+`)
-        } else if ((maxPrice && (maxPrice !== 0))) {
+        } else if (maxPrice && maxPrice !== 0) {
           subtitle.push(`Less than ${priceMaxFilter}`)
         }
       }
 
       return subtitle.length ? ` - ${subtitle.join(", ")}` : " - Not Set"
     }
-
     const minInput = useRef<CurrencyInputProps & TextInput>(null)
     const maxInput = useRef<CurrencyInputProps & TextInput>(null)
 
@@ -63,6 +61,23 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
     const [wttFilter, setWttFilter] = useState(false)
     const [wtsFilter, setWtsFilter] = useState(false)
     const [bothFilter, setBothFilter] = useState(false)
+    const generateTypeSubtitle = () => {
+      let subtitle = ""
+
+      if (typeExpanded) {
+        return ""
+      } else {
+        if (wtsFilter) {
+          subtitle += (`Want to Sell`)
+        } else if (wttFilter) {
+          subtitle += (`Want to Trade`)
+        } else if (bothFilter) {
+          subtitle += (`Want to Sell/Want to Trade`)
+        }
+      }
+
+      return subtitle.length ? ` - ${subtitle}` : " - Not Set"
+    }
 
     const [shippingExpanded, setShippingExpanded] = useState(true)
     const [i12Filter, seti12Filter] = useState(false)
@@ -132,7 +147,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
           isExpanded={priceExpanded}
           setIsExpanded={setPriceExpanded}
           title={"Price"}
-          collapsedSubtitle={generateSubtitle()}
+          collapsedSubtitle={generatePriceSubtitle()}
         >
           <View style={styles.PriceRangeInput}>
             <View style={styles.PriceInputField}>
@@ -141,7 +156,10 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
                 placeholder={"$0"}
                 placeholderTextColor={colors.textDim}
                 value={minPrice}
-                style={{fontSize: spacing.medium + spacing.micro, fontFamily: typography.primary.semiBold}}
+                style={{
+                  fontSize: spacing.medium + spacing.micro,
+                  fontFamily: typography.primary.semiBold,
+                }}
                 onChangeValue={(value) => setMinPrice(value || 0)}
                 delimiter={","}
                 separator={"."}
@@ -152,19 +170,22 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
                   setPriceMinFilter(formattedValue)
                 }}
               />
-              {
-                minPrice && minPrice !== 0 ? (
-                <Pressable onPress={() => {
-                  minInput.current.clear()
-                  setMinPrice(0)
-                }} hitSlop={hitRect}>
+              {minPrice && minPrice !== 0 ? (
+                <Pressable
+                  onPress={() => {
+                    minInput.current.clear()
+                    setMinPrice(0)
+                  }}
+                  hitSlop={hitRect}
+                >
                   <Octicons name={"x-circle-fill"} color={colors.tint} />
                 </Pressable>
-              ) : null
-              }
+              ) : null}
             </View>
 
-            <Text preset={"semiBold"} style={styles.PriceRangeSeparator}>to</Text>
+            <Text preset={"semiBold"} style={styles.PriceRangeSeparator}>
+              to
+            </Text>
 
             <View style={styles.PriceInputField}>
               <CurrencyInput
@@ -172,7 +193,10 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
                 placeholder={"$0"}
                 placeholderTextColor={colors.textDim}
                 value={maxPrice}
-                style={{fontSize: spacing.medium + spacing.micro, fontFamily: typography.primary.semiBold}}
+                style={{
+                  fontSize: spacing.medium + spacing.micro,
+                  fontFamily: typography.primary.semiBold,
+                }}
                 onChangeValue={(value) => setMaxPrice(value || 0)}
                 delimiter={","}
                 separator={"."}
@@ -183,16 +207,17 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
                   setPriceMaxFilter(formattedValue)
                 }}
               />
-              {
-                maxPrice && maxPrice !== 0 ? (
-                  <Pressable onPress={() => {
+              {maxPrice && maxPrice !== 0 ? (
+                <Pressable
+                  onPress={() => {
                     maxInput.current.clear()
                     setMaxPrice(0)
-                  }} hitSlop={hitRect}>
-                    <Octicons name={"x-circle-fill"} color={colors.tint} />
-                  </Pressable>
-                ) : null
-              }
+                  }}
+                  hitSlop={hitRect}
+                >
+                  <Octicons name={"x-circle-fill"} color={colors.tint} />
+                </Pressable>
+              ) : null}
             </View>
           </View>
         </Expandable>
@@ -201,13 +226,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
           isExpanded={typeExpanded}
           setIsExpanded={setTypeExpanded}
           title={"Type"}
-          collapsedSubtitle={`${
-            typeExpanded
-              ? ""
-              : ` - ${
-                  [wtsFilter, wttFilter, bothFilter].filter(Boolean).length > 0 ? "Set" : "Not Set"
-                }`
-          }`}
+          collapsedSubtitle={generateTypeSubtitle()}
         >
           <View style={styles.InputWrapper}>
             <Toggle
@@ -312,7 +331,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
 
 const styles = StyleSheet.create({
   PriceRangeSeparator: {
-    marginHorizontal: spacing.small
+    marginHorizontal: spacing.small,
   },
   AutoLayoutHorizontal: {
     alignItems: "center",
