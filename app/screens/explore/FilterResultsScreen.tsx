@@ -1,19 +1,31 @@
-import React, { FC, useState } from "react"
+import React, { FC, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet, View, Image, ScrollView, TouchableOpacity } from "react-native"
+import {
+  StyleSheet,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  Pressable,
+} from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
+import CurrencyInput from "react-native-currency-input"
 import { AppStackParamList } from "../../navigators"
 import { Expandable, Screen, Text, TintedButton, Toggle } from "../../components"
 import { translate } from "../../i18n"
 import { widthPercentageToDP } from "react-native-responsive-screen"
 import Collapsible from "react-native-collapsible"
-import { colors, spacing } from "../../theme"
-import { Ionicons } from "@expo/vector-icons"
+import { colors, spacing, typography } from "../../theme"
+import { Ionicons, Octicons } from "@expo/vector-icons"
+import { CurrencyInputProps } from "react-native-currency-input/lib/typescript/src/props"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
+const hitRect = spacing.extraLarge
+
 export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "FilterResults">> =
-  observer(function FilterResultsScreen({navigation}) {
+  observer(function FilterResultsScreen({ navigation }) {
     const [categoryExpanded, setCategoryExpanded] = useState(true)
     const [bgFilter, setBgFilter] = useState(false)
     const [ggFilter, setGgFilter] = useState(false)
@@ -21,7 +33,31 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
     const [coedFilter, setCoedFilter] = useState(false)
 
     const [priceExpanded, setPriceExpanded] = useState(true)
-    const [priceFilter, setPriceFilter] = useState("")
+    const [minPrice, setMinPrice] = useState(undefined)
+    const [maxPrice, setMaxPrice] = useState(undefined)
+    const [priceMinFilter, setPriceMinFilter] = useState("")
+    const [priceMaxFilter, setPriceMaxFilter] = useState("")
+
+    const generateSubtitle = () => {
+      const subtitle = []
+
+      if (priceExpanded) {
+        return ""
+      } else {
+        if ((minPrice && (minPrice !== 0)) && (maxPrice && (maxPrice !== 0))) {
+          subtitle.push(`${priceMinFilter} to ${priceMaxFilter}`)
+        } else if ((minPrice && (minPrice !== 0))) {
+          subtitle.push(`${priceMinFilter}+`)
+        } else if ((maxPrice && (maxPrice !== 0))) {
+          subtitle.push(`Less than ${priceMaxFilter}`)
+        }
+      }
+
+      return subtitle.length ? ` - ${subtitle.join(", ")}` : " - Not Set"
+    }
+
+    const minInput = useRef<CurrencyInputProps & TextInput>(null)
+    const maxInput = useRef<CurrencyInputProps & TextInput>(null)
 
     const [typeExpanded, setTypeExpanded] = useState(true)
     const [wttFilter, setWttFilter] = useState(false)
@@ -96,34 +132,67 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
           isExpanded={priceExpanded}
           setIsExpanded={setPriceExpanded}
           title={"Price"}
-          collapsedSubtitle={`${
-            priceExpanded ? "" : ` - ${priceFilter.length > 0 ? priceFilter : "Not Set"}`
-          }`}
+          collapsedSubtitle={generateSubtitle()}
         >
-          <View style={styles.StatusFillTypeNormalStateFilledInputThemeLightComponentInputField}>
-            <Image
-              style={styles.ChainEthereumComponentNftSymbol}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24193%3B1528%3A23717?alt=media&token=a0d90381-016f-4f6d-9bd3-e1eb21c40382",
-              }}
-            />
-            <Text style={styles.Txt578}>USD</Text>
-            <Image
-              style={styles.IconlyBoldArrowDown2}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24193%3B430%3A10358?alt=media&token=22f1fa27-70d5-4ee2-b1bd-40e184de710b",
-              }}
-            />
-          </View>
-          <View style={styles.AutoLayoutHorizontal3}>
-            <View style={styles.StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField}>
-              <Text style={styles.Txt453}>10.00</Text>
+          <View style={styles.PriceRangeInput}>
+            <View style={styles.PriceInputField}>
+              <CurrencyInput
+                ref={minInput}
+                placeholder={"$0"}
+                placeholderTextColor={colors.textDim}
+                value={minPrice}
+                style={{fontSize: spacing.medium + spacing.micro, fontFamily: typography.primary.semiBold}}
+                onChangeValue={(value) => setMinPrice(value || 0)}
+                delimiter={","}
+                separator={"."}
+                prefix="$"
+                precision={0}
+                minValue={0}
+                onChangeText={(formattedValue) => {
+                  setPriceMinFilter(formattedValue)
+                }}
+              />
+              {
+                minPrice && minPrice !== 0 ? (
+                <Pressable onPress={() => {
+                  minInput.current.clear()
+                  setMinPrice(0)
+                }} hitSlop={hitRect}>
+                  <Octicons name={"x-circle-fill"} color={colors.tint} />
+                </Pressable>
+              ) : null
+              }
             </View>
-            <Text style={styles.Txt585}>To</Text>
-            <View
-              style={styles.StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField1}
-            >
-              <Text style={styles.Txt453}>30.00</Text>
+
+            <Text preset={"semiBold"} style={styles.PriceRangeSeparator}>to</Text>
+
+            <View style={styles.PriceInputField}>
+              <CurrencyInput
+                ref={maxInput}
+                placeholder={"$0"}
+                placeholderTextColor={colors.textDim}
+                value={maxPrice}
+                style={{fontSize: spacing.medium + spacing.micro, fontFamily: typography.primary.semiBold}}
+                onChangeValue={(value) => setMaxPrice(value || 0)}
+                delimiter={","}
+                separator={"."}
+                prefix="$"
+                precision={0}
+                minValue={Math.min(minPrice, 0)}
+                onChangeText={(formattedValue) => {
+                  setPriceMaxFilter(formattedValue)
+                }}
+              />
+              {
+                maxPrice && maxPrice !== 0 ? (
+                  <Pressable onPress={() => {
+                    maxInput.current.clear()
+                    setMaxPrice(0)
+                  }} hitSlop={hitRect}>
+                    <Octicons name={"x-circle-fill"} color={colors.tint} />
+                  </Pressable>
+                ) : null
+              }
             </View>
           </View>
         </Expandable>
@@ -242,6 +311,9 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
   })
 
 const styles = StyleSheet.create({
+  PriceRangeSeparator: {
+    marginHorizontal: spacing.small
+  },
   AutoLayoutHorizontal: {
     alignItems: "center",
     display: "flex",
@@ -339,13 +411,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 340,
   },
-  AutoLayoutHorizontal3: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    width: 340,
-  },
   AutoLayoutVertical: {
     alignItems: "flex-start",
     backgroundColor: "rgba(255, 255, 255, 1)",
@@ -380,7 +445,6 @@ const styles = StyleSheet.create({
     paddingTop: 19,
     width: 380,
   },
-
   AutoLayoutVertical1: {
     alignItems: "flex-start",
     backgroundColor: "rgba(255, 255, 255, 1)",
@@ -397,6 +461,7 @@ const styles = StyleSheet.create({
     paddingTop: 19,
     width: 380,
   },
+
   AutoLayoutVertical2: {
     alignItems: "center",
     display: "flex",
@@ -410,27 +475,26 @@ const styles = StyleSheet.create({
   ButtonText: {
     color: colors.palette.other.white,
   },
-
   ChainEthereumComponentNftSymbol: {
     height: 20,
     marginRight: 12,
     width: 20,
   },
+
   CheckboxContainer: {
     // paddingRight: spacing.tiny,
   },
-
   CheckboxLabel: {
     // paddingRight: spacing.small,
     // flex: 1
   },
+
   CollapsibleHeader: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
   },
-
   CollapsibleSection: {
     alignItems: "flex-start",
     backgroundColor: colors.palette.other.white,
@@ -453,6 +517,17 @@ const styles = StyleSheet.create({
     paddingLeft: spacing.medium,
     paddingVertical: spacing.extraLarge,
     width: widthPercentageToDP(100) - spacing.medium,
+  },
+
+  CurrencyDropdown: {
+    alignItems: "center",
+    backgroundColor: colors.background,
+    borderRadius: 16,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginBottom: 20,
+    padding: spacing.medium,
   },
   Group: {
     height: 20,
@@ -516,12 +591,30 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
 
+  PriceInputField: {
+    alignItems: "center",
+    backgroundColor: colors.background,
+    borderRadius: 16,
+    display: "flex",
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-between",
+    padding: spacing.medium,
+  },
+  PriceRangeInput: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: 340,
+  },
   Rectangle: {
     backgroundColor: "rgba(163,176,239,1)",
     borderRadius: 100,
     height: 4,
     width: 110,
   },
+
   SectionHeader: {
     alignItems: "flex-start",
     display: "flex",
@@ -537,21 +630,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: 110,
   },
-
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 110,
-  },
-  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    width: 110,
-  },
   StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
     alignItems: "center",
     display: "flex",
@@ -560,6 +638,20 @@ const styles = StyleSheet.create({
     width: 110,
   },
 
+  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: 110,
+  },
+  StateActiveStyleNoneThemeDefaultComponentHorizontalTab: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    width: 110,
+  },
   StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField: {
     alignItems: "center",
     backgroundColor: "rgba(250,250,250,1)",
@@ -575,36 +667,6 @@ const styles = StyleSheet.create({
     paddingRight: 19,
     paddingTop: 0,
     width: 145,
-  },
-  StatusFillTypeDefaultStateFilledInputThemeLightComponentInputField1: {
-    alignItems: "center",
-    backgroundColor: "rgba(250,250,250,1)",
-    borderRadius: 16,
-    display: "flex",
-    flexDirection: "row",
-    flex: 1,
-    height: 56,
-    justifyContent: "flex-start",
-    paddingBottom: 0,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 0,
-    width: 145,
-  },
-  StatusFillTypeNormalStateFilledInputThemeLightComponentInputField: {
-    alignItems: "center",
-    backgroundColor: "rgba(250,250,250,1)",
-    borderRadius: 16,
-    display: "flex",
-    flexDirection: "row",
-    height: 56,
-    justifyContent: "flex-start",
-    marginBottom: 20,
-    paddingBottom: 0,
-    paddingLeft: 19,
-    paddingRight: 19,
-    paddingTop: 0,
-    width: 340,
   },
   StyleTextThemeLightStateUncheckedComponentCheckbox: {
     alignItems: "center",

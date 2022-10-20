@@ -68,6 +68,7 @@
     "react-native-animated-spinkit": "1.5.2",
     "react-native-bootsplash": "4.3.2",
     "react-native-collapsible": "1.6.0",
+    "react-native-currency-input": "1.0.1",
     "react-native-deck-swiper": "2.0.10",
     "react-native-dynamic-search-bar": "WrathChaos/react-native-dynamic-search-bar#expo",
     "react-native-gesture-handler": "~2.5.0",
