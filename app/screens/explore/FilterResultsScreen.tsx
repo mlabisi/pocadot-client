@@ -81,7 +81,6 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
 
     const [shippingExpanded, setShippingExpanded] = useState(true)
     const [i12Filter, seti12Filter] = useState(false)
-    const [otherCountryFilter, setOtherCountryFilter] = useState(false)
 
     return (
       <ScrollView contentContainerStyle={styles.Container}>
@@ -106,7 +105,6 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               Boy Groups
             </Text>
           </View>
-
           <View style={styles.InputWrapper}>
             <Toggle
               variant={"checkbox"}
@@ -282,35 +280,19 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
           collapsedSubtitle={`${
             shippingExpanded
               ? ""
-              : ` - ${[i12Filter, otherCountryFilter].filter(Boolean).length} Selected`
+              : ` - ${[i12Filter].filter(Boolean).length} Selected`
           }`}
         >
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Image
-              style={styles.Vector}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24216%3B442%3A2394?alt=media&token=7d3013ac-42e6-4f2b-b2aa-76e71cc0e9b5",
-              }}
+          <View style={styles.InputWrapper}>
+            <Toggle
+              variant={"checkbox"}
+              value={i12Filter}
+              onValueChange={seti12Filter}
+              containerStyle={styles.CheckboxContainer}
             />
-            <Text style={styles.Txt436}>International Shipping</Text>
-          </View>
-          <View style={styles.AutoLayoutHorizontal2}>
-            <Image
-              style={styles.Vector}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24217%3B442%3A2394?alt=media&token=c80caf70-ab54-461a-a5ee-429b31b3393f",
-              }}
-            />
-            <Text style={styles.Txt436}>In-Person Delivery</Text>
-          </View>
-          <View style={styles.StyleTextThemeLightStateUncheckedComponentCheckbox}>
-            <Image
-              style={styles.Vector}
-              source={{
-                uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/o3o1vcy77at-I1539%3A24219%3B1429%3A18113?alt=media&token=9fc471b0-f4a2-4001-9071-1803a6039b39",
-              }}
-            />
-            <Text style={styles.Txt436}>Ships from Another Country</Text>
+            <Text preset={"semiBold"} style={styles.CheckboxLabel}>
+              International Shipping
+            </Text>
           </View>
         </Expandable>
 
