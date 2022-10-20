@@ -16,6 +16,7 @@ import Animated, { FadeIn, useAnimatedStyle, withTiming } from "react-native-rea
 import { colors, spacing } from "../../theme"
 import { iconRegistry } from "./Icon"
 import { Text, TextProps } from "./Text"
+import { Octicons } from "@expo/vector-icons"
 
 type Variants = "checkbox" | "switch" | "radio"
 
@@ -268,10 +269,7 @@ function Checkbox(props: ToggleInputProps) {
           useAnimatedStyle(() => ({ opacity: withTiming(on ? 1 : 0) }), [on]),
         ]}
       >
-        <Image
-          source={iconRegistry.check}
-          style={[$checkboxDetail, { tintColor: iconTintColor }, $detailStyleOverride]}
-        />
+        <Octicons name={"check"} color={iconTintColor} size={$checkboxDetail.width} />
       </Animated.View>
     </View>
   )

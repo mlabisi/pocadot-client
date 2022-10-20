@@ -68,11 +68,11 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
         return ""
       } else {
         if (wtsFilter) {
-          subtitle += (`Want to Sell`)
+          subtitle += `Want to Sell`
         } else if (wttFilter) {
-          subtitle += (`Want to Trade`)
+          subtitle += `Want to Trade`
         } else if (bothFilter) {
-          subtitle += (`Want to Sell/Want to Trade`)
+          subtitle += `Want to Sell/Want to Trade`
         }
       }
 
@@ -100,6 +100,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               value={bgFilter}
               onValueChange={setBgFilter}
               containerStyle={styles.CheckboxContainer}
+              inputOuterStyle={styles.CheckboxStyle}
             />
             <Text preset={"semiBold"} style={styles.CheckboxLabel}>
               Boy Groups
@@ -111,6 +112,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               value={ggFilter}
               onValueChange={setGgFilter}
               containerStyle={styles.CheckboxContainer}
+              inputOuterStyle={styles.CheckboxStyle}
             />
             <Text preset={"semiBold"} style={styles.CheckboxLabel}>
               Girl Groups
@@ -122,6 +124,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               value={soloFilter}
               onValueChange={setSoloFilter}
               containerStyle={styles.CheckboxContainer}
+              inputOuterStyle={styles.CheckboxStyle}
             />
             <Text preset={"semiBold"} style={styles.CheckboxLabel}>
               Solo Idols
@@ -133,7 +136,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               value={coedFilter}
               onValueChange={setCoedFilter}
               containerStyle={styles.CheckboxContainer}
-              inputDetailStyle={{ tintColor: colors.palette.other.white }}
+              inputOuterStyle={styles.CheckboxStyle}
             />
             <Text preset={"semiBold"} style={styles.CheckboxLabel}>
               Coed Groups
@@ -236,6 +239,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
                 setWtsFilter(!wtsFilter)
               }}
               containerStyle={styles.CheckboxContainer}
+              inputOuterStyle={styles.RadioStyle}
             />
             <Text preset={"semiBold"} style={styles.CheckboxLabel}>
               WTS - Want To Sell
@@ -251,6 +255,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
                 setWtsFilter(false)
               }}
               containerStyle={styles.CheckboxContainer}
+              inputOuterStyle={styles.RadioStyle}
             />
             <Text preset={"semiBold"} style={styles.CheckboxLabel}>
               WTT - Want To Trade
@@ -266,6 +271,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
                 setWtsFilter(false)
               }}
               containerStyle={styles.CheckboxContainer}
+              inputOuterStyle={styles.RadioStyle}
             />
             <Text preset={"semiBold"} style={styles.CheckboxLabel}>
               WTS/WTT
@@ -278,9 +284,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
           setIsExpanded={setShippingExpanded}
           title={"Shipping"}
           collapsedSubtitle={`${
-            shippingExpanded
-              ? ""
-              : ` - ${[i12Filter].filter(Boolean).length} Selected`
+            shippingExpanded ? "" : ` - ${[i12Filter].filter(Boolean).length} Selected`
           }`}
         >
           <View style={styles.InputWrapper}>
@@ -289,6 +293,7 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
               value={i12Filter}
               onValueChange={seti12Filter}
               containerStyle={styles.CheckboxContainer}
+              inputOuterStyle={styles.CheckboxStyle}
             />
             <Text preset={"semiBold"} style={styles.CheckboxLabel}>
               International Shipping
@@ -312,9 +317,6 @@ export const FilterResultsScreen: FC<StackScreenProps<AppStackParamList, "Filter
   })
 
 const styles = StyleSheet.create({
-  PriceRangeSeparator: {
-    marginHorizontal: spacing.small,
-  },
   AutoLayoutHorizontal: {
     alignItems: "center",
     display: "flex",
@@ -395,7 +397,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 340,
   },
-
   AutoLayoutHorizontal2: {
     alignItems: "center",
     display: "flex",
@@ -404,6 +405,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 340,
   },
+
   AutoLayoutHorizontal2: {
     alignItems: "center",
     display: "flex",
@@ -462,7 +464,6 @@ const styles = StyleSheet.create({
     paddingTop: 19,
     width: 380,
   },
-
   AutoLayoutVertical2: {
     alignItems: "center",
     display: "flex",
@@ -470,6 +471,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: 380,
   },
+
   ButtonContainer: {
     width: widthPercentageToDP(100) - spacing.extraLarge,
   },
@@ -481,21 +483,28 @@ const styles = StyleSheet.create({
     marginRight: 12,
     width: 20,
   },
-
   CheckboxContainer: {
-    // paddingRight: spacing.tiny,
+    margin: spacing.tiny,
   },
   CheckboxLabel: {
-    // paddingRight: spacing.small,
-    // flex: 1
+    textAlignVertical: "center"
   },
-
+  CheckboxStyle: {
+    backgroundColor: colors.transparent,
+    borderColor: colors.tint,
+    borderRadius: 8
+  },
+  RadioStyle: {
+    backgroundColor: colors.transparent,
+    borderColor: colors.tint,
+  },
   CollapsibleHeader: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
   },
+
   CollapsibleSection: {
     alignItems: "flex-start",
     backgroundColor: colors.palette.other.white,
@@ -509,7 +518,6 @@ const styles = StyleSheet.create({
     padding: spacing.large,
     width: widthPercentageToDP(100) - spacing.medium,
   },
-
   Container: {
     alignItems: "center",
     display: "flex",
@@ -530,22 +538,22 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: spacing.medium,
   },
-  Group: {
-    height: 20,
-    marginRight: 16,
-    width: 20,
-  },
-  Group: {
-    height: 20,
-    marginRight: 16,
-    width: 20,
-  },
-  Group: {
-    height: 20,
-    marginRight: 16,
-    width: 20,
-  },
 
+  Group: {
+    height: 20,
+    marginRight: 16,
+    width: 20,
+  },
+  Group: {
+    height: 20,
+    marginRight: 16,
+    width: 20,
+  },
+  Group: {
+    height: 20,
+    marginRight: 16,
+    width: 20,
+  },
   GroupContainer: {
     alignItems: "flex-start",
     backgroundColor: colors.palette.other.white,
@@ -558,16 +566,21 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     padding: spacing.large,
   },
+
   IconTimesComponentAdditionalIcons: {
     height: 28,
     marginRight: 16,
     width: 28,
   },
-
   IconlyBoldArrowDown2: {
     height: 20,
     width: 20,
   },
+
+  IconlyLightOutlineArrowUp2: {
+    height: 24,
+    width: 24,
+  },
   IconlyLightOutlineArrowUp2: {
     height: 24,
     width: 24,
@@ -577,21 +590,16 @@ const styles = StyleSheet.create({
     width: 24,
   },
 
-  IconlyLightOutlineArrowUp2: {
-    height: 24,
-    width: 24,
-  },
   IconlyLightOutlineArrowUp2: {
     height: 24,
     width: 24,
   },
   InputWrapper: {
-    alignItems: "flex-start",
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
   },
-
   PriceInputField: {
     alignItems: "center",
     backgroundColor: colors.background,
@@ -602,12 +610,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: spacing.medium,
   },
+
   PriceRangeInput: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     width: 340,
+  },
+  PriceRangeSeparator: {
+    marginHorizontal: spacing.small,
   },
   Rectangle: {
     backgroundColor: "rgba(163,176,239,1)",
